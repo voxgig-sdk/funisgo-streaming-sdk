@@ -1,0 +1,69 @@
+{
+  "existing": {
+    "channel": {
+      "CHANNEL00": {
+        "category": "s82",
+        "created_at": "s83",
+        "data": {},
+        "description": "s85",
+        "id": "CHANNEL00",
+        "is_live": false,
+        "is_premium": true,
+        "language": "s89",
+        "logo_url": "s8a",
+        "name": "s8b",
+        "stream_url": "s8c",
+        "success": false,
+        "updated_at": "s8e"
+      },
+      "CHANNEL01": {
+        "category": "s104",
+        "created_at": "s105",
+        "data": {},
+        "description": "s107",
+        "id": "CHANNEL01",
+        "is_live": false,
+        "is_premium": true,
+        "language": "s10b",
+        "logo_url": "s10c",
+        "name": "s10d",
+        "stream_url": "s10e",
+        "success": false,
+        "updated_at": "s110"
+      },
+      "CHANNEL02": {
+        "category": "s186",
+        "created_at": "s187",
+        "data": {},
+        "description": "s189",
+        "id": "CHANNEL02",
+        "is_live": false,
+        "is_premium": true,
+        "language": "s18d",
+        "logo_url": "s18e",
+        "name": "s18f",
+        "stream_url": "s190",
+        "success": false,
+        "updated_at": "s192"
+      }
+    }
+  },
+  "new": {
+    "channel": {
+      "channel_ref01": {
+        "category": "s208",
+        "created_at": "s209",
+        "data": {},
+        "description": "s20b",
+        "is_live": false,
+        "is_premium": true,
+        "language": "s20f",
+        "logo_url": "s210",
+        "name": "s211",
+        "stream_url": "s212",
+        "success": false,
+        "updated_at": "s214"
+      }
+    }
+  }
+}

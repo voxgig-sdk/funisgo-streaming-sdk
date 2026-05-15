@@ -1,0 +1,295 @@
+# Entity: series
+
+main: kit: entity: series: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "created_at"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "data"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "description"
+      op: {
+        list: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "episode"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "genre"
+      op: {
+        list: {
+          req: false
+          type: "`$ARRAY`"
+        }
+      }
+      req: true
+      type: "`$ARRAY`"
+    }
+    {
+      name: "id"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "is_premium"
+      req: false
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "rating"
+      req: false
+      type: "`$NUMBER`"
+    }
+    {
+      name: "release_year"
+      op: {
+        list: {
+          req: false
+          type: "`$INTEGER`"
+        }
+      }
+      req: true
+      type: "`$INTEGER`"
+    }
+    {
+      name: "season"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "success"
+      req: false
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "thumbnail_url"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "title"
+      op: {
+        list: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "updated_at"
+      req: false
+      type: "`$STRING`"
+    }
+  ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "series"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          method: "POST"
+          orig: "/series"
+          parts: [
+            "series"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    list: {
+      name: "list"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                kind: "query"
+                name: "genre"
+                orig: "genre"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                example: 20
+                kind: "query"
+                name: "limit"
+                orig: "limit"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+              {
+                example: 1
+                kind: "query"
+                name: "page"
+                orig: "page"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/series"
+          parts: [
+            "series"
+          ]
+          select: {
+            exist: [
+              "genre"
+              "limit"
+              "page"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "series_id"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/series/{seriesId}"
+          parts: [
+            "series"
+            "{id}"
+          ]
+          rename: {
+            param: {
+              seriesId: "id"
+            }
+          }
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    remove: {
+      name: "remove"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "series_id"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "DELETE"
+          orig: "/series/{seriesId}"
+          parts: [
+            "series"
+            "{id}"
+          ]
+          rename: {
+            param: {
+              seriesId: "id"
+            }
+          }
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    update: {
+      name: "update"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "series_id"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "PUT"
+          orig: "/series/{seriesId}"
+          parts: [
+            "series"
+            "{id}"
+          ]
+          rename: {
+            param: {
+              seriesId: "id"
+            }
+          }
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

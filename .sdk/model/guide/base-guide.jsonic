@@ -1,0 +1,47 @@
+# Guide
+
+guide: {
+  metrics: count: entity: 3
+  metrics: count: path: 6
+  metrics: count: method: 15
+
+  entity: channel: {
+    path: "/channels": {
+      op: create: method: *POST
+      op: list: method: *GET
+    }
+    path: "/channels/{channelId}": {
+      rename: param: "channelId": *"id"
+      op: load: method: *GET
+      op: remove: method: *DELETE
+      op: update: method: *PUT
+    }
+  }
+
+  entity: movie: {
+    path: "/movies": {
+      op: create: method: *POST
+      op: list: method: *GET
+    }
+    path: "/movies/{movieId}": {
+      rename: param: "movieId": *"id"
+      op: load: method: *GET
+      op: remove: method: *DELETE
+      op: update: method: *PUT
+    }
+  }
+
+  entity: series: {
+    path: "/series": {
+      op: create: method: *POST
+      op: list: method: *GET
+    }
+    path: "/series/{seriesId}": {
+      rename: param: "seriesId": *"id"
+      op: load: method: *GET
+      op: remove: method: *DELETE
+      op: update: method: *PUT
+    }
+  }
+
+}

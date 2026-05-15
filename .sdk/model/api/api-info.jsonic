@@ -1,0 +1,23 @@
+# API Information
+
+
+main: {
+  kit: {
+    info: {
+      contact: {
+        url: "https://funisgo.netlify.app/docpelis"
+      }
+      description: "The FunisGo API provides a secure and structured way to access streaming content such as movies, series, and channels. It features both free and premium plans, with various usage limits and capabilities for content creation and editing for premium users."
+      servers: [
+        {
+          description: "Production server"
+          url: "https://api.funisgo.com"
+        }
+      ]
+      title: "FunisGo Streaming API"
+      version: "1.0.0"
+    }
+  }
+}
+
+}

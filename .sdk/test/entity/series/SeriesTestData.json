@@ -1,0 +1,73 @@
+{
+  "existing": {
+    "series": {
+      "SERIES00": {
+        "created_at": "s8c",
+        "data": {},
+        "description": "s8e",
+        "episode": "s8f",
+        "genre": [],
+        "id": "SERIES00",
+        "is_premium": true,
+        "rating": 147,
+        "release_year": "s94",
+        "season": "s95",
+        "success": true,
+        "thumbnail_url": "s97",
+        "title": "s98",
+        "updated_at": "s99"
+      },
+      "SERIES01": {
+        "created_at": "s118",
+        "data": {},
+        "description": "s11a",
+        "episode": "s11b",
+        "genre": [],
+        "id": "SERIES01",
+        "is_premium": true,
+        "rating": 287,
+        "release_year": "s120",
+        "season": "s121",
+        "success": true,
+        "thumbnail_url": "s123",
+        "title": "s124",
+        "updated_at": "s125"
+      },
+      "SERIES02": {
+        "created_at": "s1a4",
+        "data": {},
+        "description": "s1a6",
+        "episode": "s1a7",
+        "genre": [],
+        "id": "SERIES02",
+        "is_premium": true,
+        "rating": 427,
+        "release_year": "s1ac",
+        "season": "s1ad",
+        "success": true,
+        "thumbnail_url": "s1af",
+        "title": "s1b0",
+        "updated_at": "s1b1"
+      }
+    }
+  },
+  "new": {
+    "series": {
+      "series_ref01": {
+        "created_at": "s230",
+        "data": {},
+        "description": "s232",
+        "episode": "s233",
+        "genre": [],
+        "is_premium": true,
+        "rating": 567,
+        "release_year": "s238",
+        "season": "s239",
+        "success": true,
+        "thumbnail_url": "s23b",
+        "title": "s23c",
+        "updated_at": "s23d"
+      }
+    }
+  }
+}

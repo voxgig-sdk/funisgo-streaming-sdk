@@ -1,0 +1,1439 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "FunisGo Streaming API",
+    "description": "The FunisGo API provides a secure and structured way to access streaming content such as movies, series, and channels. It features both free and premium plans, with various usage limits and capabilities for content creation and editing for premium users.",
+    "version": "1.0.0",
+    "contact": {
+      "url": "https://funisgo.netlify.app/docpelis"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.funisgo.com",
+      "description": "Production server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Movies",
+      "description": "Operations related to movies"
+    },
+    {
+      "name": "Series",
+      "description": "Operations related to series"
+    },
+    {
+      "name": "Channels",
+      "description": "Operations related to streaming channels"
+    }
+  ],
+  "paths": {
+    "/movies": {
+      "get": {
+        "tags": [
+          "Movies"
+        ],
+        "summary": "Get list of movies",
+        "description": "Retrieve a list of available movies from the streaming catalog",
+        "operationId": "getMovies",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number for pagination",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 1,
+              "minimum": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of items per page",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 20,
+              "minimum": 1,
+              "maximum": 100
+            }
+          },
+          {
+            "name": "genre",
+            "in": "query",
+            "description": "Filter movies by genre",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with list of movies",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Movie"
+                      }
+                    },
+                    "pagination": {
+                      "$ref": "#/components/schemas/Pagination"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitError"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Movies"
+        ],
+        "summary": "Create a new movie",
+        "description": "Create a new movie entry in the catalog (Premium users only)",
+        "operationId": "createMovie",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MovieInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Movie created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Movie"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequestError"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenError"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/movies/{movieId}": {
+      "get": {
+        "tags": [
+          "Movies"
+        ],
+        "summary": "Get movie by ID",
+        "description": "Retrieve detailed information about a specific movie",
+        "operationId": "getMovieById",
+        "parameters": [
+          {
+            "name": "movieId",
+            "in": "path",
+            "description": "ID of the movie to retrieve",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with movie details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Movie"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundError"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Movies"
+        ],
+        "summary": "Update a movie",
+        "description": "Update an existing movie entry (Premium users only)",
+        "operationId": "updateMovie",
+        "parameters": [
+          {
+            "name": "movieId",
+            "in": "path",
+            "description": "ID of the movie to update",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MovieInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Movie updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Movie"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequestError"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenError"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundError"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Movies"
+        ],
+        "summary": "Delete a movie",
+        "description": "Delete a movie from the catalog (Premium users only)",
+        "operationId": "deleteMovie",
+        "parameters": [
+          {
+            "name": "movieId",
+            "in": "path",
+            "description": "ID of the movie to delete",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Movie deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Movie deleted successfully"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenError"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundError"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/series": {
+      "get": {
+        "tags": [
+          "Series"
+        ],
+        "summary": "Get list of series",
+        "description": "Retrieve a list of available series from the streaming catalog",
+        "operationId": "getSeries",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number for pagination",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 1,
+              "minimum": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of items per page",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 20,
+              "minimum": 1,
+              "maximum": 100
+            }
+          },
+          {
+            "name": "genre",
+            "in": "query",
+            "description": "Filter series by genre",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with list of series",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Series"
+                      }
+                    },
+                    "pagination": {
+                      "$ref": "#/components/schemas/Pagination"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitError"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Series"
+        ],
+        "summary": "Create a new series",
+        "description": "Create a new series entry in the catalog (Premium users only)",
+        "operationId": "createSeries",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SeriesInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Series created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Series"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequestError"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenError"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/series/{seriesId}": {
+      "get": {
+        "tags": [
+          "Series"
+        ],
+        "summary": "Get series by ID",
+        "description": "Retrieve detailed information about a specific series",
+        "operationId": "getSeriesById",
+        "parameters": [
+          {
+            "name": "seriesId",
+            "in": "path",
+            "description": "ID of the series to retrieve",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with series details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Series"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundError"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Series"
+        ],
+        "summary": "Update a series",
+        "description": "Update an existing series entry (Premium users only)",
+        "operationId": "updateSeries",
+        "parameters": [
+          {
+            "name": "seriesId",
+            "in": "path",
+            "description": "ID of the series to update",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SeriesInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Series updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Series"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequestError"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenError"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundError"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Series"
+        ],
+        "summary": "Delete a series",
+        "description": "Delete a series from the catalog (Premium users only)",
+        "operationId": "deleteSeries",
+        "parameters": [
+          {
+            "name": "seriesId",
+            "in": "path",
+            "description": "ID of the series to delete",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Series deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Series deleted successfully"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenError"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundError"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/channels": {
+      "get": {
+        "tags": [
+          "Channels"
+        ],
+        "summary": "Get list of channels",
+        "description": "Retrieve a list of available streaming channels",
+        "operationId": "getChannels",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number for pagination",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 1,
+              "minimum": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of items per page",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 20,
+              "minimum": 1,
+              "maximum": 100
+            }
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "description": "Filter channels by category",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with list of channels",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Channel"
+                      }
+                    },
+                    "pagination": {
+                      "$ref": "#/components/schemas/Pagination"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitError"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Channels"
+        ],
+        "summary": "Create a new channel",
+        "description": "Create a new channel entry (Premium users only)",
+        "operationId": "createChannel",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChannelInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Channel created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Channel"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequestError"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenError"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/channels/{channelId}": {
+      "get": {
+        "tags": [
+          "Channels"
+        ],
+        "summary": "Get channel by ID",
+        "description": "Retrieve detailed information about a specific channel",
+        "operationId": "getChannelById",
+        "parameters": [
+          {
+            "name": "channelId",
+            "in": "path",
+            "description": "ID of the channel to retrieve",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with channel details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Channel"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundError"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Channels"
+        ],
+        "summary": "Update a channel",
+        "description": "Update an existing channel entry (Premium users only)",
+        "operationId": "updateChannel",
+        "parameters": [
+          {
+            "name": "channelId",
+            "in": "path",
+            "description": "ID of the channel to update",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChannelInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Channel updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Channel"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequestError"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenError"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundError"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Channels"
+        ],
+        "summary": "Delete a channel",
+        "description": "Delete a channel from the catalog (Premium users only)",
+        "operationId": "deleteChannel",
+        "parameters": [
+          {
+            "name": "channelId",
+            "in": "path",
+            "description": "ID of the channel to delete",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Channel deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Channel deleted successfully"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenError"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundError"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-API-Key",
+        "description": "API key for authentication. Free and premium plans available with different usage limits."
+      }
+    },
+    "schemas": {
+      "Movie": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "mov123456"
+          },
+          "title": {
+            "type": "string",
+            "example": "The Matrix"
+          },
+          "description": {
+            "type": "string",
+            "example": "A computer hacker learns about the true nature of reality"
+          },
+          "genre": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "Action",
+              "Sci-Fi"
+            ]
+          },
+          "releaseYear": {
+            "type": "integer",
+            "example": 1999
+          },
+          "duration": {
+            "type": "integer",
+            "description": "Duration in minutes",
+            "example": 136
+          },
+          "rating": {
+            "type": "number",
+            "format": "float",
+            "example": 8.7
+          },
+          "thumbnailUrl": {
+            "type": "string",
+            "format": "uri",
+            "example": "https://example.com/thumbnails/matrix.jpg"
+          },
+          "streamUrl": {
+            "type": "string",
+            "format": "uri",
+            "example": "https://stream.funisgo.com/movies/mov123456"
+          },
+          "isPremium": {
+            "type": "boolean",
+            "example": false
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "MovieInput": {
+        "type": "object",
+        "required": [
+          "title",
+          "description",
+          "genre",
+          "releaseYear",
+          "duration"
+        ],
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "The Matrix"
+          },
+          "description": {
+            "type": "string",
+            "example": "A computer hacker learns about the true nature of reality"
+          },
+          "genre": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "Action",
+              "Sci-Fi"
+            ]
+          },
+          "releaseYear": {
+            "type": "integer",
+            "example": 1999
+          },
+          "duration": {
+            "type": "integer",
+            "description": "Duration in minutes",
+            "example": 136
+          },
+          "rating": {
+            "type": "number",
+            "format": "float",
+            "example": 8.7
+          },
+          "thumbnailUrl": {
+            "type": "string",
+            "format": "uri",
+            "example": "https://example.com/thumbnails/matrix.jpg"
+          },
+          "streamUrl": {
+            "type": "string",
+            "format": "uri",
+            "example": "https://stream.funisgo.com/movies/mov123456"
+          },
+          "isPremium": {
+            "type": "boolean",
+            "example": false
+          }
+        }
+      },
+      "Series": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "ser123456"
+          },
+          "title": {
+            "type": "string",
+            "example": "Breaking Bad"
+          },
+          "description": {
+            "type": "string",
+            "example": "A high school chemistry teacher turned methamphetamine producer"
+          },
+          "genre": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "Drama",
+              "Crime",
+              "Thriller"
+            ]
+          },
+          "releaseYear": {
+            "type": "integer",
+            "example": 2008
+          },
+          "seasons": {
+            "type": "integer",
+            "example": 5
+          },
+          "episodes": {
+            "type": "integer",
+            "example": 62
+          },
+          "rating": {
+            "type": "number",
+            "format": "float",
+            "example": 9.5
+          },
+          "thumbnailUrl": {
+            "type": "string",
+            "format": "uri",
+            "example": "https://example.com/thumbnails/breaking-bad.jpg"
+          },
+          "isPremium": {
+            "type": "boolean",
+            "example": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "SeriesInput": {
+        "type": "object",
+        "required": [
+          "title",
+          "description",
+          "genre",
+          "releaseYear"
+        ],
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "Breaking Bad"
+          },
+          "description": {
+            "type": "string",
+            "example": "A high school chemistry teacher turned methamphetamine producer"
+          },
+          "genre": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "Drama",
+              "Crime",
+              "Thriller"
+            ]
+          },
+          "releaseYear": {
+            "type": "integer",
+            "example": 2008
+          },
+          "seasons": {
+            "type": "integer",
+            "example": 5
+          },
+          "episodes": {
+            "type": "integer",
+            "example": 62
+          },
+          "rating": {
+            "type": "number",
+            "format": "float",
+            "example": 9.5
+          },
+          "thumbnailUrl": {
+            "type": "string",
+            "format": "uri",
+            "example": "https://example.com/thumbnails/breaking-bad.jpg"
+          },
+          "isPremium": {
+            "type": "boolean",
+            "example": true
+          }
+        }
+      },
+      "Channel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "ch123456"
+          },
+          "name": {
+            "type": "string",
+            "example": "FunisGo Sports"
+          },
+          "description": {
+            "type": "string",
+            "example": "24/7 sports streaming channel"
+          },
+          "category": {
+            "type": "string",
+            "example": "Sports"
+          },
+          "language": {
+            "type": "string",
+            "example": "English"
+          },
+          "logoUrl": {
+            "type": "string",
+            "format": "uri",
+            "example": "https://example.com/logos/sports-channel.png"
+          },
+          "streamUrl": {
+            "type": "string",
+            "format": "uri",
+            "example": "https://stream.funisgo.com/channels/ch123456"
+          },
+          "isLive": {
+            "type": "boolean",
+            "example": true
+          },
+          "isPremium": {
+            "type": "boolean",
+            "example": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "ChannelInput": {
+        "type": "object",
+        "required": [
+          "name",
+          "description",
+          "category"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "FunisGo Sports"
+          },
+          "description": {
+            "type": "string",
+            "example": "24/7 sports streaming channel"
+          },
+          "category": {
+            "type": "string",
+            "example": "Sports"
+          },
+          "language": {
+            "type": "string",
+            "example": "English"
+          },
+          "logoUrl": {
+            "type": "string",
+            "format": "uri",
+            "example": "https://example.com/logos/sports-channel.png"
+          },
+          "streamUrl": {
+            "type": "string",
+            "format": "uri",
+            "example": "https://stream.funisgo.com/channels/ch123456"
+          },
+          "isLive": {
+            "type": "boolean",
+            "example": true
+          },
+          "isPremium": {
+            "type": "boolean",
+            "example": true
+          }
+        }
+      },
+      "Pagination": {
+        "type": "object",
+        "properties": {
+          "currentPage": {
+            "type": "integer",
+            "example": 1
+          },
+          "totalPages": {
+            "type": "integer",
+            "example": 10
+          },
+          "totalItems": {
+            "type": "integer",
+            "example": 200
+          },
+          "itemsPerPage": {
+            "type": "integer",
+            "example": 20
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": false
+          },
+          "error": {
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "string",
+                "example": "INVALID_REQUEST"
+              },
+              "message": {
+                "type": "string",
+                "example": "The request was invalid or malformed"
+              }
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "UnauthorizedError": {
+        "description": "Authentication credentials are missing or invalid",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "example": {
+              "success": false,
+              "error": {
+                "code": "UNAUTHORIZED",
+                "message": "Invalid or missing API key"
+              }
+            }
+          }
+        }
+      },
+      "ForbiddenError": {
+        "description": "Premium plan required for this operation",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "example": {
+              "success": false,
+              "error": {
+                "code": "FORBIDDEN",
+                "message": "This operation requires a premium plan subscription"
+              }
+            }
+          }
+        }
+      },
+      "NotFoundError": {
+        "description": "The requested resource was not found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "example": {
+              "success": false,
+              "error": {
+                "code": "NOT_FOUND",
+                "message": "The requested resource was not found"
+              }
+            }
+          }
+        }
+      },
+      "BadRequestError": {
+        "description": "The request was invalid or malformed",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "example": {
+              "success": false,
+              "error": {
+                "code": "BAD_REQUEST",
+                "message": "Invalid input parameters"
+              }
+            }
+          }
+        }
+      },
+      "RateLimitError": {
+        "description": "API rate limit exceeded",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "example": {
+              "success": false,
+              "error": {
+                "code": "RATE_LIMIT_EXCEEDED",
+                "message": "You have exceeded your API rate limit. Please upgrade to premium for higher limits."
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

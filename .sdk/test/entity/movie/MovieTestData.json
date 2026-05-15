@@ -1,0 +1,73 @@
+{
+  "existing": {
+    "movie": {
+      "MOVIE00": {
+        "created_at": "s8c",
+        "data": {},
+        "description": "s8e",
+        "duration": "s8f",
+        "genre": [],
+        "id": "MOVIE00",
+        "is_premium": true,
+        "rating": 147,
+        "release_year": "s94",
+        "stream_url": "s95",
+        "success": true,
+        "thumbnail_url": "s97",
+        "title": "s98",
+        "updated_at": "s99"
+      },
+      "MOVIE01": {
+        "created_at": "s118",
+        "data": {},
+        "description": "s11a",
+        "duration": "s11b",
+        "genre": [],
+        "id": "MOVIE01",
+        "is_premium": true,
+        "rating": 287,
+        "release_year": "s120",
+        "stream_url": "s121",
+        "success": true,
+        "thumbnail_url": "s123",
+        "title": "s124",
+        "updated_at": "s125"
+      },
+      "MOVIE02": {
+        "created_at": "s1a4",
+        "data": {},
+        "description": "s1a6",
+        "duration": "s1a7",
+        "genre": [],
+        "id": "MOVIE02",
+        "is_premium": true,
+        "rating": 427,
+        "release_year": "s1ac",
+        "stream_url": "s1ad",
+        "success": true,
+        "thumbnail_url": "s1af",
+        "title": "s1b0",
+        "updated_at": "s1b1"
+      }
+    }
+  },
+  "new": {
+    "movie": {
+      "movie_ref01": {
+        "created_at": "s230",
+        "data": {},
+        "description": "s232",
+        "duration": "s233",
+        "genre": [],
+        "is_premium": true,
+        "rating": 567,
+        "release_year": "s238",
+        "stream_url": "s239",
+        "success": true,
+        "thumbnail_url": "s23b",
+        "title": "s23c",
+        "updated_at": "s23d"
+      }
+    }
+  }
+}

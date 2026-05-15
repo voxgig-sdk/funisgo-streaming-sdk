@@ -1,0 +1,284 @@
+# Entity: channel
+
+main: kit: entity: channel: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "category"
+      op: {
+        list: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "created_at"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "data"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "description"
+      op: {
+        list: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "id"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "is_live"
+      req: false
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "is_premium"
+      req: false
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "language"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "logo_url"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "name"
+      op: {
+        list: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "stream_url"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "success"
+      req: false
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "updated_at"
+      req: false
+      type: "`$STRING`"
+    }
+  ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "channel"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          method: "POST"
+          orig: "/channels"
+          parts: [
+            "channels"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    list: {
+      name: "list"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                kind: "query"
+                name: "category"
+                orig: "category"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                example: 20
+                kind: "query"
+                name: "limit"
+                orig: "limit"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+              {
+                example: 1
+                kind: "query"
+                name: "page"
+                orig: "page"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/channels"
+          parts: [
+            "channels"
+          ]
+          select: {
+            exist: [
+              "category"
+              "limit"
+              "page"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "channel_id"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/channels/{channelId}"
+          parts: [
+            "channels"
+            "{id}"
+          ]
+          rename: {
+            param: {
+              channelId: "id"
+            }
+          }
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    remove: {
+      name: "remove"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "channel_id"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "DELETE"
+          orig: "/channels/{channelId}"
+          parts: [
+            "channels"
+            "{id}"
+          ]
+          rename: {
+            param: {
+              channelId: "id"
+            }
+          }
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    update: {
+      name: "update"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "channel_id"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "PUT"
+          orig: "/channels/{channelId}"
+          parts: [
+            "channels"
+            "{id}"
+          ]
+          rename: {
+            param: {
+              channelId: "id"
+            }
+          }
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}
