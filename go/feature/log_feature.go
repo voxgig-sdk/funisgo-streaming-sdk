@@ -4,7 +4,7 @@ import (
 	"log/slog"
 	"os"
 
-	"github.com/voxgig-sdk/funisgo-streaming-sdk/core"
+	"github.com/voxgig-sdk/funisgo-streaming-sdk/go/core"
 )
 
 type LogFeature struct {

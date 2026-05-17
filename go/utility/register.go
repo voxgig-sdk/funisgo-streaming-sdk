@@ -1,6 +1,6 @@
 package utility
 
-import "github.com/voxgig-sdk/funisgo-streaming-sdk/core"
+import "github.com/voxgig-sdk/funisgo-streaming-sdk/go/core"
 
 func init() {
 	core.UtilityRegistrar = registerAll

@@ -1,10 +1,10 @@
 package voxgigfunisgostreamingsdk
 
 import (
-	"github.com/voxgig-sdk/funisgo-streaming-sdk/core"
-	"github.com/voxgig-sdk/funisgo-streaming-sdk/entity"
-	"github.com/voxgig-sdk/funisgo-streaming-sdk/feature"
-	_ "github.com/voxgig-sdk/funisgo-streaming-sdk/utility"
+	"github.com/voxgig-sdk/funisgo-streaming-sdk/go/core"
+	"github.com/voxgig-sdk/funisgo-streaming-sdk/go/entity"
+	"github.com/voxgig-sdk/funisgo-streaming-sdk/go/feature"
+	_ "github.com/voxgig-sdk/funisgo-streaming-sdk/go/utility"
 )
 
 // Type aliases preserve external API.

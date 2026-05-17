@@ -1,7 +1,7 @@
 package feature
 
 import (
-	"github.com/voxgig-sdk/funisgo-streaming-sdk/core"
+	"github.com/voxgig-sdk/funisgo-streaming-sdk/go/core"
 )
 
 type BaseFeature struct {

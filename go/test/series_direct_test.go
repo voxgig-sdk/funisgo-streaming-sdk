@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	sdk "github.com/voxgig-sdk/funisgo-streaming-sdk"
-	"github.com/voxgig-sdk/funisgo-streaming-sdk/core"
+	sdk "github.com/voxgig-sdk/funisgo-streaming-sdk/go"
+	"github.com/voxgig-sdk/funisgo-streaming-sdk/go/core"
 )
 
 func TestSeriesDirect(t *testing.T) {

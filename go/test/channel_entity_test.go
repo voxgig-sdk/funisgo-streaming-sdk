@@ -10,10 +10,10 @@ import (
 	"testing"
 	"time"
 
-	sdk "github.com/voxgig-sdk/funisgo-streaming-sdk"
-	"github.com/voxgig-sdk/funisgo-streaming-sdk/core"
+	sdk "github.com/voxgig-sdk/funisgo-streaming-sdk/go"
+	"github.com/voxgig-sdk/funisgo-streaming-sdk/go/core"
 
-	vs "github.com/voxgig/struct"
+	vs "github.com/voxgig-sdk/funisgo-streaming-sdk/go/utility/struct"
 )
 
 func TestChannelEntity(t *testing.T) {
