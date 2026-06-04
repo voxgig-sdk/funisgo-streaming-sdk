@@ -16,8 +16,25 @@ main: {
       ]
       title: "FunisGo Streaming API"
       version: "1.0.0"
+      tagline: "Browse streaming catalogues of movies, series and channels with free and premium tiers"
+      homepage: "https://api.funisgo.com"
+      docs_url: "https://freepublicapis.com/funisgo-streaming-api"
+      about_md: `The [FunisGo Streaming API](https://api.funisgo.com) exposes a structured catalogue of streaming content - movies, TV series and channel listings - intended for client apps and aggregators. It is listed on [Free Public APIs](https://freepublicapis.com/funisgo-streaming-api), which also surfaces health and reliability metrics for individual endpoints.
+
+What you get from the API:
+
+- Lists of channels available for streaming
+- Lists of movies in the catalogue
+- Lists of TV series in the catalogue
+- Content creation and editing operations on premium plans
+
+Authentication is via a \`token\` query parameter; a public anonymous token (\`anony_0000_public_56\`) is documented for free-tier read access. Free and premium plans differ in usage limits and write capabilities. No formal licence terms are published; treat data as third-party content and check with the operator before redistribution.`
+      entity_desc: {
+        channel: "A live or on-demand streaming channel exposed via the channels list endpoint."
+        movie: "A movie title in the FunisGo catalogue, retrievable via the movies list endpoint."
+        series: "A TV series in the FunisGo catalogue, retrievable via the series list endpoint."
+      }
+      auth: false
     }
   }
-}
-
 }

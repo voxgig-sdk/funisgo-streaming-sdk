@@ -194,14 +194,12 @@ func seriesDirectSetup(mockres any) *seriesDirectSetupResult {
 	env := envOverride(map[string]any{
 		"FUNISGOSTREAMING_TEST_SERIES_ENTID": map[string]any{},
 		"FUNISGOSTREAMING_TEST_LIVE":    "FALSE",
-		"FUNISGOSTREAMING_APIKEY":       "NONE",
 	})
 
 	live := env["FUNISGOSTREAMING_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
-			"apikey": env["FUNISGOSTREAMING_APIKEY"],
 		}
 		client := sdk.NewFunisgoStreamingSDK(mergedOpts)
 

@@ -109,14 +109,12 @@ def _channel_direct_setup(mockres):
     env = runner.env_override({
         "FUNISGOSTREAMING_TEST_CHANNEL_ENTID": {},
         "FUNISGOSTREAMING_TEST_LIVE": "FALSE",
-        "FUNISGOSTREAMING_APIKEY": "NONE",
     })
 
     live = env.get("FUNISGOSTREAMING_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {
-            "apikey": env.get("FUNISGOSTREAMING_APIKEY"),
         }
         client = FunisgoStreamingSDK(merged_opts)
         return {
