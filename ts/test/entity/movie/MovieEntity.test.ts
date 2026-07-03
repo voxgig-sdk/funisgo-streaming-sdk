@@ -154,6 +154,7 @@ function basicSetup(extra?: any) {
     'FUNISGO_STREAMING_TEST_MOVIE_ENTID': idmap,
     'FUNISGO_STREAMING_TEST_LIVE': 'FALSE',
     'FUNISGO_STREAMING_TEST_EXPLAIN': 'FALSE',
+    'FUNISGO_STREAMING_APIKEY': 'NONE',
   })
 
   idmap = env['FUNISGO_STREAMING_TEST_MOVIE_ENTID']
@@ -163,6 +164,7 @@ function basicSetup(extra?: any) {
   if (live) {
     client = new FunisgoStreamingSDK(merge([
       {
+        apikey: env.FUNISGO_STREAMING_APIKEY,
       },
       extra
     ]))

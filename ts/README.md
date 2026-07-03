@@ -1,6 +1,11 @@
 # FunisgoStreaming TypeScript SDK
 
-The TypeScript SDK for the FunisgoStreaming API. Provides a type-safe, entity-oriented interface with full async/await support.
+
+
+The TypeScript SDK for the FunisgoStreaming API — a type-safe, entity-oriented client with full async/await support.
+
+> Other languages, the CLI, and MCP server live alongside this one — see
+> the [top-level README](../README.md).
 
 
 ## Install
@@ -17,7 +22,9 @@ loading a specific record.
 ```ts
 import { FunisgoStreamingSDK } from 'funisgo-streaming'
 
-const client = new FunisgoStreamingSDK({})
+const client = new FunisgoStreamingSDK({
+  apikey: process.env.FUNISGO-STREAMING_APIKEY,
+})
 ```
 
 ### 2. List channels
@@ -112,7 +119,7 @@ const result = await client.Planet().load({ id: 'test01' })
 You can also use the instance method:
 
 ```ts
-const client = new FunisgoStreamingSDK()
+const client = new FunisgoStreamingSDK({ apikey: '...' })
 const testClient = client.tester()
 ```
 
@@ -148,6 +155,7 @@ const logger = {
 }
 
 const client = new FunisgoStreamingSDK({
+  apikey: '...',
   extend: [logger],
 })
 ```
@@ -158,6 +166,7 @@ Create a `.env.local` file at the project root:
 
 ```
 FUNISGO-STREAMING_TEST_LIVE=TRUE
+FUNISGO-STREAMING_APIKEY=<your-key>
 ```
 
 Then run:
@@ -175,6 +184,7 @@ cd ts && npm test
 
 ```ts
 new FunisgoStreamingSDK(options?: {
+  apikey?: string
   base?: string
   prefix?: string
   suffix?: string
@@ -185,6 +195,7 @@ new FunisgoStreamingSDK(options?: {
 
 | Option | Type | Description |
 | --- | --- | --- |
+| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |

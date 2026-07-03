@@ -194,12 +194,14 @@ func movieDirectSetup(mockres any) *movieDirectSetupResult {
 	env := envOverride(map[string]any{
 		"FUNISGOSTREAMING_TEST_MOVIE_ENTID": map[string]any{},
 		"FUNISGOSTREAMING_TEST_LIVE":    "FALSE",
+		"FUNISGOSTREAMING_APIKEY":       "NONE",
 	})
 
 	live := env["FUNISGOSTREAMING_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
+			"apikey": env["FUNISGOSTREAMING_APIKEY"],
 		}
 		client := sdk.NewFunisgoStreamingSDK(mergedOpts)
 

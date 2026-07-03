@@ -135,6 +135,7 @@ def movie_basic_setup(extra)
     "FUNISGOSTREAMING_TEST_MOVIE_ENTID" => idmap,
     "FUNISGOSTREAMING_TEST_LIVE" => "FALSE",
     "FUNISGOSTREAMING_TEST_EXPLAIN" => "FALSE",
+    "FUNISGOSTREAMING_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -146,6 +147,7 @@ def movie_basic_setup(extra)
   if env["FUNISGOSTREAMING_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
+        "apikey" => env["FUNISGOSTREAMING_APIKEY"],
       },
       extra || {},
     ])

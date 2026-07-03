@@ -1,6 +1,11 @@
 # FunisgoStreaming Python SDK
 
-The Python SDK for the FunisgoStreaming API. Provides an entity-oriented interface following Pythonic conventions.
+
+
+The Python SDK for the FunisgoStreaming API — an entity-oriented client following Pythonic conventions.
+
+> Other languages, the CLI, and MCP server live alongside this one — see
+> the [top-level README](../README.md).
 
 
 ## Install
@@ -23,15 +28,18 @@ loading a specific record.
 ### 1. Create a client
 
 ```python
+import os
 from funisgostreaming_sdk import FunisgoStreamingSDK
 
-client = FunisgoStreamingSDK({})
+client = FunisgoStreamingSDK({
+    "apikey": os.environ.get("FUNISGO-STREAMING_APIKEY"),
+})
 ```
 
 ### 2. List channels
 
 ```python
-result, err = client.Channel(None).list(None, None)
+result, err = client.Channel().list()
 if err:
     raise Exception(err)
 
@@ -44,7 +52,7 @@ if isinstance(result, list):
 ### 3. Load a channel
 
 ```python
-result, err = client.Channel(None).load({"id": "example_id"}, None)
+result, err = client.Channel().load({"id": "example_id"})
 if err:
     raise Exception(err)
 print(result)
@@ -54,13 +62,13 @@ print(result)
 
 ```python
 # Create
-created, _ = client.Channel(None).create({"name": "Example"}, None)
+created, _ = client.Channel().create({"name": "Example"})
 
 # Update
-client.Channel(None).update({"id": created["id"], "name": "Example-Renamed"}, None)
+client.Channel().update({"id": created["id"], "name": "Example-Renamed"})
 
 # Remove
-client.Channel(None).remove({"id": created["id"]}, None)
+client.Channel().remove({"id": created["id"]})
 ```
 
 
@@ -105,11 +113,9 @@ print(fetchdef["headers"])
 Create a mock client for unit testing — no server required:
 
 ```python
-client = FunisgoStreamingSDK.test(None, None)
+client = FunisgoStreamingSDK.test()
 
-result, err = client.FunisgoStreaming(None).load(
-    {"id": "test01"}, None
-)
+result, err = client.FunisgoStreaming().load({"id": "test01"})
 # result contains mock response data
 ```
 
@@ -140,6 +146,7 @@ Create a `.env.local` file at the project root:
 
 ```
 FUNISGO-STREAMING_TEST_LIVE=TRUE
+FUNISGO-STREAMING_APIKEY=<your-key>
 ```
 
 Then run:
@@ -163,6 +170,7 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
+| `apikey` | `str` | API key for authentication. |
 | `base` | `str` | Base URL of the API server. |
 | `prefix` | `str` | URL path prefix prepended to all requests. |
 | `suffix` | `str` | URL path suffix appended to all requests. |

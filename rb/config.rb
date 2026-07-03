@@ -15,6 +15,9 @@ module FunisgoStreamingConfig
       },
       "options" => {
         "base" => "https://api.funisgo.com",
+        "auth" => {
+          "prefix" => "Bearer",
+        },
         "headers" => {
           "content-type" => "application/json",
         },
@@ -28,6 +31,7 @@ module FunisgoStreamingConfig
         "channel" => {
           "fields" => [
             {
+              "active" => true,
               "name" => "category",
               "op" => {
                 "list" => {
@@ -37,24 +41,24 @@ module FunisgoStreamingConfig
               },
               "req" => true,
               "type" => "`$STRING`",
-              "active" => true,
               "index$" => 0,
             },
             {
+              "active" => true,
               "name" => "created_at",
               "req" => false,
               "type" => "`$STRING`",
-              "active" => true,
               "index$" => 1,
             },
             {
+              "active" => true,
               "name" => "data",
               "req" => false,
               "type" => "`$OBJECT`",
-              "active" => true,
               "index$" => 2,
             },
             {
+              "active" => true,
               "name" => "description",
               "op" => {
                 "list" => {
@@ -64,45 +68,45 @@ module FunisgoStreamingConfig
               },
               "req" => true,
               "type" => "`$STRING`",
-              "active" => true,
               "index$" => 3,
             },
             {
+              "active" => true,
               "name" => "id",
               "req" => false,
               "type" => "`$STRING`",
-              "active" => true,
               "index$" => 4,
             },
             {
+              "active" => true,
               "name" => "is_live",
               "req" => false,
               "type" => "`$BOOLEAN`",
-              "active" => true,
               "index$" => 5,
             },
             {
+              "active" => true,
               "name" => "is_premium",
               "req" => false,
               "type" => "`$BOOLEAN`",
-              "active" => true,
               "index$" => 6,
             },
             {
+              "active" => true,
               "name" => "language",
               "req" => false,
               "type" => "`$STRING`",
-              "active" => true,
               "index$" => 7,
             },
             {
+              "active" => true,
               "name" => "logo_url",
               "req" => false,
               "type" => "`$STRING`",
-              "active" => true,
               "index$" => 8,
             },
             {
+              "active" => true,
               "name" => "name",
               "op" => {
                 "list" => {
@@ -112,86 +116,87 @@ module FunisgoStreamingConfig
               },
               "req" => true,
               "type" => "`$STRING`",
-              "active" => true,
               "index$" => 9,
             },
             {
+              "active" => true,
               "name" => "stream_url",
               "req" => false,
               "type" => "`$STRING`",
-              "active" => true,
               "index$" => 10,
             },
             {
+              "active" => true,
               "name" => "success",
               "req" => false,
               "type" => "`$BOOLEAN`",
-              "active" => true,
               "index$" => 11,
             },
             {
+              "active" => true,
               "name" => "updated_at",
               "req" => false,
               "type" => "`$STRING`",
-              "active" => true,
               "index$" => 12,
             },
           ],
           "name" => "channel",
           "op" => {
             "create" => {
+              "input" => "data",
               "name" => "create",
               "points" => [
                 {
+                  "active" => true,
+                  "args" => {},
                   "method" => "POST",
                   "orig" => "/channels",
                   "parts" => [
                     "channels",
                   ],
+                  "select" => {},
                   "transform" => {
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "active" => true,
-                  "args" => {},
-                  "select" => {},
                   "index$" => 0,
                 },
               ],
-              "input" => "data",
               "key$" => "create",
             },
             "list" => {
+              "input" => "data",
               "name" => "list",
               "points" => [
                 {
+                  "active" => true,
                   "args" => {
                     "query" => [
                       {
+                        "active" => true,
                         "kind" => "query",
                         "name" => "category",
                         "orig" => "category",
                         "reqd" => false,
                         "type" => "`$STRING`",
-                        "active" => true,
                       },
                       {
+                        "active" => true,
                         "example" => 20,
                         "kind" => "query",
                         "name" => "limit",
                         "orig" => "limit",
                         "reqd" => false,
                         "type" => "`$INTEGER`",
-                        "active" => true,
                       },
                       {
+                        "active" => true,
                         "example" => 1,
                         "kind" => "query",
                         "name" => "page",
                         "orig" => "page",
                         "reqd" => false,
                         "type" => "`$INTEGER`",
-                        "active" => true,
                       },
                     ],
                   },
@@ -211,26 +216,26 @@ module FunisgoStreamingConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "active" => true,
                   "index$" => 0,
                 },
               ],
-              "input" => "data",
               "key$" => "list",
             },
             "load" => {
+              "input" => "data",
               "name" => "load",
               "points" => [
                 {
+                  "active" => true,
                   "args" => {
                     "params" => [
                       {
+                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "channel_id",
                         "reqd" => true,
                         "type" => "`$STRING`",
-                        "active" => true,
                       },
                     ],
                   },
@@ -254,26 +259,26 @@ module FunisgoStreamingConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "active" => true,
                   "index$" => 0,
                 },
               ],
-              "input" => "data",
               "key$" => "load",
             },
             "remove" => {
+              "input" => "data",
               "name" => "remove",
               "points" => [
                 {
+                  "active" => true,
                   "args" => {
                     "params" => [
                       {
+                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "channel_id",
                         "reqd" => true,
                         "type" => "`$STRING`",
-                        "active" => true,
                       },
                     ],
                   },
@@ -297,26 +302,26 @@ module FunisgoStreamingConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "active" => true,
                   "index$" => 0,
                 },
               ],
-              "input" => "data",
               "key$" => "remove",
             },
             "update" => {
+              "input" => "data",
               "name" => "update",
               "points" => [
                 {
+                  "active" => true,
                   "args" => {
                     "params" => [
                       {
+                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "channel_id",
                         "reqd" => true,
                         "type" => "`$STRING`",
-                        "active" => true,
                       },
                     ],
                   },
@@ -340,11 +345,9 @@ module FunisgoStreamingConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "active" => true,
                   "index$" => 0,
                 },
               ],
-              "input" => "data",
               "key$" => "update",
             },
           },
@@ -355,20 +358,21 @@ module FunisgoStreamingConfig
         "movie" => {
           "fields" => [
             {
+              "active" => true,
               "name" => "created_at",
               "req" => false,
               "type" => "`$STRING`",
-              "active" => true,
               "index$" => 0,
             },
             {
+              "active" => true,
               "name" => "data",
               "req" => false,
               "type" => "`$OBJECT`",
-              "active" => true,
               "index$" => 1,
             },
             {
+              "active" => true,
               "name" => "description",
               "op" => {
                 "list" => {
@@ -378,10 +382,10 @@ module FunisgoStreamingConfig
               },
               "req" => true,
               "type" => "`$STRING`",
-              "active" => true,
               "index$" => 2,
             },
             {
+              "active" => true,
               "name" => "duration",
               "op" => {
                 "list" => {
@@ -391,10 +395,10 @@ module FunisgoStreamingConfig
               },
               "req" => true,
               "type" => "`$INTEGER`",
-              "active" => true,
               "index$" => 3,
             },
             {
+              "active" => true,
               "name" => "genre",
               "op" => {
                 "list" => {
@@ -404,31 +408,31 @@ module FunisgoStreamingConfig
               },
               "req" => true,
               "type" => "`$ARRAY`",
-              "active" => true,
               "index$" => 4,
             },
             {
+              "active" => true,
               "name" => "id",
               "req" => false,
               "type" => "`$STRING`",
-              "active" => true,
               "index$" => 5,
             },
             {
+              "active" => true,
               "name" => "is_premium",
               "req" => false,
               "type" => "`$BOOLEAN`",
-              "active" => true,
               "index$" => 6,
             },
             {
+              "active" => true,
               "name" => "rating",
               "req" => false,
               "type" => "`$NUMBER`",
-              "active" => true,
               "index$" => 7,
             },
             {
+              "active" => true,
               "name" => "release_year",
               "op" => {
                 "list" => {
@@ -438,31 +442,31 @@ module FunisgoStreamingConfig
               },
               "req" => true,
               "type" => "`$INTEGER`",
-              "active" => true,
               "index$" => 8,
             },
             {
+              "active" => true,
               "name" => "stream_url",
               "req" => false,
               "type" => "`$STRING`",
-              "active" => true,
               "index$" => 9,
             },
             {
+              "active" => true,
               "name" => "success",
               "req" => false,
               "type" => "`$BOOLEAN`",
-              "active" => true,
               "index$" => 10,
             },
             {
+              "active" => true,
               "name" => "thumbnail_url",
               "req" => false,
               "type" => "`$STRING`",
-              "active" => true,
               "index$" => 11,
             },
             {
+              "active" => true,
               "name" => "title",
               "op" => {
                 "list" => {
@@ -472,72 +476,73 @@ module FunisgoStreamingConfig
               },
               "req" => true,
               "type" => "`$STRING`",
-              "active" => true,
               "index$" => 12,
             },
             {
+              "active" => true,
               "name" => "updated_at",
               "req" => false,
               "type" => "`$STRING`",
-              "active" => true,
               "index$" => 13,
             },
           ],
           "name" => "movie",
           "op" => {
             "create" => {
+              "input" => "data",
               "name" => "create",
               "points" => [
                 {
+                  "active" => true,
+                  "args" => {},
                   "method" => "POST",
                   "orig" => "/movies",
                   "parts" => [
                     "movies",
                   ],
+                  "select" => {},
                   "transform" => {
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "active" => true,
-                  "args" => {},
-                  "select" => {},
                   "index$" => 0,
                 },
               ],
-              "input" => "data",
               "key$" => "create",
             },
             "list" => {
+              "input" => "data",
               "name" => "list",
               "points" => [
                 {
+                  "active" => true,
                   "args" => {
                     "query" => [
                       {
+                        "active" => true,
                         "kind" => "query",
                         "name" => "genre",
                         "orig" => "genre",
                         "reqd" => false,
                         "type" => "`$STRING`",
-                        "active" => true,
                       },
                       {
+                        "active" => true,
                         "example" => 20,
                         "kind" => "query",
                         "name" => "limit",
                         "orig" => "limit",
                         "reqd" => false,
                         "type" => "`$INTEGER`",
-                        "active" => true,
                       },
                       {
+                        "active" => true,
                         "example" => 1,
                         "kind" => "query",
                         "name" => "page",
                         "orig" => "page",
                         "reqd" => false,
                         "type" => "`$INTEGER`",
-                        "active" => true,
                       },
                     ],
                   },
@@ -557,26 +562,26 @@ module FunisgoStreamingConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "active" => true,
                   "index$" => 0,
                 },
               ],
-              "input" => "data",
               "key$" => "list",
             },
             "load" => {
+              "input" => "data",
               "name" => "load",
               "points" => [
                 {
+                  "active" => true,
                   "args" => {
                     "params" => [
                       {
+                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "movie_id",
                         "reqd" => true,
                         "type" => "`$STRING`",
-                        "active" => true,
                       },
                     ],
                   },
@@ -600,26 +605,26 @@ module FunisgoStreamingConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "active" => true,
                   "index$" => 0,
                 },
               ],
-              "input" => "data",
               "key$" => "load",
             },
             "remove" => {
+              "input" => "data",
               "name" => "remove",
               "points" => [
                 {
+                  "active" => true,
                   "args" => {
                     "params" => [
                       {
+                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "movie_id",
                         "reqd" => true,
                         "type" => "`$STRING`",
-                        "active" => true,
                       },
                     ],
                   },
@@ -643,26 +648,26 @@ module FunisgoStreamingConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "active" => true,
                   "index$" => 0,
                 },
               ],
-              "input" => "data",
               "key$" => "remove",
             },
             "update" => {
+              "input" => "data",
               "name" => "update",
               "points" => [
                 {
+                  "active" => true,
                   "args" => {
                     "params" => [
                       {
+                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "movie_id",
                         "reqd" => true,
                         "type" => "`$STRING`",
-                        "active" => true,
                       },
                     ],
                   },
@@ -686,11 +691,9 @@ module FunisgoStreamingConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "active" => true,
                   "index$" => 0,
                 },
               ],
-              "input" => "data",
               "key$" => "update",
             },
           },
@@ -701,20 +704,21 @@ module FunisgoStreamingConfig
         "series" => {
           "fields" => [
             {
+              "active" => true,
               "name" => "created_at",
               "req" => false,
               "type" => "`$STRING`",
-              "active" => true,
               "index$" => 0,
             },
             {
+              "active" => true,
               "name" => "data",
               "req" => false,
               "type" => "`$OBJECT`",
-              "active" => true,
               "index$" => 1,
             },
             {
+              "active" => true,
               "name" => "description",
               "op" => {
                 "list" => {
@@ -724,17 +728,17 @@ module FunisgoStreamingConfig
               },
               "req" => true,
               "type" => "`$STRING`",
-              "active" => true,
               "index$" => 2,
             },
             {
+              "active" => true,
               "name" => "episode",
               "req" => false,
               "type" => "`$INTEGER`",
-              "active" => true,
               "index$" => 3,
             },
             {
+              "active" => true,
               "name" => "genre",
               "op" => {
                 "list" => {
@@ -744,31 +748,31 @@ module FunisgoStreamingConfig
               },
               "req" => true,
               "type" => "`$ARRAY`",
-              "active" => true,
               "index$" => 4,
             },
             {
+              "active" => true,
               "name" => "id",
               "req" => false,
               "type" => "`$STRING`",
-              "active" => true,
               "index$" => 5,
             },
             {
+              "active" => true,
               "name" => "is_premium",
               "req" => false,
               "type" => "`$BOOLEAN`",
-              "active" => true,
               "index$" => 6,
             },
             {
+              "active" => true,
               "name" => "rating",
               "req" => false,
               "type" => "`$NUMBER`",
-              "active" => true,
               "index$" => 7,
             },
             {
+              "active" => true,
               "name" => "release_year",
               "op" => {
                 "list" => {
@@ -778,31 +782,31 @@ module FunisgoStreamingConfig
               },
               "req" => true,
               "type" => "`$INTEGER`",
-              "active" => true,
               "index$" => 8,
             },
             {
+              "active" => true,
               "name" => "season",
               "req" => false,
               "type" => "`$INTEGER`",
-              "active" => true,
               "index$" => 9,
             },
             {
+              "active" => true,
               "name" => "success",
               "req" => false,
               "type" => "`$BOOLEAN`",
-              "active" => true,
               "index$" => 10,
             },
             {
+              "active" => true,
               "name" => "thumbnail_url",
               "req" => false,
               "type" => "`$STRING`",
-              "active" => true,
               "index$" => 11,
             },
             {
+              "active" => true,
               "name" => "title",
               "op" => {
                 "list" => {
@@ -812,72 +816,73 @@ module FunisgoStreamingConfig
               },
               "req" => true,
               "type" => "`$STRING`",
-              "active" => true,
               "index$" => 12,
             },
             {
+              "active" => true,
               "name" => "updated_at",
               "req" => false,
               "type" => "`$STRING`",
-              "active" => true,
               "index$" => 13,
             },
           ],
           "name" => "series",
           "op" => {
             "create" => {
+              "input" => "data",
               "name" => "create",
               "points" => [
                 {
+                  "active" => true,
+                  "args" => {},
                   "method" => "POST",
                   "orig" => "/series",
                   "parts" => [
                     "series",
                   ],
+                  "select" => {},
                   "transform" => {
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "active" => true,
-                  "args" => {},
-                  "select" => {},
                   "index$" => 0,
                 },
               ],
-              "input" => "data",
               "key$" => "create",
             },
             "list" => {
+              "input" => "data",
               "name" => "list",
               "points" => [
                 {
+                  "active" => true,
                   "args" => {
                     "query" => [
                       {
+                        "active" => true,
                         "kind" => "query",
                         "name" => "genre",
                         "orig" => "genre",
                         "reqd" => false,
                         "type" => "`$STRING`",
-                        "active" => true,
                       },
                       {
+                        "active" => true,
                         "example" => 20,
                         "kind" => "query",
                         "name" => "limit",
                         "orig" => "limit",
                         "reqd" => false,
                         "type" => "`$INTEGER`",
-                        "active" => true,
                       },
                       {
+                        "active" => true,
                         "example" => 1,
                         "kind" => "query",
                         "name" => "page",
                         "orig" => "page",
                         "reqd" => false,
                         "type" => "`$INTEGER`",
-                        "active" => true,
                       },
                     ],
                   },
@@ -897,26 +902,26 @@ module FunisgoStreamingConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "active" => true,
                   "index$" => 0,
                 },
               ],
-              "input" => "data",
               "key$" => "list",
             },
             "load" => {
+              "input" => "data",
               "name" => "load",
               "points" => [
                 {
+                  "active" => true,
                   "args" => {
                     "params" => [
                       {
+                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "series_id",
                         "reqd" => true,
                         "type" => "`$STRING`",
-                        "active" => true,
                       },
                     ],
                   },
@@ -940,26 +945,26 @@ module FunisgoStreamingConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "active" => true,
                   "index$" => 0,
                 },
               ],
-              "input" => "data",
               "key$" => "load",
             },
             "remove" => {
+              "input" => "data",
               "name" => "remove",
               "points" => [
                 {
+                  "active" => true,
                   "args" => {
                     "params" => [
                       {
+                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "series_id",
                         "reqd" => true,
                         "type" => "`$STRING`",
-                        "active" => true,
                       },
                     ],
                   },
@@ -983,26 +988,26 @@ module FunisgoStreamingConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "active" => true,
                   "index$" => 0,
                 },
               ],
-              "input" => "data",
               "key$" => "remove",
             },
             "update" => {
+              "input" => "data",
               "name" => "update",
               "points" => [
                 {
+                  "active" => true,
                   "args" => {
                     "params" => [
                       {
+                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "series_id",
                         "reqd" => true,
                         "type" => "`$STRING`",
-                        "active" => true,
                       },
                     ],
                   },
@@ -1026,11 +1031,9 @@ module FunisgoStreamingConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "active" => true,
                   "index$" => 0,
                 },
               ],
-              "input" => "data",
               "key$" => "update",
             },
           },

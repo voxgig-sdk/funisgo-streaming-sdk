@@ -1,6 +1,11 @@
 # FunisgoStreaming Lua SDK
 
-The Lua SDK for the FunisgoStreaming API. Provides an entity-oriented interface using Lua conventions.
+
+
+The Lua SDK for the FunisgoStreaming API — an entity-oriented client using Lua conventions.
+
+> Other languages, the CLI, and MCP server live alongside this one — see
+> the [top-level README](../README.md).
 
 
 ## Install
@@ -26,13 +31,15 @@ loading a specific record.
 ```lua
 local sdk = require("funisgo-streaming_sdk")
 
-local client = sdk.new({})
+local client = sdk.new({
+  apikey = os.getenv("FUNISGO-STREAMING_APIKEY"),
+})
 ```
 
 ### 2. List channels
 
 ```lua
-local result, err = client:Channel(nil):list(nil, nil)
+local result, err = client:Channel():list()
 if err then error(err) end
 
 if type(result) == "table" then
@@ -46,7 +53,7 @@ end
 ### 3. Load a channel
 
 ```lua
-local result, err = client:Channel(nil):load({ id = "example_id" }, nil)
+local result, err = client:Channel():load({ id = "example_id" })
 if err then error(err) end
 print(result)
 ```
@@ -55,13 +62,13 @@ print(result)
 
 ```lua
 -- Create
-local created, _ = client:Channel(nil):create({ name = "Example" }, nil)
+local created, _ = client:Channel():create({ name = "Example" })
 
 -- Update
-client:Channel(nil):update({ id = created["id"], name = "Example-Renamed" }, nil)
+client:Channel():update({ id = created["id"], name = "Example-Renamed" })
 
 -- Remove
-client:Channel(nil):remove({ id = created["id"] }, nil)
+client:Channel():remove({ id = created["id"] })
 ```
 
 
@@ -105,11 +112,9 @@ print(fetchdef["headers"])
 Create a mock client for unit testing — no server required:
 
 ```lua
-local client = sdk.test(nil, nil)
+local client = sdk.test()
 
-local result, err = client:FunisgoStreaming(nil):load(
-  { id = "test01" }, nil
-)
+local result, err = client:FunisgoStreaming():load({ id = "test01" })
 -- result contains mock response data
 ```
 
@@ -143,6 +148,7 @@ Create a `.env.local` file at the project root:
 
 ```
 FUNISGO-STREAMING_TEST_LIVE=TRUE
+FUNISGO-STREAMING_APIKEY=<your-key>
 ```
 
 Then run:
@@ -165,6 +171,7 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
+| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |

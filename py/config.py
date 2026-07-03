@@ -15,6 +15,9 @@ def make_config():
         },
         "options": {
             "base": "https://api.funisgo.com",
+            "auth": {
+                "prefix": "Bearer",
+            },
             "headers": {
         "content-type": "application/json",
       },
@@ -28,6 +31,7 @@ def make_config():
       "channel": {
         "fields": [
           {
+            "active": True,
             "name": "category",
             "op": {
               "list": {
@@ -37,24 +41,24 @@ def make_config():
             },
             "req": True,
             "type": "`$STRING`",
-            "active": True,
             "index$": 0,
           },
           {
+            "active": True,
             "name": "created_at",
             "req": False,
             "type": "`$STRING`",
-            "active": True,
             "index$": 1,
           },
           {
+            "active": True,
             "name": "data",
             "req": False,
             "type": "`$OBJECT`",
-            "active": True,
             "index$": 2,
           },
           {
+            "active": True,
             "name": "description",
             "op": {
               "list": {
@@ -64,45 +68,45 @@ def make_config():
             },
             "req": True,
             "type": "`$STRING`",
-            "active": True,
             "index$": 3,
           },
           {
+            "active": True,
             "name": "id",
             "req": False,
             "type": "`$STRING`",
-            "active": True,
             "index$": 4,
           },
           {
+            "active": True,
             "name": "is_live",
             "req": False,
             "type": "`$BOOLEAN`",
-            "active": True,
             "index$": 5,
           },
           {
+            "active": True,
             "name": "is_premium",
             "req": False,
             "type": "`$BOOLEAN`",
-            "active": True,
             "index$": 6,
           },
           {
+            "active": True,
             "name": "language",
             "req": False,
             "type": "`$STRING`",
-            "active": True,
             "index$": 7,
           },
           {
+            "active": True,
             "name": "logo_url",
             "req": False,
             "type": "`$STRING`",
-            "active": True,
             "index$": 8,
           },
           {
+            "active": True,
             "name": "name",
             "op": {
               "list": {
@@ -112,86 +116,87 @@ def make_config():
             },
             "req": True,
             "type": "`$STRING`",
-            "active": True,
             "index$": 9,
           },
           {
+            "active": True,
             "name": "stream_url",
             "req": False,
             "type": "`$STRING`",
-            "active": True,
             "index$": 10,
           },
           {
+            "active": True,
             "name": "success",
             "req": False,
             "type": "`$BOOLEAN`",
-            "active": True,
             "index$": 11,
           },
           {
+            "active": True,
             "name": "updated_at",
             "req": False,
             "type": "`$STRING`",
-            "active": True,
             "index$": 12,
           },
         ],
         "name": "channel",
         "op": {
           "create": {
+            "input": "data",
             "name": "create",
             "points": [
               {
+                "active": True,
+                "args": {},
                 "method": "POST",
                 "orig": "/channels",
                 "parts": [
                   "channels",
                 ],
+                "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "active": True,
-                "args": {},
-                "select": {},
                 "index$": 0,
               },
             ],
-            "input": "data",
             "key$": "create",
           },
           "list": {
+            "input": "data",
             "name": "list",
             "points": [
               {
+                "active": True,
                 "args": {
                   "query": [
                     {
+                      "active": True,
                       "kind": "query",
                       "name": "category",
                       "orig": "category",
                       "reqd": False,
                       "type": "`$STRING`",
-                      "active": True,
                     },
                     {
+                      "active": True,
                       "example": 20,
                       "kind": "query",
                       "name": "limit",
                       "orig": "limit",
                       "reqd": False,
                       "type": "`$INTEGER`",
-                      "active": True,
                     },
                     {
+                      "active": True,
                       "example": 1,
                       "kind": "query",
                       "name": "page",
                       "orig": "page",
                       "reqd": False,
                       "type": "`$INTEGER`",
-                      "active": True,
                     },
                   ],
                 },
@@ -211,26 +216,26 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "active": True,
                 "index$": 0,
               },
             ],
-            "input": "data",
             "key$": "list",
           },
           "load": {
+            "input": "data",
             "name": "load",
             "points": [
               {
+                "active": True,
                 "args": {
                   "params": [
                     {
+                      "active": True,
                       "kind": "param",
                       "name": "id",
                       "orig": "channel_id",
                       "reqd": True,
                       "type": "`$STRING`",
-                      "active": True,
                     },
                   ],
                 },
@@ -254,26 +259,26 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "active": True,
                 "index$": 0,
               },
             ],
-            "input": "data",
             "key$": "load",
           },
           "remove": {
+            "input": "data",
             "name": "remove",
             "points": [
               {
+                "active": True,
                 "args": {
                   "params": [
                     {
+                      "active": True,
                       "kind": "param",
                       "name": "id",
                       "orig": "channel_id",
                       "reqd": True,
                       "type": "`$STRING`",
-                      "active": True,
                     },
                   ],
                 },
@@ -297,26 +302,26 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "active": True,
                 "index$": 0,
               },
             ],
-            "input": "data",
             "key$": "remove",
           },
           "update": {
+            "input": "data",
             "name": "update",
             "points": [
               {
+                "active": True,
                 "args": {
                   "params": [
                     {
+                      "active": True,
                       "kind": "param",
                       "name": "id",
                       "orig": "channel_id",
                       "reqd": True,
                       "type": "`$STRING`",
-                      "active": True,
                     },
                   ],
                 },
@@ -340,11 +345,9 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "active": True,
                 "index$": 0,
               },
             ],
-            "input": "data",
             "key$": "update",
           },
         },
@@ -355,20 +358,21 @@ def make_config():
       "movie": {
         "fields": [
           {
+            "active": True,
             "name": "created_at",
             "req": False,
             "type": "`$STRING`",
-            "active": True,
             "index$": 0,
           },
           {
+            "active": True,
             "name": "data",
             "req": False,
             "type": "`$OBJECT`",
-            "active": True,
             "index$": 1,
           },
           {
+            "active": True,
             "name": "description",
             "op": {
               "list": {
@@ -378,10 +382,10 @@ def make_config():
             },
             "req": True,
             "type": "`$STRING`",
-            "active": True,
             "index$": 2,
           },
           {
+            "active": True,
             "name": "duration",
             "op": {
               "list": {
@@ -391,10 +395,10 @@ def make_config():
             },
             "req": True,
             "type": "`$INTEGER`",
-            "active": True,
             "index$": 3,
           },
           {
+            "active": True,
             "name": "genre",
             "op": {
               "list": {
@@ -404,31 +408,31 @@ def make_config():
             },
             "req": True,
             "type": "`$ARRAY`",
-            "active": True,
             "index$": 4,
           },
           {
+            "active": True,
             "name": "id",
             "req": False,
             "type": "`$STRING`",
-            "active": True,
             "index$": 5,
           },
           {
+            "active": True,
             "name": "is_premium",
             "req": False,
             "type": "`$BOOLEAN`",
-            "active": True,
             "index$": 6,
           },
           {
+            "active": True,
             "name": "rating",
             "req": False,
             "type": "`$NUMBER`",
-            "active": True,
             "index$": 7,
           },
           {
+            "active": True,
             "name": "release_year",
             "op": {
               "list": {
@@ -438,31 +442,31 @@ def make_config():
             },
             "req": True,
             "type": "`$INTEGER`",
-            "active": True,
             "index$": 8,
           },
           {
+            "active": True,
             "name": "stream_url",
             "req": False,
             "type": "`$STRING`",
-            "active": True,
             "index$": 9,
           },
           {
+            "active": True,
             "name": "success",
             "req": False,
             "type": "`$BOOLEAN`",
-            "active": True,
             "index$": 10,
           },
           {
+            "active": True,
             "name": "thumbnail_url",
             "req": False,
             "type": "`$STRING`",
-            "active": True,
             "index$": 11,
           },
           {
+            "active": True,
             "name": "title",
             "op": {
               "list": {
@@ -472,72 +476,73 @@ def make_config():
             },
             "req": True,
             "type": "`$STRING`",
-            "active": True,
             "index$": 12,
           },
           {
+            "active": True,
             "name": "updated_at",
             "req": False,
             "type": "`$STRING`",
-            "active": True,
             "index$": 13,
           },
         ],
         "name": "movie",
         "op": {
           "create": {
+            "input": "data",
             "name": "create",
             "points": [
               {
+                "active": True,
+                "args": {},
                 "method": "POST",
                 "orig": "/movies",
                 "parts": [
                   "movies",
                 ],
+                "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "active": True,
-                "args": {},
-                "select": {},
                 "index$": 0,
               },
             ],
-            "input": "data",
             "key$": "create",
           },
           "list": {
+            "input": "data",
             "name": "list",
             "points": [
               {
+                "active": True,
                 "args": {
                   "query": [
                     {
+                      "active": True,
                       "kind": "query",
                       "name": "genre",
                       "orig": "genre",
                       "reqd": False,
                       "type": "`$STRING`",
-                      "active": True,
                     },
                     {
+                      "active": True,
                       "example": 20,
                       "kind": "query",
                       "name": "limit",
                       "orig": "limit",
                       "reqd": False,
                       "type": "`$INTEGER`",
-                      "active": True,
                     },
                     {
+                      "active": True,
                       "example": 1,
                       "kind": "query",
                       "name": "page",
                       "orig": "page",
                       "reqd": False,
                       "type": "`$INTEGER`",
-                      "active": True,
                     },
                   ],
                 },
@@ -557,26 +562,26 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "active": True,
                 "index$": 0,
               },
             ],
-            "input": "data",
             "key$": "list",
           },
           "load": {
+            "input": "data",
             "name": "load",
             "points": [
               {
+                "active": True,
                 "args": {
                   "params": [
                     {
+                      "active": True,
                       "kind": "param",
                       "name": "id",
                       "orig": "movie_id",
                       "reqd": True,
                       "type": "`$STRING`",
-                      "active": True,
                     },
                   ],
                 },
@@ -600,26 +605,26 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "active": True,
                 "index$": 0,
               },
             ],
-            "input": "data",
             "key$": "load",
           },
           "remove": {
+            "input": "data",
             "name": "remove",
             "points": [
               {
+                "active": True,
                 "args": {
                   "params": [
                     {
+                      "active": True,
                       "kind": "param",
                       "name": "id",
                       "orig": "movie_id",
                       "reqd": True,
                       "type": "`$STRING`",
-                      "active": True,
                     },
                   ],
                 },
@@ -643,26 +648,26 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "active": True,
                 "index$": 0,
               },
             ],
-            "input": "data",
             "key$": "remove",
           },
           "update": {
+            "input": "data",
             "name": "update",
             "points": [
               {
+                "active": True,
                 "args": {
                   "params": [
                     {
+                      "active": True,
                       "kind": "param",
                       "name": "id",
                       "orig": "movie_id",
                       "reqd": True,
                       "type": "`$STRING`",
-                      "active": True,
                     },
                   ],
                 },
@@ -686,11 +691,9 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "active": True,
                 "index$": 0,
               },
             ],
-            "input": "data",
             "key$": "update",
           },
         },
@@ -701,20 +704,21 @@ def make_config():
       "series": {
         "fields": [
           {
+            "active": True,
             "name": "created_at",
             "req": False,
             "type": "`$STRING`",
-            "active": True,
             "index$": 0,
           },
           {
+            "active": True,
             "name": "data",
             "req": False,
             "type": "`$OBJECT`",
-            "active": True,
             "index$": 1,
           },
           {
+            "active": True,
             "name": "description",
             "op": {
               "list": {
@@ -724,17 +728,17 @@ def make_config():
             },
             "req": True,
             "type": "`$STRING`",
-            "active": True,
             "index$": 2,
           },
           {
+            "active": True,
             "name": "episode",
             "req": False,
             "type": "`$INTEGER`",
-            "active": True,
             "index$": 3,
           },
           {
+            "active": True,
             "name": "genre",
             "op": {
               "list": {
@@ -744,31 +748,31 @@ def make_config():
             },
             "req": True,
             "type": "`$ARRAY`",
-            "active": True,
             "index$": 4,
           },
           {
+            "active": True,
             "name": "id",
             "req": False,
             "type": "`$STRING`",
-            "active": True,
             "index$": 5,
           },
           {
+            "active": True,
             "name": "is_premium",
             "req": False,
             "type": "`$BOOLEAN`",
-            "active": True,
             "index$": 6,
           },
           {
+            "active": True,
             "name": "rating",
             "req": False,
             "type": "`$NUMBER`",
-            "active": True,
             "index$": 7,
           },
           {
+            "active": True,
             "name": "release_year",
             "op": {
               "list": {
@@ -778,31 +782,31 @@ def make_config():
             },
             "req": True,
             "type": "`$INTEGER`",
-            "active": True,
             "index$": 8,
           },
           {
+            "active": True,
             "name": "season",
             "req": False,
             "type": "`$INTEGER`",
-            "active": True,
             "index$": 9,
           },
           {
+            "active": True,
             "name": "success",
             "req": False,
             "type": "`$BOOLEAN`",
-            "active": True,
             "index$": 10,
           },
           {
+            "active": True,
             "name": "thumbnail_url",
             "req": False,
             "type": "`$STRING`",
-            "active": True,
             "index$": 11,
           },
           {
+            "active": True,
             "name": "title",
             "op": {
               "list": {
@@ -812,72 +816,73 @@ def make_config():
             },
             "req": True,
             "type": "`$STRING`",
-            "active": True,
             "index$": 12,
           },
           {
+            "active": True,
             "name": "updated_at",
             "req": False,
             "type": "`$STRING`",
-            "active": True,
             "index$": 13,
           },
         ],
         "name": "series",
         "op": {
           "create": {
+            "input": "data",
             "name": "create",
             "points": [
               {
+                "active": True,
+                "args": {},
                 "method": "POST",
                 "orig": "/series",
                 "parts": [
                   "series",
                 ],
+                "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "active": True,
-                "args": {},
-                "select": {},
                 "index$": 0,
               },
             ],
-            "input": "data",
             "key$": "create",
           },
           "list": {
+            "input": "data",
             "name": "list",
             "points": [
               {
+                "active": True,
                 "args": {
                   "query": [
                     {
+                      "active": True,
                       "kind": "query",
                       "name": "genre",
                       "orig": "genre",
                       "reqd": False,
                       "type": "`$STRING`",
-                      "active": True,
                     },
                     {
+                      "active": True,
                       "example": 20,
                       "kind": "query",
                       "name": "limit",
                       "orig": "limit",
                       "reqd": False,
                       "type": "`$INTEGER`",
-                      "active": True,
                     },
                     {
+                      "active": True,
                       "example": 1,
                       "kind": "query",
                       "name": "page",
                       "orig": "page",
                       "reqd": False,
                       "type": "`$INTEGER`",
-                      "active": True,
                     },
                   ],
                 },
@@ -897,26 +902,26 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "active": True,
                 "index$": 0,
               },
             ],
-            "input": "data",
             "key$": "list",
           },
           "load": {
+            "input": "data",
             "name": "load",
             "points": [
               {
+                "active": True,
                 "args": {
                   "params": [
                     {
+                      "active": True,
                       "kind": "param",
                       "name": "id",
                       "orig": "series_id",
                       "reqd": True,
                       "type": "`$STRING`",
-                      "active": True,
                     },
                   ],
                 },
@@ -940,26 +945,26 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "active": True,
                 "index$": 0,
               },
             ],
-            "input": "data",
             "key$": "load",
           },
           "remove": {
+            "input": "data",
             "name": "remove",
             "points": [
               {
+                "active": True,
                 "args": {
                   "params": [
                     {
+                      "active": True,
                       "kind": "param",
                       "name": "id",
                       "orig": "series_id",
                       "reqd": True,
                       "type": "`$STRING`",
-                      "active": True,
                     },
                   ],
                 },
@@ -983,26 +988,26 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "active": True,
                 "index$": 0,
               },
             ],
-            "input": "data",
             "key$": "remove",
           },
           "update": {
+            "input": "data",
             "name": "update",
             "points": [
               {
+                "active": True,
                 "args": {
                   "params": [
                     {
+                      "active": True,
                       "kind": "param",
                       "name": "id",
                       "orig": "series_id",
                       "reqd": True,
                       "type": "`$STRING`",
-                      "active": True,
                     },
                   ],
                 },
@@ -1026,11 +1031,9 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "active": True,
                 "index$": 0,
               },
             ],
-            "input": "data",
             "key$": "update",
           },
         },

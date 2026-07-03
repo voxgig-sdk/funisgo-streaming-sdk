@@ -197,6 +197,7 @@ func movieBasicSetup(extra map[string]any) *entityTestSetup {
 		"FUNISGOSTREAMING_TEST_MOVIE_ENTID": idmap,
 		"FUNISGOSTREAMING_TEST_LIVE":      "FALSE",
 		"FUNISGOSTREAMING_TEST_EXPLAIN":   "FALSE",
+		"FUNISGOSTREAMING_APIKEY":         "NONE",
 	})
 
 	idmapResolved := core.ToMapAny(env["FUNISGOSTREAMING_TEST_MOVIE_ENTID"])
@@ -207,6 +208,7 @@ func movieBasicSetup(extra map[string]any) *entityTestSetup {
 	if env["FUNISGOSTREAMING_TEST_LIVE"] == "TRUE" {
 		mergedOpts := vs.Merge([]any{
 			map[string]any{
+				"apikey": env["FUNISGOSTREAMING_APIKEY"],
 			},
 			extra,
 		})

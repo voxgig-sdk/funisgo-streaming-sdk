@@ -1,21 +1,8 @@
 # FunisgoStreaming SDK
 
-Browse streaming catalogues of movies, series and channels with free and premium tiers
+FunisGo Streaming API client, generated from the OpenAPI spec.
 
 > TypeScript, Python, PHP, Golang, Ruby, Lua SDKs, a CLI, an interactive REPL, and an MCP server for AI agents — all generated from one OpenAPI spec by [@voxgig/sdkgen](https://github.com/voxgig/sdkgen).
-
-## About FunisGo Streaming API
-
-The [FunisGo Streaming API](https://api.funisgo.com) exposes a structured catalogue of streaming content - movies, TV series and channel listings - intended for client apps and aggregators. It is listed on [Free Public APIs](https://freepublicapis.com/funisgo-streaming-api), which also surfaces health and reliability metrics for individual endpoints.
-
-What you get from the API:
-
-- Lists of channels available for streaming
-- Lists of movies in the catalogue
-- Lists of TV series in the catalogue
-- Content creation and editing operations on premium plans
-
-Authentication is via a `token` query parameter; a public anonymous token (`anony_0000_public_56`) is documented for free-tier read access. Free and premium plans differ in usage limits and write capabilities. No formal licence terms are published; treat data as third-party content and check with the operator before redistribution.
 
 ## Try it
 
@@ -49,29 +36,31 @@ gem install funisgo-streaming-sdk
 luarocks install funisgo-streaming-sdk
 ```
 
-## 30-second quickstart
+## Quickstart
 
 ### TypeScript
 
 ```ts
 import { FunisgoStreamingSDK } from 'funisgo-streaming'
 
-const client = new FunisgoStreamingSDK({})
+const client = new FunisgoStreamingSDK({
+  apikey: process.env.FUNISGO-STREAMING_APIKEY,
+})
 
 // List all channels
 const channels = await client.Channel().list()
+console.log(channels.data)
 ```
 
-See the [TypeScript README](ts/README.md) for the
-full guide, or scroll down for the same example in other languages.
+See the [TypeScript README](ts/README.md) for the full guide.
 
-## What's in the box
+## Surfaces
 
-| Surface | Use it for | Path |
-| --- | --- | --- |
-| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | App integration | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
-| **CLI** | Scripts, CI, ops, one-off API calls | `go-cli/` |
-| **MCP server** | AI agents (Claude, Cursor, Cline) | `go-mcp/` |
+| Surface | Path |
+| --- | --- |
+| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
+| **CLI** | `go-cli/` |
+| **MCP server** | `go-mcp/` |
 
 ## Use it from an AI agent (MCP)
 
@@ -101,9 +90,9 @@ The API exposes 3 entities:
 
 | Entity | Description | API path |
 | --- | --- | --- |
-| **Channel** | A live or on-demand streaming channel exposed via the channels list endpoint. | `/channels` |
-| **Movie** | A movie title in the FunisGo catalogue, retrievable via the movies list endpoint. | `/movies` |
-| **Series** | A TV series in the FunisGo catalogue, retrievable via the series list endpoint. | `/series` |
+| **Channel** |  | `/channels` |
+| **Movie** |  | `/movies` |
+| **Series** |  | `/series` |
 
 Each entity supports the following operations where available: **load**,
 **list**, **create**, **update**, and **remove**.
@@ -113,17 +102,20 @@ Each entity supports the following operations where available: **load**,
 ### Python
 
 ```python
+import os
 from funisgostreaming_sdk import FunisgoStreamingSDK
 
-client = FunisgoStreamingSDK({})
+client = FunisgoStreamingSDK({
+    "apikey": os.environ.get("FUNISGO-STREAMING_APIKEY"),
+})
 
 # List all channels
-channels, err = client.Channel(None).list(None, None)
+channels, err = client.Channel().list()
+print(channels)
 
 # Load a specific channel
-channel, err = client.Channel(None).load(
-    {"id": "example_id"}, None
-)
+channel, err = client.Channel().load({"id": "example_id"})
+print(channel)
 ```
 
 ### PHP
@@ -132,15 +124,17 @@ channel, err = client.Channel(None).load(
 <?php
 require_once 'funisgostreaming_sdk.php';
 
-$client = new FunisgoStreamingSDK([]);
+$client = new FunisgoStreamingSDK([
+    "apikey" => getenv("FUNISGO-STREAMING_APIKEY"),
+]);
 
 // List all channels
-[$channels, $err] = $client->Channel(null)->list(null, null);
+[$channels, $err] = $client->Channel()->list();
+print_r($channels);
 
 // Load a specific channel
-[$channel, $err] = $client->Channel(null)->load(
-    ["id" => "example_id"], null
-);
+[$channel, $err] = $client->Channel()->load(["id" => "example_id"]);
+print_r($channel);
 ```
 
 ### Golang
@@ -148,10 +142,13 @@ $client = new FunisgoStreamingSDK([]);
 ```go
 import sdk "github.com/voxgig-sdk/funisgo-streaming-sdk/go"
 
-client := sdk.NewFunisgoStreamingSDK(map[string]any{})
+client := sdk.NewFunisgoStreamingSDK(map[string]any{
+    "apikey": os.Getenv("FUNISGO-STREAMING_APIKEY"),
+})
 
 // List all channels
 channels, err := client.Channel(nil).List(nil, nil)
+fmt.Println(channels)
 ```
 
 ### Ruby
@@ -159,15 +156,17 @@ channels, err := client.Channel(nil).List(nil, nil)
 ```ruby
 require_relative "FunisgoStreaming_sdk"
 
-client = FunisgoStreamingSDK.new({})
+client = FunisgoStreamingSDK.new({
+  "apikey" => ENV["FUNISGO-STREAMING_APIKEY"],
+})
 
 # List all channels
-channels, err = client.Channel(nil).list(nil, nil)
+channels, err = client.Channel().list
+puts channels
 
 # Load a specific channel
-channel, err = client.Channel(nil).load(
-  { "id" => "example_id" }, nil
-)
+channel, err = client.Channel().load({ "id" => "example_id" })
+puts channel
 ```
 
 ### Lua
@@ -175,15 +174,17 @@ channel, err = client.Channel(nil).load(
 ```lua
 local sdk = require("funisgo-streaming_sdk")
 
-local client = sdk.new({})
+local client = sdk.new({
+  apikey = os.getenv("FUNISGO-STREAMING_APIKEY"),
+})
 
 -- List all channels
-local channels, err = client:Channel(nil):list(nil, nil)
+local channels, err = client:Channel():list()
+print(channels)
 
 -- Load a specific channel
-local channel, err = client:Channel(nil):load(
-  { id = "example_id" }, nil
-)
+local channel, err = client:Channel():load({ id = "example_id" })
+print(channel)
 ```
 
 ## Unit testing in offline mode
@@ -202,25 +203,21 @@ const result = await client.Channel().load({ id: 'test01' })
 ### Python
 
 ```python
-client = FunisgoStreamingSDK.test(None, None)
-result, err = client.Channel(None).load(
-    {"id": "test01"}, None
-)
+client = FunisgoStreamingSDK.test()
+result, err = client.Channel().load({"id": "test01"})
 ```
 
 ### PHP
 
 ```php
-$client = FunisgoStreamingSDK::test(null, null);
-[$result, $err] = $client->Channel(null)->load(
-    ["id" => "test01"], null
-);
+$client = FunisgoStreamingSDK::test();
+[$result, $err] = $client->Channel()->load(["id" => "test01"]);
 ```
 
 ### Golang
 
 ```go
-client := sdk.TestSDK(nil, nil)
+client := sdk.Test()
 result, err := client.Channel(nil).Load(
     map[string]any{"id": "test01"}, nil,
 )
@@ -229,19 +226,15 @@ result, err := client.Channel(nil).Load(
 ### Ruby
 
 ```ruby
-client = FunisgoStreamingSDK.test(nil, nil)
-result, err = client.Channel(nil).load(
-  { "id" => "test01" }, nil
-)
+client = FunisgoStreamingSDK.test
+result, err = client.Channel().load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
-local client = sdk.test(nil, nil)
-local result, err = client:Channel(nil):load(
-  { id = "test01" }, nil
-)
+local client = sdk.test()
+local result, err = client:Channel():load({ id = "test01" })
 ```
 
 ## How it works
@@ -345,11 +338,6 @@ local result, err = client:direct({
 - [Golang](go/README.md)
 - [Ruby](rb/README.md)
 - [Lua](lua/README.md)
-
-## Using the FunisGo Streaming API
-
-- Upstream: [https://api.funisgo.com](https://api.funisgo.com)
-- API docs: [https://freepublicapis.com/funisgo-streaming-api](https://freepublicapis.com/funisgo-streaming-api)
 
 ---
 

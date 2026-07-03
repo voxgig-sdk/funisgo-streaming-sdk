@@ -136,12 +136,14 @@ function directSetup(mockres?: any) {
   const env = envOverride({
     'FUNISGOSTREAMING_TEST_CHANNEL_ENTID': {},
     'FUNISGOSTREAMING_TEST_LIVE': 'FALSE',
+    'FUNISGOSTREAMING_APIKEY': 'NONE',
   })
 
   const live = 'TRUE' === env.FUNISGOSTREAMING_TEST_LIVE
 
   if (live) {
     const client = new FunisgoStreamingSDK({
+      apikey: env.FUNISGOSTREAMING_APIKEY,
     })
 
     let idmap: any = env['FUNISGOSTREAMING_TEST_CHANNEL_ENTID']

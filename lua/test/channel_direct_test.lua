@@ -117,12 +117,14 @@ function channel_direct_setup(mockres)
   local env = runner.env_override({
     ["FUNISGOSTREAMING_TEST_CHANNEL_ENTID"] = {},
     ["FUNISGOSTREAMING_TEST_LIVE"] = "FALSE",
+    ["FUNISGOSTREAMING_APIKEY"] = "NONE",
   })
 
   local live = env["FUNISGOSTREAMING_TEST_LIVE"] == "TRUE"
 
   if live then
     local merged_opts = {
+      apikey = env["FUNISGOSTREAMING_APIKEY"],
     }
     local client = sdk.new(merged_opts)
     return {

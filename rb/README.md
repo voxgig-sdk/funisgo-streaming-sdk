@@ -1,6 +1,11 @@
 # FunisgoStreaming Ruby SDK
 
-The Ruby SDK for the FunisgoStreaming API. Provides an entity-oriented interface using idiomatic Ruby conventions.
+
+
+The Ruby SDK for the FunisgoStreaming API — an entity-oriented client using idiomatic Ruby conventions.
+
+> Other languages, the CLI, and MCP server live alongside this one — see
+> the [top-level README](../README.md).
 
 
 ## Install
@@ -31,13 +36,15 @@ loading a specific record.
 ```ruby
 require_relative "FunisgoStreaming_sdk"
 
-client = FunisgoStreamingSDK.new({})
+client = FunisgoStreamingSDK.new({
+  "apikey" => ENV["FUNISGO-STREAMING_APIKEY"],
+})
 ```
 
 ### 2. List channels
 
 ```ruby
-result, err = client.Channel(nil).list(nil, nil)
+result, err = client.Channel().list
 raise err if err
 
 if result.is_a?(Array)
@@ -51,7 +58,7 @@ end
 ### 3. Load a channel
 
 ```ruby
-result, err = client.Channel(nil).load({ "id" => "example_id" }, nil)
+result, err = client.Channel().load({ "id" => "example_id" })
 raise err if err
 puts result
 ```
@@ -60,13 +67,13 @@ puts result
 
 ```ruby
 # Create
-created, _ = client.Channel(nil).create({ "name" => "Example" }, nil)
+created, _ = client.Channel().create({ "name" => "Example" })
 
 # Update
-client.Channel(nil).update({ "id" => created["id"], "name" => "Example-Renamed" }, nil)
+client.Channel().update({ "id" => created["id"], "name" => "Example-Renamed" })
 
 # Remove
-client.Channel(nil).remove({ "id" => created["id"] }, nil)
+client.Channel().remove({ "id" => created["id"] })
 ```
 
 
@@ -110,11 +117,9 @@ puts fetchdef["headers"]
 Create a mock client for unit testing — no server required:
 
 ```ruby
-client = FunisgoStreamingSDK.test(nil, nil)
+client = FunisgoStreamingSDK.test
 
-result, err = client.FunisgoStreaming(nil).load(
-  { "id" => "test01" }, nil
-)
+result, err = client.FunisgoStreaming().load({ "id" => "test01" })
 # result contains mock response data
 ```
 
@@ -146,6 +151,7 @@ Create a `.env.local` file at the project root:
 
 ```
 FUNISGO-STREAMING_TEST_LIVE=TRUE
+FUNISGO-STREAMING_APIKEY=<your-key>
 ```
 
 Then run:
@@ -168,6 +174,7 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
+| `apikey` | `String` | API key for authentication. |
 | `base` | `String` | Base URL of the API server. |
 | `prefix` | `String` | URL path prefix prepended to all requests. |
 | `suffix` | `String` | URL path suffix appended to all requests. |
