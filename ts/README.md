@@ -10,7 +10,7 @@ The TypeScript SDK for the FunisgoStreaming API — a type-safe, entity-oriented
 
 ## Install
 ```bash
-npm install funisgo-streaming
+npm install @voxgig-sdk/funisgo-streaming
 ```
 ## Tutorial: your first API call
 

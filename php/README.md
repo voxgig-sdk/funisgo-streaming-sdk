@@ -10,7 +10,7 @@ The PHP SDK for the FunisgoStreaming API — an entity-oriented client using PHP
 
 ## Install
 ```bash
-composer require voxgig/funisgo-streaming-sdk
+composer require voxgig-sdk/funisgo-streaming
 ```
 
 

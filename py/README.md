@@ -10,7 +10,7 @@ The Python SDK for the FunisgoStreaming API — an entity-oriented client follow
 
 ## Install
 ```bash
-pip install funisgo-streaming-sdk
+pip install voxgig-sdk-funisgo-streaming
 ```
 
 Or install from source:

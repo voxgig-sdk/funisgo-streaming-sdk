@@ -10,7 +10,7 @@ The Lua SDK for the FunisgoStreaming API — an entity-oriented client using Lua
 
 ## Install
 ```bash
-luarocks install funisgo-streaming-sdk
+luarocks install voxgig-sdk-funisgo-streaming
 ```
 
 If the module is not yet published, add the source directory to

@@ -2,9 +2,17 @@ Gem::Specification.new do |spec|
   spec.name          = "voxgig-sdk-funisgo-streaming"
   spec.version       = "0.0.1"
   spec.authors       = ["Voxgig"]
-  spec.summary       = "FunisgoStreaming SDK for Ruby"
+  spec.summary       = "Unofficial generated Ruby SDK for the FunisGo Streaming public API. Not affiliated with or endorsed by the upstream API provider."
+  spec.description   = "Unofficial generated Ruby SDK for the FunisGo Streaming public API. Not affiliated with or endorsed by the upstream API provider."
   spec.license       = "MIT"
   spec.homepage      = "https://github.com/voxgig-sdk/funisgo-streaming-sdk"
+  spec.metadata      = {
+    "homepage_uri"          => "https://github.com/voxgig-sdk/funisgo-streaming-sdk",
+    "source_code_uri"       => "https://github.com/voxgig-sdk/funisgo-streaming-sdk",
+    "bug_tracker_uri"       => "https://github.com/voxgig-sdk/funisgo-streaming-sdk/issues",
+    "changelog_uri"         => "https://github.com/voxgig-sdk/funisgo-streaming-sdk/blob/main/CHANGELOG.md",
+    "rubygems_mfa_required" => "true"
+  }
 
   spec.files         = Dir["lib/**/*.rb", "*.rb"]
   spec.require_paths = ["."]

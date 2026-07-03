@@ -1,7 +1,23 @@
 {
   "name": "@voxgig-sdk/funisgo-streaming",
   "version": "0.0.1",
-  "description": "DESCRIPTION",
+  "description": "Unofficial generated TypeScript SDK for the FunisGo Streaming public API. Not affiliated with or endorsed by the upstream API provider.",
+  "keywords": [
+    "voxgig",
+    "sdk",
+    "generated-sdk",
+    "openapi",
+    "api-client",
+    "funisgo-streaming"
+  ],
+  "homepage": "https://github.com/voxgig-sdk/funisgo-streaming-sdk#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/voxgig-sdk/funisgo-streaming-sdk.git"
+  },
+  "bugs": {
+    "url": "https://github.com/voxgig-sdk/funisgo-streaming-sdk/issues"
+  },
   "main": "dist/FunisgoStreamingSDK.js",
   "type": "commonjs",
   "types": "dist/FunisgoStreamingSDK.d.ts",
@@ -14,7 +30,10 @@
     "clean": "rm -rf node_modules yarn.lock package-lock.json",
     "reset": "npm run clean && npm i && npm run build && npm test"
   },
-  "author": "FunisgoStreaming",
+  "author": {
+    "name": "Voxgig",
+    "url": "https://voxgig.com"
+  },
   "license": "MIT",
   "dependencies": {},
   "peerDependencies": {},

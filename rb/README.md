@@ -10,13 +10,13 @@ The Ruby SDK for the FunisgoStreaming API — an entity-oriented client using id
 
 ## Install
 ```bash
-gem install funisgo-streaming-sdk
+gem install voxgig-sdk-funisgo-streaming
 ```
 
 Or add to your `Gemfile`:
 
 ```ruby
-gem "funisgo-streaming-sdk"
+gem "voxgig-sdk-funisgo-streaming"
 ```
 
 Then run:
