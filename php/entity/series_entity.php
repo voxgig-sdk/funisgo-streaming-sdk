@@ -55,6 +55,9 @@ class SeriesEntity
         return new SeriesEntity($this->_client, $opts);
     }
 
+    /**
+     * @param Series|array $args Series data (assoc-array) to store.
+     */
     public function data_set($args): void
     {
         if ($args) {
@@ -63,12 +66,18 @@ class SeriesEntity
         }
     }
 
+    /**
+     * @return Series|array The current Series data as an assoc-array.
+     */
     public function data_get()
     {
         ($this->_utility->feature_hook)($this->_entctx, "GetData");
         return Struct::clone($this->_data);
     }
 
+    /**
+     * @param array $args Match filter (any subset of Series fields).
+     */
     public function match_set($args): void
     {
         if ($args) {
@@ -77,6 +86,9 @@ class SeriesEntity
         }
     }
 
+    /**
+     * @return array The current match filter (any subset of Series fields).
+     */
     public function match_get()
     {
         ($this->_utility->feature_hook)($this->_entctx, "GetMatch");
@@ -84,7 +96,16 @@ class SeriesEntity
     }
 
     
-    public function load($reqmatch, $ctrl = null): array
+    /**
+     * Load a single Series.
+     *
+     * @param SeriesLoadMatch|array|null $reqmatch Match criteria (id/query
+     *   fields) as an assoc-array; a typed SeriesLoadMatch names the shape.
+     * @param mixed $ctrl Optional per-call control overrides.
+     * @return Series|array The loaded Series as an assoc-array at the
+     *   SDK boundary; throws FunisgoStreamingError on failure (item-5 convention).
+     */
+    public function load(?array $reqmatch = null, $ctrl = null): mixed
     {
         $utility = $this->_utility;
         $ctx = ($utility->make_context)([
@@ -110,7 +131,16 @@ class SeriesEntity
 
 
     
-    public function list($reqmatch, $ctrl = null): array
+    /**
+     * List Series items matching the given filter.
+     *
+     * @param SeriesListMatch|array|null $reqmatch Match filter (any subset
+     *   of Series fields) as an assoc-array; SeriesListMatch names the shape.
+     * @param mixed $ctrl Optional per-call control overrides.
+     * @return Series[]|array A list of Series items as assoc-arrays at
+     *   the SDK boundary; throws FunisgoStreamingError on failure (item-5 convention).
+     */
+    public function list(?array $reqmatch = null, $ctrl = null): mixed
     {
         $utility = $this->_utility;
         $ctx = ($utility->make_context)([
@@ -133,7 +163,16 @@ class SeriesEntity
 
 
     
-    public function create($reqdata, $ctrl = null): array
+    /**
+     * Create a new Series.
+     *
+     * @param SeriesCreateData|array|null $reqdata Body data as an assoc-array;
+     *   a typed SeriesCreateData names the shape.
+     * @param mixed $ctrl Optional per-call control overrides.
+     * @return Series|array The created Series as an assoc-array at the
+     *   SDK boundary; throws FunisgoStreamingError on failure (item-5 convention).
+     */
+    public function create(?array $reqdata = null, $ctrl = null): mixed
     {
         $utility = $this->_utility;
         $ctx = ($utility->make_context)([
@@ -156,7 +195,16 @@ class SeriesEntity
 
 
     
-    public function update($reqdata, $ctrl = null): array
+    /**
+     * Update an existing Series.
+     *
+     * @param SeriesUpdateData|array|null $reqdata Body data as an assoc-array;
+     *   a typed SeriesUpdateData names the shape.
+     * @param mixed $ctrl Optional per-call control overrides.
+     * @return Series|array The updated Series as an assoc-array at the
+     *   SDK boundary; throws FunisgoStreamingError on failure (item-5 convention).
+     */
+    public function update(?array $reqdata = null, $ctrl = null): mixed
     {
         $utility = $this->_utility;
         $ctx = ($utility->make_context)([
@@ -182,7 +230,16 @@ class SeriesEntity
 
 
     
-    public function remove($reqmatch, $ctrl = null): array
+    /**
+     * Remove an Series matching the given criteria.
+     *
+     * @param SeriesRemoveMatch|array|null $reqmatch Match criteria (id/query
+     *   fields) as an assoc-array; SeriesRemoveMatch names the shape.
+     * @param mixed $ctrl Optional per-call control overrides.
+     * @return Series|array The removed Series as an assoc-array at the
+     *   SDK boundary; throws FunisgoStreamingError on failure (item-5 convention).
+     */
+    public function remove(?array $reqmatch = null, $ctrl = null): mixed
     {
         $utility = $this->_utility;
         $ctx = ($utility->make_context)([
@@ -207,7 +264,7 @@ class SeriesEntity
 
 
 
-    private function _run_op($ctx, callable $post_done): array
+    private function _run_op($ctx, callable $post_done): mixed
     {
         $utility = $this->_utility;
 

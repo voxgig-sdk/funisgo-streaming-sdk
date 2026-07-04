@@ -144,16 +144,23 @@ class FunisgoStreamingSDK:
 
         _, err = utility.prepare_auth(ctx)
         if err is not None:
-            return None, err
+            raise err
 
-        return utility.make_fetch_def(ctx)
+        fetchdef, err = utility.make_fetch_def(ctx)
+        if err is not None:
+            raise err
+
+        return fetchdef
 
     def direct(self, fetchargs=None):
         utility = self._utility
 
-        fetchdef, err = self.prepare(fetchargs)
-        if err is not None:
-            return {"ok": False, "err": err}, None
+        try:
+            fetchdef = self.prepare(fetchargs)
+        except Exception as err:
+            # direct() is the raw-HTTP escape hatch: it never raises, it
+            # returns a result object callers branch on via result["ok"].
+            return {"ok": False, "err": err}
 
         if fetchargs is None:
             fetchargs = {}
@@ -170,13 +177,13 @@ class FunisgoStreamingSDK:
         fetched, fetch_err = utility.fetcher(ctx, url, fetchdef)
 
         if fetch_err is not None:
-            return {"ok": False, "err": fetch_err}, None
+            return {"ok": False, "err": fetch_err}
 
         if fetched is None:
             return {
                 "ok": False,
                 "err": ctx.make_error("direct_no_response", "response: undefined"),
-            }, None
+            }
 
         if isinstance(fetched, dict):
             status = helpers.to_int(vs.getprop(fetched, "status"))
@@ -205,25 +212,58 @@ class FunisgoStreamingSDK:
                 "status": status,
                 "headers": headers,
                 "data": json_data,
-            }, None
+            }
 
         return {
             "ok": False,
             "err": ctx.make_error("direct_invalid", "invalid response type"),
-        }, None
+        }
 
+
+    @property
+    def channel(self):
+        """Idiomatic facade: client.channel.list() / client.channel.load({"id": ...})."""
+        from entity.channel_entity import ChannelEntity
+        cached = getattr(self, "_channel", None)
+        if cached is None:
+            cached = ChannelEntity(self, None)
+            self._channel = cached
+        return cached
 
     def Channel(self, data=None):
+        # Deprecated: use client.channel instead.
         from entity.channel_entity import ChannelEntity
         return ChannelEntity(self, data)
 
 
+    @property
+    def movie(self):
+        """Idiomatic facade: client.movie.list() / client.movie.load({"id": ...})."""
+        from entity.movie_entity import MovieEntity
+        cached = getattr(self, "_movie", None)
+        if cached is None:
+            cached = MovieEntity(self, None)
+            self._movie = cached
+        return cached
+
     def Movie(self, data=None):
+        # Deprecated: use client.movie instead.
         from entity.movie_entity import MovieEntity
         return MovieEntity(self, data)
 
 
+    @property
+    def series(self):
+        """Idiomatic facade: client.series.list() / client.series.load({"id": ...})."""
+        from entity.series_entity import SeriesEntity
+        cached = getattr(self, "_series", None)
+        if cached is None:
+            cached = SeriesEntity(self, None)
+            self._series = cached
+        return cached
+
     def Series(self, data=None):
+        # Deprecated: use client.series instead.
         from entity.series_entity import SeriesEntity
         return SeriesEntity(self, data)
 

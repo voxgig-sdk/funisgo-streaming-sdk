@@ -92,7 +92,7 @@ same parameters as `direct()`.
 ## ChannelEntity
 
 ```lua
-local channel = client:Channel(nil)
+local channel = client:channel(nil)
 ```
 
 ### Fields
@@ -138,7 +138,7 @@ local channel = client:Channel(nil)
 Create a new entity with the given data.
 
 ```lua
-local result, err = client:Channel():create({
+local result, err = client:channel():create({
   category = --[[ `$STRING` ]],
   description = --[[ `$STRING` ]],
   name = --[[ `$STRING` ]],
@@ -150,7 +150,7 @@ local result, err = client:Channel():create({
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:Channel():list()
+local results, err = client:channel():list()
 ```
 
 #### `load(reqmatch, ctrl) -> any, err`
@@ -158,7 +158,7 @@ local results, err = client:Channel():list()
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Channel():load({ id = "channel_id" })
+local result, err = client:channel():load({ id = "channel_id" })
 ```
 
 #### `remove(reqmatch, ctrl) -> any, err`
@@ -166,7 +166,7 @@ local result, err = client:Channel():load({ id = "channel_id" })
 Remove the entity matching the given criteria.
 
 ```lua
-local result, err = client:Channel():remove({ id = "channel_id" })
+local result, err = client:channel():remove({ id = "channel_id" })
 ```
 
 #### `update(reqdata, ctrl) -> any, err`
@@ -174,7 +174,7 @@ local result, err = client:Channel():remove({ id = "channel_id" })
 Update an existing entity. The data must include the entity `id`.
 
 ```lua
-local result, err = client:Channel():update({
+local result, err = client:channel():update({
   id = "channel_id",
   -- Fields to update
 })
@@ -213,7 +213,7 @@ Return the entity name.
 ## MovieEntity
 
 ```lua
-local movie = client:Movie(nil)
+local movie = client:movie(nil)
 ```
 
 ### Fields
@@ -261,7 +261,7 @@ local movie = client:Movie(nil)
 Create a new entity with the given data.
 
 ```lua
-local result, err = client:Movie():create({
+local result, err = client:movie():create({
   description = --[[ `$STRING` ]],
   duration = --[[ `$INTEGER` ]],
   genre = --[[ `$ARRAY` ]],
@@ -275,7 +275,7 @@ local result, err = client:Movie():create({
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:Movie():list()
+local results, err = client:movie():list()
 ```
 
 #### `load(reqmatch, ctrl) -> any, err`
@@ -283,7 +283,7 @@ local results, err = client:Movie():list()
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Movie():load({ id = "movie_id" })
+local result, err = client:movie():load({ id = "movie_id" })
 ```
 
 #### `remove(reqmatch, ctrl) -> any, err`
@@ -291,7 +291,7 @@ local result, err = client:Movie():load({ id = "movie_id" })
 Remove the entity matching the given criteria.
 
 ```lua
-local result, err = client:Movie():remove({ id = "movie_id" })
+local result, err = client:movie():remove({ id = "movie_id" })
 ```
 
 #### `update(reqdata, ctrl) -> any, err`
@@ -299,7 +299,7 @@ local result, err = client:Movie():remove({ id = "movie_id" })
 Update an existing entity. The data must include the entity `id`.
 
 ```lua
-local result, err = client:Movie():update({
+local result, err = client:movie():update({
   id = "movie_id",
   -- Fields to update
 })
@@ -338,7 +338,7 @@ Return the entity name.
 ## SeriesEntity
 
 ```lua
-local series = client:Series(nil)
+local series = client:series(nil)
 ```
 
 ### Fields
@@ -386,7 +386,7 @@ local series = client:Series(nil)
 Create a new entity with the given data.
 
 ```lua
-local result, err = client:Series():create({
+local result, err = client:series():create({
   description = --[[ `$STRING` ]],
   genre = --[[ `$ARRAY` ]],
   release_year = --[[ `$INTEGER` ]],
@@ -399,7 +399,7 @@ local result, err = client:Series():create({
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:Series():list()
+local results, err = client:series():list()
 ```
 
 #### `load(reqmatch, ctrl) -> any, err`
@@ -407,7 +407,7 @@ local results, err = client:Series():list()
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Series():load({ id = "series_id" })
+local result, err = client:series():load({ id = "series_id" })
 ```
 
 #### `remove(reqmatch, ctrl) -> any, err`
@@ -415,7 +415,7 @@ local result, err = client:Series():load({ id = "series_id" })
 Remove the entity matching the given criteria.
 
 ```lua
-local result, err = client:Series():remove({ id = "series_id" })
+local result, err = client:series():remove({ id = "series_id" })
 ```
 
 #### `update(reqdata, ctrl) -> any, err`
@@ -423,7 +423,7 @@ local result, err = client:Series():remove({ id = "series_id" })
 Update an existing entity. The data must include the entity `id`.
 
 ```lua
-local result, err = client:Series():update({
+local result, err = client:series():update({
   id = "series_id",
   -- Fields to update
 })

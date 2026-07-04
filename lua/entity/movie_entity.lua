@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch MovieLoadMatch
+---@param ctrl? table
+---@return Movie
+---@return string? err
 function MovieEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({
@@ -104,6 +108,10 @@ end
 
 
 
+---@param reqmatch MovieListMatch
+---@param ctrl? table
+---@return Movie[]
+---@return string? err
 function MovieEntity:list(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({
@@ -126,6 +134,10 @@ end
 
 
 
+---@param reqdata MovieCreateData
+---@param ctrl? table
+---@return Movie
+---@return string? err
 function MovieEntity:create(reqdata, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({
@@ -148,6 +160,10 @@ end
 
 
 
+---@param reqdata MovieUpdateData
+---@param ctrl? table
+---@return Movie
+---@return string? err
 function MovieEntity:update(reqdata, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({
@@ -173,6 +189,10 @@ end
 
 
 
+---@param reqmatch MovieRemoveMatch
+---@param ctrl? table
+---@return Movie
+---@return string? err
 function MovieEntity:remove(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

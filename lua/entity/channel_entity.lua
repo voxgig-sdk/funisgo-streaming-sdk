@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch ChannelLoadMatch
+---@param ctrl? table
+---@return Channel
+---@return string? err
 function ChannelEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({
@@ -104,6 +108,10 @@ end
 
 
 
+---@param reqmatch ChannelListMatch
+---@param ctrl? table
+---@return Channel[]
+---@return string? err
 function ChannelEntity:list(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({
@@ -126,6 +134,10 @@ end
 
 
 
+---@param reqdata ChannelCreateData
+---@param ctrl? table
+---@return Channel
+---@return string? err
 function ChannelEntity:create(reqdata, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({
@@ -148,6 +160,10 @@ end
 
 
 
+---@param reqdata ChannelUpdateData
+---@param ctrl? table
+---@return Channel
+---@return string? err
 function ChannelEntity:update(reqdata, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({
@@ -173,6 +189,10 @@ end
 
 
 
+---@param reqmatch ChannelRemoveMatch
+---@param ctrl? table
+---@return Channel
+---@return string? err
 function ChannelEntity:remove(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

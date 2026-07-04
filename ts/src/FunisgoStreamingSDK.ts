@@ -4,6 +4,8 @@ import { ChannelEntity } from './entity/ChannelEntity'
 import { MovieEntity } from './entity/MovieEntity'
 import { SeriesEntity } from './entity/SeriesEntity'
 
+export type * from './FunisgoStreamingTypes'
+
 
 import { inspect } from 'node:util'
 
@@ -204,18 +206,42 @@ class FunisgoStreamingSDK {
 
 
 
+  _channel?: ChannelEntity
+
+  // Idiomatic facade: `client.channel.list()` / `client.channel.load({ id })`.
+  get channel(): ChannelEntity {
+    return (this._channel ??= new ChannelEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.channel` instead. */
   Channel(data?: any) {
     const self = this
     return new ChannelEntity(self,data)
   }
 
 
+  _movie?: MovieEntity
+
+  // Idiomatic facade: `client.movie.list()` / `client.movie.load({ id })`.
+  get movie(): MovieEntity {
+    return (this._movie ??= new MovieEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.movie` instead. */
   Movie(data?: any) {
     const self = this
     return new MovieEntity(self,data)
   }
 
 
+  _series?: SeriesEntity
+
+  // Idiomatic facade: `client.series.list()` / `client.series.load({ id })`.
+  get series(): SeriesEntity {
+    return (this._series ??= new SeriesEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.series` instead. */
   Series(data?: any) {
     const self = this
     return new SeriesEntity(self,data)

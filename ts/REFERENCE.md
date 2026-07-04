@@ -134,7 +134,7 @@ Alias for `FunisgoStreamingSDK.test()`.
 ## ChannelEntity
 
 ```ts
-const channel = client.Channel()
+const channel = client.channel
 ```
 
 ### Fields
@@ -180,7 +180,7 @@ const channel = client.Channel()
 Create a new entity with the given data.
 
 ```ts
-const result = await client.Channel().create({
+const result = await client.channel.create({
   category: /* `$STRING` */,
   description: /* `$STRING` */,
   name: /* `$STRING` */,
@@ -192,7 +192,7 @@ const result = await client.Channel().create({
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.Channel().list()
+const results = await client.channel.list()
 ```
 
 #### `load(match: object, ctrl?: object)`
@@ -200,7 +200,7 @@ const results = await client.Channel().list()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Channel().load({ id: 'channel_id' })
+const result = await client.channel.load({ id: 'channel_id' })
 ```
 
 #### `remove(match: object, ctrl?: object)`
@@ -208,7 +208,7 @@ const result = await client.Channel().load({ id: 'channel_id' })
 Remove the entity matching the given criteria.
 
 ```ts
-const result = await client.Channel().remove({ id: 'channel_id' })
+const result = await client.channel.remove({ id: 'channel_id' })
 ```
 
 #### `update(data: object, ctrl?: object)`
@@ -216,7 +216,7 @@ const result = await client.Channel().remove({ id: 'channel_id' })
 Update an existing entity. The data must include the entity `id`.
 
 ```ts
-const result = await client.Channel().update({
+const result = await client.channel.update({
   id: 'channel_id',
   // Fields to update
 })
@@ -253,7 +253,7 @@ Return a copy of the entity options.
 ## MovieEntity
 
 ```ts
-const movie = client.Movie()
+const movie = client.movie
 ```
 
 ### Fields
@@ -301,7 +301,7 @@ const movie = client.Movie()
 Create a new entity with the given data.
 
 ```ts
-const result = await client.Movie().create({
+const result = await client.movie.create({
   description: /* `$STRING` */,
   duration: /* `$INTEGER` */,
   genre: /* `$ARRAY` */,
@@ -315,7 +315,7 @@ const result = await client.Movie().create({
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.Movie().list()
+const results = await client.movie.list()
 ```
 
 #### `load(match: object, ctrl?: object)`
@@ -323,7 +323,7 @@ const results = await client.Movie().list()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Movie().load({ id: 'movie_id' })
+const result = await client.movie.load({ id: 'movie_id' })
 ```
 
 #### `remove(match: object, ctrl?: object)`
@@ -331,7 +331,7 @@ const result = await client.Movie().load({ id: 'movie_id' })
 Remove the entity matching the given criteria.
 
 ```ts
-const result = await client.Movie().remove({ id: 'movie_id' })
+const result = await client.movie.remove({ id: 'movie_id' })
 ```
 
 #### `update(data: object, ctrl?: object)`
@@ -339,7 +339,7 @@ const result = await client.Movie().remove({ id: 'movie_id' })
 Update an existing entity. The data must include the entity `id`.
 
 ```ts
-const result = await client.Movie().update({
+const result = await client.movie.update({
   id: 'movie_id',
   // Fields to update
 })
@@ -376,7 +376,7 @@ Return a copy of the entity options.
 ## SeriesEntity
 
 ```ts
-const series = client.Series()
+const series = client.series
 ```
 
 ### Fields
@@ -424,7 +424,7 @@ const series = client.Series()
 Create a new entity with the given data.
 
 ```ts
-const result = await client.Series().create({
+const result = await client.series.create({
   description: /* `$STRING` */,
   genre: /* `$ARRAY` */,
   release_year: /* `$INTEGER` */,
@@ -437,7 +437,7 @@ const result = await client.Series().create({
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.Series().list()
+const results = await client.series.list()
 ```
 
 #### `load(match: object, ctrl?: object)`
@@ -445,7 +445,7 @@ const results = await client.Series().list()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Series().load({ id: 'series_id' })
+const result = await client.series.load({ id: 'series_id' })
 ```
 
 #### `remove(match: object, ctrl?: object)`
@@ -453,7 +453,7 @@ const result = await client.Series().load({ id: 'series_id' })
 Remove the entity matching the given criteria.
 
 ```ts
-const result = await client.Series().remove({ id: 'series_id' })
+const result = await client.series.remove({ id: 'series_id' })
 ```
 
 #### `update(data: object, ctrl?: object)`
@@ -461,7 +461,7 @@ const result = await client.Series().remove({ id: 'series_id' })
 Update an existing entity. The data must include the entity `id`.
 
 ```ts
-const result = await client.Series().update({
+const result = await client.series.update({
   id: 'series_id',
   // Fields to update
 })

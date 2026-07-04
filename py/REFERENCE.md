@@ -62,9 +62,9 @@ Return a deep copy of the current SDK options.
 
 Return a copy of the SDK utility object.
 
-#### `direct(fetchargs=None) -> tuple`
+#### `direct(fetchargs=None) -> dict`
 
-Make a direct HTTP request to any API endpoint. Returns `(result, err)`.
+Make a direct HTTP request to any API endpoint. Returns a result `dict` with `ok`, `status`, `headers`, and `data` (or `err` on failure). This escape hatch never raises — branch on `result["ok"]`.
 
 **Parameters:**
 
@@ -77,11 +77,11 @@ Make a direct HTTP request to any API endpoint. Returns `(result, err)`.
 | `fetchargs["headers"]` | `dict` | Request headers (merged with defaults). |
 | `fetchargs["body"]` | `any` | Request body (dicts are JSON-serialized). |
 
-**Returns:** `(result_dict, err)`
+**Returns:** `result_dict`
 
-#### `prepare(fetchargs=None) -> tuple`
+#### `prepare(fetchargs=None) -> dict`
 
-Prepare a fetch definition without sending. Returns `(fetchdef, err)`.
+Prepare a fetch definition without sending. Returns the `fetchdef` and raises on error.
 
 
 ---
@@ -89,7 +89,7 @@ Prepare a fetch definition without sending. Returns `(fetchdef, err)`.
 ## ChannelEntity
 
 ```python
-channel = client.Channel()
+channel = client.channel
 ```
 
 ### Fields
@@ -130,48 +130,48 @@ channel = client.Channel()
 
 ### Operations
 
-#### `create(reqdata, ctrl=None) -> tuple`
+#### `create(reqdata, ctrl=None) -> dict`
 
-Create a new entity with the given data.
+Create a new entity with the given data. Returns the created entity data and raises on error.
 
 ```python
-result, err = client.Channel().create({
+result = client.channel.create({
     "category": # `$STRING`,
     "description": # `$STRING`,
     "name": # `$STRING`,
 })
 ```
 
-#### `list(reqmatch, ctrl=None) -> tuple`
+#### `list(reqmatch, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results, err = client.Channel().list({})
+results = client.channel.list({})
 ```
 
-#### `load(reqmatch, ctrl=None) -> tuple`
+#### `load(reqmatch, ctrl=None) -> dict`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result, err = client.Channel().load({"id": "channel_id"})
+result = client.channel.load({"id": "channel_id"})
 ```
 
-#### `remove(reqmatch, ctrl=None) -> tuple`
+#### `remove(reqmatch, ctrl=None) -> dict`
 
-Remove the entity matching the given criteria.
+Remove the entity matching the given criteria. Raises on error.
 
 ```python
-result, err = client.Channel().remove({"id": "channel_id"})
+result = client.channel.remove({"id": "channel_id"})
 ```
 
-#### `update(reqdata, ctrl=None) -> tuple`
+#### `update(reqdata, ctrl=None) -> dict`
 
-Update an existing entity. The data must include the entity `id`.
+Update an existing entity. The data must include the entity `id`. Returns the updated entity data and raises on error.
 
 ```python
-result, err = client.Channel().update({
+result = client.channel.update({
     "id": "channel_id",
     # Fields to update
 })
@@ -209,7 +209,7 @@ Return the entity name.
 ## MovieEntity
 
 ```python
-movie = client.Movie()
+movie = client.movie
 ```
 
 ### Fields
@@ -252,12 +252,12 @@ movie = client.Movie()
 
 ### Operations
 
-#### `create(reqdata, ctrl=None) -> tuple`
+#### `create(reqdata, ctrl=None) -> dict`
 
-Create a new entity with the given data.
+Create a new entity with the given data. Returns the created entity data and raises on error.
 
 ```python
-result, err = client.Movie().create({
+result = client.movie.create({
     "description": # `$STRING`,
     "duration": # `$INTEGER`,
     "genre": # `$ARRAY`,
@@ -266,36 +266,36 @@ result, err = client.Movie().create({
 })
 ```
 
-#### `list(reqmatch, ctrl=None) -> tuple`
+#### `list(reqmatch, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results, err = client.Movie().list({})
+results = client.movie.list({})
 ```
 
-#### `load(reqmatch, ctrl=None) -> tuple`
+#### `load(reqmatch, ctrl=None) -> dict`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result, err = client.Movie().load({"id": "movie_id"})
+result = client.movie.load({"id": "movie_id"})
 ```
 
-#### `remove(reqmatch, ctrl=None) -> tuple`
+#### `remove(reqmatch, ctrl=None) -> dict`
 
-Remove the entity matching the given criteria.
+Remove the entity matching the given criteria. Raises on error.
 
 ```python
-result, err = client.Movie().remove({"id": "movie_id"})
+result = client.movie.remove({"id": "movie_id"})
 ```
 
-#### `update(reqdata, ctrl=None) -> tuple`
+#### `update(reqdata, ctrl=None) -> dict`
 
-Update an existing entity. The data must include the entity `id`.
+Update an existing entity. The data must include the entity `id`. Returns the updated entity data and raises on error.
 
 ```python
-result, err = client.Movie().update({
+result = client.movie.update({
     "id": "movie_id",
     # Fields to update
 })
@@ -333,7 +333,7 @@ Return the entity name.
 ## SeriesEntity
 
 ```python
-series = client.Series()
+series = client.series
 ```
 
 ### Fields
@@ -376,12 +376,12 @@ series = client.Series()
 
 ### Operations
 
-#### `create(reqdata, ctrl=None) -> tuple`
+#### `create(reqdata, ctrl=None) -> dict`
 
-Create a new entity with the given data.
+Create a new entity with the given data. Returns the created entity data and raises on error.
 
 ```python
-result, err = client.Series().create({
+result = client.series.create({
     "description": # `$STRING`,
     "genre": # `$ARRAY`,
     "release_year": # `$INTEGER`,
@@ -389,36 +389,36 @@ result, err = client.Series().create({
 })
 ```
 
-#### `list(reqmatch, ctrl=None) -> tuple`
+#### `list(reqmatch, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results, err = client.Series().list({})
+results = client.series.list({})
 ```
 
-#### `load(reqmatch, ctrl=None) -> tuple`
+#### `load(reqmatch, ctrl=None) -> dict`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result, err = client.Series().load({"id": "series_id"})
+result = client.series.load({"id": "series_id"})
 ```
 
-#### `remove(reqmatch, ctrl=None) -> tuple`
+#### `remove(reqmatch, ctrl=None) -> dict`
 
-Remove the entity matching the given criteria.
+Remove the entity matching the given criteria. Raises on error.
 
 ```python
-result, err = client.Series().remove({"id": "series_id"})
+result = client.series.remove({"id": "series_id"})
 ```
 
-#### `update(reqdata, ctrl=None) -> tuple`
+#### `update(reqdata, ctrl=None) -> dict`
 
-Update an existing entity. The data must include the entity `id`.
+Update an existing entity. The data must include the entity `id`. Returns the updated entity data and raises on error.
 
 ```python
-result, err = client.Series().update({
+result = client.series.update({
     "id": "series_id",
     # Fields to update
 })

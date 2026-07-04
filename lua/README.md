@@ -9,12 +9,9 @@ The Lua SDK for the FunisgoStreaming API — an entity-oriented client using Lua
 
 
 ## Install
-```bash
-luarocks install voxgig-sdk-funisgo-streaming
-```
-
-If the module is not yet published, add the source directory to
-your `LUA_PATH`:
+This package is not yet published to LuaRocks. Install it from the
+GitHub release tag (`lua/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/funisgo-streaming-sdk/releases)),
+or add the source directory to your `LUA_PATH`:
 
 ```bash
 export LUA_PATH="path/to/lua/?.lua;path/to/lua/?/init.lua;;"
@@ -32,14 +29,14 @@ loading a specific record.
 local sdk = require("funisgo-streaming_sdk")
 
 local client = sdk.new({
-  apikey = os.getenv("FUNISGO-STREAMING_APIKEY"),
+  apikey = os.getenv("FUNISGO_STREAMING_APIKEY"),
 })
 ```
 
 ### 2. List channels
 
 ```lua
-local result, err = client:Channel():list()
+local result, err = client:channel():list()
 if err then error(err) end
 
 if type(result) == "table" then
@@ -53,7 +50,7 @@ end
 ### 3. Load a channel
 
 ```lua
-local result, err = client:Channel():load({ id = "example_id" })
+local result, err = client:channel():load({ id = "example_id" })
 if err then error(err) end
 print(result)
 ```
@@ -62,13 +59,13 @@ print(result)
 
 ```lua
 -- Create
-local created, _ = client:Channel():create({ name = "Example" })
+local created, _ = client:channel():create({ name = "Example" })
 
 -- Update
-client:Channel():update({ id = created["id"], name = "Example-Renamed" })
+client:channel():update({ id = created["id"], name = "Example-Renamed" })
 
 -- Remove
-client:Channel():remove({ id = created["id"] })
+client:channel():remove({ id = created["id"] })
 ```
 
 
@@ -114,7 +111,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:FunisgoStreaming():load({ id = "test01" })
+local result, err = client:channel():load({ id = "test01" })
 -- result contains mock response data
 ```
 
@@ -147,8 +144,8 @@ local client = sdk.new({
 Create a `.env.local` file at the project root:
 
 ```
-FUNISGO-STREAMING_TEST_LIVE=TRUE
-FUNISGO-STREAMING_APIKEY=<your-key>
+FUNISGO_STREAMING_TEST_LIVE=TRUE
+FUNISGO_STREAMING_APIKEY=<your-key>
 ```
 
 Then run:
@@ -308,7 +305,7 @@ API path: `/series`
 
 ### Channel
 
-Create an instance: `const channel = client.Channel()`
+Create an instance: `const channel = client.channel`
 
 #### Operations
 
@@ -341,19 +338,19 @@ Create an instance: `const channel = client.Channel()`
 #### Example: Load
 
 ```ts
-const channel = await client.Channel().load({ id: 'channel_id' })
+const channel = await client.channel.load({ id: 'channel_id' })
 ```
 
 #### Example: List
 
 ```ts
-const channels = await client.Channel().list()
+const channels = await client.channel.list()
 ```
 
 #### Example: Create
 
 ```ts
-const channel = await client.Channel().create({
+const channel = await client.channel.create({
   category: /* `$STRING` */,
   description: /* `$STRING` */,
   name: /* `$STRING` */,
@@ -363,7 +360,7 @@ const channel = await client.Channel().create({
 
 ### Movie
 
-Create an instance: `const movie = client.Movie()`
+Create an instance: `const movie = client.movie`
 
 #### Operations
 
@@ -397,19 +394,19 @@ Create an instance: `const movie = client.Movie()`
 #### Example: Load
 
 ```ts
-const movie = await client.Movie().load({ id: 'movie_id' })
+const movie = await client.movie.load({ id: 'movie_id' })
 ```
 
 #### Example: List
 
 ```ts
-const movies = await client.Movie().list()
+const movies = await client.movie.list()
 ```
 
 #### Example: Create
 
 ```ts
-const movie = await client.Movie().create({
+const movie = await client.movie.create({
   description: /* `$STRING` */,
   duration: /* `$INTEGER` */,
   genre: /* `$ARRAY` */,
@@ -421,7 +418,7 @@ const movie = await client.Movie().create({
 
 ### Series
 
-Create an instance: `const series = client.Series()`
+Create an instance: `const series = client.series`
 
 #### Operations
 
@@ -455,19 +452,19 @@ Create an instance: `const series = client.Series()`
 #### Example: Load
 
 ```ts
-const series = await client.Series().load({ id: 'series_id' })
+const series = await client.series.load({ id: 'series_id' })
 ```
 
 #### Example: List
 
 ```ts
-const seriess = await client.Series().list()
+const seriess = await client.series.list()
 ```
 
 #### Example: Create
 
 ```ts
-const series = await client.Series().create({
+const series = await client.series.create({
   description: /* `$STRING` */,
   genre: /* `$ARRAY` */,
   release_year: /* `$INTEGER` */,
@@ -547,11 +544,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local moon = client:Moon(nil)
-moon:load({ planet_id = "earth", id = "luna" }, nil)
+local channel = client:channel()
+channel:load({ id = "example_id" })
 
--- moon:data_get() now returns the loaded moon data
--- moon:match_get() returns the last match criteria
+-- channel:data_get() now returns the loaded channel data
+-- channel:match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

@@ -1,7 +1,17 @@
 # FunisgoStreaming SDK Movie entity
 
+from __future__ import annotations
+
 from utility.voxgig_struct import voxgig_struct as vs
 from core import helpers
+from funisgostreaming_types import (
+    Movie,
+    MovieLoadMatch,
+    MovieListMatch,
+    MovieCreateData,
+    MovieUpdateData,
+    MovieRemoveMatch,
+)
 
 
 class MovieEntity:
@@ -44,7 +54,7 @@ class MovieEntity:
             self._data = helpers.to_map(vs.clone(args)) or {}
             self._utility.feature_hook(self._entctx, "SetData")
 
-    def data_get(self):
+    def data_get(self) -> Movie:
         self._utility.feature_hook(self._entctx, "GetData")
         return vs.clone(self._data)
 
@@ -53,12 +63,12 @@ class MovieEntity:
             self._match = helpers.to_map(vs.clone(args)) or {}
             self._utility.feature_hook(self._entctx, "SetMatch")
 
-    def match_get(self):
+    def match_get(self) -> Movie:
         self._utility.feature_hook(self._entctx, "GetMatch")
         return vs.clone(self._match)
 
     
-    def load(self, reqmatch, ctrl=None):
+    def load(self, reqmatch: MovieLoadMatch, ctrl=None) -> Movie:
         utility = self._utility
         ctx = utility.make_context({
             "opname": "load",
@@ -80,7 +90,7 @@ class MovieEntity:
 
 
     
-    def list(self, reqmatch, ctrl=None):
+    def list(self, reqmatch: MovieListMatch, ctrl=None) -> list[Movie]:
         utility = self._utility
         ctx = utility.make_context({
             "opname": "list",
@@ -100,7 +110,7 @@ class MovieEntity:
 
 
     
-    def create(self, reqdata, ctrl=None):
+    def create(self, reqdata: MovieCreateData, ctrl=None) -> Movie:
         utility = self._utility
         ctx = utility.make_context({
             "opname": "create",
@@ -120,7 +130,7 @@ class MovieEntity:
 
 
     
-    def update(self, reqdata, ctrl=None):
+    def update(self, reqdata: MovieUpdateData, ctrl=None) -> Movie:
         utility = self._utility
         ctx = utility.make_context({
             "opname": "update",
@@ -142,7 +152,7 @@ class MovieEntity:
 
 
     
-    def remove(self, reqmatch, ctrl=None):
+    def remove(self, reqmatch: MovieRemoveMatch, ctrl=None) -> Movie:
         utility = self._utility
         ctx = utility.make_context({
             "opname": "remove",

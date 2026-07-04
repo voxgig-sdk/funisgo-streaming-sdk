@@ -45,6 +45,7 @@ class ChannelEntity
     end
   end
 
+  # @return [Channel, Hash] the current Channel data
   def data_get
     @_utility.feature_hook.call(@_entctx, "GetData")
     VoxgigStruct.clone(@_data)
@@ -57,12 +58,18 @@ class ChannelEntity
     end
   end
 
+  # @return [Hash] the current match filter (any subset of Channel fields)
   def match_get
     @_utility.feature_hook.call(@_entctx, "GetMatch")
     VoxgigStruct.clone(@_match)
   end
 
   
+  # Load a single Channel.
+  #
+  # @param reqmatch [ChannelLoadMatch, Hash, nil] match criteria (id/query fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Channel, Hash] the loaded Channel; raises FunisgoStreamingError on failure
   def load(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({
@@ -86,6 +93,11 @@ class ChannelEntity
 
 
   
+  # List Channel items matching the given filter.
+  #
+  # @param reqmatch [ChannelListMatch, Hash, nil] match filter (any subset of Channel fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Array<Channel>, Array] the matching Channel items; raises FunisgoStreamingError on failure
   def list(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({
@@ -106,6 +118,11 @@ class ChannelEntity
 
 
   
+  # Create a new Channel.
+  #
+  # @param reqdata [ChannelCreateData, Hash, nil] body data
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Channel, Hash] the created Channel; raises FunisgoStreamingError on failure
   def create(reqdata, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({
@@ -128,6 +145,11 @@ class ChannelEntity
 
 
   
+  # Update an existing Channel.
+  #
+  # @param reqdata [ChannelUpdateData, Hash, nil] body data
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Channel, Hash] the updated Channel; raises FunisgoStreamingError on failure
   def update(reqdata, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({
@@ -151,6 +173,11 @@ class ChannelEntity
 
 
   
+  # Remove an Channel matching the given criteria.
+  #
+  # @param reqmatch [ChannelRemoveMatch, Hash, nil] match criteria (id/query fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Channel, Hash] the removed Channel; raises FunisgoStreamingError on failure
   def remove(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({

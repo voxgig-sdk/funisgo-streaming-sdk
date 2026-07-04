@@ -269,7 +269,8 @@ class Config {
                     "name": "id",
                     "orig": "channel_id",
                     "reqd": true,
-                    "type": "`$STRING`"
+                    "type": "`$STRING`",
+                    "index$": 0
                   }
                 ]
               },
@@ -312,7 +313,8 @@ class Config {
                     "name": "id",
                     "orig": "channel_id",
                     "reqd": true,
-                    "type": "`$STRING`"
+                    "type": "`$STRING`",
+                    "index$": 0
                   }
                 ]
               },
@@ -355,7 +357,8 @@ class Config {
                     "name": "id",
                     "orig": "channel_id",
                     "reqd": true,
-                    "type": "`$STRING`"
+                    "type": "`$STRING`",
+                    "index$": 0
                   }
                 ]
               },
@@ -615,7 +618,8 @@ class Config {
                     "name": "id",
                     "orig": "movie_id",
                     "reqd": true,
-                    "type": "`$STRING`"
+                    "type": "`$STRING`",
+                    "index$": 0
                   }
                 ]
               },
@@ -658,7 +662,8 @@ class Config {
                     "name": "id",
                     "orig": "movie_id",
                     "reqd": true,
-                    "type": "`$STRING`"
+                    "type": "`$STRING`",
+                    "index$": 0
                   }
                 ]
               },
@@ -701,7 +706,8 @@ class Config {
                     "name": "id",
                     "orig": "movie_id",
                     "reqd": true,
-                    "type": "`$STRING`"
+                    "type": "`$STRING`",
+                    "index$": 0
                   }
                 ]
               },
@@ -955,7 +961,8 @@ class Config {
                     "name": "id",
                     "orig": "series_id",
                     "reqd": true,
-                    "type": "`$STRING`"
+                    "type": "`$STRING`",
+                    "index$": 0
                   }
                 ]
               },
@@ -998,7 +1005,8 @@ class Config {
                     "name": "id",
                     "orig": "series_id",
                     "reqd": true,
-                    "type": "`$STRING`"
+                    "type": "`$STRING`",
+                    "index$": 0
                   }
                 ]
               },
@@ -1041,7 +1049,8 @@ class Config {
                     "name": "id",
                     "orig": "series_id",
                     "reqd": true,
-                    "type": "`$STRING`"
+                    "type": "`$STRING`",
+                    "index$": 0
                   }
                 ]
               },

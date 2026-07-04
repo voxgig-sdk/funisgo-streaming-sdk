@@ -45,6 +45,7 @@ class SeriesEntity
     end
   end
 
+  # @return [Series, Hash] the current Series data
   def data_get
     @_utility.feature_hook.call(@_entctx, "GetData")
     VoxgigStruct.clone(@_data)
@@ -57,12 +58,18 @@ class SeriesEntity
     end
   end
 
+  # @return [Hash] the current match filter (any subset of Series fields)
   def match_get
     @_utility.feature_hook.call(@_entctx, "GetMatch")
     VoxgigStruct.clone(@_match)
   end
 
   
+  # Load a single Series.
+  #
+  # @param reqmatch [SeriesLoadMatch, Hash, nil] match criteria (id/query fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Series, Hash] the loaded Series; raises FunisgoStreamingError on failure
   def load(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({
@@ -86,6 +93,11 @@ class SeriesEntity
 
 
   
+  # List Series items matching the given filter.
+  #
+  # @param reqmatch [SeriesListMatch, Hash, nil] match filter (any subset of Series fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Array<Series>, Array] the matching Series items; raises FunisgoStreamingError on failure
   def list(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({
@@ -106,6 +118,11 @@ class SeriesEntity
 
 
   
+  # Create a new Series.
+  #
+  # @param reqdata [SeriesCreateData, Hash, nil] body data
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Series, Hash] the created Series; raises FunisgoStreamingError on failure
   def create(reqdata, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({
@@ -128,6 +145,11 @@ class SeriesEntity
 
 
   
+  # Update an existing Series.
+  #
+  # @param reqdata [SeriesUpdateData, Hash, nil] body data
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Series, Hash] the updated Series; raises FunisgoStreamingError on failure
   def update(reqdata, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({
@@ -151,6 +173,11 @@ class SeriesEntity
 
 
   
+  # Remove an Series matching the given criteria.
+  #
+  # @param reqmatch [SeriesRemoveMatch, Hash, nil] match criteria (id/query fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Series, Hash] the removed Series; raises FunisgoStreamingError on failure
   def remove(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({

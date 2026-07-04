@@ -244,18 +244,57 @@ end
 
 
 
+-- Idiomatic facade: client:channel():list() / client:channel():load({ id = ... })
+function FunisgoStreamingSDK:channel(data)
+  local EntityMod = require("entity.channel_entity")
+  if data == nil then
+    if self._channel == nil then
+      self._channel = EntityMod.new(self, nil)
+    end
+    return self._channel
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:channel() instead.
 function FunisgoStreamingSDK:Channel(data)
   local EntityMod = require("entity.channel_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:movie():list() / client:movie():load({ id = ... })
+function FunisgoStreamingSDK:movie(data)
+  local EntityMod = require("entity.movie_entity")
+  if data == nil then
+    if self._movie == nil then
+      self._movie = EntityMod.new(self, nil)
+    end
+    return self._movie
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:movie() instead.
 function FunisgoStreamingSDK:Movie(data)
   local EntityMod = require("entity.movie_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:series():list() / client:series():load({ id = ... })
+function FunisgoStreamingSDK:series(data)
+  local EntityMod = require("entity.series_entity")
+  if data == nil then
+    if self._series == nil then
+      self._series = EntityMod.new(self, nil)
+    end
+    return self._series
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:series() instead.
 function FunisgoStreamingSDK:Series(data)
   local EntityMod = require("entity.series_entity")
   return EntityMod.new(self, data)

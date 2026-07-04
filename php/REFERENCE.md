@@ -64,7 +64,10 @@ Return a copy of the SDK utility object.
 
 #### `direct(array $fetchargs = []): array`
 
-Make a direct HTTP request to any API endpoint. Returns `[$result, $err]`.
+Make a direct HTTP request to any API endpoint. This is the raw-HTTP escape
+hatch: it does **not** throw. It returns a result array
+`["ok" => bool, "status" => int, "headers" => array, "data" => mixed]`, or
+`["ok" => false, "err" => \Exception]` on failure. Branch on `$result["ok"]`.
 
 **Parameters:**
 
@@ -78,11 +81,12 @@ Make a direct HTTP request to any API endpoint. Returns `[$result, $err]`.
 | `$fetchargs["body"]` | `mixed` | Request body (arrays are JSON-serialized). |
 | `$fetchargs["ctrl"]` | `array` | Control options. |
 
-**Returns:** `array [$result, $err]`
+**Returns:** `array` — the result dict (see above); never throws.
 
-#### `prepare(array $fetchargs = []): array`
+#### `prepare(array $fetchargs = []): mixed`
 
-Prepare a fetch definition without sending the request. Returns `[$fetchdef, $err]`.
+Prepare a fetch definition without sending the request. Returns the
+`$fetchdef` array. Throws on error.
 
 
 ---
@@ -90,7 +94,7 @@ Prepare a fetch definition without sending the request. Returns `[$fetchdef, $er
 ## ChannelEntity
 
 ```php
-$channel = $client->Channel();
+$channel = $client->channel();
 ```
 
 ### Fields
@@ -131,48 +135,48 @@ $channel = $client->Channel();
 
 ### Operations
 
-#### `create(array $reqdata, ?array $ctrl = null): array`
+#### `create(array $reqdata, ?array $ctrl = null): mixed`
 
-Create a new entity with the given data.
+Create a new entity with the given data. Throws on error.
 
 ```php
-[$result, $err] = $client->Channel()->create([
+$result = $client->channel()->create([
   "category" => /* `$STRING` */,
   "description" => /* `$STRING` */,
   "name" => /* `$STRING` */,
 ]);
 ```
 
-#### `list(array $reqmatch, ?array $ctrl = null): array`
+#### `list(array $reqmatch, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-[$results, $err] = $client->Channel()->list([]);
+$results = $client->channel()->list([]);
 ```
 
-#### `load(array $reqmatch, ?array $ctrl = null): array`
+#### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Throws on error.
 
 ```php
-[$result, $err] = $client->Channel()->load(["id" => "channel_id"]);
+$result = $client->channel()->load(["id" => "channel_id"]);
 ```
 
-#### `remove(array $reqmatch, ?array $ctrl = null): array`
+#### `remove(array $reqmatch, ?array $ctrl = null): mixed`
 
-Remove the entity matching the given criteria.
+Remove the entity matching the given criteria. Throws on error.
 
 ```php
-[$result, $err] = $client->Channel()->remove(["id" => "channel_id"]);
+$result = $client->channel()->remove(["id" => "channel_id"]);
 ```
 
-#### `update(array $reqdata, ?array $ctrl = null): array`
+#### `update(array $reqdata, ?array $ctrl = null): mixed`
 
-Update an existing entity. The data must include the entity `id`.
+Update an existing entity. The data must include the entity `id`. Throws on error.
 
 ```php
-[$result, $err] = $client->Channel()->update([
+$result = $client->channel()->update([
   "id" => "channel_id",
   // Fields to update
 ]);
@@ -211,7 +215,7 @@ Return the entity name.
 ## MovieEntity
 
 ```php
-$movie = $client->Movie();
+$movie = $client->movie();
 ```
 
 ### Fields
@@ -254,12 +258,12 @@ $movie = $client->Movie();
 
 ### Operations
 
-#### `create(array $reqdata, ?array $ctrl = null): array`
+#### `create(array $reqdata, ?array $ctrl = null): mixed`
 
-Create a new entity with the given data.
+Create a new entity with the given data. Throws on error.
 
 ```php
-[$result, $err] = $client->Movie()->create([
+$result = $client->movie()->create([
   "description" => /* `$STRING` */,
   "duration" => /* `$INTEGER` */,
   "genre" => /* `$ARRAY` */,
@@ -268,36 +272,36 @@ Create a new entity with the given data.
 ]);
 ```
 
-#### `list(array $reqmatch, ?array $ctrl = null): array`
+#### `list(array $reqmatch, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-[$results, $err] = $client->Movie()->list([]);
+$results = $client->movie()->list([]);
 ```
 
-#### `load(array $reqmatch, ?array $ctrl = null): array`
+#### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Throws on error.
 
 ```php
-[$result, $err] = $client->Movie()->load(["id" => "movie_id"]);
+$result = $client->movie()->load(["id" => "movie_id"]);
 ```
 
-#### `remove(array $reqmatch, ?array $ctrl = null): array`
+#### `remove(array $reqmatch, ?array $ctrl = null): mixed`
 
-Remove the entity matching the given criteria.
+Remove the entity matching the given criteria. Throws on error.
 
 ```php
-[$result, $err] = $client->Movie()->remove(["id" => "movie_id"]);
+$result = $client->movie()->remove(["id" => "movie_id"]);
 ```
 
-#### `update(array $reqdata, ?array $ctrl = null): array`
+#### `update(array $reqdata, ?array $ctrl = null): mixed`
 
-Update an existing entity. The data must include the entity `id`.
+Update an existing entity. The data must include the entity `id`. Throws on error.
 
 ```php
-[$result, $err] = $client->Movie()->update([
+$result = $client->movie()->update([
   "id" => "movie_id",
   // Fields to update
 ]);
@@ -336,7 +340,7 @@ Return the entity name.
 ## SeriesEntity
 
 ```php
-$series = $client->Series();
+$series = $client->series();
 ```
 
 ### Fields
@@ -379,12 +383,12 @@ $series = $client->Series();
 
 ### Operations
 
-#### `create(array $reqdata, ?array $ctrl = null): array`
+#### `create(array $reqdata, ?array $ctrl = null): mixed`
 
-Create a new entity with the given data.
+Create a new entity with the given data. Throws on error.
 
 ```php
-[$result, $err] = $client->Series()->create([
+$result = $client->series()->create([
   "description" => /* `$STRING` */,
   "genre" => /* `$ARRAY` */,
   "release_year" => /* `$INTEGER` */,
@@ -392,36 +396,36 @@ Create a new entity with the given data.
 ]);
 ```
 
-#### `list(array $reqmatch, ?array $ctrl = null): array`
+#### `list(array $reqmatch, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-[$results, $err] = $client->Series()->list([]);
+$results = $client->series()->list([]);
 ```
 
-#### `load(array $reqmatch, ?array $ctrl = null): array`
+#### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Throws on error.
 
 ```php
-[$result, $err] = $client->Series()->load(["id" => "series_id"]);
+$result = $client->series()->load(["id" => "series_id"]);
 ```
 
-#### `remove(array $reqmatch, ?array $ctrl = null): array`
+#### `remove(array $reqmatch, ?array $ctrl = null): mixed`
 
-Remove the entity matching the given criteria.
+Remove the entity matching the given criteria. Throws on error.
 
 ```php
-[$result, $err] = $client->Series()->remove(["id" => "series_id"]);
+$result = $client->series()->remove(["id" => "series_id"]);
 ```
 
-#### `update(array $reqdata, ?array $ctrl = null): array`
+#### `update(array $reqdata, ?array $ctrl = null): mixed`
 
-Update an existing entity. The data must include the entity `id`.
+Update an existing entity. The data must include the entity `id`. Throws on error.
 
 ```php
-[$result, $err] = $client->Series()->update([
+$result = $client->series()->update([
   "id" => "series_id",
   // Fields to update
 ]);

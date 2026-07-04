@@ -44,17 +44,14 @@ class TestMovieEntity:
         movie_ref01_data = helpers.to_map(vs.getprop(
             vs.getpath(setup["data"], "new.movie"), "movie_ref01"))
 
-        movie_ref01_data_result, err = movie_ref01_ent.create(movie_ref01_data, None)
-        assert err is None
-        movie_ref01_data = helpers.to_map(movie_ref01_data_result)
+        movie_ref01_data = helpers.to_map(movie_ref01_ent.create(movie_ref01_data, None))
         assert movie_ref01_data is not None
         assert movie_ref01_data["id"] is not None
 
         # LIST
         movie_ref01_match = {}
 
-        movie_ref01_list_result, err = movie_ref01_ent.list(movie_ref01_match, None)
-        assert err is None
+        movie_ref01_list_result = movie_ref01_ent.list(movie_ref01_match, None)
         assert isinstance(movie_ref01_list_result, list)
 
         found_item = vs.select(
@@ -71,9 +68,7 @@ class TestMovieEntity:
         movie_ref01_markdef_up0_value = "Mark01-movie_ref01_" + str(setup["now"])
         movie_ref01_data_up0_up[movie_ref01_markdef_up0_name] = movie_ref01_markdef_up0_value
 
-        movie_ref01_resdata_up0_result, err = movie_ref01_ent.update(movie_ref01_data_up0_up, None)
-        assert err is None
-        movie_ref01_resdata_up0 = helpers.to_map(movie_ref01_resdata_up0_result)
+        movie_ref01_resdata_up0 = helpers.to_map(movie_ref01_ent.update(movie_ref01_data_up0_up, None))
         assert movie_ref01_resdata_up0 is not None
         assert movie_ref01_resdata_up0["id"] == movie_ref01_data_up0_up["id"]
         assert movie_ref01_resdata_up0[movie_ref01_markdef_up0_name] == movie_ref01_markdef_up0_value
@@ -82,8 +77,7 @@ class TestMovieEntity:
         movie_ref01_match_dt0 = {
             "id": movie_ref01_data["id"],
         }
-        movie_ref01_data_dt0_loaded, err = movie_ref01_ent.load(movie_ref01_match_dt0, None)
-        assert err is None
+        movie_ref01_data_dt0_loaded = movie_ref01_ent.load(movie_ref01_match_dt0, None)
         movie_ref01_data_dt0_load_result = helpers.to_map(movie_ref01_data_dt0_loaded)
         assert movie_ref01_data_dt0_load_result is not None
         assert movie_ref01_data_dt0_load_result["id"] == movie_ref01_data["id"]
@@ -92,14 +86,12 @@ class TestMovieEntity:
         movie_ref01_match_rm0 = {
             "id": movie_ref01_data["id"],
         }
-        _, err = movie_ref01_ent.remove(movie_ref01_match_rm0, None)
-        assert err is None
+        movie_ref01_ent.remove(movie_ref01_match_rm0, None)
 
         # LIST
         movie_ref01_match_rt0 = {}
 
-        movie_ref01_list_rt0_result, err = movie_ref01_ent.list(movie_ref01_match_rt0, None)
-        assert err is None
+        movie_ref01_list_rt0_result = movie_ref01_ent.list(movie_ref01_match_rt0, None)
         assert isinstance(movie_ref01_list_rt0_result, list)
 
         not_found_item = vs.select(

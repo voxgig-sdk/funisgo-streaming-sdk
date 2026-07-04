@@ -55,6 +55,9 @@ class MovieEntity
         return new MovieEntity($this->_client, $opts);
     }
 
+    /**
+     * @param Movie|array $args Movie data (assoc-array) to store.
+     */
     public function data_set($args): void
     {
         if ($args) {
@@ -63,12 +66,18 @@ class MovieEntity
         }
     }
 
+    /**
+     * @return Movie|array The current Movie data as an assoc-array.
+     */
     public function data_get()
     {
         ($this->_utility->feature_hook)($this->_entctx, "GetData");
         return Struct::clone($this->_data);
     }
 
+    /**
+     * @param array $args Match filter (any subset of Movie fields).
+     */
     public function match_set($args): void
     {
         if ($args) {
@@ -77,6 +86,9 @@ class MovieEntity
         }
     }
 
+    /**
+     * @return array The current match filter (any subset of Movie fields).
+     */
     public function match_get()
     {
         ($this->_utility->feature_hook)($this->_entctx, "GetMatch");
@@ -84,7 +96,16 @@ class MovieEntity
     }
 
     
-    public function load($reqmatch, $ctrl = null): array
+    /**
+     * Load a single Movie.
+     *
+     * @param MovieLoadMatch|array|null $reqmatch Match criteria (id/query
+     *   fields) as an assoc-array; a typed MovieLoadMatch names the shape.
+     * @param mixed $ctrl Optional per-call control overrides.
+     * @return Movie|array The loaded Movie as an assoc-array at the
+     *   SDK boundary; throws FunisgoStreamingError on failure (item-5 convention).
+     */
+    public function load(?array $reqmatch = null, $ctrl = null): mixed
     {
         $utility = $this->_utility;
         $ctx = ($utility->make_context)([
@@ -110,7 +131,16 @@ class MovieEntity
 
 
     
-    public function list($reqmatch, $ctrl = null): array
+    /**
+     * List Movie items matching the given filter.
+     *
+     * @param MovieListMatch|array|null $reqmatch Match filter (any subset
+     *   of Movie fields) as an assoc-array; MovieListMatch names the shape.
+     * @param mixed $ctrl Optional per-call control overrides.
+     * @return Movie[]|array A list of Movie items as assoc-arrays at
+     *   the SDK boundary; throws FunisgoStreamingError on failure (item-5 convention).
+     */
+    public function list(?array $reqmatch = null, $ctrl = null): mixed
     {
         $utility = $this->_utility;
         $ctx = ($utility->make_context)([
@@ -133,7 +163,16 @@ class MovieEntity
 
 
     
-    public function create($reqdata, $ctrl = null): array
+    /**
+     * Create a new Movie.
+     *
+     * @param MovieCreateData|array|null $reqdata Body data as an assoc-array;
+     *   a typed MovieCreateData names the shape.
+     * @param mixed $ctrl Optional per-call control overrides.
+     * @return Movie|array The created Movie as an assoc-array at the
+     *   SDK boundary; throws FunisgoStreamingError on failure (item-5 convention).
+     */
+    public function create(?array $reqdata = null, $ctrl = null): mixed
     {
         $utility = $this->_utility;
         $ctx = ($utility->make_context)([
@@ -156,7 +195,16 @@ class MovieEntity
 
 
     
-    public function update($reqdata, $ctrl = null): array
+    /**
+     * Update an existing Movie.
+     *
+     * @param MovieUpdateData|array|null $reqdata Body data as an assoc-array;
+     *   a typed MovieUpdateData names the shape.
+     * @param mixed $ctrl Optional per-call control overrides.
+     * @return Movie|array The updated Movie as an assoc-array at the
+     *   SDK boundary; throws FunisgoStreamingError on failure (item-5 convention).
+     */
+    public function update(?array $reqdata = null, $ctrl = null): mixed
     {
         $utility = $this->_utility;
         $ctx = ($utility->make_context)([
@@ -182,7 +230,16 @@ class MovieEntity
 
 
     
-    public function remove($reqmatch, $ctrl = null): array
+    /**
+     * Remove an Movie matching the given criteria.
+     *
+     * @param MovieRemoveMatch|array|null $reqmatch Match criteria (id/query
+     *   fields) as an assoc-array; MovieRemoveMatch names the shape.
+     * @param mixed $ctrl Optional per-call control overrides.
+     * @return Movie|array The removed Movie as an assoc-array at the
+     *   SDK boundary; throws FunisgoStreamingError on failure (item-5 convention).
+     */
+    public function remove(?array $reqmatch = null, $ctrl = null): mixed
     {
         $utility = $this->_utility;
         $ctx = ($utility->make_context)([
@@ -207,7 +264,7 @@ class MovieEntity
 
 
 
-    private function _run_op($ctx, callable $post_done): array
+    private function _run_op($ctx, callable $post_done): mixed
     {
         $utility = $this->_utility;
 

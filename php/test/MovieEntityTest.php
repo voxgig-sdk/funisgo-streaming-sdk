@@ -43,8 +43,7 @@ class MovieEntityTest extends TestCase
         $movie_ref01_data = Helpers::to_map(Vs::getprop(
             Vs::getpath($setup["data"], "new.movie"), "movie_ref01"));
 
-        [$movie_ref01_data_result, $err] = $movie_ref01_ent->create($movie_ref01_data, null);
-        $this->assertNull($err);
+        $movie_ref01_data_result = $movie_ref01_ent->create($movie_ref01_data, null);
         $movie_ref01_data = Helpers::to_map($movie_ref01_data_result);
         $this->assertNotNull($movie_ref01_data);
         $this->assertNotNull($movie_ref01_data["id"]);
@@ -52,8 +51,7 @@ class MovieEntityTest extends TestCase
         // LIST
         $movie_ref01_match = [];
 
-        [$movie_ref01_list_result, $err] = $movie_ref01_ent->list($movie_ref01_match, null);
-        $this->assertNull($err);
+        $movie_ref01_list_result = $movie_ref01_ent->list($movie_ref01_match, null);
         $this->assertIsArray($movie_ref01_list_result);
 
         $found_item = sdk_select(
@@ -70,8 +68,7 @@ class MovieEntityTest extends TestCase
         $movie_ref01_markdef_up0_value = "Mark01-movie_ref01_" . $setup["now"];
         $movie_ref01_data_up0_up[$movie_ref01_markdef_up0_name] = $movie_ref01_markdef_up0_value;
 
-        [$movie_ref01_resdata_up0_result, $err] = $movie_ref01_ent->update($movie_ref01_data_up0_up, null);
-        $this->assertNull($err);
+        $movie_ref01_resdata_up0_result = $movie_ref01_ent->update($movie_ref01_data_up0_up, null);
         $movie_ref01_resdata_up0 = Helpers::to_map($movie_ref01_resdata_up0_result);
         $this->assertNotNull($movie_ref01_resdata_up0);
         $this->assertEquals($movie_ref01_resdata_up0["id"], $movie_ref01_data_up0_up["id"]);
@@ -81,8 +78,7 @@ class MovieEntityTest extends TestCase
         $movie_ref01_match_dt0 = [
             "id" => $movie_ref01_data["id"],
         ];
-        [$movie_ref01_data_dt0_loaded, $err] = $movie_ref01_ent->load($movie_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $movie_ref01_data_dt0_loaded = $movie_ref01_ent->load($movie_ref01_match_dt0, null);
         $movie_ref01_data_dt0_load_result = Helpers::to_map($movie_ref01_data_dt0_loaded);
         $this->assertNotNull($movie_ref01_data_dt0_load_result);
         $this->assertEquals($movie_ref01_data_dt0_load_result["id"], $movie_ref01_data["id"]);
@@ -91,14 +87,12 @@ class MovieEntityTest extends TestCase
         $movie_ref01_match_rm0 = [
             "id" => $movie_ref01_data["id"],
         ];
-        [$_, $err] = $movie_ref01_ent->remove($movie_ref01_match_rm0, null);
-        $this->assertNull($err);
+        $movie_ref01_ent->remove($movie_ref01_match_rm0, null);
 
         // LIST
         $movie_ref01_match_rt0 = [];
 
-        [$movie_ref01_list_rt0_result, $err] = $movie_ref01_ent->list($movie_ref01_match_rt0, null);
-        $this->assertNull($err);
+        $movie_ref01_list_rt0_result = $movie_ref01_ent->list($movie_ref01_match_rt0, null);
         $this->assertIsArray($movie_ref01_list_rt0_result);
 
         $not_found_item = sdk_select(

@@ -1,7 +1,17 @@
 # FunisgoStreaming SDK Channel entity
 
+from __future__ import annotations
+
 from utility.voxgig_struct import voxgig_struct as vs
 from core import helpers
+from funisgostreaming_types import (
+    Channel,
+    ChannelLoadMatch,
+    ChannelListMatch,
+    ChannelCreateData,
+    ChannelUpdateData,
+    ChannelRemoveMatch,
+)
 
 
 class ChannelEntity:
@@ -44,7 +54,7 @@ class ChannelEntity:
             self._data = helpers.to_map(vs.clone(args)) or {}
             self._utility.feature_hook(self._entctx, "SetData")
 
-    def data_get(self):
+    def data_get(self) -> Channel:
         self._utility.feature_hook(self._entctx, "GetData")
         return vs.clone(self._data)
 
@@ -53,12 +63,12 @@ class ChannelEntity:
             self._match = helpers.to_map(vs.clone(args)) or {}
             self._utility.feature_hook(self._entctx, "SetMatch")
 
-    def match_get(self):
+    def match_get(self) -> Channel:
         self._utility.feature_hook(self._entctx, "GetMatch")
         return vs.clone(self._match)
 
     
-    def load(self, reqmatch, ctrl=None):
+    def load(self, reqmatch: ChannelLoadMatch, ctrl=None) -> Channel:
         utility = self._utility
         ctx = utility.make_context({
             "opname": "load",
@@ -80,7 +90,7 @@ class ChannelEntity:
 
 
     
-    def list(self, reqmatch, ctrl=None):
+    def list(self, reqmatch: ChannelListMatch, ctrl=None) -> list[Channel]:
         utility = self._utility
         ctx = utility.make_context({
             "opname": "list",
@@ -100,7 +110,7 @@ class ChannelEntity:
 
 
     
-    def create(self, reqdata, ctrl=None):
+    def create(self, reqdata: ChannelCreateData, ctrl=None) -> Channel:
         utility = self._utility
         ctx = utility.make_context({
             "opname": "create",
@@ -120,7 +130,7 @@ class ChannelEntity:
 
 
     
-    def update(self, reqdata, ctrl=None):
+    def update(self, reqdata: ChannelUpdateData, ctrl=None) -> Channel:
         utility = self._utility
         ctx = utility.make_context({
             "opname": "update",
@@ -142,7 +152,7 @@ class ChannelEntity:
 
 
     
-    def remove(self, reqmatch, ctrl=None):
+    def remove(self, reqmatch: ChannelRemoveMatch, ctrl=None) -> Channel:
         utility = self._utility
         ctx = utility.make_context({
             "opname": "remove",

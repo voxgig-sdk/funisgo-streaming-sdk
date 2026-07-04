@@ -9,9 +9,12 @@ The TypeScript SDK for the FunisgoStreaming API — a type-safe, entity-oriented
 
 
 ## Install
-```bash
-npm install @voxgig-sdk/funisgo-streaming
-```
+This package is not yet published to npm. Install it from the GitHub
+release tag (`ts/vX.Y.Z`):
+
+- Releases: [https://github.com/voxgig-sdk/funisgo-streaming-sdk/releases](https://github.com/voxgig-sdk/funisgo-streaming-sdk/releases)
+
+
 ## Tutorial: your first API call
 
 This tutorial walks through creating a client, listing entities, and
@@ -20,17 +23,17 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { FunisgoStreamingSDK } from 'funisgo-streaming'
+import { FunisgoStreamingSDK } from '@voxgig-sdk/funisgo-streaming'
 
 const client = new FunisgoStreamingSDK({
-  apikey: process.env.FUNISGO-STREAMING_APIKEY,
+  apikey: process.env.FUNISGO_STREAMING_APIKEY,
 })
 ```
 
 ### 2. List channels
 
 ```ts
-const result = await client.Channel().list()
+const result = await client.channel.list()
 
 if (result.ok) {
   for (const item of result.data) {
@@ -42,7 +45,7 @@ if (result.ok) {
 ### 3. Load a channel
 
 ```ts
-const result = await client.Channel().load({ id: 'example_id' })
+const result = await client.channel.load({ id: 'example_id' })
 
 if (result.ok) {
   console.log(result.data)
@@ -53,18 +56,18 @@ if (result.ok) {
 
 ```ts
 // Create
-const created = await client.Channel().create({
+const created = await client.channel.create({
   name: 'Example',
 })
 
 // Update
-const updated = await client.Channel().update({
+const updated = await client.channel.update({
   id: created.data.id,
   name: 'Example-Renamed',
 })
 
 // Remove
-const removed = await client.Channel().remove({
+const removed = await client.channel.remove({
   id: created.data.id,
 })
 ```
@@ -111,7 +114,7 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = FunisgoStreamingSDK.test()
 
-const result = await client.Planet().load({ id: 'test01' })
+const result = await client.channel.load({ id: 'test01' })
 // result.ok === true
 // result.data contains mock response data
 ```
@@ -128,7 +131,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.Planet()
+const entity = client.channel
 
 // First call sets internal match
 await entity.load({ id: 'example' })
@@ -165,8 +168,8 @@ const client = new FunisgoStreamingSDK({
 Create a `.env.local` file at the project root:
 
 ```
-FUNISGO-STREAMING_TEST_LIVE=TRUE
-FUNISGO-STREAMING_APIKEY=<your-key>
+FUNISGO_STREAMING_TEST_LIVE=TRUE
+FUNISGO_STREAMING_APIKEY=<your-key>
 ```
 
 Then run:
@@ -358,7 +361,7 @@ API path: `/series`
 
 ### Channel
 
-Create an instance: `const channel = client.Channel()`
+Create an instance: `const channel = client.channel`
 
 #### Operations
 
@@ -391,19 +394,19 @@ Create an instance: `const channel = client.Channel()`
 #### Example: Load
 
 ```ts
-const channel = await client.Channel().load({ id: 'channel_id' })
+const channel = await client.channel.load({ id: 'channel_id' })
 ```
 
 #### Example: List
 
 ```ts
-const channels = await client.Channel().list()
+const channels = await client.channel.list()
 ```
 
 #### Example: Create
 
 ```ts
-const channel = await client.Channel().create({
+const channel = await client.channel.create({
   category: /* `$STRING` */,
   description: /* `$STRING` */,
   name: /* `$STRING` */,
@@ -413,7 +416,7 @@ const channel = await client.Channel().create({
 
 ### Movie
 
-Create an instance: `const movie = client.Movie()`
+Create an instance: `const movie = client.movie`
 
 #### Operations
 
@@ -447,19 +450,19 @@ Create an instance: `const movie = client.Movie()`
 #### Example: Load
 
 ```ts
-const movie = await client.Movie().load({ id: 'movie_id' })
+const movie = await client.movie.load({ id: 'movie_id' })
 ```
 
 #### Example: List
 
 ```ts
-const movies = await client.Movie().list()
+const movies = await client.movie.list()
 ```
 
 #### Example: Create
 
 ```ts
-const movie = await client.Movie().create({
+const movie = await client.movie.create({
   description: /* `$STRING` */,
   duration: /* `$INTEGER` */,
   genre: /* `$ARRAY` */,
@@ -471,7 +474,7 @@ const movie = await client.Movie().create({
 
 ### Series
 
-Create an instance: `const series = client.Series()`
+Create an instance: `const series = client.series`
 
 #### Operations
 
@@ -505,19 +508,19 @@ Create an instance: `const series = client.Series()`
 #### Example: Load
 
 ```ts
-const series = await client.Series().load({ id: 'series_id' })
+const series = await client.series.load({ id: 'series_id' })
 ```
 
 #### Example: List
 
 ```ts
-const seriess = await client.Series().list()
+const seriess = await client.series.list()
 ```
 
 #### Example: Create
 
 ```ts
-const series = await client.Series().create({
+const series = await client.series.create({
   description: /* `$STRING` */,
   genre: /* `$ARRAY` */,
   release_year: /* `$INTEGER` */,
@@ -583,7 +586,7 @@ funisgo-streaming/
 Import the SDK from the package root:
 
 ```ts
-import { FunisgoStreamingSDK } from 'funisgo-streaming'
+import { FunisgoStreamingSDK } from '@voxgig-sdk/funisgo-streaming'
 ```
 
 ### Entity state
@@ -593,11 +596,11 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const moon = client.Moon()
-await moon.load({ planet_id: 'earth', id: 'luna' })
+const channel = client.channel
+await channel.load({ id: "example_id" })
 
-// moon.data() now returns the loaded moon data
-// moon.match() returns { planet_id: 'earth', id: 'luna' }
+// channel.data() now returns the loaded channel data
+// channel.match() returns { id: "example_id" }
 ```
 
 Call `make()` to create a fresh instance with the same configuration

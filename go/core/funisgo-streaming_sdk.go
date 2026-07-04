@@ -245,16 +245,25 @@ func (sdk *FunisgoStreamingSDK) Direct(fetchargs map[string]any) (map[string]any
 }
 
 
+// Channel returns a Channel entity bound to this client.
+// Idiomatic usage: client.Channel(nil).List(nil, nil) or
+// client.Channel(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *FunisgoStreamingSDK) Channel(data map[string]any) FunisgoStreamingEntity {
 	return NewChannelEntityFunc(sdk, data)
 }
 
 
+// Movie returns a Movie entity bound to this client.
+// Idiomatic usage: client.Movie(nil).List(nil, nil) or
+// client.Movie(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *FunisgoStreamingSDK) Movie(data map[string]any) FunisgoStreamingEntity {
 	return NewMovieEntityFunc(sdk, data)
 }
 
 
+// Series returns a Series entity bound to this client.
+// Idiomatic usage: client.Series(nil).List(nil, nil) or
+// client.Series(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *FunisgoStreamingSDK) Series(data map[string]any) FunisgoStreamingEntity {
 	return NewSeriesEntityFunc(sdk, data)
 }

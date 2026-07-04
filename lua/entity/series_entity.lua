@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch SeriesLoadMatch
+---@param ctrl? table
+---@return Series
+---@return string? err
 function SeriesEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({
@@ -104,6 +108,10 @@ end
 
 
 
+---@param reqmatch SeriesListMatch
+---@param ctrl? table
+---@return Series[]
+---@return string? err
 function SeriesEntity:list(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({
@@ -126,6 +134,10 @@ end
 
 
 
+---@param reqdata SeriesCreateData
+---@param ctrl? table
+---@return Series
+---@return string? err
 function SeriesEntity:create(reqdata, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({
@@ -148,6 +160,10 @@ end
 
 
 
+---@param reqdata SeriesUpdateData
+---@param ctrl? table
+---@return Series
+---@return string? err
 function SeriesEntity:update(reqdata, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({
@@ -173,6 +189,10 @@ end
 
 
 
+---@param reqmatch SeriesRemoveMatch
+---@param ctrl? table
+---@return Series
+---@return string? err
 function SeriesEntity:remove(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

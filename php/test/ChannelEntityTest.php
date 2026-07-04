@@ -43,8 +43,7 @@ class ChannelEntityTest extends TestCase
         $channel_ref01_data = Helpers::to_map(Vs::getprop(
             Vs::getpath($setup["data"], "new.channel"), "channel_ref01"));
 
-        [$channel_ref01_data_result, $err] = $channel_ref01_ent->create($channel_ref01_data, null);
-        $this->assertNull($err);
+        $channel_ref01_data_result = $channel_ref01_ent->create($channel_ref01_data, null);
         $channel_ref01_data = Helpers::to_map($channel_ref01_data_result);
         $this->assertNotNull($channel_ref01_data);
         $this->assertNotNull($channel_ref01_data["id"]);
@@ -52,8 +51,7 @@ class ChannelEntityTest extends TestCase
         // LIST
         $channel_ref01_match = [];
 
-        [$channel_ref01_list_result, $err] = $channel_ref01_ent->list($channel_ref01_match, null);
-        $this->assertNull($err);
+        $channel_ref01_list_result = $channel_ref01_ent->list($channel_ref01_match, null);
         $this->assertIsArray($channel_ref01_list_result);
 
         $found_item = sdk_select(
@@ -70,8 +68,7 @@ class ChannelEntityTest extends TestCase
         $channel_ref01_markdef_up0_value = "Mark01-channel_ref01_" . $setup["now"];
         $channel_ref01_data_up0_up[$channel_ref01_markdef_up0_name] = $channel_ref01_markdef_up0_value;
 
-        [$channel_ref01_resdata_up0_result, $err] = $channel_ref01_ent->update($channel_ref01_data_up0_up, null);
-        $this->assertNull($err);
+        $channel_ref01_resdata_up0_result = $channel_ref01_ent->update($channel_ref01_data_up0_up, null);
         $channel_ref01_resdata_up0 = Helpers::to_map($channel_ref01_resdata_up0_result);
         $this->assertNotNull($channel_ref01_resdata_up0);
         $this->assertEquals($channel_ref01_resdata_up0["id"], $channel_ref01_data_up0_up["id"]);
@@ -81,8 +78,7 @@ class ChannelEntityTest extends TestCase
         $channel_ref01_match_dt0 = [
             "id" => $channel_ref01_data["id"],
         ];
-        [$channel_ref01_data_dt0_loaded, $err] = $channel_ref01_ent->load($channel_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $channel_ref01_data_dt0_loaded = $channel_ref01_ent->load($channel_ref01_match_dt0, null);
         $channel_ref01_data_dt0_load_result = Helpers::to_map($channel_ref01_data_dt0_loaded);
         $this->assertNotNull($channel_ref01_data_dt0_load_result);
         $this->assertEquals($channel_ref01_data_dt0_load_result["id"], $channel_ref01_data["id"]);
@@ -91,14 +87,12 @@ class ChannelEntityTest extends TestCase
         $channel_ref01_match_rm0 = [
             "id" => $channel_ref01_data["id"],
         ];
-        [$_, $err] = $channel_ref01_ent->remove($channel_ref01_match_rm0, null);
-        $this->assertNull($err);
+        $channel_ref01_ent->remove($channel_ref01_match_rm0, null);
 
         // LIST
         $channel_ref01_match_rt0 = [];
 
-        [$channel_ref01_list_rt0_result, $err] = $channel_ref01_ent->list($channel_ref01_match_rt0, null);
-        $this->assertNull($err);
+        $channel_ref01_list_rt0_result = $channel_ref01_ent->list($channel_ref01_match_rt0, null);
         $this->assertIsArray($channel_ref01_list_rt0_result);
 
         $not_found_item = sdk_select(

@@ -1,7 +1,17 @@
 # FunisgoStreaming SDK Series entity
 
+from __future__ import annotations
+
 from utility.voxgig_struct import voxgig_struct as vs
 from core import helpers
+from funisgostreaming_types import (
+    Series,
+    SeriesLoadMatch,
+    SeriesListMatch,
+    SeriesCreateData,
+    SeriesUpdateData,
+    SeriesRemoveMatch,
+)
 
 
 class SeriesEntity:
@@ -44,7 +54,7 @@ class SeriesEntity:
             self._data = helpers.to_map(vs.clone(args)) or {}
             self._utility.feature_hook(self._entctx, "SetData")
 
-    def data_get(self):
+    def data_get(self) -> Series:
         self._utility.feature_hook(self._entctx, "GetData")
         return vs.clone(self._data)
 
@@ -53,12 +63,12 @@ class SeriesEntity:
             self._match = helpers.to_map(vs.clone(args)) or {}
             self._utility.feature_hook(self._entctx, "SetMatch")
 
-    def match_get(self):
+    def match_get(self) -> Series:
         self._utility.feature_hook(self._entctx, "GetMatch")
         return vs.clone(self._match)
 
     
-    def load(self, reqmatch, ctrl=None):
+    def load(self, reqmatch: SeriesLoadMatch, ctrl=None) -> Series:
         utility = self._utility
         ctx = utility.make_context({
             "opname": "load",
@@ -80,7 +90,7 @@ class SeriesEntity:
 
 
     
-    def list(self, reqmatch, ctrl=None):
+    def list(self, reqmatch: SeriesListMatch, ctrl=None) -> list[Series]:
         utility = self._utility
         ctx = utility.make_context({
             "opname": "list",
@@ -100,7 +110,7 @@ class SeriesEntity:
 
 
     
-    def create(self, reqdata, ctrl=None):
+    def create(self, reqdata: SeriesCreateData, ctrl=None) -> Series:
         utility = self._utility
         ctx = utility.make_context({
             "opname": "create",
@@ -120,7 +130,7 @@ class SeriesEntity:
 
 
     
-    def update(self, reqdata, ctrl=None):
+    def update(self, reqdata: SeriesUpdateData, ctrl=None) -> Series:
         utility = self._utility
         ctx = utility.make_context({
             "opname": "update",
@@ -142,7 +152,7 @@ class SeriesEntity:
 
 
     
-    def remove(self, reqmatch, ctrl=None):
+    def remove(self, reqmatch: SeriesRemoveMatch, ctrl=None) -> Series:
         utility = self._utility
         ctx = utility.make_context({
             "opname": "remove",

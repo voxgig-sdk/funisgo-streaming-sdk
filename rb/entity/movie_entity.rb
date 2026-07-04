@@ -45,6 +45,7 @@ class MovieEntity
     end
   end
 
+  # @return [Movie, Hash] the current Movie data
   def data_get
     @_utility.feature_hook.call(@_entctx, "GetData")
     VoxgigStruct.clone(@_data)
@@ -57,12 +58,18 @@ class MovieEntity
     end
   end
 
+  # @return [Hash] the current match filter (any subset of Movie fields)
   def match_get
     @_utility.feature_hook.call(@_entctx, "GetMatch")
     VoxgigStruct.clone(@_match)
   end
 
   
+  # Load a single Movie.
+  #
+  # @param reqmatch [MovieLoadMatch, Hash, nil] match criteria (id/query fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Movie, Hash] the loaded Movie; raises FunisgoStreamingError on failure
   def load(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({
@@ -86,6 +93,11 @@ class MovieEntity
 
 
   
+  # List Movie items matching the given filter.
+  #
+  # @param reqmatch [MovieListMatch, Hash, nil] match filter (any subset of Movie fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Array<Movie>, Array] the matching Movie items; raises FunisgoStreamingError on failure
   def list(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({
@@ -106,6 +118,11 @@ class MovieEntity
 
 
   
+  # Create a new Movie.
+  #
+  # @param reqdata [MovieCreateData, Hash, nil] body data
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Movie, Hash] the created Movie; raises FunisgoStreamingError on failure
   def create(reqdata, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({
@@ -128,6 +145,11 @@ class MovieEntity
 
 
   
+  # Update an existing Movie.
+  #
+  # @param reqdata [MovieUpdateData, Hash, nil] body data
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Movie, Hash] the updated Movie; raises FunisgoStreamingError on failure
   def update(reqdata, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({
@@ -151,6 +173,11 @@ class MovieEntity
 
 
   
+  # Remove an Movie matching the given criteria.
+  #
+  # @param reqmatch [MovieRemoveMatch, Hash, nil] match criteria (id/query fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Movie, Hash] the removed Movie; raises FunisgoStreamingError on failure
   def remove(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({
