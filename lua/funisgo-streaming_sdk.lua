@@ -244,8 +244,9 @@ end
 
 
 
--- Idiomatic facade: client:channel():list() / client:channel():load({ id = ... })
-function FunisgoStreamingSDK:channel(data)
+-- Idiomatic facade: client:Channel():list() / client:Channel():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function FunisgoStreamingSDK:Channel(data)
   local EntityMod = require("entity.channel_entity")
   if data == nil then
     if self._channel == nil then
@@ -256,15 +257,10 @@ function FunisgoStreamingSDK:channel(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:channel() instead.
-function FunisgoStreamingSDK:Channel(data)
-  local EntityMod = require("entity.channel_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:movie():list() / client:movie():load({ id = ... })
-function FunisgoStreamingSDK:movie(data)
+-- Idiomatic facade: client:Movie():list() / client:Movie():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function FunisgoStreamingSDK:Movie(data)
   local EntityMod = require("entity.movie_entity")
   if data == nil then
     if self._movie == nil then
@@ -275,15 +271,10 @@ function FunisgoStreamingSDK:movie(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:movie() instead.
-function FunisgoStreamingSDK:Movie(data)
-  local EntityMod = require("entity.movie_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:series():list() / client:series():load({ id = ... })
-function FunisgoStreamingSDK:series(data)
+-- Idiomatic facade: client:Series():list() / client:Series():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function FunisgoStreamingSDK:Series(data)
   local EntityMod = require("entity.series_entity")
   if data == nil then
     if self._series == nil then
@@ -291,12 +282,6 @@ function FunisgoStreamingSDK:series(data)
     end
     return self._series
   end
-  return EntityMod.new(self, data)
-end
-
--- Deprecated: use client:series() instead.
-function FunisgoStreamingSDK:Series(data)
-  local EntityMod = require("entity.series_entity")
   return EntityMod.new(self, data)
 end
 

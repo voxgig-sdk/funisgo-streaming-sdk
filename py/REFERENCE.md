@@ -89,7 +89,7 @@ Prepare a fetch definition without sending. Returns the `fetchdef` and raises on
 ## ChannelEntity
 
 ```python
-channel = client.channel
+channel = client.Channel()
 ```
 
 ### Fields
@@ -135,10 +135,10 @@ channel = client.channel
 Create a new entity with the given data. Returns the created entity data and raises on error.
 
 ```python
-result = client.channel.create({
-    "category": # `$STRING`,
-    "description": # `$STRING`,
-    "name": # `$STRING`,
+result = client.Channel().create({
+    "category": ...,  # `$STRING`
+    "description": ...,  # `$STRING`
+    "name": ...,  # `$STRING`
 })
 ```
 
@@ -147,7 +147,9 @@ result = client.channel.create({
 List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results = client.channel.list({})
+results = client.Channel().list({})
+for channel in results:
+    print(channel)
 ```
 
 #### `load(reqmatch, ctrl=None) -> dict`
@@ -155,7 +157,7 @@ results = client.channel.list({})
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.channel.load({"id": "channel_id"})
+result = client.Channel().load({"id": "channel_id"})
 ```
 
 #### `remove(reqmatch, ctrl=None) -> dict`
@@ -163,7 +165,7 @@ result = client.channel.load({"id": "channel_id"})
 Remove the entity matching the given criteria. Raises on error.
 
 ```python
-result = client.channel.remove({"id": "channel_id"})
+result = client.Channel().remove({"id": "channel_id"})
 ```
 
 #### `update(reqdata, ctrl=None) -> dict`
@@ -171,7 +173,7 @@ result = client.channel.remove({"id": "channel_id"})
 Update an existing entity. The data must include the entity `id`. Returns the updated entity data and raises on error.
 
 ```python
-result = client.channel.update({
+result = client.Channel().update({
     "id": "channel_id",
     # Fields to update
 })
@@ -209,7 +211,7 @@ Return the entity name.
 ## MovieEntity
 
 ```python
-movie = client.movie
+movie = client.Movie()
 ```
 
 ### Fields
@@ -257,12 +259,12 @@ movie = client.movie
 Create a new entity with the given data. Returns the created entity data and raises on error.
 
 ```python
-result = client.movie.create({
-    "description": # `$STRING`,
-    "duration": # `$INTEGER`,
-    "genre": # `$ARRAY`,
-    "release_year": # `$INTEGER`,
-    "title": # `$STRING`,
+result = client.Movie().create({
+    "description": ...,  # `$STRING`
+    "duration": ...,  # `$INTEGER`
+    "genre": ...,  # `$ARRAY`
+    "release_year": ...,  # `$INTEGER`
+    "title": ...,  # `$STRING`
 })
 ```
 
@@ -271,7 +273,9 @@ result = client.movie.create({
 List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results = client.movie.list({})
+results = client.Movie().list({})
+for movie in results:
+    print(movie)
 ```
 
 #### `load(reqmatch, ctrl=None) -> dict`
@@ -279,7 +283,7 @@ results = client.movie.list({})
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.movie.load({"id": "movie_id"})
+result = client.Movie().load({"id": "movie_id"})
 ```
 
 #### `remove(reqmatch, ctrl=None) -> dict`
@@ -287,7 +291,7 @@ result = client.movie.load({"id": "movie_id"})
 Remove the entity matching the given criteria. Raises on error.
 
 ```python
-result = client.movie.remove({"id": "movie_id"})
+result = client.Movie().remove({"id": "movie_id"})
 ```
 
 #### `update(reqdata, ctrl=None) -> dict`
@@ -295,7 +299,7 @@ result = client.movie.remove({"id": "movie_id"})
 Update an existing entity. The data must include the entity `id`. Returns the updated entity data and raises on error.
 
 ```python
-result = client.movie.update({
+result = client.Movie().update({
     "id": "movie_id",
     # Fields to update
 })
@@ -333,7 +337,7 @@ Return the entity name.
 ## SeriesEntity
 
 ```python
-series = client.series
+series = client.Series()
 ```
 
 ### Fields
@@ -381,11 +385,11 @@ series = client.series
 Create a new entity with the given data. Returns the created entity data and raises on error.
 
 ```python
-result = client.series.create({
-    "description": # `$STRING`,
-    "genre": # `$ARRAY`,
-    "release_year": # `$INTEGER`,
-    "title": # `$STRING`,
+result = client.Series().create({
+    "description": ...,  # `$STRING`
+    "genre": ...,  # `$ARRAY`
+    "release_year": ...,  # `$INTEGER`
+    "title": ...,  # `$STRING`
 })
 ```
 
@@ -394,7 +398,9 @@ result = client.series.create({
 List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results = client.series.list({})
+results = client.Series().list({})
+for series in results:
+    print(series)
 ```
 
 #### `load(reqmatch, ctrl=None) -> dict`
@@ -402,7 +408,7 @@ results = client.series.list({})
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.series.load({"id": "series_id"})
+result = client.Series().load({"id": "series_id"})
 ```
 
 #### `remove(reqmatch, ctrl=None) -> dict`
@@ -410,7 +416,7 @@ result = client.series.load({"id": "series_id"})
 Remove the entity matching the given criteria. Raises on error.
 
 ```python
-result = client.series.remove({"id": "series_id"})
+result = client.Series().remove({"id": "series_id"})
 ```
 
 #### `update(reqdata, ctrl=None) -> dict`
@@ -418,7 +424,7 @@ result = client.series.remove({"id": "series_id"})
 Update an existing entity. The data must include the entity `id`. Returns the updated entity data and raises on error.
 
 ```python
-result = client.series.update({
+result = client.Series().update({
     "id": "series_id",
     # Fields to update
 })

@@ -31,18 +31,16 @@ $client = new FunisgoStreamingSDK([
 ]);
 ```
 
-### 2. List channels
+### 2. List channel records
 
 ```php
 try {
-    $result = $client->channel()->list();
-    if (is_array($result)) {
-        foreach ($result as $item) {
-            $d = $item->data_get();
-            echo $d["id"] . " " . $d["name"] . "\n";
-        }
+    // list() returns an array of Channel records — iterate directly.
+    $channels = $client->Channel()->list();
+    foreach ($channels as $item) {
+        echo $item["id"] . " " . $item["name"] . "\n";
     }
-} catch (\Exception $err) {
+} catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
 ```
@@ -51,9 +49,10 @@ try {
 
 ```php
 try {
-    $result = $client->channel()->load(["id" => "example_id"]);
-    print_r($result);
-} catch (\Exception $err) {
+    // load() returns the bare Channel record (throws on error).
+    $channel = $client->Channel()->load(["id" => "example_id"]);
+    print_r($channel);
+} catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
 ```
@@ -61,14 +60,14 @@ try {
 ### 4. Create, update, and remove
 
 ```php
-// Create
-$created = $client->channel()->create(["name" => "Example"]);
+// create() returns the bare created Channel record.
+$created = $client->Channel()->create(["name" => "Example"]);
 
-// Update
-$client->channel()->update(["id" => $created["id"], "name" => "Example-Renamed"]);
+// Update — index the bare record directly ($created["id"]).
+$client->Channel()->update(["id" => $created["id"], "name" => "Example-Renamed"]);
 
 // Remove
-$client->channel()->remove(["id" => $created["id"]]);
+$client->Channel()->remove(["id" => $created["id"]]);
 ```
 
 
@@ -112,13 +111,17 @@ print_r($fetchdef["headers"]);
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```php
-$client = FunisgoStreamingSDK::test();
+$client = FunisgoStreamingSDK::test([
+    "entity" => ["channel" => ["test01" => ["id" => "test01"]]],
+]);
 
-$result = $client->channel()->load(["id" => "test01"]);
-// $result contains mock response data
+// load() returns the bare mock record (throws on error).
+$channel = $client->Channel()->load(["id" => "test01"]);
+print_r($channel);
 ```
 
 ### Use a custom fetch function
@@ -316,7 +319,7 @@ API path: `/series`
 
 ### Channel
 
-Create an instance: `const channel = client.channel`
+Create an instance: `$channel = $client->Channel();`
 
 #### Operations
 
@@ -348,30 +351,32 @@ Create an instance: `const channel = client.channel`
 
 #### Example: Load
 
-```ts
-const channel = await client.channel.load({ id: 'channel_id' })
+```php
+// load() returns the bare Channel record (throws on error).
+$channel = $client->Channel()->load(["id" => "channel_id"]);
 ```
 
 #### Example: List
 
-```ts
-const channels = await client.channel.list()
+```php
+// list() returns an array of Channel records (throws on error).
+$channels = $client->Channel()->list();
 ```
 
 #### Example: Create
 
-```ts
-const channel = await client.channel.create({
-  category: /* `$STRING` */,
-  description: /* `$STRING` */,
-  name: /* `$STRING` */,
-})
+```php
+$channel = $client->Channel()->create([
+    "category" => null, // `$STRING`
+    "description" => null, // `$STRING`
+    "name" => null, // `$STRING`
+]);
 ```
 
 
 ### Movie
 
-Create an instance: `const movie = client.movie`
+Create an instance: `$movie = $client->Movie();`
 
 #### Operations
 
@@ -404,32 +409,34 @@ Create an instance: `const movie = client.movie`
 
 #### Example: Load
 
-```ts
-const movie = await client.movie.load({ id: 'movie_id' })
+```php
+// load() returns the bare Movie record (throws on error).
+$movie = $client->Movie()->load(["id" => "movie_id"]);
 ```
 
 #### Example: List
 
-```ts
-const movies = await client.movie.list()
+```php
+// list() returns an array of Movie records (throws on error).
+$movies = $client->Movie()->list();
 ```
 
 #### Example: Create
 
-```ts
-const movie = await client.movie.create({
-  description: /* `$STRING` */,
-  duration: /* `$INTEGER` */,
-  genre: /* `$ARRAY` */,
-  release_year: /* `$INTEGER` */,
-  title: /* `$STRING` */,
-})
+```php
+$movie = $client->Movie()->create([
+    "description" => null, // `$STRING`
+    "duration" => null, // `$INTEGER`
+    "genre" => null, // `$ARRAY`
+    "release_year" => null, // `$INTEGER`
+    "title" => null, // `$STRING`
+]);
 ```
 
 
 ### Series
 
-Create an instance: `const series = client.series`
+Create an instance: `$series = $client->Series();`
 
 #### Operations
 
@@ -462,25 +469,27 @@ Create an instance: `const series = client.series`
 
 #### Example: Load
 
-```ts
-const series = await client.series.load({ id: 'series_id' })
+```php
+// load() returns the bare Series record (throws on error).
+$series = $client->Series()->load(["id" => "series_id"]);
 ```
 
 #### Example: List
 
-```ts
-const seriess = await client.series.list()
+```php
+// list() returns an array of Series records (throws on error).
+$seriess = $client->Series()->list();
 ```
 
 #### Example: Create
 
-```ts
-const series = await client.series.create({
-  description: /* `$STRING` */,
-  genre: /* `$ARRAY` */,
-  release_year: /* `$INTEGER` */,
-  title: /* `$STRING` */,
-})
+```php
+$series = $client->Series()->create([
+    "description" => null, // `$STRING`
+    "genre" => null, // `$ARRAY`
+    "release_year" => null, // `$INTEGER`
+    "title" => null, // `$STRING`
+]);
 ```
 
 
@@ -555,7 +564,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$channel = $client->channel();
+$channel = $client->Channel();
 $channel->load(["id" => "example_id"]);
 
 // $channel->dataGet() now returns the loaded channel data

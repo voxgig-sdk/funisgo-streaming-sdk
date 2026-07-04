@@ -206,42 +206,21 @@ class FunisgoStreamingSDK {
 
 
 
-  _channel?: ChannelEntity
-
-  // Idiomatic facade: `client.channel.list()` / `client.channel.load({ id })`.
-  get channel(): ChannelEntity {
-    return (this._channel ??= new ChannelEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.channel` instead. */
+  // Entity access: `client.Channel().list()` / `client.Channel().load({ id })`.
   Channel(data?: any) {
     const self = this
     return new ChannelEntity(self,data)
   }
 
 
-  _movie?: MovieEntity
-
-  // Idiomatic facade: `client.movie.list()` / `client.movie.load({ id })`.
-  get movie(): MovieEntity {
-    return (this._movie ??= new MovieEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.movie` instead. */
+  // Entity access: `client.Movie().list()` / `client.Movie().load({ id })`.
   Movie(data?: any) {
     const self = this
     return new MovieEntity(self,data)
   }
 
 
-  _series?: SeriesEntity
-
-  // Idiomatic facade: `client.series.list()` / `client.series.load({ id })`.
-  get series(): SeriesEntity {
-    return (this._series ??= new SeriesEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.series` instead. */
+  // Entity access: `client.Series().list()` / `client.Series().load({ id })`.
   Series(data?: any) {
     const self = this
     return new SeriesEntity(self,data)

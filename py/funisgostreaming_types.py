@@ -4,213 +4,208 @@
 # params (op.<name>.points[].args.params[]). Field/param types come from the
 # canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 # @voxgig/apidef VALID_CANON). Do not edit by hand.
+#
+# These are TypedDicts, not dataclasses: the SDK ops return/accept plain dicts
+# at runtime, and a TypedDict IS a dict shape, so the types match the runtime.
+# Optional (req:false) keys are modelled as TypedDict key-optionality
+# (total=False), split into a required base + total=False subclass when a type
+# has both required and optional keys.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
-from typing import Optional, Any
+from typing import TypedDict, Any
 
 
-@dataclass
-class Channel:
+class ChannelRequired(TypedDict):
     category: str
     description: str
     name: str
-    created_at: Optional[str] = None
-    data: Optional[dict] = None
-    id: Optional[str] = None
-    is_live: Optional[bool] = None
-    is_premium: Optional[bool] = None
-    language: Optional[str] = None
-    logo_url: Optional[str] = None
-    stream_url: Optional[str] = None
-    success: Optional[bool] = None
-    updated_at: Optional[str] = None
 
 
-@dataclass
-class ChannelLoadMatch:
+class Channel(ChannelRequired, total=False):
+    created_at: str
+    data: dict
+    id: str
+    is_live: bool
+    is_premium: bool
+    language: str
+    logo_url: str
+    stream_url: str
+    success: bool
+    updated_at: str
+
+
+class ChannelLoadMatch(TypedDict):
     id: str
 
 
-@dataclass
-class ChannelListMatch:
-    category: Optional[str] = None
-    created_at: Optional[str] = None
-    data: Optional[dict] = None
-    description: Optional[str] = None
-    id: Optional[str] = None
-    is_live: Optional[bool] = None
-    is_premium: Optional[bool] = None
-    language: Optional[str] = None
-    logo_url: Optional[str] = None
-    name: Optional[str] = None
-    stream_url: Optional[str] = None
-    success: Optional[bool] = None
-    updated_at: Optional[str] = None
+class ChannelListMatch(TypedDict, total=False):
+    category: str
+    created_at: str
+    data: dict
+    description: str
+    id: str
+    is_live: bool
+    is_premium: bool
+    language: str
+    logo_url: str
+    name: str
+    stream_url: str
+    success: bool
+    updated_at: str
 
 
-@dataclass
-class ChannelCreateData:
-    category: Optional[str] = None
-    created_at: Optional[str] = None
-    data: Optional[dict] = None
-    description: Optional[str] = None
-    id: Optional[str] = None
-    is_live: Optional[bool] = None
-    is_premium: Optional[bool] = None
-    language: Optional[str] = None
-    logo_url: Optional[str] = None
-    name: Optional[str] = None
-    stream_url: Optional[str] = None
-    success: Optional[bool] = None
-    updated_at: Optional[str] = None
+class ChannelCreateData(TypedDict, total=False):
+    category: str
+    created_at: str
+    data: dict
+    description: str
+    id: str
+    is_live: bool
+    is_premium: bool
+    language: str
+    logo_url: str
+    name: str
+    stream_url: str
+    success: bool
+    updated_at: str
 
 
-@dataclass
-class ChannelUpdateData:
+class ChannelUpdateData(TypedDict):
     id: str
 
 
-@dataclass
-class ChannelRemoveMatch:
+class ChannelRemoveMatch(TypedDict):
     id: str
 
 
-@dataclass
-class Movie:
+class MovieRequired(TypedDict):
     description: str
     duration: int
     genre: list
     release_year: int
     title: str
-    created_at: Optional[str] = None
-    data: Optional[dict] = None
-    id: Optional[str] = None
-    is_premium: Optional[bool] = None
-    rating: Optional[float] = None
-    stream_url: Optional[str] = None
-    success: Optional[bool] = None
-    thumbnail_url: Optional[str] = None
-    updated_at: Optional[str] = None
 
 
-@dataclass
-class MovieLoadMatch:
+class Movie(MovieRequired, total=False):
+    created_at: str
+    data: dict
+    id: str
+    is_premium: bool
+    rating: float
+    stream_url: str
+    success: bool
+    thumbnail_url: str
+    updated_at: str
+
+
+class MovieLoadMatch(TypedDict):
     id: str
 
 
-@dataclass
-class MovieListMatch:
-    created_at: Optional[str] = None
-    data: Optional[dict] = None
-    description: Optional[str] = None
-    duration: Optional[int] = None
-    genre: Optional[list] = None
-    id: Optional[str] = None
-    is_premium: Optional[bool] = None
-    rating: Optional[float] = None
-    release_year: Optional[int] = None
-    stream_url: Optional[str] = None
-    success: Optional[bool] = None
-    thumbnail_url: Optional[str] = None
-    title: Optional[str] = None
-    updated_at: Optional[str] = None
+class MovieListMatch(TypedDict, total=False):
+    created_at: str
+    data: dict
+    description: str
+    duration: int
+    genre: list
+    id: str
+    is_premium: bool
+    rating: float
+    release_year: int
+    stream_url: str
+    success: bool
+    thumbnail_url: str
+    title: str
+    updated_at: str
 
 
-@dataclass
-class MovieCreateData:
-    created_at: Optional[str] = None
-    data: Optional[dict] = None
-    description: Optional[str] = None
-    duration: Optional[int] = None
-    genre: Optional[list] = None
-    id: Optional[str] = None
-    is_premium: Optional[bool] = None
-    rating: Optional[float] = None
-    release_year: Optional[int] = None
-    stream_url: Optional[str] = None
-    success: Optional[bool] = None
-    thumbnail_url: Optional[str] = None
-    title: Optional[str] = None
-    updated_at: Optional[str] = None
+class MovieCreateData(TypedDict, total=False):
+    created_at: str
+    data: dict
+    description: str
+    duration: int
+    genre: list
+    id: str
+    is_premium: bool
+    rating: float
+    release_year: int
+    stream_url: str
+    success: bool
+    thumbnail_url: str
+    title: str
+    updated_at: str
 
 
-@dataclass
-class MovieUpdateData:
+class MovieUpdateData(TypedDict):
     id: str
 
 
-@dataclass
-class MovieRemoveMatch:
+class MovieRemoveMatch(TypedDict):
     id: str
 
 
-@dataclass
-class Series:
+class SeriesRequired(TypedDict):
     description: str
     genre: list
     release_year: int
     title: str
-    created_at: Optional[str] = None
-    data: Optional[dict] = None
-    episode: Optional[int] = None
-    id: Optional[str] = None
-    is_premium: Optional[bool] = None
-    rating: Optional[float] = None
-    season: Optional[int] = None
-    success: Optional[bool] = None
-    thumbnail_url: Optional[str] = None
-    updated_at: Optional[str] = None
 
 
-@dataclass
-class SeriesLoadMatch:
+class Series(SeriesRequired, total=False):
+    created_at: str
+    data: dict
+    episode: int
+    id: str
+    is_premium: bool
+    rating: float
+    season: int
+    success: bool
+    thumbnail_url: str
+    updated_at: str
+
+
+class SeriesLoadMatch(TypedDict):
     id: str
 
 
-@dataclass
-class SeriesListMatch:
-    created_at: Optional[str] = None
-    data: Optional[dict] = None
-    description: Optional[str] = None
-    episode: Optional[int] = None
-    genre: Optional[list] = None
-    id: Optional[str] = None
-    is_premium: Optional[bool] = None
-    rating: Optional[float] = None
-    release_year: Optional[int] = None
-    season: Optional[int] = None
-    success: Optional[bool] = None
-    thumbnail_url: Optional[str] = None
-    title: Optional[str] = None
-    updated_at: Optional[str] = None
+class SeriesListMatch(TypedDict, total=False):
+    created_at: str
+    data: dict
+    description: str
+    episode: int
+    genre: list
+    id: str
+    is_premium: bool
+    rating: float
+    release_year: int
+    season: int
+    success: bool
+    thumbnail_url: str
+    title: str
+    updated_at: str
 
 
-@dataclass
-class SeriesCreateData:
-    created_at: Optional[str] = None
-    data: Optional[dict] = None
-    description: Optional[str] = None
-    episode: Optional[int] = None
-    genre: Optional[list] = None
-    id: Optional[str] = None
-    is_premium: Optional[bool] = None
-    rating: Optional[float] = None
-    release_year: Optional[int] = None
-    season: Optional[int] = None
-    success: Optional[bool] = None
-    thumbnail_url: Optional[str] = None
-    title: Optional[str] = None
-    updated_at: Optional[str] = None
+class SeriesCreateData(TypedDict, total=False):
+    created_at: str
+    data: dict
+    description: str
+    episode: int
+    genre: list
+    id: str
+    is_premium: bool
+    rating: float
+    release_year: int
+    season: int
+    success: bool
+    thumbnail_url: str
+    title: str
+    updated_at: str
 
 
-@dataclass
-class SeriesUpdateData:
+class SeriesUpdateData(TypedDict):
     id: str
 
 
-@dataclass
-class SeriesRemoveMatch:
+class SeriesRemoveMatch(TypedDict):
     id: str
-

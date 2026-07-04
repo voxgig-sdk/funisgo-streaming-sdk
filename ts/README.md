@@ -30,45 +30,48 @@ const client = new FunisgoStreamingSDK({
 })
 ```
 
-### 2. List channels
+### 2. List channel records
+
+`list()` resolves to an array of Channel objects — iterate it directly:
 
 ```ts
-const result = await client.channel.list()
+const channels = await client.Channel().list()
 
-if (result.ok) {
-  for (const item of result.data) {
-    console.log(item.id, item.name)
-  }
+for (const channel of channels) {
+  console.log(channel)
 }
 ```
 
 ### 3. Load a channel
 
-```ts
-const result = await client.channel.load({ id: 'example_id' })
+`load()` returns the entity directly and throws on failure:
 
-if (result.ok) {
-  console.log(result.data)
+```ts
+try {
+  const channel = await client.Channel().load({ id: 'example_id' })
+  console.log(channel)
+} catch (err) {
+  console.error('load failed:', err)
 }
 ```
 
 ### 4. Create, update, and remove
 
 ```ts
-// Create
-const created = await client.channel.create({
+// Create — returns the created Channel
+const created = await client.Channel().create({
   name: 'Example',
 })
 
-// Update
-const updated = await client.channel.update({
-  id: created.data.id,
+// Update — the id comes straight off the returned entity
+const updated = await client.Channel().update({
+  id: created.id,
   name: 'Example-Renamed',
 })
 
 // Remove
-const removed = await client.channel.remove({
-  id: created.data.id,
+await client.Channel().remove({
+  id: created.id,
 })
 ```
 
@@ -86,6 +89,9 @@ const result = await client.direct({
   params: { id: 'example' },
 })
 
+if (result instanceof Error) {
+  throw result
+}
 if (result.ok) {
   console.log(result.status)  // 200
   console.log(result.data)    // response body
@@ -114,9 +120,9 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = FunisgoStreamingSDK.test()
 
-const result = await client.channel.load({ id: 'test01' })
-// result.ok === true
-// result.data contains mock response data
+const channel = await client.Channel().load({ id: 'test01' })
+// channel is a bare entity populated with mock response data
+console.log(channel)
 ```
 
 You can also use the instance method:
@@ -131,7 +137,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.channel
+const entity = client.Channel()
 
 // First call sets internal match
 await entity.load({ id: 'example' })
@@ -232,29 +238,30 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `load` | `load(reqmatch?, ctrl?): Promise<Result>` | Load a single entity by match criteria. |
-| `list` | `list(reqmatch?, ctrl?): Promise<Result>` | List entities matching the criteria. |
-| `create` | `create(reqdata?, ctrl?): Promise<Result>` | Create a new entity. |
-| `update` | `update(reqdata?, ctrl?): Promise<Result>` | Update an existing entity. |
-| `remove` | `remove(reqmatch?, ctrl?): Promise<Result>` | Remove an entity. |
+| `load` | `load(reqmatch?, ctrl?): Promise<Entity>` | Load a single entity by match criteria. |
+| `list` | `list(reqmatch?, ctrl?): Promise<Entity[]>` | List entities matching the criteria. |
+| `create` | `create(reqdata?, ctrl?): Promise<Entity>` | Create a new entity. |
+| `update` | `update(reqdata?, ctrl?): Promise<Entity>` | Update an existing entity. |
+| `remove` | `remove(reqmatch?, ctrl?): Promise<void>` | Remove an entity. |
 | `data` | `data(data?): any` | Get or set entity data. |
 | `match` | `match(match?): any` | Get or set entity match criteria. |
 | `make` | `make(): Entity` | Create a new instance with the same options. |
 | `client` | `client(): FunisgoStreamingSDK` | Return the parent SDK client. |
 | `entopts` | `entopts(): object` | Return a copy of the entity options. |
 
-#### Result shape
+#### Return values
 
-All entity operations return a Result object:
+Entity operations resolve to the entity data directly — there is no
+result envelope:
 
-```ts
-{
-  ok: boolean      // true if the HTTP status is 2xx
-  status: number   // HTTP status code
-  headers: object  // response headers
-  data: any        // parsed JSON response body
-}
-```
+- `load`, `create` and `update` resolve to a single entity object.
+- `list` resolves to an **array** of entity objects (iterate it directly;
+  there is no `.data` and no `.ok`).
+- `remove` resolves to `void`.
+
+On a failed request these methods **throw**, so wrap calls in
+`try`/`catch` to handle errors. Only `direct()` returns the result
+envelope described below.
 
 ### DirectResult shape
 
@@ -361,7 +368,7 @@ API path: `/series`
 
 ### Channel
 
-Create an instance: `const channel = client.channel`
+Create an instance: `const channel = client.Channel()`
 
 #### Operations
 
@@ -394,19 +401,19 @@ Create an instance: `const channel = client.channel`
 #### Example: Load
 
 ```ts
-const channel = await client.channel.load({ id: 'channel_id' })
+const channel = await client.Channel().load({ id: 'channel_id' })
 ```
 
 #### Example: List
 
 ```ts
-const channels = await client.channel.list()
+const channels = await client.Channel().list()
 ```
 
 #### Example: Create
 
 ```ts
-const channel = await client.channel.create({
+const channel = await client.Channel().create({
   category: /* `$STRING` */,
   description: /* `$STRING` */,
   name: /* `$STRING` */,
@@ -416,7 +423,7 @@ const channel = await client.channel.create({
 
 ### Movie
 
-Create an instance: `const movie = client.movie`
+Create an instance: `const movie = client.Movie()`
 
 #### Operations
 
@@ -450,19 +457,19 @@ Create an instance: `const movie = client.movie`
 #### Example: Load
 
 ```ts
-const movie = await client.movie.load({ id: 'movie_id' })
+const movie = await client.Movie().load({ id: 'movie_id' })
 ```
 
 #### Example: List
 
 ```ts
-const movies = await client.movie.list()
+const movies = await client.Movie().list()
 ```
 
 #### Example: Create
 
 ```ts
-const movie = await client.movie.create({
+const movie = await client.Movie().create({
   description: /* `$STRING` */,
   duration: /* `$INTEGER` */,
   genre: /* `$ARRAY` */,
@@ -474,7 +481,7 @@ const movie = await client.movie.create({
 
 ### Series
 
-Create an instance: `const series = client.series`
+Create an instance: `const series = client.Series()`
 
 #### Operations
 
@@ -508,19 +515,19 @@ Create an instance: `const series = client.series`
 #### Example: Load
 
 ```ts
-const series = await client.series.load({ id: 'series_id' })
+const series = await client.Series().load({ id: 'series_id' })
 ```
 
 #### Example: List
 
 ```ts
-const seriess = await client.series.list()
+const seriess = await client.Series().list()
 ```
 
 #### Example: Create
 
 ```ts
-const series = await client.series.create({
+const series = await client.Series().create({
   description: /* `$STRING` */,
   genre: /* `$ARRAY` */,
   release_year: /* `$INTEGER` */,
@@ -596,7 +603,7 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const channel = client.channel
+const channel = client.Channel()
 await channel.load({ id: "example_id" })
 
 // channel.data() now returns the loaded channel data

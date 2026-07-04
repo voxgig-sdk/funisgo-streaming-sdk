@@ -208,39 +208,21 @@ class FunisgoStreamingSDK
   end
 
 
-  # Idiomatic facade: client.channel.list / client.channel.load({ "id" => ... })
-  def channel
-    require_relative 'entity/channel_entity'
-    @channel ||= ChannelEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.channel instead.
+  # Canonical facade: client.Channel.list / client.Channel.load({ "id" => ... })
   def Channel(data = nil)
     require_relative 'entity/channel_entity'
     ChannelEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.movie.list / client.movie.load({ "id" => ... })
-  def movie
-    require_relative 'entity/movie_entity'
-    @movie ||= MovieEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.movie instead.
+  # Canonical facade: client.Movie.list / client.Movie.load({ "id" => ... })
   def Movie(data = nil)
     require_relative 'entity/movie_entity'
     MovieEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.series.list / client.series.load({ "id" => ... })
-  def series
-    require_relative 'entity/series_entity'
-    @series ||= SeriesEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.series instead.
+  # Canonical facade: client.Series.list / client.Series.load({ "id" => ... })
   def Series(data = nil)
     require_relative 'entity/series_entity'
     SeriesEntity.new(self, data)

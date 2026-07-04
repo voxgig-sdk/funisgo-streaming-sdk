@@ -30,16 +30,14 @@ client = FunisgoStreamingSDK.new({
 })
 ```
 
-### 2. List channels
+### 2. List channel records
 
 ```ruby
 begin
-  result = client.channel.list
-  if result.is_a?(Array)
-    result.each do |item|
-      d = item.data_get
-      puts "#{d["id"]} #{d["name"]}"
-    end
+  # list returns an Array of Channel records — iterate directly.
+  channels = client.Channel.list
+  channels.each do |item|
+    puts "#{item["id"]} #{item["name"]}"
   end
 rescue => err
   warn "list failed: #{err}"
@@ -50,8 +48,9 @@ end
 
 ```ruby
 begin
-  result = client.channel.load({ "id" => "example_id" })
-  puts result
+  # load returns the bare Channel record (raises on error).
+  channel = client.Channel.load({ "id" => "example_id" })
+  puts channel
 rescue => err
   warn "load failed: #{err}"
 end
@@ -60,14 +59,14 @@ end
 ### 4. Create, update, and remove
 
 ```ruby
-# Create
-created = client.channel.create({ "name" => "Example" })
+# create returns the bare created Channel record.
+created = client.Channel.create({ "name" => "Example" })
 
-# Update
-client.channel.update({ "id" => created["id"], "name" => "Example-Renamed" })
+# Update — index the bare record directly (created["id"]).
+client.Channel.update({ "id" => created["id"], "name" => "Example-Renamed" })
 
 # Remove
-client.channel.remove({ "id" => created["id"] })
+client.Channel.remove({ "id" => created["id"] })
 ```
 
 
@@ -111,13 +110,17 @@ end
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```ruby
-client = FunisgoStreamingSDK.test
+client = FunisgoStreamingSDK.test({
+  "entity" => { "channel" => { "test01" => { "id" => "test01" } } },
+})
 
-result = client.channel.load({ "id" => "test01" })
-# result contains mock response data
+# load returns the bare mock record (raises on error).
+channel = client.Channel.load({ "id" => "test01" })
+puts channel
 ```
 
 ### Use a custom fetch function
@@ -311,7 +314,7 @@ API path: `/series`
 
 ### Channel
 
-Create an instance: `const channel = client.channel`
+Create an instance: `channel = client.Channel`
 
 #### Operations
 
@@ -343,30 +346,32 @@ Create an instance: `const channel = client.channel`
 
 #### Example: Load
 
-```ts
-const channel = await client.channel.load({ id: 'channel_id' })
+```ruby
+# load returns the bare Channel record (raises on error).
+channel = client.Channel.load({ "id" => "channel_id" })
 ```
 
 #### Example: List
 
-```ts
-const channels = await client.channel.list()
+```ruby
+# list returns an Array of Channel records (raises on error).
+channels = client.Channel.list
 ```
 
 #### Example: Create
 
-```ts
-const channel = await client.channel.create({
-  category: /* `$STRING` */,
-  description: /* `$STRING` */,
-  name: /* `$STRING` */,
+```ruby
+channel = client.Channel.create({
+  "category" => nil, # `$STRING`
+  "description" => nil, # `$STRING`
+  "name" => nil, # `$STRING`
 })
 ```
 
 
 ### Movie
 
-Create an instance: `const movie = client.movie`
+Create an instance: `movie = client.Movie`
 
 #### Operations
 
@@ -399,32 +404,34 @@ Create an instance: `const movie = client.movie`
 
 #### Example: Load
 
-```ts
-const movie = await client.movie.load({ id: 'movie_id' })
+```ruby
+# load returns the bare Movie record (raises on error).
+movie = client.Movie.load({ "id" => "movie_id" })
 ```
 
 #### Example: List
 
-```ts
-const movies = await client.movie.list()
+```ruby
+# list returns an Array of Movie records (raises on error).
+movies = client.Movie.list
 ```
 
 #### Example: Create
 
-```ts
-const movie = await client.movie.create({
-  description: /* `$STRING` */,
-  duration: /* `$INTEGER` */,
-  genre: /* `$ARRAY` */,
-  release_year: /* `$INTEGER` */,
-  title: /* `$STRING` */,
+```ruby
+movie = client.Movie.create({
+  "description" => nil, # `$STRING`
+  "duration" => nil, # `$INTEGER`
+  "genre" => nil, # `$ARRAY`
+  "release_year" => nil, # `$INTEGER`
+  "title" => nil, # `$STRING`
 })
 ```
 
 
 ### Series
 
-Create an instance: `const series = client.series`
+Create an instance: `series = client.Series`
 
 #### Operations
 
@@ -457,24 +464,26 @@ Create an instance: `const series = client.series`
 
 #### Example: Load
 
-```ts
-const series = await client.series.load({ id: 'series_id' })
+```ruby
+# load returns the bare Series record (raises on error).
+series = client.Series.load({ "id" => "series_id" })
 ```
 
 #### Example: List
 
-```ts
-const seriess = await client.series.list()
+```ruby
+# list returns an Array of Series records (raises on error).
+seriess = client.Series.list
 ```
 
 #### Example: Create
 
-```ts
-const series = await client.series.create({
-  description: /* `$STRING` */,
-  genre: /* `$ARRAY` */,
-  release_year: /* `$INTEGER` */,
-  title: /* `$STRING` */,
+```ruby
+series = client.Series.create({
+  "description" => nil, # `$STRING`
+  "genre" => nil, # `$ARRAY`
+  "release_year" => nil, # `$INTEGER`
+  "title" => nil, # `$STRING`
 })
 ```
 
@@ -550,7 +559,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-channel = client.channel
+channel = client.Channel
 channel.load({ "id" => "example_id" })
 
 # channel.data_get now returns the loaded channel data

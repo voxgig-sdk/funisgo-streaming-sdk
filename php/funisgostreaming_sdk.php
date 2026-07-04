@@ -233,10 +233,10 @@ class FunisgoStreamingSDK
 
     private $_channel = null;
 
-    // Idiomatic facade: $client->channel()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Channel() (PHP method
-    // names are case-insensitive).
-    public function channel($data = null)
+    // Canonical facade: $client->Channel()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->channel()
+    // resolves here too.
+    public function Channel($data = null)
     {
         require_once __DIR__ . '/entity/channel_entity.php';
         if ($data === null) {
@@ -251,10 +251,10 @@ class FunisgoStreamingSDK
 
     private $_movie = null;
 
-    // Idiomatic facade: $client->movie()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Movie() (PHP method
-    // names are case-insensitive).
-    public function movie($data = null)
+    // Canonical facade: $client->Movie()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->movie()
+    // resolves here too.
+    public function Movie($data = null)
     {
         require_once __DIR__ . '/entity/movie_entity.php';
         if ($data === null) {
@@ -269,10 +269,10 @@ class FunisgoStreamingSDK
 
     private $_series = null;
 
-    // Idiomatic facade: $client->series()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Series() (PHP method
-    // names are case-insensitive).
-    public function series($data = null)
+    // Canonical facade: $client->Series()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->series()
+    // resolves here too.
+    public function Series($data = null)
     {
         require_once __DIR__ . '/entity/series_entity.php';
         if ($data === null) {

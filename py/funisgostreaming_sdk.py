@@ -220,57 +220,27 @@ class FunisgoStreamingSDK:
         }
 
 
-    @property
-    def channel(self):
-        """Idiomatic facade: client.channel.list() / client.channel.load({"id": ...})."""
-        from entity.channel_entity import ChannelEntity
-        cached = getattr(self, "_channel", None)
-        if cached is None:
-            cached = ChannelEntity(self, None)
-            self._channel = cached
-        return cached
-
-    def Channel(self, data=None):
-        # Deprecated: use client.channel instead.
+    def Channel(self, data=None) -> "ChannelEntity":
+        """Entity factory: client.Channel().list({}) / client.Channel().load({"id": ...})."""
         from entity.channel_entity import ChannelEntity
         return ChannelEntity(self, data)
 
 
-    @property
-    def movie(self):
-        """Idiomatic facade: client.movie.list() / client.movie.load({"id": ...})."""
-        from entity.movie_entity import MovieEntity
-        cached = getattr(self, "_movie", None)
-        if cached is None:
-            cached = MovieEntity(self, None)
-            self._movie = cached
-        return cached
-
-    def Movie(self, data=None):
-        # Deprecated: use client.movie instead.
+    def Movie(self, data=None) -> "MovieEntity":
+        """Entity factory: client.Movie().list({}) / client.Movie().load({"id": ...})."""
         from entity.movie_entity import MovieEntity
         return MovieEntity(self, data)
 
 
-    @property
-    def series(self):
-        """Idiomatic facade: client.series.list() / client.series.load({"id": ...})."""
-        from entity.series_entity import SeriesEntity
-        cached = getattr(self, "_series", None)
-        if cached is None:
-            cached = SeriesEntity(self, None)
-            self._series = cached
-        return cached
-
-    def Series(self, data=None):
-        # Deprecated: use client.series instead.
+    def Series(self, data=None) -> "SeriesEntity":
+        """Entity factory: client.Series().list({}) / client.Series().load({"id": ...})."""
         from entity.series_entity import SeriesEntity
         return SeriesEntity(self, data)
 
 
 
     @classmethod
-    def test(cls, testopts=None, sdkopts=None):
+    def test(cls, testopts=None, sdkopts=None) -> "FunisgoStreamingSDK":
         if sdkopts is None:
             sdkopts = {}
         sdkopts = vs.clone(sdkopts)
@@ -290,3 +260,11 @@ class FunisgoStreamingSDK:
         sdk.mode = "test"
 
         return sdk
+
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from entity.channel_entity import ChannelEntity
+    from entity.movie_entity import MovieEntity
+    from entity.series_entity import SeriesEntity

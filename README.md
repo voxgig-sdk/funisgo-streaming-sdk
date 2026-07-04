@@ -28,9 +28,11 @@ const client = new FunisgoStreamingSDK({
   apikey: process.env.FUNISGO_STREAMING_APIKEY,
 })
 
-// List all channels
-const channels = await client.channel.list()
-console.log(channels.data)
+// List all channels (returns Channel[])
+const channels = await client.Channel().list()
+for (const channel of channels) {
+  console.log(channel)
+}
 ```
 
 See the [TypeScript README](ts/README.md) for the full guide.
@@ -90,12 +92,13 @@ client = FunisgoStreamingSDK({
     "apikey": os.environ.get("FUNISGO_STREAMING_APIKEY"),
 })
 
-# List all channels
-channels = client.channel.list()
-print(channels)
+# List all channels (returns a list, raises on error)
+channels = client.Channel().list({})
+for channel in channels:
+    print(channel)
 
-# Load a specific channel
-channel = client.channel.load({"id": "example_id"})
+# Load a specific channel (returns the record, raises on error)
+channel = client.Channel().load({"id": "example_id"})
 print(channel)
 ```
 
@@ -109,12 +112,12 @@ $client = new FunisgoStreamingSDK([
     "apikey" => getenv("FUNISGO_STREAMING_APIKEY"),
 ]);
 
-// List all channels (throws on error)
-$channels = $client->channel()->list();
+// List all channels (returns an array; throws on error)
+$channels = $client->Channel()->list();
 print_r($channels);
 
-// Load a specific channel
-$channel = $client->channel()->load(["id" => "example_id"]);
+// Load a specific channel (returns the bare record; throws on error)
+$channel = $client->Channel()->load(["id" => "example_id"]);
 print_r($channel);
 ```
 
@@ -141,12 +144,12 @@ client = FunisgoStreamingSDK.new({
   "apikey" => ENV["FUNISGO_STREAMING_APIKEY"],
 })
 
-# List all channels
-channels = client.channel.list
+# List all channels (returns an Array; raises on error)
+channels = client.Channel.list
 puts channels
 
-# Load a specific channel
-channel = client.channel.load({ "id" => "example_id" })
+# Load a specific channel (returns the bare record; raises on error)
+channel = client.Channel.load({ "id" => "example_id" })
 puts channel
 ```
 
@@ -160,11 +163,11 @@ local client = sdk.new({
 })
 
 -- List all channels
-local channels, err = client:channel():list()
+local channels, err = client:Channel():list()
 print(channels)
 
 -- Load a specific channel
-local channel, err = client:channel():load({ id = "example_id" })
+local channel, err = client:Channel():load({ id = "example_id" })
 print(channel)
 ```
 
@@ -177,22 +180,27 @@ in-memory mock, so unit tests run offline.
 
 ```ts
 const client = FunisgoStreamingSDK.test()
-const result = await client.channel.load({ id: 'test01' })
-// result.ok === true, result.data contains mock data
+const channel = await client.Channel().load({ id: 'test01' })
+// channel is a bare Channel populated with mock data
+console.log(channel)
 ```
 
 ### Python
 
 ```python
 client = FunisgoStreamingSDK.test()
-result = client.channel.load({"id": "test01"})
+channel = client.Channel().load({"id": "test01"})
+print(channel)
 ```
 
 ### PHP
 
 ```php
-$client = FunisgoStreamingSDK::test();
-$result = $client->channel()->load(["id" => "test01"]);
+// Seed fixture data so offline calls resolve without a live server.
+$client = FunisgoStreamingSDK::test([
+    "entity" => ["channel" => ["test01" => ["id" => "test01"]]],
+]);
+$channel = $client->Channel()->load(["id" => "test01"]);
 ```
 
 ### Golang
@@ -207,15 +215,18 @@ result, err := client.Channel(nil).Load(
 ### Ruby
 
 ```ruby
-client = FunisgoStreamingSDK.test
-result = client.channel.load({ "id" => "test01" })
+# Seed fixture data so offline calls resolve without a live server.
+client = FunisgoStreamingSDK.test({
+  "entity" => { "channel" => { "test01" => { "id" => "test01" } } },
+})
+channel = client.Channel.load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local result, err = client:channel():load({ id = "test01" })
+local result, err = client:Channel():load({ id = "test01" })
 ```
 
 ## How it works
@@ -263,6 +274,9 @@ const result = await client.direct({
   method: 'GET',
   params: { id: 'example' },
 })
+if (result instanceof Error) {
+  throw result
+}
 console.log(result.data)
 ```
 

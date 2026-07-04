@@ -34,24 +34,28 @@ client = FunisgoStreamingSDK({
 })
 ```
 
-### 2. List channels
+### 2. List channel records
+
+`list()` returns a `list` of records (each a `dict`) and raises on
+error — iterate it directly.
 
 ```python
 try:
-    result = client.channel.list()
-    for item in result:
-        d = item.data_get()
-        print(d["id"], d["name"])
+    channels = client.Channel().list({})
+    for channel in channels:
+        print(channel)
 except Exception as err:
     print(f"list failed: {err}")
 ```
 
 ### 3. Load a channel
 
+`load()` returns the bare record (a `dict`) and raises on error.
+
 ```python
 try:
-    result = client.channel.load({"id": "example_id"})
-    print(result)
+    channel = client.Channel().load({"id": "example_id"})
+    print(channel)
 except Exception as err:
     print(f"load failed: {err}")
 ```
@@ -59,14 +63,14 @@ except Exception as err:
 ### 4. Create, update, and remove
 
 ```python
-# Create
-created = client.channel.create({"name": "Example"})
+# Create — returns the bare created record (a dict)
+created = client.Channel().create({"name": "Example"})
 
-# Update
-client.channel.update({"id": created["id"], "name": "Example-Renamed"})
+# Update — the created record's id is a plain dict key
+client.Channel().update({"id": created["id"], "name": "Example-Renamed"})
 
 # Remove
-client.channel.remove({"id": created["id"]})
+client.Channel().remove({"id": created["id"]})
 ```
 
 
@@ -112,8 +116,9 @@ Create a mock client for unit testing — no server required:
 ```python
 client = FunisgoStreamingSDK.test()
 
-result = client.channel.load({"id": "test01"})
-# result contains mock response data
+# Entity ops return the bare record and raise on error.
+channel = client.Channel().load({"id": "test01"})
+# channel contains the mock response record
 ```
 
 ### Use a custom fetch function
@@ -308,7 +313,7 @@ API path: `/series`
 
 ### Channel
 
-Create an instance: `const channel = client.channel`
+Create an instance: `channel = client.Channel()`
 
 #### Operations
 
@@ -340,30 +345,30 @@ Create an instance: `const channel = client.channel`
 
 #### Example: Load
 
-```ts
-const channel = await client.channel.load({ id: 'channel_id' })
+```python
+channel = client.Channel().load({"id": "channel_id"})
 ```
 
 #### Example: List
 
-```ts
-const channels = await client.channel.list()
+```python
+channels = client.Channel().list({})
 ```
 
 #### Example: Create
 
-```ts
-const channel = await client.channel.create({
-  category: /* `$STRING` */,
-  description: /* `$STRING` */,
-  name: /* `$STRING` */,
+```python
+channel = client.Channel().create({
+    "category": ...,  # `$STRING`
+    "description": ...,  # `$STRING`
+    "name": ...,  # `$STRING`
 })
 ```
 
 
 ### Movie
 
-Create an instance: `const movie = client.movie`
+Create an instance: `movie = client.Movie()`
 
 #### Operations
 
@@ -396,32 +401,32 @@ Create an instance: `const movie = client.movie`
 
 #### Example: Load
 
-```ts
-const movie = await client.movie.load({ id: 'movie_id' })
+```python
+movie = client.Movie().load({"id": "movie_id"})
 ```
 
 #### Example: List
 
-```ts
-const movies = await client.movie.list()
+```python
+movies = client.Movie().list({})
 ```
 
 #### Example: Create
 
-```ts
-const movie = await client.movie.create({
-  description: /* `$STRING` */,
-  duration: /* `$INTEGER` */,
-  genre: /* `$ARRAY` */,
-  release_year: /* `$INTEGER` */,
-  title: /* `$STRING` */,
+```python
+movie = client.Movie().create({
+    "description": ...,  # `$STRING`
+    "duration": ...,  # `$INTEGER`
+    "genre": ...,  # `$ARRAY`
+    "release_year": ...,  # `$INTEGER`
+    "title": ...,  # `$STRING`
 })
 ```
 
 
 ### Series
 
-Create an instance: `const series = client.series`
+Create an instance: `series = client.Series()`
 
 #### Operations
 
@@ -454,24 +459,24 @@ Create an instance: `const series = client.series`
 
 #### Example: Load
 
-```ts
-const series = await client.series.load({ id: 'series_id' })
+```python
+series = client.Series().load({"id": "series_id"})
 ```
 
 #### Example: List
 
-```ts
-const seriess = await client.series.list()
+```python
+seriess = client.Series().list({})
 ```
 
 #### Example: Create
 
-```ts
-const series = await client.series.create({
-  description: /* `$STRING` */,
-  genre: /* `$ARRAY` */,
-  release_year: /* `$INTEGER` */,
-  title: /* `$STRING` */,
+```python
+series = client.Series().create({
+    "description": ...,  # `$STRING`
+    "genre": ...,  # `$ARRAY`
+    "release_year": ...,  # `$INTEGER`
+    "title": ...,  # `$STRING`
 })
 ```
 
@@ -546,7 +551,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-channel = client.channel
+channel = client.Channel()
 channel.load({"id": "example_id"})
 
 # channel.data_get() now returns the loaded channel data

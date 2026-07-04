@@ -95,7 +95,7 @@ same parameters as `direct()`. Raises on error.
 ## ChannelEntity
 
 ```ruby
-channel = client.channel
+channel = client.Channel
 ```
 
 ### Fields
@@ -141,7 +141,7 @@ channel = client.channel
 Create a new entity with the given data. Raises on error.
 
 ```ruby
-result = client.channel.create({
+result = client.Channel.create({
   "category" => # `$STRING`,
   "description" => # `$STRING`,
   "name" => # `$STRING`,
@@ -153,7 +153,7 @@ result = client.channel.create({
 List entities matching the given criteria. Returns an array. Raises on error.
 
 ```ruby
-results = client.channel.list(nil)
+results = client.Channel.list(nil)
 ```
 
 #### `load(reqmatch, ctrl = nil) -> result`
@@ -161,7 +161,7 @@ results = client.channel.list(nil)
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.channel.load({ "id" => "channel_id" })
+result = client.Channel.load({ "id" => "channel_id" })
 ```
 
 #### `remove(reqmatch, ctrl = nil) -> result`
@@ -169,7 +169,7 @@ result = client.channel.load({ "id" => "channel_id" })
 Remove the entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.channel.remove({ "id" => "channel_id" })
+result = client.Channel.remove({ "id" => "channel_id" })
 ```
 
 #### `update(reqdata, ctrl = nil) -> result`
@@ -177,7 +177,7 @@ result = client.channel.remove({ "id" => "channel_id" })
 Update an existing entity. The data must include the entity `id`. Raises on error.
 
 ```ruby
-result = client.channel.update({
+result = client.Channel.update({
   "id" => "channel_id",
   # Fields to update
 })
@@ -216,7 +216,7 @@ Return the entity name.
 ## MovieEntity
 
 ```ruby
-movie = client.movie
+movie = client.Movie
 ```
 
 ### Fields
@@ -264,7 +264,7 @@ movie = client.movie
 Create a new entity with the given data. Raises on error.
 
 ```ruby
-result = client.movie.create({
+result = client.Movie.create({
   "description" => # `$STRING`,
   "duration" => # `$INTEGER`,
   "genre" => # `$ARRAY`,
@@ -278,7 +278,7 @@ result = client.movie.create({
 List entities matching the given criteria. Returns an array. Raises on error.
 
 ```ruby
-results = client.movie.list(nil)
+results = client.Movie.list(nil)
 ```
 
 #### `load(reqmatch, ctrl = nil) -> result`
@@ -286,7 +286,7 @@ results = client.movie.list(nil)
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.movie.load({ "id" => "movie_id" })
+result = client.Movie.load({ "id" => "movie_id" })
 ```
 
 #### `remove(reqmatch, ctrl = nil) -> result`
@@ -294,7 +294,7 @@ result = client.movie.load({ "id" => "movie_id" })
 Remove the entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.movie.remove({ "id" => "movie_id" })
+result = client.Movie.remove({ "id" => "movie_id" })
 ```
 
 #### `update(reqdata, ctrl = nil) -> result`
@@ -302,7 +302,7 @@ result = client.movie.remove({ "id" => "movie_id" })
 Update an existing entity. The data must include the entity `id`. Raises on error.
 
 ```ruby
-result = client.movie.update({
+result = client.Movie.update({
   "id" => "movie_id",
   # Fields to update
 })
@@ -341,7 +341,7 @@ Return the entity name.
 ## SeriesEntity
 
 ```ruby
-series = client.series
+series = client.Series
 ```
 
 ### Fields
@@ -389,7 +389,7 @@ series = client.series
 Create a new entity with the given data. Raises on error.
 
 ```ruby
-result = client.series.create({
+result = client.Series.create({
   "description" => # `$STRING`,
   "genre" => # `$ARRAY`,
   "release_year" => # `$INTEGER`,
@@ -402,7 +402,7 @@ result = client.series.create({
 List entities matching the given criteria. Returns an array. Raises on error.
 
 ```ruby
-results = client.series.list(nil)
+results = client.Series.list(nil)
 ```
 
 #### `load(reqmatch, ctrl = nil) -> result`
@@ -410,7 +410,7 @@ results = client.series.list(nil)
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.series.load({ "id" => "series_id" })
+result = client.Series.load({ "id" => "series_id" })
 ```
 
 #### `remove(reqmatch, ctrl = nil) -> result`
@@ -418,7 +418,7 @@ result = client.series.load({ "id" => "series_id" })
 Remove the entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.series.remove({ "id" => "series_id" })
+result = client.Series.remove({ "id" => "series_id" })
 ```
 
 #### `update(reqdata, ctrl = nil) -> result`
@@ -426,7 +426,7 @@ result = client.series.remove({ "id" => "series_id" })
 Update an existing entity. The data must include the entity `id`. Raises on error.
 
 ```ruby
-result = client.series.update({
+result = client.Series.update({
   "id" => "series_id",
   # Fields to update
 })

@@ -33,39 +33,40 @@ local client = sdk.new({
 })
 ```
 
-### 2. List channels
+### 2. List channel records
+
+Entity operations return `(value, err)`. For `list`, `value` is the
+array of records itself — iterate it directly (there is no wrapper).
 
 ```lua
-local result, err = client:channel():list()
+local channels, err = client:Channel():list()
 if err then error(err) end
 
-if type(result) == "table" then
-  for _, item in ipairs(result) do
-    local d = item:data_get()
-    print(d["id"], d["name"])
-  end
+for _, item in ipairs(channels) do
+  print(item["id"], item["name"])
 end
 ```
 
 ### 3. Load a channel
 
 ```lua
-local result, err = client:channel():load({ id = "example_id" })
+local channel, err = client:Channel():load({ id = "example_id" })
 if err then error(err) end
-print(result)
+print(channel)
 ```
 
 ### 4. Create, update, and remove
 
 ```lua
 -- Create
-local created, _ = client:channel():create({ name = "Example" })
+local created, err = client:Channel():create({ name = "Example" })
+if err then error(err) end
 
 -- Update
-client:channel():update({ id = created["id"], name = "Example-Renamed" })
+client:Channel():update({ id = created["id"], name = "Example-Renamed" })
 
 -- Remove
-client:channel():remove({ id = created["id"] })
+client:Channel():remove({ id = created["id"] })
 ```
 
 
@@ -111,8 +112,8 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:channel():load({ id = "test01" })
--- result contains mock response data
+local result, err = client:Channel():load({ id = "test01" })
+-- result is the loaded data; err is set on failure
 ```
 
 ### Use a custom fetch function
@@ -216,17 +217,22 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return `(any, err)`. The first value is a
-`table` with these keys:
+Entity operations return `(value, err)`. The `value` is the operation's
+data **directly** — there is no wrapper:
 
-| Key | Type | Description |
-| --- | --- | --- |
-| `ok` | `boolean` | `true` if the HTTP status is 2xx. |
-| `status` | `number` | HTTP status code. |
-| `headers` | `table` | Response headers. |
-| `data` | `any` | Parsed JSON response body. |
+| Operation | `value` |
+| --- | --- |
+| `load` / `create` / `update` / `remove` | the entity record (a `table`) |
+| `list` | an array (`table`) of entity records |
 
-On error, `ok` is `false` and `err` contains the error value.
+Check `err` first (it is non-`nil` on failure), then use `value`:
+
+    local channel, err = client:Channel():load({ id = "example_id" })
+    if err then error(err) end
+    -- channel is the loaded record
+
+Only `direct()` returns a response envelope — a `table` with `ok`,
+`status`, `headers`, and `data` keys.
 
 ### Entities
 
@@ -305,7 +311,7 @@ API path: `/series`
 
 ### Channel
 
-Create an instance: `const channel = client.channel`
+Create an instance: `local channel = client:Channel(nil)`
 
 #### Operations
 
@@ -337,30 +343,30 @@ Create an instance: `const channel = client.channel`
 
 #### Example: Load
 
-```ts
-const channel = await client.channel.load({ id: 'channel_id' })
+```lua
+local channel, err = client:Channel():load({ id = "channel_id" })
 ```
 
 #### Example: List
 
-```ts
-const channels = await client.channel.list()
+```lua
+local channels, err = client:Channel():list()
 ```
 
 #### Example: Create
 
-```ts
-const channel = await client.channel.create({
-  category: /* `$STRING` */,
-  description: /* `$STRING` */,
-  name: /* `$STRING` */,
+```lua
+local channel, err = client:Channel():create({
+  category = nil, -- `$STRING`
+  description = nil, -- `$STRING`
+  name = nil, -- `$STRING`
 })
 ```
 
 
 ### Movie
 
-Create an instance: `const movie = client.movie`
+Create an instance: `local movie = client:Movie(nil)`
 
 #### Operations
 
@@ -393,32 +399,32 @@ Create an instance: `const movie = client.movie`
 
 #### Example: Load
 
-```ts
-const movie = await client.movie.load({ id: 'movie_id' })
+```lua
+local movie, err = client:Movie():load({ id = "movie_id" })
 ```
 
 #### Example: List
 
-```ts
-const movies = await client.movie.list()
+```lua
+local movies, err = client:Movie():list()
 ```
 
 #### Example: Create
 
-```ts
-const movie = await client.movie.create({
-  description: /* `$STRING` */,
-  duration: /* `$INTEGER` */,
-  genre: /* `$ARRAY` */,
-  release_year: /* `$INTEGER` */,
-  title: /* `$STRING` */,
+```lua
+local movie, err = client:Movie():create({
+  description = nil, -- `$STRING`
+  duration = nil, -- `$INTEGER`
+  genre = nil, -- `$ARRAY`
+  release_year = nil, -- `$INTEGER`
+  title = nil, -- `$STRING`
 })
 ```
 
 
 ### Series
 
-Create an instance: `const series = client.series`
+Create an instance: `local series = client:Series(nil)`
 
 #### Operations
 
@@ -451,24 +457,24 @@ Create an instance: `const series = client.series`
 
 #### Example: Load
 
-```ts
-const series = await client.series.load({ id: 'series_id' })
+```lua
+local series, err = client:Series():load({ id = "series_id" })
 ```
 
 #### Example: List
 
-```ts
-const seriess = await client.series.list()
+```lua
+local seriess, err = client:Series():list()
 ```
 
 #### Example: Create
 
-```ts
-const series = await client.series.create({
-  description: /* `$STRING` */,
-  genre: /* `$ARRAY` */,
-  release_year: /* `$INTEGER` */,
-  title: /* `$STRING` */,
+```lua
+local series, err = client:Series():create({
+  description = nil, -- `$STRING`
+  genre = nil, -- `$ARRAY`
+  release_year = nil, -- `$INTEGER`
+  title = nil, -- `$STRING`
 })
 ```
 
@@ -544,7 +550,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local channel = client:channel()
+local channel = client:Channel()
 channel:load({ id = "example_id" })
 
 -- channel:data_get() now returns the loaded channel data
