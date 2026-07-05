@@ -8,7 +8,7 @@ Complete API reference for the FunisgoStreaming Python SDK.
 ### Constructor
 
 ```python
-from funisgo-streaming_sdk import FunisgoStreamingSDK
+from funisgostreaming_sdk import FunisgoStreamingSDK
 
 client = FunisgoStreamingSDK(options)
 ```
@@ -96,19 +96,19 @@ channel = client.Channel()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `category` | ``$STRING`` | Yes |  |
-| `created_at` | ``$STRING`` | No |  |
-| `data` | ``$OBJECT`` | No |  |
-| `description` | ``$STRING`` | Yes |  |
-| `id` | ``$STRING`` | No |  |
-| `is_live` | ``$BOOLEAN`` | No |  |
-| `is_premium` | ``$BOOLEAN`` | No |  |
-| `language` | ``$STRING`` | No |  |
-| `logo_url` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | Yes |  |
-| `stream_url` | ``$STRING`` | No |  |
-| `success` | ``$BOOLEAN`` | No |  |
-| `updated_at` | ``$STRING`` | No |  |
+| `category` | `str` | Yes |  |
+| `created_at` | `str` | No |  |
+| `data` | `dict` | No |  |
+| `description` | `str` | Yes |  |
+| `id` | `str` | No |  |
+| `is_live` | `bool` | No |  |
+| `is_premium` | `bool` | No |  |
+| `language` | `str` | No |  |
+| `logo_url` | `str` | No |  |
+| `name` | `str` | Yes |  |
+| `stream_url` | `str` | No |  |
+| `success` | `bool` | No |  |
+| `updated_at` | `str` | No |  |
 
 ### Field Usage by Operation
 
@@ -136,18 +136,18 @@ Create a new entity with the given data. Returns the created entity data and rai
 
 ```python
 result = client.Channel().create({
-    "category": ...,  # `$STRING`
-    "description": ...,  # `$STRING`
-    "name": ...,  # `$STRING`
+    "category": "example",  # str
+    "description": "example",  # str
+    "name": "example",  # str
 })
 ```
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Channel().list({})
+results = client.Channel().list()
 for channel in results:
     print(channel)
 ```
@@ -218,20 +218,20 @@ movie = client.Movie()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | ``$STRING`` | No |  |
-| `data` | ``$OBJECT`` | No |  |
-| `description` | ``$STRING`` | Yes |  |
-| `duration` | ``$INTEGER`` | Yes |  |
-| `genre` | ``$ARRAY`` | Yes |  |
-| `id` | ``$STRING`` | No |  |
-| `is_premium` | ``$BOOLEAN`` | No |  |
-| `rating` | ``$NUMBER`` | No |  |
-| `release_year` | ``$INTEGER`` | Yes |  |
-| `stream_url` | ``$STRING`` | No |  |
-| `success` | ``$BOOLEAN`` | No |  |
-| `thumbnail_url` | ``$STRING`` | No |  |
-| `title` | ``$STRING`` | Yes |  |
-| `updated_at` | ``$STRING`` | No |  |
+| `created_at` | `str` | No |  |
+| `data` | `dict` | No |  |
+| `description` | `str` | Yes |  |
+| `duration` | `int` | Yes |  |
+| `genre` | `list` | Yes |  |
+| `id` | `str` | No |  |
+| `is_premium` | `bool` | No |  |
+| `rating` | `float` | No |  |
+| `release_year` | `int` | Yes |  |
+| `stream_url` | `str` | No |  |
+| `success` | `bool` | No |  |
+| `thumbnail_url` | `str` | No |  |
+| `title` | `str` | Yes |  |
+| `updated_at` | `str` | No |  |
 
 ### Field Usage by Operation
 
@@ -260,20 +260,20 @@ Create a new entity with the given data. Returns the created entity data and rai
 
 ```python
 result = client.Movie().create({
-    "description": ...,  # `$STRING`
-    "duration": ...,  # `$INTEGER`
-    "genre": ...,  # `$ARRAY`
-    "release_year": ...,  # `$INTEGER`
-    "title": ...,  # `$STRING`
+    "description": "example",  # str
+    "duration": 1,  # int
+    "genre": [],  # list
+    "release_year": 1,  # int
+    "title": "example",  # str
 })
 ```
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Movie().list({})
+results = client.Movie().list()
 for movie in results:
     print(movie)
 ```
@@ -344,20 +344,20 @@ series = client.Series()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | ``$STRING`` | No |  |
-| `data` | ``$OBJECT`` | No |  |
-| `description` | ``$STRING`` | Yes |  |
-| `episode` | ``$INTEGER`` | No |  |
-| `genre` | ``$ARRAY`` | Yes |  |
-| `id` | ``$STRING`` | No |  |
-| `is_premium` | ``$BOOLEAN`` | No |  |
-| `rating` | ``$NUMBER`` | No |  |
-| `release_year` | ``$INTEGER`` | Yes |  |
-| `season` | ``$INTEGER`` | No |  |
-| `success` | ``$BOOLEAN`` | No |  |
-| `thumbnail_url` | ``$STRING`` | No |  |
-| `title` | ``$STRING`` | Yes |  |
-| `updated_at` | ``$STRING`` | No |  |
+| `created_at` | `str` | No |  |
+| `data` | `dict` | No |  |
+| `description` | `str` | Yes |  |
+| `episode` | `int` | No |  |
+| `genre` | `list` | Yes |  |
+| `id` | `str` | No |  |
+| `is_premium` | `bool` | No |  |
+| `rating` | `float` | No |  |
+| `release_year` | `int` | Yes |  |
+| `season` | `int` | No |  |
+| `success` | `bool` | No |  |
+| `thumbnail_url` | `str` | No |  |
+| `title` | `str` | Yes |  |
+| `updated_at` | `str` | No |  |
 
 ### Field Usage by Operation
 
@@ -386,19 +386,19 @@ Create a new entity with the given data. Returns the created entity data and rai
 
 ```python
 result = client.Series().create({
-    "description": ...,  # `$STRING`
-    "genre": ...,  # `$ARRAY`
-    "release_year": ...,  # `$INTEGER`
-    "title": ...,  # `$STRING`
+    "description": "example",  # str
+    "genre": [],  # list
+    "release_year": 1,  # int
+    "title": "example",  # str
 })
 ```
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Series().list({})
+results = client.Series().list()
 for series in results:
     print(series)
 ```

@@ -79,12 +79,12 @@ describe('MovieEntity', async () => {
     movie_ref01_data_up0.id = movie_ref01_data.id
 
     const movie_ref01_markdef_up0 = { name: 'created_at', value: 'Mark01-movie_ref01_' + setup.now }
-    movie_ref01_data_up0 [movie_ref01_markdef_up0.name] = movie_ref01_markdef_up0.value
+    ;(movie_ref01_data_up0 as any)[movie_ref01_markdef_up0.name] = movie_ref01_markdef_up0.value
 
     const movie_ref01_resdata_up0 = await movie_ref01_ent.update(movie_ref01_data_up0)
     assert(movie_ref01_resdata_up0.id === movie_ref01_data_up0.id)
 
-    assert(movie_ref01_resdata_up0[movie_ref01_markdef_up0.name] === movie_ref01_markdef_up0.value)
+    assert((movie_ref01_resdata_up0 as any)[movie_ref01_markdef_up0.name] === movie_ref01_markdef_up0.value)
 
 
     // LOAD

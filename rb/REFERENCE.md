@@ -8,7 +8,7 @@ Complete API reference for the FunisgoStreaming Ruby SDK.
 ### Constructor
 
 ```ruby
-require_relative 'funisgo-streaming_sdk'
+require_relative 'FunisgoStreaming_sdk'
 
 client = FunisgoStreamingSDK.new(options)
 ```
@@ -102,19 +102,19 @@ channel = client.Channel
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `category` | ``$STRING`` | Yes |  |
-| `created_at` | ``$STRING`` | No |  |
-| `data` | ``$OBJECT`` | No |  |
-| `description` | ``$STRING`` | Yes |  |
-| `id` | ``$STRING`` | No |  |
-| `is_live` | ``$BOOLEAN`` | No |  |
-| `is_premium` | ``$BOOLEAN`` | No |  |
-| `language` | ``$STRING`` | No |  |
-| `logo_url` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | Yes |  |
-| `stream_url` | ``$STRING`` | No |  |
-| `success` | ``$BOOLEAN`` | No |  |
-| `updated_at` | ``$STRING`` | No |  |
+| `category` | `String` | Yes |  |
+| `created_at` | `String` | No |  |
+| `data` | `Hash` | No |  |
+| `description` | `String` | Yes |  |
+| `id` | `String` | No |  |
+| `is_live` | `Boolean` | No |  |
+| `is_premium` | `Boolean` | No |  |
+| `language` | `String` | No |  |
+| `logo_url` | `String` | No |  |
+| `name` | `String` | Yes |  |
+| `stream_url` | `String` | No |  |
+| `success` | `Boolean` | No |  |
+| `updated_at` | `String` | No |  |
 
 ### Field Usage by Operation
 
@@ -142,18 +142,18 @@ Create a new entity with the given data. Raises on error.
 
 ```ruby
 result = client.Channel.create({
-  "category" => # `$STRING`,
-  "description" => # `$STRING`,
-  "name" => # `$STRING`,
+  "category" => "example", # String
+  "description" => "example", # String
+  "name" => "example", # String
 })
 ```
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.Channel.list(nil)
+results = client.Channel.list
 ```
 
 #### `load(reqmatch, ctrl = nil) -> result`
@@ -223,20 +223,20 @@ movie = client.Movie
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | ``$STRING`` | No |  |
-| `data` | ``$OBJECT`` | No |  |
-| `description` | ``$STRING`` | Yes |  |
-| `duration` | ``$INTEGER`` | Yes |  |
-| `genre` | ``$ARRAY`` | Yes |  |
-| `id` | ``$STRING`` | No |  |
-| `is_premium` | ``$BOOLEAN`` | No |  |
-| `rating` | ``$NUMBER`` | No |  |
-| `release_year` | ``$INTEGER`` | Yes |  |
-| `stream_url` | ``$STRING`` | No |  |
-| `success` | ``$BOOLEAN`` | No |  |
-| `thumbnail_url` | ``$STRING`` | No |  |
-| `title` | ``$STRING`` | Yes |  |
-| `updated_at` | ``$STRING`` | No |  |
+| `created_at` | `String` | No |  |
+| `data` | `Hash` | No |  |
+| `description` | `String` | Yes |  |
+| `duration` | `Integer` | Yes |  |
+| `genre` | `Array` | Yes |  |
+| `id` | `String` | No |  |
+| `is_premium` | `Boolean` | No |  |
+| `rating` | `Float` | No |  |
+| `release_year` | `Integer` | Yes |  |
+| `stream_url` | `String` | No |  |
+| `success` | `Boolean` | No |  |
+| `thumbnail_url` | `String` | No |  |
+| `title` | `String` | Yes |  |
+| `updated_at` | `String` | No |  |
 
 ### Field Usage by Operation
 
@@ -265,20 +265,20 @@ Create a new entity with the given data. Raises on error.
 
 ```ruby
 result = client.Movie.create({
-  "description" => # `$STRING`,
-  "duration" => # `$INTEGER`,
-  "genre" => # `$ARRAY`,
-  "release_year" => # `$INTEGER`,
-  "title" => # `$STRING`,
+  "description" => "example", # String
+  "duration" => 1, # Integer
+  "genre" => [], # Array
+  "release_year" => 1, # Integer
+  "title" => "example", # String
 })
 ```
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.Movie.list(nil)
+results = client.Movie.list
 ```
 
 #### `load(reqmatch, ctrl = nil) -> result`
@@ -348,20 +348,20 @@ series = client.Series
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | ``$STRING`` | No |  |
-| `data` | ``$OBJECT`` | No |  |
-| `description` | ``$STRING`` | Yes |  |
-| `episode` | ``$INTEGER`` | No |  |
-| `genre` | ``$ARRAY`` | Yes |  |
-| `id` | ``$STRING`` | No |  |
-| `is_premium` | ``$BOOLEAN`` | No |  |
-| `rating` | ``$NUMBER`` | No |  |
-| `release_year` | ``$INTEGER`` | Yes |  |
-| `season` | ``$INTEGER`` | No |  |
-| `success` | ``$BOOLEAN`` | No |  |
-| `thumbnail_url` | ``$STRING`` | No |  |
-| `title` | ``$STRING`` | Yes |  |
-| `updated_at` | ``$STRING`` | No |  |
+| `created_at` | `String` | No |  |
+| `data` | `Hash` | No |  |
+| `description` | `String` | Yes |  |
+| `episode` | `Integer` | No |  |
+| `genre` | `Array` | Yes |  |
+| `id` | `String` | No |  |
+| `is_premium` | `Boolean` | No |  |
+| `rating` | `Float` | No |  |
+| `release_year` | `Integer` | Yes |  |
+| `season` | `Integer` | No |  |
+| `success` | `Boolean` | No |  |
+| `thumbnail_url` | `String` | No |  |
+| `title` | `String` | Yes |  |
+| `updated_at` | `String` | No |  |
 
 ### Field Usage by Operation
 
@@ -390,19 +390,19 @@ Create a new entity with the given data. Raises on error.
 
 ```ruby
 result = client.Series.create({
-  "description" => # `$STRING`,
-  "genre" => # `$ARRAY`,
-  "release_year" => # `$INTEGER`,
-  "title" => # `$STRING`,
+  "description" => "example", # String
+  "genre" => [], # Array
+  "release_year" => 1, # Integer
+  "title" => "example", # String
 })
 ```
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.Series.list(nil)
+results = client.Series.list
 ```
 
 #### `load(reqmatch, ctrl = nil) -> result`

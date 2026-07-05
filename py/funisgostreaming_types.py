@@ -55,17 +55,20 @@ class ChannelListMatch(TypedDict, total=False):
     updated_at: str
 
 
-class ChannelCreateData(TypedDict, total=False):
+class ChannelCreateDataRequired(TypedDict):
     category: str
+    description: str
+    name: str
+
+
+class ChannelCreateData(ChannelCreateDataRequired, total=False):
     created_at: str
     data: dict
-    description: str
     id: str
     is_live: bool
     is_premium: bool
     language: str
     logo_url: str
-    name: str
     stream_url: str
     success: bool
     updated_at: str
@@ -120,20 +123,23 @@ class MovieListMatch(TypedDict, total=False):
     updated_at: str
 
 
-class MovieCreateData(TypedDict, total=False):
-    created_at: str
-    data: dict
+class MovieCreateDataRequired(TypedDict):
     description: str
     duration: int
     genre: list
+    release_year: int
+    title: str
+
+
+class MovieCreateData(MovieCreateDataRequired, total=False):
+    created_at: str
+    data: dict
     id: str
     is_premium: bool
     rating: float
-    release_year: int
     stream_url: str
     success: bool
     thumbnail_url: str
-    title: str
     updated_at: str
 
 
@@ -186,20 +192,23 @@ class SeriesListMatch(TypedDict, total=False):
     updated_at: str
 
 
-class SeriesCreateData(TypedDict, total=False):
+class SeriesCreateDataRequired(TypedDict):
+    description: str
+    genre: list
+    release_year: int
+    title: str
+
+
+class SeriesCreateData(SeriesCreateDataRequired, total=False):
     created_at: str
     data: dict
-    description: str
     episode: int
-    genre: list
     id: str
     is_premium: bool
     rating: float
-    release_year: int
     season: int
     success: bool
     thumbnail_url: str
-    title: str
     updated_at: str
 
 

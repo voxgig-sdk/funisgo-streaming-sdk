@@ -8,7 +8,7 @@ Complete API reference for the FunisgoStreaming PHP SDK.
 ### Constructor
 
 ```php
-require_once __DIR__ . '/funisgo-streaming_sdk.php';
+require_once __DIR__ . '/funisgostreaming_sdk.php';
 
 $client = new FunisgoStreamingSDK($options);
 ```
@@ -54,11 +54,11 @@ Create a new `MovieEntity` instance. Pass `null` for no initial data.
 
 Create a new `SeriesEntity` instance. Pass `null` for no initial data.
 
-#### `optionsMap(): array`
+#### `options_map(): array`
 
 Return a deep copy of the current SDK options.
 
-#### `getUtility(): ProjectNameUtility`
+#### `get_utility(): FunisgoStreamingUtility`
 
 Return a copy of the SDK utility object.
 
@@ -101,19 +101,19 @@ $channel = $client->Channel();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `category` | ``$STRING`` | Yes |  |
-| `created_at` | ``$STRING`` | No |  |
-| `data` | ``$OBJECT`` | No |  |
-| `description` | ``$STRING`` | Yes |  |
-| `id` | ``$STRING`` | No |  |
-| `is_live` | ``$BOOLEAN`` | No |  |
-| `is_premium` | ``$BOOLEAN`` | No |  |
-| `language` | ``$STRING`` | No |  |
-| `logo_url` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | Yes |  |
-| `stream_url` | ``$STRING`` | No |  |
-| `success` | ``$BOOLEAN`` | No |  |
-| `updated_at` | ``$STRING`` | No |  |
+| `category` | `string` | Yes |  |
+| `created_at` | `string` | No |  |
+| `data` | `array` | No |  |
+| `description` | `string` | Yes |  |
+| `id` | `string` | No |  |
+| `is_live` | `bool` | No |  |
+| `is_premium` | `bool` | No |  |
+| `language` | `string` | No |  |
+| `logo_url` | `string` | No |  |
+| `name` | `string` | Yes |  |
+| `stream_url` | `string` | No |  |
+| `success` | `bool` | No |  |
+| `updated_at` | `string` | No |  |
 
 ### Field Usage by Operation
 
@@ -141,18 +141,18 @@ Create a new entity with the given data. Throws on error.
 
 ```php
 $result = $client->Channel()->create([
-  "category" => /* `$STRING` */,
-  "description" => /* `$STRING` */,
-  "name" => /* `$STRING` */,
+  "category" => null, // string
+  "description" => null, // string
+  "name" => null, // string
 ]);
 ```
 
-#### `list(array $reqmatch, ?array $ctrl = null): mixed`
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
 
 ```php
-$results = $client->Channel()->list([]);
+$results = $client->Channel()->list();
 ```
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
@@ -184,19 +184,19 @@ $result = $client->Channel()->update([
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -205,7 +205,7 @@ Set the entity match criteria.
 Create a new `ChannelEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -222,20 +222,20 @@ $movie = $client->Movie();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | ``$STRING`` | No |  |
-| `data` | ``$OBJECT`` | No |  |
-| `description` | ``$STRING`` | Yes |  |
-| `duration` | ``$INTEGER`` | Yes |  |
-| `genre` | ``$ARRAY`` | Yes |  |
-| `id` | ``$STRING`` | No |  |
-| `is_premium` | ``$BOOLEAN`` | No |  |
-| `rating` | ``$NUMBER`` | No |  |
-| `release_year` | ``$INTEGER`` | Yes |  |
-| `stream_url` | ``$STRING`` | No |  |
-| `success` | ``$BOOLEAN`` | No |  |
-| `thumbnail_url` | ``$STRING`` | No |  |
-| `title` | ``$STRING`` | Yes |  |
-| `updated_at` | ``$STRING`` | No |  |
+| `created_at` | `string` | No |  |
+| `data` | `array` | No |  |
+| `description` | `string` | Yes |  |
+| `duration` | `int` | Yes |  |
+| `genre` | `array` | Yes |  |
+| `id` | `string` | No |  |
+| `is_premium` | `bool` | No |  |
+| `rating` | `float` | No |  |
+| `release_year` | `int` | Yes |  |
+| `stream_url` | `string` | No |  |
+| `success` | `bool` | No |  |
+| `thumbnail_url` | `string` | No |  |
+| `title` | `string` | Yes |  |
+| `updated_at` | `string` | No |  |
 
 ### Field Usage by Operation
 
@@ -264,20 +264,20 @@ Create a new entity with the given data. Throws on error.
 
 ```php
 $result = $client->Movie()->create([
-  "description" => /* `$STRING` */,
-  "duration" => /* `$INTEGER` */,
-  "genre" => /* `$ARRAY` */,
-  "release_year" => /* `$INTEGER` */,
-  "title" => /* `$STRING` */,
+  "description" => null, // string
+  "duration" => null, // int
+  "genre" => null, // array
+  "release_year" => null, // int
+  "title" => null, // string
 ]);
 ```
 
-#### `list(array $reqmatch, ?array $ctrl = null): mixed`
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
 
 ```php
-$results = $client->Movie()->list([]);
+$results = $client->Movie()->list();
 ```
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
@@ -309,19 +309,19 @@ $result = $client->Movie()->update([
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -330,7 +330,7 @@ Set the entity match criteria.
 Create a new `MovieEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -347,20 +347,20 @@ $series = $client->Series();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | ``$STRING`` | No |  |
-| `data` | ``$OBJECT`` | No |  |
-| `description` | ``$STRING`` | Yes |  |
-| `episode` | ``$INTEGER`` | No |  |
-| `genre` | ``$ARRAY`` | Yes |  |
-| `id` | ``$STRING`` | No |  |
-| `is_premium` | ``$BOOLEAN`` | No |  |
-| `rating` | ``$NUMBER`` | No |  |
-| `release_year` | ``$INTEGER`` | Yes |  |
-| `season` | ``$INTEGER`` | No |  |
-| `success` | ``$BOOLEAN`` | No |  |
-| `thumbnail_url` | ``$STRING`` | No |  |
-| `title` | ``$STRING`` | Yes |  |
-| `updated_at` | ``$STRING`` | No |  |
+| `created_at` | `string` | No |  |
+| `data` | `array` | No |  |
+| `description` | `string` | Yes |  |
+| `episode` | `int` | No |  |
+| `genre` | `array` | Yes |  |
+| `id` | `string` | No |  |
+| `is_premium` | `bool` | No |  |
+| `rating` | `float` | No |  |
+| `release_year` | `int` | Yes |  |
+| `season` | `int` | No |  |
+| `success` | `bool` | No |  |
+| `thumbnail_url` | `string` | No |  |
+| `title` | `string` | Yes |  |
+| `updated_at` | `string` | No |  |
 
 ### Field Usage by Operation
 
@@ -389,19 +389,19 @@ Create a new entity with the given data. Throws on error.
 
 ```php
 $result = $client->Series()->create([
-  "description" => /* `$STRING` */,
-  "genre" => /* `$ARRAY` */,
-  "release_year" => /* `$INTEGER` */,
-  "title" => /* `$STRING` */,
+  "description" => null, // string
+  "genre" => null, // array
+  "release_year" => null, // int
+  "title" => null, // string
 ]);
 ```
 
-#### `list(array $reqmatch, ?array $ctrl = null): mixed`
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
 
 ```php
-$results = $client->Series()->list([]);
+$results = $client->Series()->list();
 ```
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
@@ -433,19 +433,19 @@ $result = $client->Series()->update([
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -454,7 +454,7 @@ Set the entity match criteria.
 Create a new `SeriesEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 

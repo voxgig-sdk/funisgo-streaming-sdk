@@ -19,6 +19,7 @@ go build -o funisgo-streaming-cli ./...
 ./funisgo-streaming-cli list channel
 ./funisgo-streaming-cli load 1 channel
 ./funisgo-streaming-cli load '{id:1}' channel
+./funisgo-streaming-cli update '{id:1}' channel
 
 # REPL
 ./funisgo-streaming-cli

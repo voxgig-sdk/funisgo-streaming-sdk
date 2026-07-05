@@ -30,8 +30,7 @@ type ChannelLoadMatch struct {
 	Id string `json:"id"`
 }
 
-// ChannelListMatch mirrors the channel fields as an all-optional match
-// filter (Go analog of Partial<Channel>).
+// ChannelListMatch is the typed request payload for Channel.ListTyped.
 type ChannelListMatch struct {
 	Category *string `json:"category,omitempty"`
 	CreatedAt *string `json:"created_at,omitempty"`
@@ -48,19 +47,18 @@ type ChannelListMatch struct {
 	UpdatedAt *string `json:"updated_at,omitempty"`
 }
 
-// ChannelCreateData mirrors the channel fields as an all-optional match
-// filter (Go analog of Partial<Channel>).
+// ChannelCreateData is the typed request payload for Channel.CreateTyped.
 type ChannelCreateData struct {
-	Category *string `json:"category,omitempty"`
+	Category string `json:"category"`
 	CreatedAt *string `json:"created_at,omitempty"`
 	Data *map[string]any `json:"data,omitempty"`
-	Description *string `json:"description,omitempty"`
+	Description string `json:"description"`
 	Id *string `json:"id,omitempty"`
 	IsLive *bool `json:"is_live,omitempty"`
 	IsPremium *bool `json:"is_premium,omitempty"`
 	Language *string `json:"language,omitempty"`
 	LogoUrl *string `json:"logo_url,omitempty"`
-	Name *string `json:"name,omitempty"`
+	Name string `json:"name"`
 	StreamUrl *string `json:"stream_url,omitempty"`
 	Success *bool `json:"success,omitempty"`
 	UpdatedAt *string `json:"updated_at,omitempty"`
@@ -99,8 +97,7 @@ type MovieLoadMatch struct {
 	Id string `json:"id"`
 }
 
-// MovieListMatch mirrors the movie fields as an all-optional match
-// filter (Go analog of Partial<Movie>).
+// MovieListMatch is the typed request payload for Movie.ListTyped.
 type MovieListMatch struct {
 	CreatedAt *string `json:"created_at,omitempty"`
 	Data *map[string]any `json:"data,omitempty"`
@@ -118,22 +115,21 @@ type MovieListMatch struct {
 	UpdatedAt *string `json:"updated_at,omitempty"`
 }
 
-// MovieCreateData mirrors the movie fields as an all-optional match
-// filter (Go analog of Partial<Movie>).
+// MovieCreateData is the typed request payload for Movie.CreateTyped.
 type MovieCreateData struct {
 	CreatedAt *string `json:"created_at,omitempty"`
 	Data *map[string]any `json:"data,omitempty"`
-	Description *string `json:"description,omitempty"`
-	Duration *int `json:"duration,omitempty"`
-	Genre *[]any `json:"genre,omitempty"`
+	Description string `json:"description"`
+	Duration int `json:"duration"`
+	Genre []any `json:"genre"`
 	Id *string `json:"id,omitempty"`
 	IsPremium *bool `json:"is_premium,omitempty"`
 	Rating *float64 `json:"rating,omitempty"`
-	ReleaseYear *int `json:"release_year,omitempty"`
+	ReleaseYear int `json:"release_year"`
 	StreamUrl *string `json:"stream_url,omitempty"`
 	Success *bool `json:"success,omitempty"`
 	ThumbnailUrl *string `json:"thumbnail_url,omitempty"`
-	Title *string `json:"title,omitempty"`
+	Title string `json:"title"`
 	UpdatedAt *string `json:"updated_at,omitempty"`
 }
 
@@ -170,8 +166,7 @@ type SeriesLoadMatch struct {
 	Id string `json:"id"`
 }
 
-// SeriesListMatch mirrors the series fields as an all-optional match
-// filter (Go analog of Partial<Series>).
+// SeriesListMatch is the typed request payload for Series.ListTyped.
 type SeriesListMatch struct {
 	CreatedAt *string `json:"created_at,omitempty"`
 	Data *map[string]any `json:"data,omitempty"`
@@ -189,22 +184,21 @@ type SeriesListMatch struct {
 	UpdatedAt *string `json:"updated_at,omitempty"`
 }
 
-// SeriesCreateData mirrors the series fields as an all-optional match
-// filter (Go analog of Partial<Series>).
+// SeriesCreateData is the typed request payload for Series.CreateTyped.
 type SeriesCreateData struct {
 	CreatedAt *string `json:"created_at,omitempty"`
 	Data *map[string]any `json:"data,omitempty"`
-	Description *string `json:"description,omitempty"`
+	Description string `json:"description"`
 	Episode *int `json:"episode,omitempty"`
-	Genre *[]any `json:"genre,omitempty"`
+	Genre []any `json:"genre"`
 	Id *string `json:"id,omitempty"`
 	IsPremium *bool `json:"is_premium,omitempty"`
 	Rating *float64 `json:"rating,omitempty"`
-	ReleaseYear *int `json:"release_year,omitempty"`
+	ReleaseYear int `json:"release_year"`
 	Season *int `json:"season,omitempty"`
 	Success *bool `json:"success,omitempty"`
 	ThumbnailUrl *string `json:"thumbnail_url,omitempty"`
-	Title *string `json:"title,omitempty"`
+	Title string `json:"title"`
 	UpdatedAt *string `json:"updated_at,omitempty"`
 }
 

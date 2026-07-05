@@ -25,9 +25,37 @@ export interface ChannelLoadMatch {
   id: string
 }
 
-export type ChannelListMatch = Partial<Channel>
+export interface ChannelListMatch {
+  category?: string
+  created_at?: string
+  data?: Record<string, any>
+  description?: string
+  id?: string
+  is_live?: boolean
+  is_premium?: boolean
+  language?: string
+  logo_url?: string
+  name?: string
+  stream_url?: string
+  success?: boolean
+  updated_at?: string
+}
 
-export type ChannelCreateData = Partial<Channel>
+export interface ChannelCreateData {
+  category: string
+  created_at?: string
+  data?: Record<string, any>
+  description: string
+  id?: string
+  is_live?: boolean
+  is_premium?: boolean
+  language?: string
+  logo_url?: string
+  name: string
+  stream_url?: string
+  success?: boolean
+  updated_at?: string
+}
 
 export interface ChannelUpdateData {
   id: string
@@ -58,9 +86,39 @@ export interface MovieLoadMatch {
   id: string
 }
 
-export type MovieListMatch = Partial<Movie>
+export interface MovieListMatch {
+  created_at?: string
+  data?: Record<string, any>
+  description?: string
+  duration?: number
+  genre?: any[]
+  id?: string
+  is_premium?: boolean
+  rating?: number
+  release_year?: number
+  stream_url?: string
+  success?: boolean
+  thumbnail_url?: string
+  title?: string
+  updated_at?: string
+}
 
-export type MovieCreateData = Partial<Movie>
+export interface MovieCreateData {
+  created_at?: string
+  data?: Record<string, any>
+  description: string
+  duration: number
+  genre: any[]
+  id?: string
+  is_premium?: boolean
+  rating?: number
+  release_year: number
+  stream_url?: string
+  success?: boolean
+  thumbnail_url?: string
+  title: string
+  updated_at?: string
+}
 
 export interface MovieUpdateData {
   id: string
@@ -91,9 +149,39 @@ export interface SeriesLoadMatch {
   id: string
 }
 
-export type SeriesListMatch = Partial<Series>
+export interface SeriesListMatch {
+  created_at?: string
+  data?: Record<string, any>
+  description?: string
+  episode?: number
+  genre?: any[]
+  id?: string
+  is_premium?: boolean
+  rating?: number
+  release_year?: number
+  season?: number
+  success?: boolean
+  thumbnail_url?: string
+  title?: string
+  updated_at?: string
+}
 
-export type SeriesCreateData = Partial<Series>
+export interface SeriesCreateData {
+  created_at?: string
+  data?: Record<string, any>
+  description: string
+  episode?: number
+  genre: any[]
+  id?: string
+  is_premium?: boolean
+  rating?: number
+  release_year: number
+  season?: number
+  success?: boolean
+  thumbnail_url?: string
+  title: string
+  updated_at?: string
+}
 
 export interface SeriesUpdateData {
   id: string

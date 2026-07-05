@@ -74,7 +74,7 @@ ChannelLoadMatch = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Channel#list (any subset of Channel fields).
+# Request payload for Channel#list.
 #
 # @!attribute [rw] category
 #   @return [String, nil]
@@ -131,10 +131,10 @@ ChannelListMatch = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Channel#create (any subset of Channel fields).
+# Request payload for Channel#create.
 #
 # @!attribute [rw] category
-#   @return [String, nil]
+#   @return [String]
 #
 # @!attribute [rw] created_at
 #   @return [String, nil]
@@ -143,7 +143,7 @@ ChannelListMatch = Struct.new(
 #   @return [Hash, nil]
 #
 # @!attribute [rw] description
-#   @return [String, nil]
+#   @return [String]
 #
 # @!attribute [rw] id
 #   @return [String, nil]
@@ -161,7 +161,7 @@ ChannelListMatch = Struct.new(
 #   @return [String, nil]
 #
 # @!attribute [rw] name
-#   @return [String, nil]
+#   @return [String]
 #
 # @!attribute [rw] stream_url
 #   @return [String, nil]
@@ -276,7 +276,7 @@ MovieLoadMatch = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Movie#list (any subset of Movie fields).
+# Request payload for Movie#list.
 #
 # @!attribute [rw] created_at
 #   @return [String, nil]
@@ -337,7 +337,7 @@ MovieListMatch = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Movie#create (any subset of Movie fields).
+# Request payload for Movie#create.
 #
 # @!attribute [rw] created_at
 #   @return [String, nil]
@@ -346,13 +346,13 @@ MovieListMatch = Struct.new(
 #   @return [Hash, nil]
 #
 # @!attribute [rw] description
-#   @return [String, nil]
+#   @return [String]
 #
 # @!attribute [rw] duration
-#   @return [Integer, nil]
+#   @return [Integer]
 #
 # @!attribute [rw] genre
-#   @return [Array, nil]
+#   @return [Array]
 #
 # @!attribute [rw] id
 #   @return [String, nil]
@@ -364,7 +364,7 @@ MovieListMatch = Struct.new(
 #   @return [Float, nil]
 #
 # @!attribute [rw] release_year
-#   @return [Integer, nil]
+#   @return [Integer]
 #
 # @!attribute [rw] stream_url
 #   @return [String, nil]
@@ -376,7 +376,7 @@ MovieListMatch = Struct.new(
 #   @return [String, nil]
 #
 # @!attribute [rw] title
-#   @return [String, nil]
+#   @return [String]
 #
 # @!attribute [rw] updated_at
 #   @return [String, nil]
@@ -486,7 +486,7 @@ SeriesLoadMatch = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Series#list (any subset of Series fields).
+# Request payload for Series#list.
 #
 # @!attribute [rw] created_at
 #   @return [String, nil]
@@ -547,7 +547,7 @@ SeriesListMatch = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Series#create (any subset of Series fields).
+# Request payload for Series#create.
 #
 # @!attribute [rw] created_at
 #   @return [String, nil]
@@ -556,13 +556,13 @@ SeriesListMatch = Struct.new(
 #   @return [Hash, nil]
 #
 # @!attribute [rw] description
-#   @return [String, nil]
+#   @return [String]
 #
 # @!attribute [rw] episode
 #   @return [Integer, nil]
 #
 # @!attribute [rw] genre
-#   @return [Array, nil]
+#   @return [Array]
 #
 # @!attribute [rw] id
 #   @return [String, nil]
@@ -574,7 +574,7 @@ SeriesListMatch = Struct.new(
 #   @return [Float, nil]
 #
 # @!attribute [rw] release_year
-#   @return [Integer, nil]
+#   @return [Integer]
 #
 # @!attribute [rw] season
 #   @return [Integer, nil]
@@ -586,7 +586,7 @@ SeriesListMatch = Struct.new(
 #   @return [String, nil]
 #
 # @!attribute [rw] title
-#   @return [String, nil]
+#   @return [String]
 #
 # @!attribute [rw] updated_at
 #   @return [String, nil]

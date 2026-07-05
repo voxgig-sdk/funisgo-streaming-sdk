@@ -4,6 +4,8 @@
 
 The PHP SDK for the FunisgoStreaming API — an entity-oriented client using PHP conventions.
 
+The SDK exposes the API as capitalised, semantic **Entities** — for example `$client->Channel()` — with named operations (`list`/`load`/`create`/`update`/`remove`) instead of raw URL paths and query strings. Working with resources and verbs keeps call sites self-describing and reduces cognitive load.
+
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
 
@@ -38,7 +40,7 @@ try {
     // list() returns an array of Channel records — iterate directly.
     $channels = $client->Channel()->list();
     foreach ($channels as $item) {
-        echo $item["id"] . " " . $item["name"] . "\n";
+        echo $item["id"] . " " . $item["category"] . "\n";
     }
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
@@ -61,13 +63,44 @@ try {
 
 ```php
 // create() returns the bare created Channel record.
-$created = $client->Channel()->create(["name" => "Example"]);
+$created = $client->Channel()->create(["category" => "example", "description" => "example", "name" => "example"]);
 
 // Update — index the bare record directly ($created["id"]).
-$client->Channel()->update(["id" => $created["id"], "name" => "Example-Renamed"]);
+$client->Channel()->update(["id" => $created["id"]]);
 
 // Remove
 $client->Channel()->remove(["id" => $created["id"]]);
+```
+
+
+## Error handling
+
+Entity operations throw a `\Throwable` on failure, so wrap them in
+`try` / `catch`:
+
+```php
+try {
+    $channels = $client->Channel()->list();
+} catch (\Throwable $err) {
+    echo "Error: " . $err->getMessage();
+}
+```
+
+`direct()` does **not** throw — it returns the result array. Branch on
+`ok`; on failure `status` holds the HTTP status (for error responses) and
+`err` holds a transport error, so read both defensively:
+
+```php
+$result = $client->direct([
+    "path" => "/api/resource/{id}",
+    "method" => "GET",
+    "params" => ["id" => "example_id"],
+]);
+
+if (! $result["ok"]) {
+    $err = $result["err"] ?? null;
+    echo "request failed: " . ($err ? $err->getMessage() : "HTTP " . $result["status"]);
+}
 ```
 
 
@@ -90,7 +123,10 @@ if ($result["ok"]) {
     echo $result["status"];  // 200
     print_r($result["data"]);  // response body
 } else {
-    echo "Error: " . $result["err"]->getMessage();
+    // On an HTTP error status there is no err (only a transport failure sets
+    // it), so fall back to the status code.
+    $err = $result["err"] ?? null;
+    echo "Error: " . ($err ? $err->getMessage() : "HTTP " . $result["status"]);
 }
 ```
 
@@ -119,8 +155,8 @@ $client = FunisgoStreamingSDK::test([
     "entity" => ["channel" => ["test01" => ["id" => "test01"]]],
 ]);
 
-// load() returns the bare mock record (throws on error).
-$channel = $client->Channel()->load(["id" => "test01"]);
+// Entity ops return the bare mock record (throws on error).
+$channel = $client->Channel()->list();
 print_r($channel);
 ```
 
@@ -213,7 +249,7 @@ All entities share the same interface.
 | Method | Signature | Description |
 | --- | --- | --- |
 | `load` | `($reqmatch, $ctrl): array` | Load a single entity by match criteria. |
-| `list` | `($reqmatch, $ctrl): array` | List entities matching the criteria. |
+| `list` | `(?array $reqmatch = null, $ctrl): array` | List entities matching the criteria (call with no argument to list all). |
 | `create` | `($reqdata, $ctrl): array` | Create a new entity. |
 | `update` | `($reqdata, $ctrl): array` | Update an existing entity. |
 | `remove` | `($reqmatch, $ctrl): array` | Remove an entity. |
@@ -335,19 +371,19 @@ Create an instance: `$channel = $client->Channel();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `category` | ``$STRING`` |  |
-| `created_at` | ``$STRING`` |  |
-| `data` | ``$OBJECT`` |  |
-| `description` | ``$STRING`` |  |
-| `id` | ``$STRING`` |  |
-| `is_live` | ``$BOOLEAN`` |  |
-| `is_premium` | ``$BOOLEAN`` |  |
-| `language` | ``$STRING`` |  |
-| `logo_url` | ``$STRING`` |  |
-| `name` | ``$STRING`` |  |
-| `stream_url` | ``$STRING`` |  |
-| `success` | ``$BOOLEAN`` |  |
-| `updated_at` | ``$STRING`` |  |
+| `category` | `string` |  |
+| `created_at` | `string` |  |
+| `data` | `array` |  |
+| `description` | `string` |  |
+| `id` | `string` |  |
+| `is_live` | `bool` |  |
+| `is_premium` | `bool` |  |
+| `language` | `string` |  |
+| `logo_url` | `string` |  |
+| `name` | `string` |  |
+| `stream_url` | `string` |  |
+| `success` | `bool` |  |
+| `updated_at` | `string` |  |
 
 #### Example: Load
 
@@ -367,9 +403,9 @@ $channels = $client->Channel()->list();
 
 ```php
 $channel = $client->Channel()->create([
-    "category" => null, // `$STRING`
-    "description" => null, // `$STRING`
-    "name" => null, // `$STRING`
+    "category" => null, // string
+    "description" => null, // string
+    "name" => null, // string
 ]);
 ```
 
@@ -392,20 +428,20 @@ Create an instance: `$movie = $client->Movie();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `created_at` | ``$STRING`` |  |
-| `data` | ``$OBJECT`` |  |
-| `description` | ``$STRING`` |  |
-| `duration` | ``$INTEGER`` |  |
-| `genre` | ``$ARRAY`` |  |
-| `id` | ``$STRING`` |  |
-| `is_premium` | ``$BOOLEAN`` |  |
-| `rating` | ``$NUMBER`` |  |
-| `release_year` | ``$INTEGER`` |  |
-| `stream_url` | ``$STRING`` |  |
-| `success` | ``$BOOLEAN`` |  |
-| `thumbnail_url` | ``$STRING`` |  |
-| `title` | ``$STRING`` |  |
-| `updated_at` | ``$STRING`` |  |
+| `created_at` | `string` |  |
+| `data` | `array` |  |
+| `description` | `string` |  |
+| `duration` | `int` |  |
+| `genre` | `array` |  |
+| `id` | `string` |  |
+| `is_premium` | `bool` |  |
+| `rating` | `float` |  |
+| `release_year` | `int` |  |
+| `stream_url` | `string` |  |
+| `success` | `bool` |  |
+| `thumbnail_url` | `string` |  |
+| `title` | `string` |  |
+| `updated_at` | `string` |  |
 
 #### Example: Load
 
@@ -425,11 +461,11 @@ $movies = $client->Movie()->list();
 
 ```php
 $movie = $client->Movie()->create([
-    "description" => null, // `$STRING`
-    "duration" => null, // `$INTEGER`
-    "genre" => null, // `$ARRAY`
-    "release_year" => null, // `$INTEGER`
-    "title" => null, // `$STRING`
+    "description" => null, // string
+    "duration" => null, // int
+    "genre" => null, // array
+    "release_year" => null, // int
+    "title" => null, // string
 ]);
 ```
 
@@ -452,20 +488,20 @@ Create an instance: `$series = $client->Series();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `created_at` | ``$STRING`` |  |
-| `data` | ``$OBJECT`` |  |
-| `description` | ``$STRING`` |  |
-| `episode` | ``$INTEGER`` |  |
-| `genre` | ``$ARRAY`` |  |
-| `id` | ``$STRING`` |  |
-| `is_premium` | ``$BOOLEAN`` |  |
-| `rating` | ``$NUMBER`` |  |
-| `release_year` | ``$INTEGER`` |  |
-| `season` | ``$INTEGER`` |  |
-| `success` | ``$BOOLEAN`` |  |
-| `thumbnail_url` | ``$STRING`` |  |
-| `title` | ``$STRING`` |  |
-| `updated_at` | ``$STRING`` |  |
+| `created_at` | `string` |  |
+| `data` | `array` |  |
+| `description` | `string` |  |
+| `episode` | `int` |  |
+| `genre` | `array` |  |
+| `id` | `string` |  |
+| `is_premium` | `bool` |  |
+| `rating` | `float` |  |
+| `release_year` | `int` |  |
+| `season` | `int` |  |
+| `success` | `bool` |  |
+| `thumbnail_url` | `string` |  |
+| `title` | `string` |  |
+| `updated_at` | `string` |  |
 
 #### Example: Load
 
@@ -485,20 +521,24 @@ $seriess = $client->Series()->list();
 
 ```php
 $series = $client->Series()->create([
-    "description" => null, // `$STRING`
-    "genre" => null, // `$ARRAY`
-    "release_year" => null, // `$INTEGER`
-    "title" => null, // `$STRING`
+    "description" => null, // string
+    "genre" => null, // array
+    "release_year" => null, // int
+    "title" => null, // string
 ]);
 ```
 
 
-## Explanation
+## Advanced
+
+> The sections above cover everyday use. The material below explains the
+> SDK's internals — useful when extending it with custom features, but not
+> needed for normal use.
 
 ### The operation pipeline
 
-Every entity operation (load, list, create, update, remove) follows a
-six-stage pipeline. Each stage fires a feature hook before executing:
+Every entity operation follows a six-stage pipeline. Each stage fires a
+feature hook before executing:
 
 ```
 PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
@@ -515,8 +555,9 @@ PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
 - **PreDone**: Final stage before returning to the caller. Entity
   state (match, data) is updated here.
 
-If any stage returns an error, the pipeline short-circuits and the
-error is returned to the caller as the second element in the return array.
+If any stage errors, the pipeline short-circuits and the error surfaces
+to the caller — see [Error handling](#error-handling) for how that looks
+in this language.
 
 ### Features and hooks
 
@@ -560,15 +601,15 @@ when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `load`, the entity
+Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```php
 $channel = $client->Channel();
-$channel->load(["id" => "example_id"]);
+$channel->list();
 
-// $channel->dataGet() now returns the loaded channel data
-// $channel->matchGet() returns the last match criteria
+// $channel->data_get() now returns the channel data from the last list
+// $channel->match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

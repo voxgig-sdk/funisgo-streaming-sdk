@@ -36,7 +36,7 @@ class ChannelLoadMatch
     public string $id;
 }
 
-/** Match filter for Channel#list (any subset of Channel fields). */
+/** Request payload for Channel#list. */
 class ChannelListMatch
 {
     public ?string $category = null;
@@ -54,19 +54,19 @@ class ChannelListMatch
     public ?string $updated_at = null;
 }
 
-/** Match filter for Channel#create (any subset of Channel fields). */
+/** Request payload for Channel#create. */
 class ChannelCreateData
 {
-    public ?string $category = null;
+    public string $category;
     public ?string $created_at = null;
     public ?array $data = null;
-    public ?string $description = null;
+    public string $description;
     public ?string $id = null;
     public ?bool $is_live = null;
     public ?bool $is_premium = null;
     public ?string $language = null;
     public ?string $logo_url = null;
-    public ?string $name = null;
+    public string $name;
     public ?string $stream_url = null;
     public ?bool $success = null;
     public ?string $updated_at = null;
@@ -109,7 +109,7 @@ class MovieLoadMatch
     public string $id;
 }
 
-/** Match filter for Movie#list (any subset of Movie fields). */
+/** Request payload for Movie#list. */
 class MovieListMatch
 {
     public ?string $created_at = null;
@@ -128,22 +128,22 @@ class MovieListMatch
     public ?string $updated_at = null;
 }
 
-/** Match filter for Movie#create (any subset of Movie fields). */
+/** Request payload for Movie#create. */
 class MovieCreateData
 {
     public ?string $created_at = null;
     public ?array $data = null;
-    public ?string $description = null;
-    public ?int $duration = null;
-    public ?array $genre = null;
+    public string $description;
+    public int $duration;
+    public array $genre;
     public ?string $id = null;
     public ?bool $is_premium = null;
     public ?float $rating = null;
-    public ?int $release_year = null;
+    public int $release_year;
     public ?string $stream_url = null;
     public ?bool $success = null;
     public ?string $thumbnail_url = null;
-    public ?string $title = null;
+    public string $title;
     public ?string $updated_at = null;
 }
 
@@ -184,7 +184,7 @@ class SeriesLoadMatch
     public string $id;
 }
 
-/** Match filter for Series#list (any subset of Series fields). */
+/** Request payload for Series#list. */
 class SeriesListMatch
 {
     public ?string $created_at = null;
@@ -203,22 +203,22 @@ class SeriesListMatch
     public ?string $updated_at = null;
 }
 
-/** Match filter for Series#create (any subset of Series fields). */
+/** Request payload for Series#create. */
 class SeriesCreateData
 {
     public ?string $created_at = null;
     public ?array $data = null;
-    public ?string $description = null;
+    public string $description;
     public ?int $episode = null;
-    public ?array $genre = null;
+    public array $genre;
     public ?string $id = null;
     public ?bool $is_premium = null;
     public ?float $rating = null;
-    public ?int $release_year = null;
+    public int $release_year;
     public ?int $season = null;
     public ?bool $success = null;
     public ?string $thumbnail_url = null;
-    public ?string $title = null;
+    public string $title;
     public ?string $updated_at = null;
 }
 

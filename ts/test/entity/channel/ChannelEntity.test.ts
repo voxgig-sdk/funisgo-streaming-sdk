@@ -79,12 +79,12 @@ describe('ChannelEntity', async () => {
     channel_ref01_data_up0.id = channel_ref01_data.id
 
     const channel_ref01_markdef_up0 = { name: 'category', value: 'Mark01-channel_ref01_' + setup.now }
-    channel_ref01_data_up0 [channel_ref01_markdef_up0.name] = channel_ref01_markdef_up0.value
+    ;(channel_ref01_data_up0 as any)[channel_ref01_markdef_up0.name] = channel_ref01_markdef_up0.value
 
     const channel_ref01_resdata_up0 = await channel_ref01_ent.update(channel_ref01_data_up0)
     assert(channel_ref01_resdata_up0.id === channel_ref01_data_up0.id)
 
-    assert(channel_ref01_resdata_up0[channel_ref01_markdef_up0.name] === channel_ref01_markdef_up0.value)
+    assert((channel_ref01_resdata_up0 as any)[channel_ref01_markdef_up0.name] === channel_ref01_markdef_up0.value)
 
 
     // LOAD

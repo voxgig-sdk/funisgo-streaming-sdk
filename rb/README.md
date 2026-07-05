@@ -4,6 +4,8 @@
 
 The Ruby SDK for the FunisgoStreaming API — an entity-oriented client using idiomatic Ruby conventions.
 
+The SDK exposes the API as capitalised, semantic **Entities** — for example `client.Channel` — with named operations (`list`/`load`/`create`/`update`/`remove`) instead of raw URL paths and query strings. Working with resources and verbs keeps call sites self-describing and reduces cognitive load.
+
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
 
@@ -37,7 +39,7 @@ begin
   # list returns an Array of Channel records — iterate directly.
   channels = client.Channel.list
   channels.each do |item|
-    puts "#{item["id"]} #{item["name"]}"
+    puts "#{item["id"]} #{item["category"]}"
   end
 rescue => err
   warn "list failed: #{err}"
@@ -60,13 +62,40 @@ end
 
 ```ruby
 # create returns the bare created Channel record.
-created = client.Channel.create({ "name" => "Example" })
+created = client.Channel.create({ "category" => "example", "description" => "example", "name" => "example" })
 
 # Update — index the bare record directly (created["id"]).
-client.Channel.update({ "id" => created["id"], "name" => "Example-Renamed" })
+client.Channel.update({ "id" => created["id"] })
 
 # Remove
 client.Channel.remove({ "id" => created["id"] })
+```
+
+
+## Error handling
+
+Entity operations raise on failure, so rescue them:
+
+```ruby
+begin
+  channels = client.Channel.list()
+rescue => err
+  warn "list failed: #{err}"
+end
+```
+
+`direct` does **not** raise — it returns the result hash. Branch on
+`ok`; on failure `status` holds the HTTP status (for error responses) and
+`err` holds a transport error, so read both defensively:
+
+```ruby
+result = client.direct({
+  "path" => "/api/resource/{id}",
+  "method" => "GET",
+  "params" => { "id" => "example_id" },
+})
+
+warn "request failed: #{result["err"] || "HTTP #{result["status"]}"}" unless result["ok"]
 ```
 
 
@@ -87,7 +116,9 @@ if result["ok"]
   puts result["status"]  # 200
   puts result["data"]    # response body
 else
-  warn result["err"]
+  # On an HTTP error status there is no err (only a transport failure sets
+  # it), so fall back to the status code.
+  warn(result["err"] || "HTTP #{result["status"]}")
 end
 ```
 
@@ -118,8 +149,8 @@ client = FunisgoStreamingSDK.test({
   "entity" => { "channel" => { "test01" => { "id" => "test01" } } },
 })
 
-# load returns the bare mock record (raises on error).
-channel = client.Channel.load({ "id" => "test01" })
+# Entity ops return the bare mock record (raises on error).
+channel = client.Channel.list()
 puts channel
 ```
 
@@ -209,7 +240,7 @@ All entities share the same interface.
 | Method | Signature | Description |
 | --- | --- | --- |
 | `load` | `(reqmatch, ctrl) -> any` | Load a single entity by match criteria. Raises on error. |
-| `list` | `(reqmatch, ctrl) -> Array` | List entities matching the criteria. Raises on error. |
+| `list` | `(reqmatch = nil, ctrl) -> Array` | List entities matching the criteria (call with no argument to list all). Raises on error. |
 | `create` | `(reqdata, ctrl) -> any` | Create a new entity. Raises on error. |
 | `update` | `(reqdata, ctrl) -> any` | Update an existing entity. Raises on error. |
 | `remove` | `(reqmatch, ctrl) -> any` | Remove an entity. Raises on error. |
@@ -330,19 +361,19 @@ Create an instance: `channel = client.Channel`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `category` | ``$STRING`` |  |
-| `created_at` | ``$STRING`` |  |
-| `data` | ``$OBJECT`` |  |
-| `description` | ``$STRING`` |  |
-| `id` | ``$STRING`` |  |
-| `is_live` | ``$BOOLEAN`` |  |
-| `is_premium` | ``$BOOLEAN`` |  |
-| `language` | ``$STRING`` |  |
-| `logo_url` | ``$STRING`` |  |
-| `name` | ``$STRING`` |  |
-| `stream_url` | ``$STRING`` |  |
-| `success` | ``$BOOLEAN`` |  |
-| `updated_at` | ``$STRING`` |  |
+| `category` | `String` |  |
+| `created_at` | `String` |  |
+| `data` | `Hash` |  |
+| `description` | `String` |  |
+| `id` | `String` |  |
+| `is_live` | `Boolean` |  |
+| `is_premium` | `Boolean` |  |
+| `language` | `String` |  |
+| `logo_url` | `String` |  |
+| `name` | `String` |  |
+| `stream_url` | `String` |  |
+| `success` | `Boolean` |  |
+| `updated_at` | `String` |  |
 
 #### Example: Load
 
@@ -362,9 +393,9 @@ channels = client.Channel.list
 
 ```ruby
 channel = client.Channel.create({
-  "category" => nil, # `$STRING`
-  "description" => nil, # `$STRING`
-  "name" => nil, # `$STRING`
+  "category" => "example", # String
+  "description" => "example", # String
+  "name" => "example", # String
 })
 ```
 
@@ -387,20 +418,20 @@ Create an instance: `movie = client.Movie`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `created_at` | ``$STRING`` |  |
-| `data` | ``$OBJECT`` |  |
-| `description` | ``$STRING`` |  |
-| `duration` | ``$INTEGER`` |  |
-| `genre` | ``$ARRAY`` |  |
-| `id` | ``$STRING`` |  |
-| `is_premium` | ``$BOOLEAN`` |  |
-| `rating` | ``$NUMBER`` |  |
-| `release_year` | ``$INTEGER`` |  |
-| `stream_url` | ``$STRING`` |  |
-| `success` | ``$BOOLEAN`` |  |
-| `thumbnail_url` | ``$STRING`` |  |
-| `title` | ``$STRING`` |  |
-| `updated_at` | ``$STRING`` |  |
+| `created_at` | `String` |  |
+| `data` | `Hash` |  |
+| `description` | `String` |  |
+| `duration` | `Integer` |  |
+| `genre` | `Array` |  |
+| `id` | `String` |  |
+| `is_premium` | `Boolean` |  |
+| `rating` | `Float` |  |
+| `release_year` | `Integer` |  |
+| `stream_url` | `String` |  |
+| `success` | `Boolean` |  |
+| `thumbnail_url` | `String` |  |
+| `title` | `String` |  |
+| `updated_at` | `String` |  |
 
 #### Example: Load
 
@@ -420,11 +451,11 @@ movies = client.Movie.list
 
 ```ruby
 movie = client.Movie.create({
-  "description" => nil, # `$STRING`
-  "duration" => nil, # `$INTEGER`
-  "genre" => nil, # `$ARRAY`
-  "release_year" => nil, # `$INTEGER`
-  "title" => nil, # `$STRING`
+  "description" => "example", # String
+  "duration" => 1, # Integer
+  "genre" => [], # Array
+  "release_year" => 1, # Integer
+  "title" => "example", # String
 })
 ```
 
@@ -447,20 +478,20 @@ Create an instance: `series = client.Series`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `created_at` | ``$STRING`` |  |
-| `data` | ``$OBJECT`` |  |
-| `description` | ``$STRING`` |  |
-| `episode` | ``$INTEGER`` |  |
-| `genre` | ``$ARRAY`` |  |
-| `id` | ``$STRING`` |  |
-| `is_premium` | ``$BOOLEAN`` |  |
-| `rating` | ``$NUMBER`` |  |
-| `release_year` | ``$INTEGER`` |  |
-| `season` | ``$INTEGER`` |  |
-| `success` | ``$BOOLEAN`` |  |
-| `thumbnail_url` | ``$STRING`` |  |
-| `title` | ``$STRING`` |  |
-| `updated_at` | ``$STRING`` |  |
+| `created_at` | `String` |  |
+| `data` | `Hash` |  |
+| `description` | `String` |  |
+| `episode` | `Integer` |  |
+| `genre` | `Array` |  |
+| `id` | `String` |  |
+| `is_premium` | `Boolean` |  |
+| `rating` | `Float` |  |
+| `release_year` | `Integer` |  |
+| `season` | `Integer` |  |
+| `success` | `Boolean` |  |
+| `thumbnail_url` | `String` |  |
+| `title` | `String` |  |
+| `updated_at` | `String` |  |
 
 #### Example: Load
 
@@ -480,20 +511,24 @@ seriess = client.Series.list
 
 ```ruby
 series = client.Series.create({
-  "description" => nil, # `$STRING`
-  "genre" => nil, # `$ARRAY`
-  "release_year" => nil, # `$INTEGER`
-  "title" => nil, # `$STRING`
+  "description" => "example", # String
+  "genre" => [], # Array
+  "release_year" => 1, # Integer
+  "title" => "example", # String
 })
 ```
 
 
-## Explanation
+## Advanced
+
+> The sections above cover everyday use. The material below explains the
+> SDK's internals — useful when extending it with custom features, but not
+> needed for normal use.
 
 ### The operation pipeline
 
-Every entity operation (load, list, create, update, remove) follows a
-six-stage pipeline. Each stage fires a feature hook before executing:
+Every entity operation follows a six-stage pipeline. Each stage fires a
+feature hook before executing:
 
 ```
 PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
@@ -510,8 +545,9 @@ PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
 - **PreDone**: Final stage before returning to the caller. Entity
   state (match, data) is updated here.
 
-If any stage returns an error, the pipeline short-circuits and the
-error is returned to the caller as a second return value.
+If any stage errors, the pipeline short-circuits and the error surfaces
+to the caller — see [Error handling](#error-handling) for how that looks
+in this language.
 
 ### Features and hooks
 
@@ -555,14 +591,14 @@ when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `load`, the entity
+Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
 channel = client.Channel
-channel.load({ "id" => "example_id" })
+channel.list()
 
-# channel.data_get now returns the loaded channel data
+# channel.data_get now returns the channel data from the last list
 # channel.match_get returns the last match criteria
 ```
 

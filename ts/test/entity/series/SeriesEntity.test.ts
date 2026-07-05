@@ -79,12 +79,12 @@ describe('SeriesEntity', async () => {
     series_ref01_data_up0.id = series_ref01_data.id
 
     const series_ref01_markdef_up0 = { name: 'created_at', value: 'Mark01-series_ref01_' + setup.now }
-    series_ref01_data_up0 [series_ref01_markdef_up0.name] = series_ref01_markdef_up0.value
+    ;(series_ref01_data_up0 as any)[series_ref01_markdef_up0.name] = series_ref01_markdef_up0.value
 
     const series_ref01_resdata_up0 = await series_ref01_ent.update(series_ref01_data_up0)
     assert(series_ref01_resdata_up0.id === series_ref01_data_up0.id)
 
-    assert(series_ref01_resdata_up0[series_ref01_markdef_up0.name] === series_ref01_markdef_up0.value)
+    assert((series_ref01_resdata_up0 as any)[series_ref01_markdef_up0.name] === series_ref01_markdef_up0.value)
 
 
     // LOAD

@@ -4,6 +4,8 @@
 
 The Golang SDK for the FunisgoStreaming API — an entity-oriented client using standard Go conventions. No generics required; data flows as `map[string]any`.
 
+It exposes the API as capitalised, semantic **Entities** — e.g. `client.Channel(nil)` — each with the same small set of operations (`List`, `Load`, `Create`, `Update`, `Remove`) instead of raw URL paths and query strings. You call meaning, not endpoints, which keeps the cognitive load low.
+
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
 
@@ -61,33 +63,62 @@ func main() {
     }
 
     // Load a single channel — the value is the loaded record.
-    channel, err := client.Channel(nil).Load(map[string]any{"id": "example_id"}, nil)
+    channel, err := client.Channel(nil).Load(map[string]any{"id": "example"}, nil)
     if err != nil {
         panic(err)
     }
     fmt.Println(channel)
 
     // Create a channel.
-    created, err := client.Channel(nil).Create(map[string]any{"name": "Example"}, nil)
+    created, err := client.Channel(nil).Create(map[string]any{"category": "example", "description": "example", "name": "example"}, nil)
     if err != nil {
         panic(err)
     }
     fmt.Println(created)
 
     // Update a channel.
-    updated, err := client.Channel(nil).Update(map[string]any{"id": "example_id", "name": "Renamed"}, nil)
+    updated, err := client.Channel(nil).Update(map[string]any{"id": "example"}, nil)
     if err != nil {
         panic(err)
     }
     fmt.Println(updated)
 
     // Remove a channel.
-    removed, err := client.Channel(nil).Remove(map[string]any{"id": "example_id"}, nil)
+    removed, err := client.Channel(nil).Remove(map[string]any{"id": "example"}, nil)
     if err != nil {
         panic(err)
     }
     fmt.Println(removed)
 }
+```
+
+
+## Error handling
+
+Every entity operation returns `(value, error)`. Check `err` before
+using the value — there is no exception to catch:
+
+```go
+channels, err := client.Channel(nil).List(nil, nil)
+if err != nil {
+    // handle err
+    return
+}
+_ = channels
+```
+
+`Direct` follows the same `(value, error)` convention:
+
+```go
+result, err := client.Direct(map[string]any{
+    "path":   "/api/resource/{id}",
+    "method": "GET",
+    "params": map[string]any{"id": "example_id"},
+})
+if err != nil {
+    // handle err
+}
+_ = result
 ```
 
 
@@ -137,13 +168,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-channel, err := client.Channel(nil).Load(
-    map[string]any{"id": "test01"}, nil,
+channel, err := client.Channel(nil).List(
+    nil, nil,
 )
 if err != nil {
     panic(err)
 }
-fmt.Println(channel) // the loaded mock data
+fmt.Println(channel) // the returned mock data
 ```
 
 ### Use a custom fetch function
@@ -256,9 +287,9 @@ Check `err` first, then use the value directly (or the typed
 `...Typed` variants, which return the entity's model struct and a typed
 slice):
 
-    channel, err := client.Channel(nil).Load(map[string]any{"id": "example_id"}, nil)
+    channel, err := client.Channel(nil).List(map[string]any{/* fields */}, nil)
     if err != nil { /* handle */ }
-    // channel is the loaded record
+    // channel is the returned record
 
 Only `Direct()` returns a response envelope — a `map[string]any` with
 `"ok"`, `"status"`, `"headers"`, and `"data"` keys.
@@ -356,19 +387,19 @@ Create an instance: `channel := client.Channel(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `category` | ``$STRING`` |  |
-| `created_at` | ``$STRING`` |  |
-| `data` | ``$OBJECT`` |  |
-| `description` | ``$STRING`` |  |
-| `id` | ``$STRING`` |  |
-| `is_live` | ``$BOOLEAN`` |  |
-| `is_premium` | ``$BOOLEAN`` |  |
-| `language` | ``$STRING`` |  |
-| `logo_url` | ``$STRING`` |  |
-| `name` | ``$STRING`` |  |
-| `stream_url` | ``$STRING`` |  |
-| `success` | ``$BOOLEAN`` |  |
-| `updated_at` | ``$STRING`` |  |
+| `category` | `string` |  |
+| `created_at` | `string` |  |
+| `data` | `map[string]any` |  |
+| `description` | `string` |  |
+| `id` | `string` |  |
+| `is_live` | `bool` |  |
+| `is_premium` | `bool` |  |
+| `language` | `string` |  |
+| `logo_url` | `string` |  |
+| `name` | `string` |  |
+| `stream_url` | `string` |  |
+| `success` | `bool` |  |
+| `updated_at` | `string` |  |
 
 #### Example: Load
 
@@ -394,9 +425,9 @@ fmt.Println(channels) // the array of records
 
 ```go
 result, err := client.Channel(nil).Create(map[string]any{
-    "category": /* `$STRING` */,
-    "description": /* `$STRING` */,
-    "name": /* `$STRING` */,
+    "category": /* string */,
+    "description": /* string */,
+    "name": /* string */,
 }, nil)
 ```
 
@@ -419,20 +450,20 @@ Create an instance: `movie := client.Movie(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `created_at` | ``$STRING`` |  |
-| `data` | ``$OBJECT`` |  |
-| `description` | ``$STRING`` |  |
-| `duration` | ``$INTEGER`` |  |
-| `genre` | ``$ARRAY`` |  |
-| `id` | ``$STRING`` |  |
-| `is_premium` | ``$BOOLEAN`` |  |
-| `rating` | ``$NUMBER`` |  |
-| `release_year` | ``$INTEGER`` |  |
-| `stream_url` | ``$STRING`` |  |
-| `success` | ``$BOOLEAN`` |  |
-| `thumbnail_url` | ``$STRING`` |  |
-| `title` | ``$STRING`` |  |
-| `updated_at` | ``$STRING`` |  |
+| `created_at` | `string` |  |
+| `data` | `map[string]any` |  |
+| `description` | `string` |  |
+| `duration` | `int` |  |
+| `genre` | `[]any` |  |
+| `id` | `string` |  |
+| `is_premium` | `bool` |  |
+| `rating` | `float64` |  |
+| `release_year` | `int` |  |
+| `stream_url` | `string` |  |
+| `success` | `bool` |  |
+| `thumbnail_url` | `string` |  |
+| `title` | `string` |  |
+| `updated_at` | `string` |  |
 
 #### Example: Load
 
@@ -458,11 +489,11 @@ fmt.Println(movies) // the array of records
 
 ```go
 result, err := client.Movie(nil).Create(map[string]any{
-    "description": /* `$STRING` */,
-    "duration": /* `$INTEGER` */,
-    "genre": /* `$ARRAY` */,
-    "release_year": /* `$INTEGER` */,
-    "title": /* `$STRING` */,
+    "description": /* string */,
+    "duration": /* int */,
+    "genre": /* []any */,
+    "release_year": /* int */,
+    "title": /* string */,
 }, nil)
 ```
 
@@ -485,20 +516,20 @@ Create an instance: `series := client.Series(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `created_at` | ``$STRING`` |  |
-| `data` | ``$OBJECT`` |  |
-| `description` | ``$STRING`` |  |
-| `episode` | ``$INTEGER`` |  |
-| `genre` | ``$ARRAY`` |  |
-| `id` | ``$STRING`` |  |
-| `is_premium` | ``$BOOLEAN`` |  |
-| `rating` | ``$NUMBER`` |  |
-| `release_year` | ``$INTEGER`` |  |
-| `season` | ``$INTEGER`` |  |
-| `success` | ``$BOOLEAN`` |  |
-| `thumbnail_url` | ``$STRING`` |  |
-| `title` | ``$STRING`` |  |
-| `updated_at` | ``$STRING`` |  |
+| `created_at` | `string` |  |
+| `data` | `map[string]any` |  |
+| `description` | `string` |  |
+| `episode` | `int` |  |
+| `genre` | `[]any` |  |
+| `id` | `string` |  |
+| `is_premium` | `bool` |  |
+| `rating` | `float64` |  |
+| `release_year` | `int` |  |
+| `season` | `int` |  |
+| `success` | `bool` |  |
+| `thumbnail_url` | `string` |  |
+| `title` | `string` |  |
+| `updated_at` | `string` |  |
 
 #### Example: Load
 
@@ -524,20 +555,24 @@ fmt.Println(seriess) // the array of records
 
 ```go
 result, err := client.Series(nil).Create(map[string]any{
-    "description": /* `$STRING` */,
-    "genre": /* `$ARRAY` */,
-    "release_year": /* `$INTEGER` */,
-    "title": /* `$STRING` */,
+    "description": /* string */,
+    "genre": /* []any */,
+    "release_year": /* int */,
+    "title": /* string */,
 }, nil)
 ```
 
 
-## Explanation
+## Advanced
+
+> The sections above cover everyday use. The material below explains the
+> SDK's internals — useful when extending it with custom features, but not
+> needed for normal use.
 
 ### The operation pipeline
 
-Every entity operation (load, list, create, update, remove) follows a
-six-stage pipeline. Each stage fires a feature hook before executing:
+Every entity operation follows a six-stage pipeline. Each stage fires a
+feature hook before executing:
 
 ```
 PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
@@ -554,9 +589,9 @@ PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
 - **PreDone**: Final stage before returning to the caller. Entity
   state (match, data) is updated here.
 
-If any stage returns an error, the pipeline short-circuits and the
-error is returned to the caller. An unexpected panic triggers the
-`PreUnexpected` hook.
+If any stage errors, the pipeline short-circuits and the error surfaces
+to the caller — see [Error handling](#error-handling) for how that looks
+in this language.
 
 ### Features and hooks
 
@@ -597,14 +632,14 @@ like `core.ToMapAny`.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `Load`, the entity
+Entity instances are stateful. After a successful `List`, the entity
 stores the returned data and match criteria internally.
 
 ```go
 channel := client.Channel(nil)
-channel.Load(map[string]any{"id": "example_id"}, nil)
+channel.List(nil, nil)
 
-// channel.Data() now returns the loaded channel data
+// channel.Data() now returns the channel data from the last list
 // channel.Match() returns the last match criteria
 ```
 

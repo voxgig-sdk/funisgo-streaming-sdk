@@ -4,6 +4,8 @@
 
 The Lua SDK for the FunisgoStreaming API — an entity-oriented client using Lua conventions.
 
+It exposes the API as capitalised, semantic **Entities** — e.g. `client:Channel()` — each with the same small set of operations (`list`, `load`, `create`, `update`, `remove`) instead of raw URL paths and query strings. You call meaning, not endpoints, which keeps the cognitive load low.
+
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
 
@@ -43,7 +45,7 @@ local channels, err = client:Channel():list()
 if err then error(err) end
 
 for _, item in ipairs(channels) do
-  print(item["id"], item["name"])
+  print(item["id"], item["category"])
 end
 ```
 
@@ -59,14 +61,36 @@ print(channel)
 
 ```lua
 -- Create
-local created, err = client:Channel():create({ name = "Example" })
+local created, err = client:Channel():create({ category = "example", description = "example", name = "example" })
 if err then error(err) end
 
 -- Update
-client:Channel():update({ id = created["id"], name = "Example-Renamed" })
+client:Channel():update({ id = created["id"] })
 
 -- Remove
 client:Channel():remove({ id = created["id"] })
+```
+
+
+## Error handling
+
+Entity operations return `(value, err)`. Check `err` before using
+the value:
+
+```lua
+local channels, err = client:Channel():list()
+if err then error(err) end
+```
+
+`direct` follows the same `(value, err)` convention:
+
+```lua
+local result, err = client:direct({
+  path = "/api/resource/{id}",
+  method = "GET",
+  params = { id = "example_id" },
+})
+if err then error(err) end
 ```
 
 
@@ -112,8 +136,8 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:Channel():load({ id = "test01" })
--- result is the loaded data; err is set on failure
+local result, err = client:Channel():list()
+-- result is the returned data; err is set on failure
 ```
 
 ### Use a custom fetch function
@@ -327,19 +351,19 @@ Create an instance: `local channel = client:Channel(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `category` | ``$STRING`` |  |
-| `created_at` | ``$STRING`` |  |
-| `data` | ``$OBJECT`` |  |
-| `description` | ``$STRING`` |  |
-| `id` | ``$STRING`` |  |
-| `is_live` | ``$BOOLEAN`` |  |
-| `is_premium` | ``$BOOLEAN`` |  |
-| `language` | ``$STRING`` |  |
-| `logo_url` | ``$STRING`` |  |
-| `name` | ``$STRING`` |  |
-| `stream_url` | ``$STRING`` |  |
-| `success` | ``$BOOLEAN`` |  |
-| `updated_at` | ``$STRING`` |  |
+| `category` | `string` |  |
+| `created_at` | `string` |  |
+| `data` | `table` |  |
+| `description` | `string` |  |
+| `id` | `string` |  |
+| `is_live` | `boolean` |  |
+| `is_premium` | `boolean` |  |
+| `language` | `string` |  |
+| `logo_url` | `string` |  |
+| `name` | `string` |  |
+| `stream_url` | `string` |  |
+| `success` | `boolean` |  |
+| `updated_at` | `string` |  |
 
 #### Example: Load
 
@@ -357,9 +381,9 @@ local channels, err = client:Channel():list()
 
 ```lua
 local channel, err = client:Channel():create({
-  category = nil, -- `$STRING`
-  description = nil, -- `$STRING`
-  name = nil, -- `$STRING`
+  category = nil, -- string
+  description = nil, -- string
+  name = nil, -- string
 })
 ```
 
@@ -382,20 +406,20 @@ Create an instance: `local movie = client:Movie(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `created_at` | ``$STRING`` |  |
-| `data` | ``$OBJECT`` |  |
-| `description` | ``$STRING`` |  |
-| `duration` | ``$INTEGER`` |  |
-| `genre` | ``$ARRAY`` |  |
-| `id` | ``$STRING`` |  |
-| `is_premium` | ``$BOOLEAN`` |  |
-| `rating` | ``$NUMBER`` |  |
-| `release_year` | ``$INTEGER`` |  |
-| `stream_url` | ``$STRING`` |  |
-| `success` | ``$BOOLEAN`` |  |
-| `thumbnail_url` | ``$STRING`` |  |
-| `title` | ``$STRING`` |  |
-| `updated_at` | ``$STRING`` |  |
+| `created_at` | `string` |  |
+| `data` | `table` |  |
+| `description` | `string` |  |
+| `duration` | `number` |  |
+| `genre` | `table` |  |
+| `id` | `string` |  |
+| `is_premium` | `boolean` |  |
+| `rating` | `number` |  |
+| `release_year` | `number` |  |
+| `stream_url` | `string` |  |
+| `success` | `boolean` |  |
+| `thumbnail_url` | `string` |  |
+| `title` | `string` |  |
+| `updated_at` | `string` |  |
 
 #### Example: Load
 
@@ -413,11 +437,11 @@ local movies, err = client:Movie():list()
 
 ```lua
 local movie, err = client:Movie():create({
-  description = nil, -- `$STRING`
-  duration = nil, -- `$INTEGER`
-  genre = nil, -- `$ARRAY`
-  release_year = nil, -- `$INTEGER`
-  title = nil, -- `$STRING`
+  description = nil, -- string
+  duration = nil, -- number
+  genre = nil, -- table
+  release_year = nil, -- number
+  title = nil, -- string
 })
 ```
 
@@ -440,20 +464,20 @@ Create an instance: `local series = client:Series(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `created_at` | ``$STRING`` |  |
-| `data` | ``$OBJECT`` |  |
-| `description` | ``$STRING`` |  |
-| `episode` | ``$INTEGER`` |  |
-| `genre` | ``$ARRAY`` |  |
-| `id` | ``$STRING`` |  |
-| `is_premium` | ``$BOOLEAN`` |  |
-| `rating` | ``$NUMBER`` |  |
-| `release_year` | ``$INTEGER`` |  |
-| `season` | ``$INTEGER`` |  |
-| `success` | ``$BOOLEAN`` |  |
-| `thumbnail_url` | ``$STRING`` |  |
-| `title` | ``$STRING`` |  |
-| `updated_at` | ``$STRING`` |  |
+| `created_at` | `string` |  |
+| `data` | `table` |  |
+| `description` | `string` |  |
+| `episode` | `number` |  |
+| `genre` | `table` |  |
+| `id` | `string` |  |
+| `is_premium` | `boolean` |  |
+| `rating` | `number` |  |
+| `release_year` | `number` |  |
+| `season` | `number` |  |
+| `success` | `boolean` |  |
+| `thumbnail_url` | `string` |  |
+| `title` | `string` |  |
+| `updated_at` | `string` |  |
 
 #### Example: Load
 
@@ -471,20 +495,24 @@ local seriess, err = client:Series():list()
 
 ```lua
 local series, err = client:Series():create({
-  description = nil, -- `$STRING`
-  genre = nil, -- `$ARRAY`
-  release_year = nil, -- `$INTEGER`
-  title = nil, -- `$STRING`
+  description = nil, -- string
+  genre = nil, -- table
+  release_year = nil, -- number
+  title = nil, -- string
 })
 ```
 
 
-## Explanation
+## Advanced
+
+> The sections above cover everyday use. The material below explains the
+> SDK's internals — useful when extending it with custom features, but not
+> needed for normal use.
 
 ### The operation pipeline
 
-Every entity operation (load, list, create, update, remove) follows a
-six-stage pipeline. Each stage fires a feature hook before executing:
+Every entity operation follows a six-stage pipeline. Each stage fires a
+feature hook before executing:
 
 ```
 PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
@@ -501,8 +529,9 @@ PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
 - **PreDone**: Final stage before returning to the caller. Entity
   state (match, data) is updated here.
 
-If any stage returns an error, the pipeline short-circuits and the
-error is returned to the caller as a second return value.
+If any stage errors, the pipeline short-circuits and the error surfaces
+to the caller — see [Error handling](#error-handling) for how that looks
+in this language.
 
 ### Features and hooks
 
@@ -546,14 +575,14 @@ when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `load`, the entity
+Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
 local channel = client:Channel()
-channel:load({ id = "example_id" })
+channel:list()
 
--- channel:data_get() now returns the loaded channel data
+-- channel:data_get() now returns the channel data from the last list
 -- channel:match_get() returns the last match criteria
 ```
 

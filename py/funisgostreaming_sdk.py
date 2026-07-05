@@ -221,19 +221,19 @@ class FunisgoStreamingSDK:
 
 
     def Channel(self, data=None) -> "ChannelEntity":
-        """Entity factory: client.Channel().list({}) / client.Channel().load({"id": ...})."""
+        """Entity factory: client.Channel().list() / client.Channel().load({"id": ...})."""
         from entity.channel_entity import ChannelEntity
         return ChannelEntity(self, data)
 
 
     def Movie(self, data=None) -> "MovieEntity":
-        """Entity factory: client.Movie().list({}) / client.Movie().load({"id": ...})."""
+        """Entity factory: client.Movie().list() / client.Movie().load({"id": ...})."""
         from entity.movie_entity import MovieEntity
         return MovieEntity(self, data)
 
 
     def Series(self, data=None) -> "SeriesEntity":
-        """Entity factory: client.Series().list({}) / client.Series().load({"id": ...})."""
+        """Entity factory: client.Series().list() / client.Series().load({"id": ...})."""
         from entity.series_entity import SeriesEntity
         return SeriesEntity(self, data)
 

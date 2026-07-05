@@ -25,8 +25,34 @@
 ---@field id string
 
 ---@class ChannelListMatch
+---@field category? string
+---@field created_at? string
+---@field data? table
+---@field description? string
+---@field id? string
+---@field is_live? boolean
+---@field is_premium? boolean
+---@field language? string
+---@field logo_url? string
+---@field name? string
+---@field stream_url? string
+---@field success? boolean
+---@field updated_at? string
 
 ---@class ChannelCreateData
+---@field category string
+---@field created_at? string
+---@field data? table
+---@field description string
+---@field id? string
+---@field is_live? boolean
+---@field is_premium? boolean
+---@field language? string
+---@field logo_url? string
+---@field name string
+---@field stream_url? string
+---@field success? boolean
+---@field updated_at? string
 
 ---@class ChannelUpdateData
 ---@field id string
@@ -54,8 +80,36 @@
 ---@field id string
 
 ---@class MovieListMatch
+---@field created_at? string
+---@field data? table
+---@field description? string
+---@field duration? number
+---@field genre? table
+---@field id? string
+---@field is_premium? boolean
+---@field rating? number
+---@field release_year? number
+---@field stream_url? string
+---@field success? boolean
+---@field thumbnail_url? string
+---@field title? string
+---@field updated_at? string
 
 ---@class MovieCreateData
+---@field created_at? string
+---@field data? table
+---@field description string
+---@field duration number
+---@field genre table
+---@field id? string
+---@field is_premium? boolean
+---@field rating? number
+---@field release_year number
+---@field stream_url? string
+---@field success? boolean
+---@field thumbnail_url? string
+---@field title string
+---@field updated_at? string
 
 ---@class MovieUpdateData
 ---@field id string
@@ -83,8 +137,36 @@
 ---@field id string
 
 ---@class SeriesListMatch
+---@field created_at? string
+---@field data? table
+---@field description? string
+---@field episode? number
+---@field genre? table
+---@field id? string
+---@field is_premium? boolean
+---@field rating? number
+---@field release_year? number
+---@field season? number
+---@field success? boolean
+---@field thumbnail_url? string
+---@field title? string
+---@field updated_at? string
 
 ---@class SeriesCreateData
+---@field created_at? string
+---@field data? table
+---@field description string
+---@field episode? number
+---@field genre table
+---@field id? string
+---@field is_premium? boolean
+---@field rating? number
+---@field release_year number
+---@field season? number
+---@field success? boolean
+---@field thumbnail_url? string
+---@field title string
+---@field updated_at? string
 
 ---@class SeriesUpdateData
 ---@field id string

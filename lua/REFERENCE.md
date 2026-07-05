@@ -99,19 +99,19 @@ local channel = client:Channel(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `category` | ``$STRING`` | Yes |  |
-| `created_at` | ``$STRING`` | No |  |
-| `data` | ``$OBJECT`` | No |  |
-| `description` | ``$STRING`` | Yes |  |
-| `id` | ``$STRING`` | No |  |
-| `is_live` | ``$BOOLEAN`` | No |  |
-| `is_premium` | ``$BOOLEAN`` | No |  |
-| `language` | ``$STRING`` | No |  |
-| `logo_url` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | Yes |  |
-| `stream_url` | ``$STRING`` | No |  |
-| `success` | ``$BOOLEAN`` | No |  |
-| `updated_at` | ``$STRING`` | No |  |
+| `category` | `string` | Yes |  |
+| `created_at` | `string` | No |  |
+| `data` | `table` | No |  |
+| `description` | `string` | Yes |  |
+| `id` | `string` | No |  |
+| `is_live` | `boolean` | No |  |
+| `is_premium` | `boolean` | No |  |
+| `language` | `string` | No |  |
+| `logo_url` | `string` | No |  |
+| `name` | `string` | Yes |  |
+| `stream_url` | `string` | No |  |
+| `success` | `boolean` | No |  |
+| `updated_at` | `string` | No |  |
 
 ### Field Usage by Operation
 
@@ -139,9 +139,9 @@ Create a new entity with the given data.
 
 ```lua
 local result, err = client:Channel():create({
-  category = --[[ `$STRING` ]],
-  description = --[[ `$STRING` ]],
-  name = --[[ `$STRING` ]],
+  category = --[[ string ]],
+  description = --[[ string ]],
+  name = --[[ string ]],
 })
 ```
 
@@ -220,20 +220,20 @@ local movie = client:Movie(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | ``$STRING`` | No |  |
-| `data` | ``$OBJECT`` | No |  |
-| `description` | ``$STRING`` | Yes |  |
-| `duration` | ``$INTEGER`` | Yes |  |
-| `genre` | ``$ARRAY`` | Yes |  |
-| `id` | ``$STRING`` | No |  |
-| `is_premium` | ``$BOOLEAN`` | No |  |
-| `rating` | ``$NUMBER`` | No |  |
-| `release_year` | ``$INTEGER`` | Yes |  |
-| `stream_url` | ``$STRING`` | No |  |
-| `success` | ``$BOOLEAN`` | No |  |
-| `thumbnail_url` | ``$STRING`` | No |  |
-| `title` | ``$STRING`` | Yes |  |
-| `updated_at` | ``$STRING`` | No |  |
+| `created_at` | `string` | No |  |
+| `data` | `table` | No |  |
+| `description` | `string` | Yes |  |
+| `duration` | `number` | Yes |  |
+| `genre` | `table` | Yes |  |
+| `id` | `string` | No |  |
+| `is_premium` | `boolean` | No |  |
+| `rating` | `number` | No |  |
+| `release_year` | `number` | Yes |  |
+| `stream_url` | `string` | No |  |
+| `success` | `boolean` | No |  |
+| `thumbnail_url` | `string` | No |  |
+| `title` | `string` | Yes |  |
+| `updated_at` | `string` | No |  |
 
 ### Field Usage by Operation
 
@@ -262,11 +262,11 @@ Create a new entity with the given data.
 
 ```lua
 local result, err = client:Movie():create({
-  description = --[[ `$STRING` ]],
-  duration = --[[ `$INTEGER` ]],
-  genre = --[[ `$ARRAY` ]],
-  release_year = --[[ `$INTEGER` ]],
-  title = --[[ `$STRING` ]],
+  description = --[[ string ]],
+  duration = --[[ number ]],
+  genre = --[[ table ]],
+  release_year = --[[ number ]],
+  title = --[[ string ]],
 })
 ```
 
@@ -345,20 +345,20 @@ local series = client:Series(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | ``$STRING`` | No |  |
-| `data` | ``$OBJECT`` | No |  |
-| `description` | ``$STRING`` | Yes |  |
-| `episode` | ``$INTEGER`` | No |  |
-| `genre` | ``$ARRAY`` | Yes |  |
-| `id` | ``$STRING`` | No |  |
-| `is_premium` | ``$BOOLEAN`` | No |  |
-| `rating` | ``$NUMBER`` | No |  |
-| `release_year` | ``$INTEGER`` | Yes |  |
-| `season` | ``$INTEGER`` | No |  |
-| `success` | ``$BOOLEAN`` | No |  |
-| `thumbnail_url` | ``$STRING`` | No |  |
-| `title` | ``$STRING`` | Yes |  |
-| `updated_at` | ``$STRING`` | No |  |
+| `created_at` | `string` | No |  |
+| `data` | `table` | No |  |
+| `description` | `string` | Yes |  |
+| `episode` | `number` | No |  |
+| `genre` | `table` | Yes |  |
+| `id` | `string` | No |  |
+| `is_premium` | `boolean` | No |  |
+| `rating` | `number` | No |  |
+| `release_year` | `number` | Yes |  |
+| `season` | `number` | No |  |
+| `success` | `boolean` | No |  |
+| `thumbnail_url` | `string` | No |  |
+| `title` | `string` | Yes |  |
+| `updated_at` | `string` | No |  |
 
 ### Field Usage by Operation
 
@@ -387,10 +387,10 @@ Create a new entity with the given data.
 
 ```lua
 local result, err = client:Series():create({
-  description = --[[ `$STRING` ]],
-  genre = --[[ `$ARRAY` ]],
-  release_year = --[[ `$INTEGER` ]],
-  title = --[[ `$STRING` ]],
+  description = --[[ string ]],
+  genre = --[[ table ]],
+  release_year = --[[ number ]],
+  title = --[[ string ]],
 })
 ```
 

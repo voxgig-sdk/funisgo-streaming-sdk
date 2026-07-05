@@ -106,19 +106,19 @@ channel := client.Channel(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `category` | ``$STRING`` | Yes |  |
-| `created_at` | ``$STRING`` | No |  |
-| `data` | ``$OBJECT`` | No |  |
-| `description` | ``$STRING`` | Yes |  |
-| `id` | ``$STRING`` | No |  |
-| `is_live` | ``$BOOLEAN`` | No |  |
-| `is_premium` | ``$BOOLEAN`` | No |  |
-| `language` | ``$STRING`` | No |  |
-| `logo_url` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | Yes |  |
-| `stream_url` | ``$STRING`` | No |  |
-| `success` | ``$BOOLEAN`` | No |  |
-| `updated_at` | ``$STRING`` | No |  |
+| `category` | `string` | Yes |  |
+| `created_at` | `string` | No |  |
+| `data` | `map[string]any` | No |  |
+| `description` | `string` | Yes |  |
+| `id` | `string` | No |  |
+| `is_live` | `bool` | No |  |
+| `is_premium` | `bool` | No |  |
+| `language` | `string` | No |  |
+| `logo_url` | `string` | No |  |
+| `name` | `string` | Yes |  |
+| `stream_url` | `string` | No |  |
+| `success` | `bool` | No |  |
+| `updated_at` | `string` | No |  |
 
 ### Field Usage by Operation
 
@@ -146,9 +146,9 @@ Create a new entity with the given data.
 
 ```go
 result, err := client.Channel(nil).Create(map[string]any{
-    "category": /* `$STRING` */,
-    "description": /* `$STRING` */,
-    "name": /* `$STRING` */,
+    "category": /* string */,
+    "description": /* string */,
+    "name": /* string */,
 }, nil)
 ```
 
@@ -221,20 +221,20 @@ movie := client.Movie(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | ``$STRING`` | No |  |
-| `data` | ``$OBJECT`` | No |  |
-| `description` | ``$STRING`` | Yes |  |
-| `duration` | ``$INTEGER`` | Yes |  |
-| `genre` | ``$ARRAY`` | Yes |  |
-| `id` | ``$STRING`` | No |  |
-| `is_premium` | ``$BOOLEAN`` | No |  |
-| `rating` | ``$NUMBER`` | No |  |
-| `release_year` | ``$INTEGER`` | Yes |  |
-| `stream_url` | ``$STRING`` | No |  |
-| `success` | ``$BOOLEAN`` | No |  |
-| `thumbnail_url` | ``$STRING`` | No |  |
-| `title` | ``$STRING`` | Yes |  |
-| `updated_at` | ``$STRING`` | No |  |
+| `created_at` | `string` | No |  |
+| `data` | `map[string]any` | No |  |
+| `description` | `string` | Yes |  |
+| `duration` | `int` | Yes |  |
+| `genre` | `[]any` | Yes |  |
+| `id` | `string` | No |  |
+| `is_premium` | `bool` | No |  |
+| `rating` | `float64` | No |  |
+| `release_year` | `int` | Yes |  |
+| `stream_url` | `string` | No |  |
+| `success` | `bool` | No |  |
+| `thumbnail_url` | `string` | No |  |
+| `title` | `string` | Yes |  |
+| `updated_at` | `string` | No |  |
 
 ### Field Usage by Operation
 
@@ -263,11 +263,11 @@ Create a new entity with the given data.
 
 ```go
 result, err := client.Movie(nil).Create(map[string]any{
-    "description": /* `$STRING` */,
-    "duration": /* `$INTEGER` */,
-    "genre": /* `$ARRAY` */,
-    "release_year": /* `$INTEGER` */,
-    "title": /* `$STRING` */,
+    "description": /* string */,
+    "duration": /* int */,
+    "genre": /* []any */,
+    "release_year": /* int */,
+    "title": /* string */,
 }, nil)
 ```
 
@@ -340,20 +340,20 @@ series := client.Series(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | ``$STRING`` | No |  |
-| `data` | ``$OBJECT`` | No |  |
-| `description` | ``$STRING`` | Yes |  |
-| `episode` | ``$INTEGER`` | No |  |
-| `genre` | ``$ARRAY`` | Yes |  |
-| `id` | ``$STRING`` | No |  |
-| `is_premium` | ``$BOOLEAN`` | No |  |
-| `rating` | ``$NUMBER`` | No |  |
-| `release_year` | ``$INTEGER`` | Yes |  |
-| `season` | ``$INTEGER`` | No |  |
-| `success` | ``$BOOLEAN`` | No |  |
-| `thumbnail_url` | ``$STRING`` | No |  |
-| `title` | ``$STRING`` | Yes |  |
-| `updated_at` | ``$STRING`` | No |  |
+| `created_at` | `string` | No |  |
+| `data` | `map[string]any` | No |  |
+| `description` | `string` | Yes |  |
+| `episode` | `int` | No |  |
+| `genre` | `[]any` | Yes |  |
+| `id` | `string` | No |  |
+| `is_premium` | `bool` | No |  |
+| `rating` | `float64` | No |  |
+| `release_year` | `int` | Yes |  |
+| `season` | `int` | No |  |
+| `success` | `bool` | No |  |
+| `thumbnail_url` | `string` | No |  |
+| `title` | `string` | Yes |  |
+| `updated_at` | `string` | No |  |
 
 ### Field Usage by Operation
 
@@ -382,10 +382,10 @@ Create a new entity with the given data.
 
 ```go
 result, err := client.Series(nil).Create(map[string]any{
-    "description": /* `$STRING` */,
-    "genre": /* `$ARRAY` */,
-    "release_year": /* `$INTEGER` */,
-    "title": /* `$STRING` */,
+    "description": /* string */,
+    "genre": /* []any */,
+    "release_year": /* int */,
+    "title": /* string */,
 }, nil)
 ```
 

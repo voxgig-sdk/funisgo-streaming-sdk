@@ -4,6 +4,11 @@
 
 The Python SDK for the FunisgoStreaming API — an entity-oriented client following Pythonic conventions.
 
+The SDK exposes the API as capitalised, semantic **Entities** — for example `client.Channel()` — each
+carrying a small, uniform set of operations (`list`, `load`, `create`, `update`, `remove`) instead of raw URL
+paths and query strings. You work with named resources and verbs, which
+keeps the cognitive load low.
+
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
 
@@ -41,7 +46,7 @@ error — iterate it directly.
 
 ```python
 try:
-    channels = client.Channel().list({})
+    channels = client.Channel().list()
     for channel in channels:
         print(channel)
 except Exception as err:
@@ -64,13 +69,41 @@ except Exception as err:
 
 ```python
 # Create — returns the bare created record (a dict)
-created = client.Channel().create({"name": "Example"})
+created = client.Channel().create({"category": "example", "description": "example", "name": "example"})
 
 # Update — the created record's id is a plain dict key
-client.Channel().update({"id": created["id"], "name": "Example-Renamed"})
+client.Channel().update({"id": created["id"]})
 
 # Remove
 client.Channel().remove({"id": created["id"]})
+```
+
+
+## Error handling
+
+Entity operations raise on failure, so wrap them in `try` / `except`:
+
+```python
+try:
+    channels = client.Channel().list()
+    print(channels)
+except Exception as err:
+    print(f"list failed: {err}")
+```
+
+`direct()` does **not** raise — it returns the result envelope. Branch
+on `ok`; on failure `status` holds the HTTP status (for error responses)
+and `err` holds a transport error, so read both defensively:
+
+```python
+result = client.direct({
+    "path": "/api/resource/{id}",
+    "method": "GET",
+    "params": {"id": "example_id"},
+})
+
+if not result["ok"]:
+    print("request failed:", result.get("status"), result.get("err"))
 ```
 
 
@@ -91,7 +124,10 @@ if result["ok"]:
     print(result["status"])  # 200
     print(result["data"])    # response body
 else:
-    print(result["err"])     # error value
+    # A non-2xx response carries status + data (the error body); a
+    # transport-level failure carries err instead. Only one is present, so
+    # read both with .get() rather than indexing a key that may be absent.
+    print(result.get("status"), result.get("err"))
 ```
 
 ### Prepare a request without sending it
@@ -117,7 +153,7 @@ Create a mock client for unit testing — no server required:
 client = FunisgoStreamingSDK.test()
 
 # Entity ops return the bare record and raise on error.
-channel = client.Channel().load({"id": "test01"})
+channel = client.Channel().list()
 # channel contains the mock response record
 ```
 
@@ -320,7 +356,7 @@ Create an instance: `channel = client.Channel()`
 | Method | Description |
 | --- | --- |
 | `create(data)` | Create a new entity with the given data. |
-| `list(match)` | List entities matching the criteria. |
+| `list()` | List entities, optionally matching the given criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 | `remove(match)` | Remove the matching entity. |
 | `update(data)` | Update an existing entity. |
@@ -329,19 +365,19 @@ Create an instance: `channel = client.Channel()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `category` | ``$STRING`` |  |
-| `created_at` | ``$STRING`` |  |
-| `data` | ``$OBJECT`` |  |
-| `description` | ``$STRING`` |  |
-| `id` | ``$STRING`` |  |
-| `is_live` | ``$BOOLEAN`` |  |
-| `is_premium` | ``$BOOLEAN`` |  |
-| `language` | ``$STRING`` |  |
-| `logo_url` | ``$STRING`` |  |
-| `name` | ``$STRING`` |  |
-| `stream_url` | ``$STRING`` |  |
-| `success` | ``$BOOLEAN`` |  |
-| `updated_at` | ``$STRING`` |  |
+| `category` | `str` |  |
+| `created_at` | `str` |  |
+| `data` | `dict` |  |
+| `description` | `str` |  |
+| `id` | `str` |  |
+| `is_live` | `bool` |  |
+| `is_premium` | `bool` |  |
+| `language` | `str` |  |
+| `logo_url` | `str` |  |
+| `name` | `str` |  |
+| `stream_url` | `str` |  |
+| `success` | `bool` |  |
+| `updated_at` | `str` |  |
 
 #### Example: Load
 
@@ -352,16 +388,16 @@ channel = client.Channel().load({"id": "channel_id"})
 #### Example: List
 
 ```python
-channels = client.Channel().list({})
+channels = client.Channel().list()
 ```
 
 #### Example: Create
 
 ```python
 channel = client.Channel().create({
-    "category": ...,  # `$STRING`
-    "description": ...,  # `$STRING`
-    "name": ...,  # `$STRING`
+    "category": "example",  # str
+    "description": "example",  # str
+    "name": "example",  # str
 })
 ```
 
@@ -375,7 +411,7 @@ Create an instance: `movie = client.Movie()`
 | Method | Description |
 | --- | --- |
 | `create(data)` | Create a new entity with the given data. |
-| `list(match)` | List entities matching the criteria. |
+| `list()` | List entities, optionally matching the given criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 | `remove(match)` | Remove the matching entity. |
 | `update(data)` | Update an existing entity. |
@@ -384,20 +420,20 @@ Create an instance: `movie = client.Movie()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `created_at` | ``$STRING`` |  |
-| `data` | ``$OBJECT`` |  |
-| `description` | ``$STRING`` |  |
-| `duration` | ``$INTEGER`` |  |
-| `genre` | ``$ARRAY`` |  |
-| `id` | ``$STRING`` |  |
-| `is_premium` | ``$BOOLEAN`` |  |
-| `rating` | ``$NUMBER`` |  |
-| `release_year` | ``$INTEGER`` |  |
-| `stream_url` | ``$STRING`` |  |
-| `success` | ``$BOOLEAN`` |  |
-| `thumbnail_url` | ``$STRING`` |  |
-| `title` | ``$STRING`` |  |
-| `updated_at` | ``$STRING`` |  |
+| `created_at` | `str` |  |
+| `data` | `dict` |  |
+| `description` | `str` |  |
+| `duration` | `int` |  |
+| `genre` | `list` |  |
+| `id` | `str` |  |
+| `is_premium` | `bool` |  |
+| `rating` | `float` |  |
+| `release_year` | `int` |  |
+| `stream_url` | `str` |  |
+| `success` | `bool` |  |
+| `thumbnail_url` | `str` |  |
+| `title` | `str` |  |
+| `updated_at` | `str` |  |
 
 #### Example: Load
 
@@ -408,18 +444,18 @@ movie = client.Movie().load({"id": "movie_id"})
 #### Example: List
 
 ```python
-movies = client.Movie().list({})
+movies = client.Movie().list()
 ```
 
 #### Example: Create
 
 ```python
 movie = client.Movie().create({
-    "description": ...,  # `$STRING`
-    "duration": ...,  # `$INTEGER`
-    "genre": ...,  # `$ARRAY`
-    "release_year": ...,  # `$INTEGER`
-    "title": ...,  # `$STRING`
+    "description": "example",  # str
+    "duration": 1,  # int
+    "genre": [],  # list
+    "release_year": 1,  # int
+    "title": "example",  # str
 })
 ```
 
@@ -433,7 +469,7 @@ Create an instance: `series = client.Series()`
 | Method | Description |
 | --- | --- |
 | `create(data)` | Create a new entity with the given data. |
-| `list(match)` | List entities matching the criteria. |
+| `list()` | List entities, optionally matching the given criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 | `remove(match)` | Remove the matching entity. |
 | `update(data)` | Update an existing entity. |
@@ -442,20 +478,20 @@ Create an instance: `series = client.Series()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `created_at` | ``$STRING`` |  |
-| `data` | ``$OBJECT`` |  |
-| `description` | ``$STRING`` |  |
-| `episode` | ``$INTEGER`` |  |
-| `genre` | ``$ARRAY`` |  |
-| `id` | ``$STRING`` |  |
-| `is_premium` | ``$BOOLEAN`` |  |
-| `rating` | ``$NUMBER`` |  |
-| `release_year` | ``$INTEGER`` |  |
-| `season` | ``$INTEGER`` |  |
-| `success` | ``$BOOLEAN`` |  |
-| `thumbnail_url` | ``$STRING`` |  |
-| `title` | ``$STRING`` |  |
-| `updated_at` | ``$STRING`` |  |
+| `created_at` | `str` |  |
+| `data` | `dict` |  |
+| `description` | `str` |  |
+| `episode` | `int` |  |
+| `genre` | `list` |  |
+| `id` | `str` |  |
+| `is_premium` | `bool` |  |
+| `rating` | `float` |  |
+| `release_year` | `int` |  |
+| `season` | `int` |  |
+| `success` | `bool` |  |
+| `thumbnail_url` | `str` |  |
+| `title` | `str` |  |
+| `updated_at` | `str` |  |
 
 #### Example: Load
 
@@ -466,27 +502,31 @@ series = client.Series().load({"id": "series_id"})
 #### Example: List
 
 ```python
-seriess = client.Series().list({})
+seriess = client.Series().list()
 ```
 
 #### Example: Create
 
 ```python
 series = client.Series().create({
-    "description": ...,  # `$STRING`
-    "genre": ...,  # `$ARRAY`
-    "release_year": ...,  # `$INTEGER`
-    "title": ...,  # `$STRING`
+    "description": "example",  # str
+    "genre": [],  # list
+    "release_year": 1,  # int
+    "title": "example",  # str
 })
 ```
 
 
-## Explanation
+## Advanced
+
+> The sections above cover everyday use. The material below explains the
+> SDK's internals — useful when extending it with custom features, but not
+> needed for normal use.
 
 ### The operation pipeline
 
-Every entity operation (load, list, create, update, remove) follows a
-six-stage pipeline. Each stage fires a feature hook before executing:
+Every entity operation follows a six-stage pipeline. Each stage fires a
+feature hook before executing:
 
 ```
 PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
@@ -503,8 +543,9 @@ PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
 - **PreDone**: Final stage before returning to the caller. Entity
   state (match, data) is updated here.
 
-If any stage returns an error, the pipeline short-circuits and the
-error is returned to the caller as the second element in the return tuple.
+If any stage errors, the pipeline short-circuits and the error surfaces
+to the caller — see [Error handling](#error-handling) for how that looks
+in this language.
 
 ### Features and hooks
 
@@ -547,14 +588,14 @@ Import entity or utility modules directly only when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `load`, the entity
+Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```python
 channel = client.Channel()
-channel.load({"id": "example_id"})
+channel.list()
 
-# channel.data_get() now returns the loaded channel data
+# channel.data_get() now returns the channel data from the last list
 # channel.match_get() returns the last match criteria
 ```
 
