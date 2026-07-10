@@ -21,7 +21,7 @@ class FunisgoStreamingConfig
             "options" => [
                 "base" => "https://api.funisgo.com",
                 "auth" => [
-                    "prefix" => "Bearer",
+                    "prefix" => "",
                 ],
                 "headers" => [
           'content-type' => 'application/json',

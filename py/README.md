@@ -69,7 +69,7 @@ except Exception as err:
 
 ```python
 # Create — returns the bare created record (a dict)
-created = client.Channel().create({"category": "example", "description": "example", "name": "example"})
+created = client.Channel().create({"category": "example_category", "description": "example_description", "name": "example_name"})
 
 # Update — the created record's id is a plain dict key
 client.Channel().update({"id": created["id"]})
@@ -395,9 +395,9 @@ channels = client.Channel().list()
 
 ```python
 channel = client.Channel().create({
-    "category": "example",  # str
-    "description": "example",  # str
-    "name": "example",  # str
+    "category": "example_category",  # str
+    "description": "example_description",  # str
+    "name": "example_name",  # str
 })
 ```
 
@@ -451,11 +451,11 @@ movies = client.Movie().list()
 
 ```python
 movie = client.Movie().create({
-    "description": "example",  # str
+    "description": "example_description",  # str
     "duration": 1,  # int
     "genre": [],  # list
     "release_year": 1,  # int
-    "title": "example",  # str
+    "title": "example_title",  # str
 })
 ```
 
@@ -509,10 +509,10 @@ seriess = client.Series().list()
 
 ```python
 series = client.Series().create({
-    "description": "example",  # str
+    "description": "example_description",  # str
     "genre": [],  # list
     "release_year": 1,  # int
-    "title": "example",  # str
+    "title": "example_title",  # str
 })
 ```
 

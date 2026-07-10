@@ -136,9 +136,9 @@ Create a new entity with the given data. Returns the created entity data and rai
 
 ```python
 result = client.Channel().create({
-    "category": "example",  # str
-    "description": "example",  # str
-    "name": "example",  # str
+    "category": "example_category",  # str
+    "description": "example_description",  # str
+    "name": "example_name",  # str
 })
 ```
 
@@ -260,11 +260,11 @@ Create a new entity with the given data. Returns the created entity data and rai
 
 ```python
 result = client.Movie().create({
-    "description": "example",  # str
+    "description": "example_description",  # str
     "duration": 1,  # int
     "genre": [],  # list
     "release_year": 1,  # int
-    "title": "example",  # str
+    "title": "example_title",  # str
 })
 ```
 
@@ -386,10 +386,10 @@ Create a new entity with the given data. Returns the created entity data and rai
 
 ```python
 result = client.Series().create({
-    "description": "example",  # str
+    "description": "example_description",  # str
     "genre": [],  # list
     "release_year": 1,  # int
-    "title": "example",  # str
+    "title": "example_title",  # str
 })
 ```
 

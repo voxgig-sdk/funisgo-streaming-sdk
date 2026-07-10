@@ -449,9 +449,9 @@ const channels = await client.Channel().list()
 
 ```ts
 const channel = await client.Channel().create({
-  category: /* string */,
-  description: /* string */,
-  name: /* string */,
+  category: 'example_category',
+  description: 'example_description',
+  name: 'example_name',
 })
 ```
 
@@ -505,11 +505,11 @@ const movies = await client.Movie().list()
 
 ```ts
 const movie = await client.Movie().create({
-  description: /* string */,
-  duration: /* number */,
-  genre: /* any[] */,
-  release_year: /* number */,
-  title: /* string */,
+  description: 'example_description',
+  duration: 1,
+  genre: [],
+  release_year: 1,
+  title: 'example_title',
 })
 ```
 
@@ -563,10 +563,10 @@ const seriess = await client.Series().list()
 
 ```ts
 const series = await client.Series().create({
-  description: /* string */,
-  genre: /* any[] */,
-  release_year: /* number */,
-  title: /* string */,
+  description: 'example_description',
+  genre: [],
+  release_year: 1,
+  title: 'example_title',
 })
 ```
 

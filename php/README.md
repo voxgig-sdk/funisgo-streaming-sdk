@@ -63,7 +63,7 @@ try {
 
 ```php
 // create() returns the bare created Channel record.
-$created = $client->Channel()->create(["category" => "example", "description" => "example", "name" => "example"]);
+$created = $client->Channel()->create(["category" => "example_category", "description" => "example_description", "name" => "example_name"]);
 
 // Update — index the bare record directly ($created["id"]).
 $client->Channel()->update(["id" => $created["id"]]);

@@ -61,7 +61,7 @@ print(channel)
 
 ```lua
 -- Create
-local created, err = client:Channel():create({ category = "example", description = "example", name = "example" })
+local created, err = client:Channel():create({ category = "example_category", description = "example_description", name = "example_name" })
 if err then error(err) end
 
 -- Update
@@ -381,9 +381,9 @@ local channels, err = client:Channel():list()
 
 ```lua
 local channel, err = client:Channel():create({
-  category = nil, -- string
-  description = nil, -- string
-  name = nil, -- string
+  category = "example_category", -- string
+  description = "example_description", -- string
+  name = "example_name", -- string
 })
 ```
 
@@ -437,11 +437,11 @@ local movies, err = client:Movie():list()
 
 ```lua
 local movie, err = client:Movie():create({
-  description = nil, -- string
-  duration = nil, -- number
-  genre = nil, -- table
-  release_year = nil, -- number
-  title = nil, -- string
+  description = "example_description", -- string
+  duration = 1, -- number
+  genre = {}, -- table
+  release_year = 1, -- number
+  title = "example_title", -- string
 })
 ```
 
@@ -495,10 +495,10 @@ local seriess, err = client:Series():list()
 
 ```lua
 local series, err = client:Series():create({
-  description = nil, -- string
-  genre = nil, -- table
-  release_year = nil, -- number
-  title = nil, -- string
+  description = "example_description", -- string
+  genre = {}, -- table
+  release_year = 1, -- number
+  title = "example_title", -- string
 })
 ```
 

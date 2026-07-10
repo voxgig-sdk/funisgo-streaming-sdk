@@ -63,28 +63,28 @@ func main() {
     }
 
     // Load a single channel — the value is the loaded record.
-    channel, err := client.Channel(nil).Load(map[string]any{"id": "example"}, nil)
+    channel, err := client.Channel(nil).Load(map[string]any{"id": "example_id"}, nil)
     if err != nil {
         panic(err)
     }
     fmt.Println(channel)
 
     // Create a channel.
-    created, err := client.Channel(nil).Create(map[string]any{"category": "example", "description": "example", "name": "example"}, nil)
+    created, err := client.Channel(nil).Create(map[string]any{"category": "example_category", "description": "example_description", "name": "example_name"}, nil)
     if err != nil {
         panic(err)
     }
     fmt.Println(created)
 
     // Update a channel.
-    updated, err := client.Channel(nil).Update(map[string]any{"id": "example"}, nil)
+    updated, err := client.Channel(nil).Update(map[string]any{"id": "example_id"}, nil)
     if err != nil {
         panic(err)
     }
     fmt.Println(updated)
 
     // Remove a channel.
-    removed, err := client.Channel(nil).Remove(map[string]any{"id": "example"}, nil)
+    removed, err := client.Channel(nil).Remove(map[string]any{"id": "example_id"}, nil)
     if err != nil {
         panic(err)
     }
@@ -377,11 +377,11 @@ Create an instance: `channel := client.Channel(nil)`
 
 | Method | Description |
 | --- | --- |
-| `Create(data, ctrl)` | Create a new entity with the given data. |
 | `List(match, ctrl)` | List entities matching the criteria. |
 | `Load(match, ctrl)` | Load a single entity by match criteria. |
-| `Remove(match, ctrl)` | Remove the matching entity. |
+| `Create(data, ctrl)` | Create a new entity with the given data. |
 | `Update(data, ctrl)` | Update an existing entity. |
+| `Remove(match, ctrl)` | Remove the matching entity. |
 
 #### Fields
 
@@ -425,10 +425,14 @@ fmt.Println(channels) // the array of records
 
 ```go
 result, err := client.Channel(nil).Create(map[string]any{
-    "category": /* string */,
-    "description": /* string */,
-    "name": /* string */,
+    "category": "example_category",
+    "description": "example_description",
+    "name": "example_name",
 }, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 
@@ -440,11 +444,11 @@ Create an instance: `movie := client.Movie(nil)`
 
 | Method | Description |
 | --- | --- |
-| `Create(data, ctrl)` | Create a new entity with the given data. |
 | `List(match, ctrl)` | List entities matching the criteria. |
 | `Load(match, ctrl)` | Load a single entity by match criteria. |
-| `Remove(match, ctrl)` | Remove the matching entity. |
+| `Create(data, ctrl)` | Create a new entity with the given data. |
 | `Update(data, ctrl)` | Update an existing entity. |
+| `Remove(match, ctrl)` | Remove the matching entity. |
 
 #### Fields
 
@@ -489,12 +493,16 @@ fmt.Println(movies) // the array of records
 
 ```go
 result, err := client.Movie(nil).Create(map[string]any{
-    "description": /* string */,
-    "duration": /* int */,
-    "genre": /* []any */,
-    "release_year": /* int */,
-    "title": /* string */,
+    "description": "example_description",
+    "duration": 1,
+    "genre": []any{},
+    "release_year": 1,
+    "title": "example_title",
 }, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 
@@ -506,11 +514,11 @@ Create an instance: `series := client.Series(nil)`
 
 | Method | Description |
 | --- | --- |
-| `Create(data, ctrl)` | Create a new entity with the given data. |
 | `List(match, ctrl)` | List entities matching the criteria. |
 | `Load(match, ctrl)` | Load a single entity by match criteria. |
-| `Remove(match, ctrl)` | Remove the matching entity. |
+| `Create(data, ctrl)` | Create a new entity with the given data. |
 | `Update(data, ctrl)` | Update an existing entity. |
+| `Remove(match, ctrl)` | Remove the matching entity. |
 
 #### Fields
 
@@ -555,11 +563,15 @@ fmt.Println(seriess) // the array of records
 
 ```go
 result, err := client.Series(nil).Create(map[string]any{
-    "description": /* string */,
-    "genre": /* []any */,
-    "release_year": /* int */,
-    "title": /* string */,
+    "description": "example_description",
+    "genre": []any{},
+    "release_year": 1,
+    "title": "example_title",
 }, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 

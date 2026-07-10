@@ -100,6 +100,7 @@ same parameters as `Direct()`.
 
 ```go
 channel := client.Channel(nil)
+fmt.Println(channel.GetName()) // "channel"
 ```
 
 ### Fields
@@ -140,24 +141,16 @@ channel := client.Channel(nil)
 
 ### Operations
 
-#### `Create(reqdata, ctrl map[string]any) (any, error)`
-
-Create a new entity with the given data.
-
-```go
-result, err := client.Channel(nil).Create(map[string]any{
-    "category": /* string */,
-    "description": /* string */,
-    "name": /* string */,
-}, nil)
-```
-
 #### `List(reqmatch, ctrl map[string]any) (any, error)`
 
 List entities matching the given criteria. Returns an array.
 
 ```go
 results, err := client.Channel(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(results)
 ```
 
 #### `Load(reqmatch, ctrl map[string]any) (any, error)`
@@ -166,14 +159,26 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.Channel(nil).Load(map[string]any{"id": "channel_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
-#### `Remove(reqmatch, ctrl map[string]any) (any, error)`
+#### `Create(reqdata, ctrl map[string]any) (any, error)`
 
-Remove the entity matching the given criteria.
+Create a new entity with the given data.
 
 ```go
-result, err := client.Channel(nil).Remove(map[string]any{"id": "channel_id"}, nil)
+result, err := client.Channel(nil).Create(map[string]any{
+    "category": "example_category",
+    "description": "example_description",
+    "name": "example_name",
+}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 #### `Update(reqdata, ctrl map[string]any) (any, error)`
@@ -185,6 +190,22 @@ result, err := client.Channel(nil).Update(map[string]any{
     "id": "channel_id",
     // Fields to update
 }, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
+```
+
+#### `Remove(reqmatch, ctrl map[string]any) (any, error)`
+
+Remove the entity matching the given criteria.
+
+```go
+result, err := client.Channel(nil).Remove(map[string]any{"id": "channel_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -215,6 +236,7 @@ Return the entity name.
 
 ```go
 movie := client.Movie(nil)
+fmt.Println(movie.GetName()) // "movie"
 ```
 
 ### Fields
@@ -257,26 +279,16 @@ movie := client.Movie(nil)
 
 ### Operations
 
-#### `Create(reqdata, ctrl map[string]any) (any, error)`
-
-Create a new entity with the given data.
-
-```go
-result, err := client.Movie(nil).Create(map[string]any{
-    "description": /* string */,
-    "duration": /* int */,
-    "genre": /* []any */,
-    "release_year": /* int */,
-    "title": /* string */,
-}, nil)
-```
-
 #### `List(reqmatch, ctrl map[string]any) (any, error)`
 
 List entities matching the given criteria. Returns an array.
 
 ```go
 results, err := client.Movie(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(results)
 ```
 
 #### `Load(reqmatch, ctrl map[string]any) (any, error)`
@@ -285,14 +297,28 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.Movie(nil).Load(map[string]any{"id": "movie_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
-#### `Remove(reqmatch, ctrl map[string]any) (any, error)`
+#### `Create(reqdata, ctrl map[string]any) (any, error)`
 
-Remove the entity matching the given criteria.
+Create a new entity with the given data.
 
 ```go
-result, err := client.Movie(nil).Remove(map[string]any{"id": "movie_id"}, nil)
+result, err := client.Movie(nil).Create(map[string]any{
+    "description": "example_description",
+    "duration": 1,
+    "genre": []any{},
+    "release_year": 1,
+    "title": "example_title",
+}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 #### `Update(reqdata, ctrl map[string]any) (any, error)`
@@ -304,6 +330,22 @@ result, err := client.Movie(nil).Update(map[string]any{
     "id": "movie_id",
     // Fields to update
 }, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
+```
+
+#### `Remove(reqmatch, ctrl map[string]any) (any, error)`
+
+Remove the entity matching the given criteria.
+
+```go
+result, err := client.Movie(nil).Remove(map[string]any{"id": "movie_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -334,6 +376,7 @@ Return the entity name.
 
 ```go
 series := client.Series(nil)
+fmt.Println(series.GetName()) // "series"
 ```
 
 ### Fields
@@ -376,25 +419,16 @@ series := client.Series(nil)
 
 ### Operations
 
-#### `Create(reqdata, ctrl map[string]any) (any, error)`
-
-Create a new entity with the given data.
-
-```go
-result, err := client.Series(nil).Create(map[string]any{
-    "description": /* string */,
-    "genre": /* []any */,
-    "release_year": /* int */,
-    "title": /* string */,
-}, nil)
-```
-
 #### `List(reqmatch, ctrl map[string]any) (any, error)`
 
 List entities matching the given criteria. Returns an array.
 
 ```go
 results, err := client.Series(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(results)
 ```
 
 #### `Load(reqmatch, ctrl map[string]any) (any, error)`
@@ -403,14 +437,27 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.Series(nil).Load(map[string]any{"id": "series_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
-#### `Remove(reqmatch, ctrl map[string]any) (any, error)`
+#### `Create(reqdata, ctrl map[string]any) (any, error)`
 
-Remove the entity matching the given criteria.
+Create a new entity with the given data.
 
 ```go
-result, err := client.Series(nil).Remove(map[string]any{"id": "series_id"}, nil)
+result, err := client.Series(nil).Create(map[string]any{
+    "description": "example_description",
+    "genre": []any{},
+    "release_year": 1,
+    "title": "example_title",
+}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 #### `Update(reqdata, ctrl map[string]any) (any, error)`
@@ -422,6 +469,22 @@ result, err := client.Series(nil).Update(map[string]any{
     "id": "series_id",
     // Fields to update
 }, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
+```
+
+#### `Remove(reqmatch, ctrl map[string]any) (any, error)`
+
+Remove the entity matching the given criteria.
+
+```go
+result, err := client.Series(nil).Remove(map[string]any{"id": "series_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods

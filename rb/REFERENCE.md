@@ -142,9 +142,9 @@ Create a new entity with the given data. Raises on error.
 
 ```ruby
 result = client.Channel.create({
-  "category" => "example", # String
-  "description" => "example", # String
-  "name" => "example", # String
+  "category" => "example_category", # String
+  "description" => "example_description", # String
+  "name" => "example_name", # String
 })
 ```
 
@@ -265,11 +265,11 @@ Create a new entity with the given data. Raises on error.
 
 ```ruby
 result = client.Movie.create({
-  "description" => "example", # String
+  "description" => "example_description", # String
   "duration" => 1, # Integer
   "genre" => [], # Array
   "release_year" => 1, # Integer
-  "title" => "example", # String
+  "title" => "example_title", # String
 })
 ```
 
@@ -390,10 +390,10 @@ Create a new entity with the given data. Raises on error.
 
 ```ruby
 result = client.Series.create({
-  "description" => "example", # String
+  "description" => "example_description", # String
   "genre" => [], # Array
   "release_year" => 1, # Integer
-  "title" => "example", # String
+  "title" => "example_title", # String
 })
 ```
 

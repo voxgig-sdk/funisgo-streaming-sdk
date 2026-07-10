@@ -62,7 +62,7 @@ end
 
 ```ruby
 # create returns the bare created Channel record.
-created = client.Channel.create({ "category" => "example", "description" => "example", "name" => "example" })
+created = client.Channel.create({ "category" => "example_category", "description" => "example_description", "name" => "example_name" })
 
 # Update — index the bare record directly (created["id"]).
 client.Channel.update({ "id" => created["id"] })
@@ -393,9 +393,9 @@ channels = client.Channel.list
 
 ```ruby
 channel = client.Channel.create({
-  "category" => "example", # String
-  "description" => "example", # String
-  "name" => "example", # String
+  "category" => "example_category", # String
+  "description" => "example_description", # String
+  "name" => "example_name", # String
 })
 ```
 
@@ -451,11 +451,11 @@ movies = client.Movie.list
 
 ```ruby
 movie = client.Movie.create({
-  "description" => "example", # String
+  "description" => "example_description", # String
   "duration" => 1, # Integer
   "genre" => [], # Array
   "release_year" => 1, # Integer
-  "title" => "example", # String
+  "title" => "example_title", # String
 })
 ```
 
@@ -511,10 +511,10 @@ seriess = client.Series.list
 
 ```ruby
 series = client.Series.create({
-  "description" => "example", # String
+  "description" => "example_description", # String
   "genre" => [], # Array
   "release_year" => 1, # Integer
-  "title" => "example", # String
+  "title" => "example_title", # String
 })
 ```
 
