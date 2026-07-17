@@ -1,4 +1,4 @@
--- ProjectName SDK exists test
+-- FunisgoStreaming SDK exists test
 
 local sdk = require("funisgo-streaming_sdk")
 
