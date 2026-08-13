@@ -7,169 +7,183 @@
 -- edit by hand.
 
 ---@class Channel
----@field category string
----@field created_at? string
----@field data? table
----@field description string
+---@field category? string
+---@field createdAt? string
+---@field description? string
 ---@field id? string
----@field is_live? boolean
----@field is_premium? boolean
+---@field isLive? boolean
+---@field isPremium? boolean
 ---@field language? string
----@field logo_url? string
----@field name string
----@field stream_url? string
----@field success? boolean
----@field updated_at? string
+---@field logoUrl? string
+---@field name? string
+---@field streamUrl? string
+---@field updatedAt? string
 
 ---@class ChannelLoadMatch
 ---@field id string
 
 ---@class ChannelListMatch
 ---@field category? string
----@field created_at? string
----@field data? table
+---@field createdAt? string
 ---@field description? string
 ---@field id? string
----@field is_live? boolean
----@field is_premium? boolean
+---@field isLive? boolean
+---@field isPremium? boolean
 ---@field language? string
----@field logo_url? string
+---@field logoUrl? string
 ---@field name? string
----@field stream_url? string
----@field success? boolean
----@field updated_at? string
+---@field streamUrl? string
+---@field updatedAt? string
 
 ---@class ChannelCreateData
----@field category string
----@field created_at? string
----@field data? table
----@field description string
+---@field category? string
+---@field createdAt? string
+---@field description? string
 ---@field id? string
----@field is_live? boolean
----@field is_premium? boolean
+---@field isLive? boolean
+---@field isPremium? boolean
 ---@field language? string
----@field logo_url? string
----@field name string
----@field stream_url? string
----@field success? boolean
----@field updated_at? string
+---@field logoUrl? string
+---@field name? string
+---@field streamUrl? string
+---@field updatedAt? string
 
 ---@class ChannelUpdateData
 ---@field id string
+---@field category? string
+---@field createdAt? string
+---@field description? string
+---@field isLive? boolean
+---@field isPremium? boolean
+---@field language? string
+---@field logoUrl? string
+---@field name? string
+---@field streamUrl? string
+---@field updatedAt? string
 
 ---@class ChannelRemoveMatch
 ---@field id string
 
 ---@class Movie
----@field created_at? string
----@field data? table
----@field description string
----@field duration number
----@field genre table
+---@field createdAt? string
+---@field description? string
+---@field duration? number
+---@field genre? table
 ---@field id? string
----@field is_premium? boolean
+---@field isPremium? boolean
 ---@field rating? number
----@field release_year number
----@field stream_url? string
----@field success? boolean
----@field thumbnail_url? string
----@field title string
----@field updated_at? string
+---@field releaseYear? number
+---@field streamUrl? string
+---@field thumbnailUrl? string
+---@field title? string
+---@field updatedAt? string
 
 ---@class MovieLoadMatch
 ---@field id string
 
 ---@class MovieListMatch
----@field created_at? string
----@field data? table
+---@field createdAt? string
 ---@field description? string
 ---@field duration? number
 ---@field genre? table
 ---@field id? string
----@field is_premium? boolean
+---@field isPremium? boolean
 ---@field rating? number
----@field release_year? number
----@field stream_url? string
----@field success? boolean
----@field thumbnail_url? string
+---@field releaseYear? number
+---@field streamUrl? string
+---@field thumbnailUrl? string
 ---@field title? string
----@field updated_at? string
+---@field updatedAt? string
 
 ---@class MovieCreateData
----@field created_at? string
----@field data? table
----@field description string
----@field duration number
----@field genre table
+---@field createdAt? string
+---@field description? string
+---@field duration? number
+---@field genre? table
 ---@field id? string
----@field is_premium? boolean
+---@field isPremium? boolean
 ---@field rating? number
----@field release_year number
----@field stream_url? string
----@field success? boolean
----@field thumbnail_url? string
----@field title string
----@field updated_at? string
+---@field releaseYear? number
+---@field streamUrl? string
+---@field thumbnailUrl? string
+---@field title? string
+---@field updatedAt? string
 
 ---@class MovieUpdateData
 ---@field id string
+---@field createdAt? string
+---@field description? string
+---@field duration? number
+---@field genre? table
+---@field isPremium? boolean
+---@field rating? number
+---@field releaseYear? number
+---@field streamUrl? string
+---@field thumbnailUrl? string
+---@field title? string
+---@field updatedAt? string
 
 ---@class MovieRemoveMatch
 ---@field id string
 
 ---@class Series
----@field created_at? string
----@field data? table
----@field description string
----@field episode? number
----@field genre table
+---@field createdAt? string
+---@field description? string
+---@field episodes? number
+---@field genre? table
 ---@field id? string
----@field is_premium? boolean
+---@field isPremium? boolean
 ---@field rating? number
----@field release_year number
----@field season? number
----@field success? boolean
----@field thumbnail_url? string
----@field title string
----@field updated_at? string
+---@field releaseYear? number
+---@field seasons? number
+---@field thumbnailUrl? string
+---@field title? string
+---@field updatedAt? string
 
 ---@class SeriesLoadMatch
 ---@field id string
 
 ---@class SeriesListMatch
----@field created_at? string
----@field data? table
+---@field createdAt? string
 ---@field description? string
----@field episode? number
+---@field episodes? number
 ---@field genre? table
 ---@field id? string
----@field is_premium? boolean
+---@field isPremium? boolean
 ---@field rating? number
----@field release_year? number
----@field season? number
----@field success? boolean
----@field thumbnail_url? string
+---@field releaseYear? number
+---@field seasons? number
+---@field thumbnailUrl? string
 ---@field title? string
----@field updated_at? string
+---@field updatedAt? string
 
 ---@class SeriesCreateData
----@field created_at? string
----@field data? table
----@field description string
----@field episode? number
----@field genre table
+---@field createdAt? string
+---@field description? string
+---@field episodes? number
+---@field genre? table
 ---@field id? string
----@field is_premium? boolean
+---@field isPremium? boolean
 ---@field rating? number
----@field release_year number
----@field season? number
----@field success? boolean
----@field thumbnail_url? string
----@field title string
----@field updated_at? string
+---@field releaseYear? number
+---@field seasons? number
+---@field thumbnailUrl? string
+---@field title? string
+---@field updatedAt? string
 
 ---@class SeriesUpdateData
 ---@field id string
+---@field createdAt? string
+---@field description? string
+---@field episodes? number
+---@field genre? table
+---@field isPremium? boolean
+---@field rating? number
+---@field releaseYear? number
+---@field seasons? number
+---@field thumbnailUrl? string
+---@field title? string
+---@field updatedAt? string
 
 ---@class SeriesRemoveMatch
 ---@field id string

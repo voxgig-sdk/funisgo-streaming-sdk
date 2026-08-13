@@ -51,7 +51,7 @@ try {
 
 ```php
 try {
-    // load() returns the bare Channel record (throws on error).
+    // load() returns the ENTITY — call data_get() for the Channel record (throws on error).
     $channel = $client->Channel()->load(["id" => "example_id"]);
     print_r($channel);
 } catch (\Throwable $err) {
@@ -62,14 +62,14 @@ try {
 ### 4. Create, update, and remove
 
 ```php
-// create() returns the bare created Channel record.
-$created = $client->Channel()->create(["category" => "example_category", "description" => "example_description", "name" => "example_name"]);
+// create() returns the ENTITY — call data_get() for the created Channel record.
+$created = $client->Channel()->create(["category" => "example_category", "createdAt" => "example_createdAt"]);
 
-// Update — index the bare record directly ($created["id"]).
-$client->Channel()->update(["id" => $created["id"]]);
+// Update — index the record via data_get() ($created->data_get()["id"]).
+$client->Channel()->update(["id" => $created->data_get()["id"], "category" => "example_category", "createdAt" => "example_createdAt"]);
 
 // Remove
-$client->Channel()->remove(["id" => $created["id"]]);
+$client->Channel()->remove(["id" => $created->data_get()["id"]]);
 ```
 
 
@@ -80,7 +80,7 @@ Entity operations throw a `\Throwable` on failure, so wrap them in
 
 ```php
 try {
-    $channels = $client->Channel()->list();
+    $seriess = $client->Series()->list();
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
@@ -152,12 +152,13 @@ data via the `entity` option so offline calls resolve without a live server:
 
 ```php
 $client = FunisgoStreamingSDK::test([
-    "entity" => ["channel" => ["test01" => ["id" => "test01"]]],
+    "entity" => ["series" => ["test01" => ["id" => "test01"]]],
 ]);
 
-// Entity ops return the bare mock record (throws on error).
-$channel = $client->Channel()->list();
-print_r($channel);
+// Entity ops return the ENTITY (throws on error);
+// call data_get() for the mock record.
+$series = $client->Series()->list();
+print_r($series);
 ```
 
 ### Use a custom fetch function
@@ -262,7 +263,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (an `array` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (an `array` for single-entity
 ops, a `list` for `list`) and throw on error. Wrap calls in
 `try`/`catch` to handle failures.
 
@@ -285,18 +286,16 @@ On error, `ok` is `false` and `$err` contains the error value.
 | Field | Description |
 | --- | --- |
 | `category` |  |
-| `created_at` |  |
-| `data` |  |
+| `createdAt` |  |
 | `description` |  |
 | `id` |  |
-| `is_live` |  |
-| `is_premium` |  |
+| `isLive` |  |
+| `isPremium` |  |
 | `language` |  |
-| `logo_url` |  |
+| `logoUrl` |  |
 | `name` |  |
-| `stream_url` |  |
-| `success` |  |
-| `updated_at` |  |
+| `streamUrl` |  |
+| `updatedAt` |  |
 
 Operations: Create, List, Load, Remove, Update.
 
@@ -306,20 +305,18 @@ API path: `/channels`
 
 | Field | Description |
 | --- | --- |
-| `created_at` |  |
-| `data` |  |
+| `createdAt` |  |
 | `description` |  |
 | `duration` |  |
 | `genre` |  |
 | `id` |  |
-| `is_premium` |  |
+| `isPremium` |  |
 | `rating` |  |
-| `release_year` |  |
-| `stream_url` |  |
-| `success` |  |
-| `thumbnail_url` |  |
+| `releaseYear` |  |
+| `streamUrl` |  |
+| `thumbnailUrl` |  |
 | `title` |  |
-| `updated_at` |  |
+| `updatedAt` |  |
 
 Operations: Create, List, Load, Remove, Update.
 
@@ -329,20 +326,18 @@ API path: `/movies`
 
 | Field | Description |
 | --- | --- |
-| `created_at` |  |
-| `data` |  |
+| `createdAt` |  |
 | `description` |  |
-| `episode` |  |
+| `episodes` |  |
 | `genre` |  |
 | `id` |  |
-| `is_premium` |  |
+| `isPremium` |  |
 | `rating` |  |
-| `release_year` |  |
-| `season` |  |
-| `success` |  |
-| `thumbnail_url` |  |
+| `releaseYear` |  |
+| `seasons` |  |
+| `thumbnailUrl` |  |
 | `title` |  |
-| `updated_at` |  |
+| `updatedAt` |  |
 
 Operations: Create, List, Load, Remove, Update.
 
@@ -372,23 +367,21 @@ Create an instance: `$channel = $client->Channel();`
 | Field | Type | Description |
 | --- | --- | --- |
 | `category` | `string` |  |
-| `created_at` | `string` |  |
-| `data` | `array` |  |
+| `createdAt` | `string` |  |
 | `description` | `string` |  |
 | `id` | `string` |  |
-| `is_live` | `bool` |  |
-| `is_premium` | `bool` |  |
+| `isLive` | `bool` |  |
+| `isPremium` | `bool` |  |
 | `language` | `string` |  |
-| `logo_url` | `string` |  |
+| `logoUrl` | `string` |  |
 | `name` | `string` |  |
-| `stream_url` | `string` |  |
-| `success` | `bool` |  |
-| `updated_at` | `string` |  |
+| `streamUrl` | `string` |  |
+| `updatedAt` | `string` |  |
 
 #### Example: Load
 
 ```php
-// load() returns the bare Channel record (throws on error).
+// load() returns the ENTITY — call data_get() for the Channel record (throws on error).
 $channel = $client->Channel()->load(["id" => "channel_id"]);
 ```
 
@@ -403,9 +396,6 @@ $channels = $client->Channel()->list();
 
 ```php
 $channel = $client->Channel()->create([
-    "category" => null, // string
-    "description" => null, // string
-    "name" => null, // string
 ]);
 ```
 
@@ -428,25 +418,23 @@ Create an instance: `$movie = $client->Movie();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `created_at` | `string` |  |
-| `data` | `array` |  |
+| `createdAt` | `string` |  |
 | `description` | `string` |  |
 | `duration` | `int` |  |
 | `genre` | `array` |  |
 | `id` | `string` |  |
-| `is_premium` | `bool` |  |
+| `isPremium` | `bool` |  |
 | `rating` | `float` |  |
-| `release_year` | `int` |  |
-| `stream_url` | `string` |  |
-| `success` | `bool` |  |
-| `thumbnail_url` | `string` |  |
+| `releaseYear` | `int` |  |
+| `streamUrl` | `string` |  |
+| `thumbnailUrl` | `string` |  |
 | `title` | `string` |  |
-| `updated_at` | `string` |  |
+| `updatedAt` | `string` |  |
 
 #### Example: Load
 
 ```php
-// load() returns the bare Movie record (throws on error).
+// load() returns the ENTITY — call data_get() for the Movie record (throws on error).
 $movie = $client->Movie()->load(["id" => "movie_id"]);
 ```
 
@@ -461,11 +449,6 @@ $movies = $client->Movie()->list();
 
 ```php
 $movie = $client->Movie()->create([
-    "description" => null, // string
-    "duration" => null, // int
-    "genre" => null, // array
-    "release_year" => null, // int
-    "title" => null, // string
 ]);
 ```
 
@@ -488,25 +471,23 @@ Create an instance: `$series = $client->Series();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `created_at` | `string` |  |
-| `data` | `array` |  |
+| `createdAt` | `string` |  |
 | `description` | `string` |  |
-| `episode` | `int` |  |
+| `episodes` | `int` |  |
 | `genre` | `array` |  |
 | `id` | `string` |  |
-| `is_premium` | `bool` |  |
+| `isPremium` | `bool` |  |
 | `rating` | `float` |  |
-| `release_year` | `int` |  |
-| `season` | `int` |  |
-| `success` | `bool` |  |
-| `thumbnail_url` | `string` |  |
+| `releaseYear` | `int` |  |
+| `seasons` | `int` |  |
+| `thumbnailUrl` | `string` |  |
 | `title` | `string` |  |
-| `updated_at` | `string` |  |
+| `updatedAt` | `string` |  |
 
 #### Example: Load
 
 ```php
-// load() returns the bare Series record (throws on error).
+// load() returns the ENTITY — call data_get() for the Series record (throws on error).
 $series = $client->Series()->load(["id" => "series_id"]);
 ```
 
@@ -521,10 +502,6 @@ $seriess = $client->Series()->list();
 
 ```php
 $series = $client->Series()->create([
-    "description" => null, // string
-    "genre" => null, // array
-    "release_year" => null, // int
-    "title" => null, // string
 ]);
 ```
 
@@ -605,11 +582,11 @@ Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$channel = $client->Channel();
-$channel->list();
+$series = $client->Series();
+$series->list();
 
-// $channel->data_get() now returns the channel data from the last list
-// $channel->match_get() returns the last match criteria
+// $series->data_get() now returns the series data from the last list
+// $series->match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

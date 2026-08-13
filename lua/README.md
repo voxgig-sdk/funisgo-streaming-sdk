@@ -61,14 +61,14 @@ print(channel)
 
 ```lua
 -- Create
-local created, err = client:Channel():create({ category = "example_category", description = "example_description", name = "example_name" })
+local created, err = client:Channel():create({ category = "example_category", createdAt = "example_createdAt" })
 if err then error(err) end
 
 -- Update
-client:Channel():update({ id = created["id"] })
+client:Channel():update({ id = created:data_get()["id"], category = "example_category", createdAt = "example_createdAt" })
 
 -- Remove
-client:Channel():remove({ id = created["id"] })
+client:Channel():remove({ id = created:data_get()["id"] })
 ```
 
 
@@ -78,7 +78,7 @@ Entity operations return `(value, err)`. Check `err` before using
 the value:
 
 ```lua
-local channels, err = client:Channel():list()
+local seriess, err = client:Series():list()
 if err then error(err) end
 ```
 
@@ -136,7 +136,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:Channel():list()
+local result, err = client:Series():list()
 -- result is the returned data; err is set on failure
 ```
 
@@ -265,18 +265,16 @@ Only `direct()` returns a response envelope — a `table` with `ok`,
 | Field | Description |
 | --- | --- |
 | `category` |  |
-| `created_at` |  |
-| `data` |  |
+| `createdAt` |  |
 | `description` |  |
 | `id` |  |
-| `is_live` |  |
-| `is_premium` |  |
+| `isLive` |  |
+| `isPremium` |  |
 | `language` |  |
-| `logo_url` |  |
+| `logoUrl` |  |
 | `name` |  |
-| `stream_url` |  |
-| `success` |  |
-| `updated_at` |  |
+| `streamUrl` |  |
+| `updatedAt` |  |
 
 Operations: Create, List, Load, Remove, Update.
 
@@ -286,20 +284,18 @@ API path: `/channels`
 
 | Field | Description |
 | --- | --- |
-| `created_at` |  |
-| `data` |  |
+| `createdAt` |  |
 | `description` |  |
 | `duration` |  |
 | `genre` |  |
 | `id` |  |
-| `is_premium` |  |
+| `isPremium` |  |
 | `rating` |  |
-| `release_year` |  |
-| `stream_url` |  |
-| `success` |  |
-| `thumbnail_url` |  |
+| `releaseYear` |  |
+| `streamUrl` |  |
+| `thumbnailUrl` |  |
 | `title` |  |
-| `updated_at` |  |
+| `updatedAt` |  |
 
 Operations: Create, List, Load, Remove, Update.
 
@@ -309,20 +305,18 @@ API path: `/movies`
 
 | Field | Description |
 | --- | --- |
-| `created_at` |  |
-| `data` |  |
+| `createdAt` |  |
 | `description` |  |
-| `episode` |  |
+| `episodes` |  |
 | `genre` |  |
 | `id` |  |
-| `is_premium` |  |
+| `isPremium` |  |
 | `rating` |  |
-| `release_year` |  |
-| `season` |  |
-| `success` |  |
-| `thumbnail_url` |  |
+| `releaseYear` |  |
+| `seasons` |  |
+| `thumbnailUrl` |  |
 | `title` |  |
-| `updated_at` |  |
+| `updatedAt` |  |
 
 Operations: Create, List, Load, Remove, Update.
 
@@ -352,18 +346,16 @@ Create an instance: `local channel = client:Channel(nil)`
 | Field | Type | Description |
 | --- | --- | --- |
 | `category` | `string` |  |
-| `created_at` | `string` |  |
-| `data` | `table` |  |
+| `createdAt` | `string` |  |
 | `description` | `string` |  |
 | `id` | `string` |  |
-| `is_live` | `boolean` |  |
-| `is_premium` | `boolean` |  |
+| `isLive` | `boolean` |  |
+| `isPremium` | `boolean` |  |
 | `language` | `string` |  |
-| `logo_url` | `string` |  |
+| `logoUrl` | `string` |  |
 | `name` | `string` |  |
-| `stream_url` | `string` |  |
-| `success` | `boolean` |  |
-| `updated_at` | `string` |  |
+| `streamUrl` | `string` |  |
+| `updatedAt` | `string` |  |
 
 #### Example: Load
 
@@ -381,9 +373,6 @@ local channels, err = client:Channel():list()
 
 ```lua
 local channel, err = client:Channel():create({
-  category = "example_category", -- string
-  description = "example_description", -- string
-  name = "example_name", -- string
 })
 ```
 
@@ -406,20 +395,18 @@ Create an instance: `local movie = client:Movie(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `created_at` | `string` |  |
-| `data` | `table` |  |
+| `createdAt` | `string` |  |
 | `description` | `string` |  |
 | `duration` | `number` |  |
 | `genre` | `table` |  |
 | `id` | `string` |  |
-| `is_premium` | `boolean` |  |
+| `isPremium` | `boolean` |  |
 | `rating` | `number` |  |
-| `release_year` | `number` |  |
-| `stream_url` | `string` |  |
-| `success` | `boolean` |  |
-| `thumbnail_url` | `string` |  |
+| `releaseYear` | `number` |  |
+| `streamUrl` | `string` |  |
+| `thumbnailUrl` | `string` |  |
 | `title` | `string` |  |
-| `updated_at` | `string` |  |
+| `updatedAt` | `string` |  |
 
 #### Example: Load
 
@@ -437,11 +424,6 @@ local movies, err = client:Movie():list()
 
 ```lua
 local movie, err = client:Movie():create({
-  description = "example_description", -- string
-  duration = 1, -- number
-  genre = {}, -- table
-  release_year = 1, -- number
-  title = "example_title", -- string
 })
 ```
 
@@ -464,20 +446,18 @@ Create an instance: `local series = client:Series(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `created_at` | `string` |  |
-| `data` | `table` |  |
+| `createdAt` | `string` |  |
 | `description` | `string` |  |
-| `episode` | `number` |  |
+| `episodes` | `number` |  |
 | `genre` | `table` |  |
 | `id` | `string` |  |
-| `is_premium` | `boolean` |  |
+| `isPremium` | `boolean` |  |
 | `rating` | `number` |  |
-| `release_year` | `number` |  |
-| `season` | `number` |  |
-| `success` | `boolean` |  |
-| `thumbnail_url` | `string` |  |
+| `releaseYear` | `number` |  |
+| `seasons` | `number` |  |
+| `thumbnailUrl` | `string` |  |
 | `title` | `string` |  |
-| `updated_at` | `string` |  |
+| `updatedAt` | `string` |  |
 
 #### Example: Load
 
@@ -495,10 +475,6 @@ local seriess, err = client:Series():list()
 
 ```lua
 local series, err = client:Series():create({
-  description = "example_description", -- string
-  genre = {}, -- table
-  release_year = 1, -- number
-  title = "example_title", -- string
 })
 ```
 
@@ -579,11 +555,11 @@ Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local channel = client:Channel()
-channel:list()
+local series = client:Series()
+series:list()
 
--- channel:data_get() now returns the channel data from the last list
--- channel:match_get() returns the last match criteria
+-- series:data_get() now returns the series data from the last list
+-- series:match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

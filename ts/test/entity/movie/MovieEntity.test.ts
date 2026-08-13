@@ -26,8 +26,8 @@ import {
 describe('MovieEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when FUNISGOSTREAMING_TEST_LIVE=TRUE.
-  afterEach(liveDelay('FUNISGOSTREAMING_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when FUNISGO_STREAMING_TEST_LIVE=TRUE.
+  afterEach(liveDelay('FUNISGO_STREAMING_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = FunisgoStreamingSDK.test()
@@ -62,14 +62,14 @@ describe('MovieEntity', async () => {
     const movie_ref01_ent = client.Movie()
     let movie_ref01_data = setup.data.new.movie['movie_ref01']
 
-    movie_ref01_data = await movie_ref01_ent.create(movie_ref01_data)
+    movie_ref01_data = (await movie_ref01_ent.create(movie_ref01_data)).data()
     assert(null != movie_ref01_data.id)
 
 
     // LIST
     const movie_ref01_match: any = {}
 
-    const movie_ref01_list = await movie_ref01_ent.list(movie_ref01_match)
+    const movie_ref01_list = (await movie_ref01_ent.list(movie_ref01_match)).map((e: any) => e.data())
 
     assert(!isempty(select(movie_ref01_list, { id: movie_ref01_data.id })))
 
@@ -78,10 +78,10 @@ describe('MovieEntity', async () => {
     const movie_ref01_data_up0: any = {}
     movie_ref01_data_up0.id = movie_ref01_data.id
 
-    const movie_ref01_markdef_up0 = { name: 'created_at', value: 'Mark01-movie_ref01_' + setup.now }
+    const movie_ref01_markdef_up0 = { name: 'createdAt', value: 'Mark01-movie_ref01_' + setup.now }
     ;(movie_ref01_data_up0 as any)[movie_ref01_markdef_up0.name] = movie_ref01_markdef_up0.value
 
-    const movie_ref01_resdata_up0 = await movie_ref01_ent.update(movie_ref01_data_up0)
+    const movie_ref01_resdata_up0 = (await movie_ref01_ent.update(movie_ref01_data_up0)).data()
     assert(movie_ref01_resdata_up0.id === movie_ref01_data_up0.id)
 
     assert((movie_ref01_resdata_up0 as any)[movie_ref01_markdef_up0.name] === movie_ref01_markdef_up0.value)
@@ -90,7 +90,7 @@ describe('MovieEntity', async () => {
     // LOAD
     const movie_ref01_match_dt0: any = {}
     movie_ref01_match_dt0.id = movie_ref01_data.id
-    const movie_ref01_data_dt0 = await movie_ref01_ent.load(movie_ref01_match_dt0)
+    const movie_ref01_data_dt0 = (await movie_ref01_ent.load(movie_ref01_match_dt0)).data()
     assert(movie_ref01_data_dt0.id === movie_ref01_data.id)
 
 
@@ -102,7 +102,7 @@ describe('MovieEntity', async () => {
     // LIST
     const movie_ref01_match_rt0: any = {}
 
-    const movie_ref01_list_rt0 = await movie_ref01_ent.list(movie_ref01_match_rt0)
+    const movie_ref01_list_rt0 = (await movie_ref01_ent.list(movie_ref01_match_rt0)).map((e: any) => e.data())
 
     assert(isempty(select(movie_ref01_list_rt0, { id: movie_ref01_data.id })))
 

@@ -62,8 +62,8 @@ function makeCtrl(explain: boolean) {
 // Overrides configuration values with environment variables if available
 function envOverride(m: Record<string, any>) {
   if (
-    'TRUE' === process.env.FUNISGOSTREAMING_TEST_LIVE ||
-    'TRUE' === process.env.FUNISGOSTREAMING_TEST_OVERRIDE
+    'TRUE' === process.env.FUNISGO_STREAMING_TEST_LIVE ||
+    'TRUE' === process.env.FUNISGO_STREAMING_TEST_OVERRIDE
   ) {
     Object.entries(m).map(n => {
       let envval = process.env[n[0]]
@@ -74,7 +74,7 @@ function envOverride(m: Record<string, any>) {
     })
   }
 
-  m.FUNISGOSTREAMING_TEST_EXPLAIN = process.env.FUNISGOSTREAMING_TEST_EXPLAIN || m.FUNISGOSTREAMING_TEST_EXPLAIN
+  m.FUNISGO_STREAMING_TEST_EXPLAIN = process.env.FUNISGO_STREAMING_TEST_EXPLAIN || m.FUNISGO_STREAMING_TEST_EXPLAIN
 
   return m
 }

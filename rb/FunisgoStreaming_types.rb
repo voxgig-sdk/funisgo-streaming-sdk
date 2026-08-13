@@ -11,57 +11,49 @@
 # Channel entity data model.
 #
 # @!attribute [rw] category
-#   @return [String]
-#
-# @!attribute [rw] created_at
 #   @return [String, nil]
 #
-# @!attribute [rw] data
-#   @return [Hash, nil]
+# @!attribute [rw] createdAt
+#   @return [String, nil]
 #
 # @!attribute [rw] description
-#   @return [String]
+#   @return [String, nil]
 #
 # @!attribute [rw] id
 #   @return [String, nil]
 #
-# @!attribute [rw] is_live
+# @!attribute [rw] isLive
 #   @return [Boolean, nil]
 #
-# @!attribute [rw] is_premium
+# @!attribute [rw] isPremium
 #   @return [Boolean, nil]
 #
 # @!attribute [rw] language
 #   @return [String, nil]
 #
-# @!attribute [rw] logo_url
+# @!attribute [rw] logoUrl
 #   @return [String, nil]
 #
 # @!attribute [rw] name
-#   @return [String]
-#
-# @!attribute [rw] stream_url
 #   @return [String, nil]
 #
-# @!attribute [rw] success
-#   @return [Boolean, nil]
+# @!attribute [rw] streamUrl
+#   @return [String, nil]
 #
-# @!attribute [rw] updated_at
+# @!attribute [rw] updatedAt
 #   @return [String, nil]
 Channel = Struct.new(
   :category,
-  :created_at,
-  :data,
+  :createdAt,
   :description,
   :id,
-  :is_live,
-  :is_premium,
+  :isLive,
+  :isPremium,
   :language,
-  :logo_url,
+  :logoUrl,
   :name,
-  :stream_url,
-  :success,
-  :updated_at,
+  :streamUrl,
+  :updatedAt,
   keyword_init: true
 )
 
@@ -79,11 +71,8 @@ ChannelLoadMatch = Struct.new(
 # @!attribute [rw] category
 #   @return [String, nil]
 #
-# @!attribute [rw] created_at
+# @!attribute [rw] createdAt
 #   @return [String, nil]
-#
-# @!attribute [rw] data
-#   @return [Hash, nil]
 #
 # @!attribute [rw] description
 #   @return [String, nil]
@@ -91,100 +80,87 @@ ChannelLoadMatch = Struct.new(
 # @!attribute [rw] id
 #   @return [String, nil]
 #
-# @!attribute [rw] is_live
+# @!attribute [rw] isLive
 #   @return [Boolean, nil]
 #
-# @!attribute [rw] is_premium
+# @!attribute [rw] isPremium
 #   @return [Boolean, nil]
 #
 # @!attribute [rw] language
 #   @return [String, nil]
 #
-# @!attribute [rw] logo_url
+# @!attribute [rw] logoUrl
 #   @return [String, nil]
 #
 # @!attribute [rw] name
 #   @return [String, nil]
 #
-# @!attribute [rw] stream_url
+# @!attribute [rw] streamUrl
 #   @return [String, nil]
 #
-# @!attribute [rw] success
-#   @return [Boolean, nil]
-#
-# @!attribute [rw] updated_at
+# @!attribute [rw] updatedAt
 #   @return [String, nil]
 ChannelListMatch = Struct.new(
   :category,
-  :created_at,
-  :data,
+  :createdAt,
   :description,
   :id,
-  :is_live,
-  :is_premium,
+  :isLive,
+  :isPremium,
   :language,
-  :logo_url,
+  :logoUrl,
   :name,
-  :stream_url,
-  :success,
-  :updated_at,
+  :streamUrl,
+  :updatedAt,
   keyword_init: true
 )
 
 # Request payload for Channel#create.
 #
 # @!attribute [rw] category
-#   @return [String]
-#
-# @!attribute [rw] created_at
 #   @return [String, nil]
 #
-# @!attribute [rw] data
-#   @return [Hash, nil]
+# @!attribute [rw] createdAt
+#   @return [String, nil]
 #
 # @!attribute [rw] description
-#   @return [String]
+#   @return [String, nil]
 #
 # @!attribute [rw] id
 #   @return [String, nil]
 #
-# @!attribute [rw] is_live
+# @!attribute [rw] isLive
 #   @return [Boolean, nil]
 #
-# @!attribute [rw] is_premium
+# @!attribute [rw] isPremium
 #   @return [Boolean, nil]
 #
 # @!attribute [rw] language
 #   @return [String, nil]
 #
-# @!attribute [rw] logo_url
+# @!attribute [rw] logoUrl
 #   @return [String, nil]
 #
 # @!attribute [rw] name
-#   @return [String]
-#
-# @!attribute [rw] stream_url
 #   @return [String, nil]
 #
-# @!attribute [rw] success
-#   @return [Boolean, nil]
+# @!attribute [rw] streamUrl
+#   @return [String, nil]
 #
-# @!attribute [rw] updated_at
+# @!attribute [rw] updatedAt
 #   @return [String, nil]
 ChannelCreateData = Struct.new(
   :category,
-  :created_at,
-  :data,
+  :createdAt,
   :description,
   :id,
-  :is_live,
-  :is_premium,
+  :isLive,
+  :isPremium,
   :language,
-  :logo_url,
+  :logoUrl,
   :name,
-  :stream_url,
-  :success,
-  :updated_at,
+  :streamUrl,
+  :updatedAt,
   keyword_init: true
 )
 
@@ -192,8 +168,48 @@ ChannelCreateData = Struct.new(
 #
 # @!attribute [rw] id
 #   @return [String]
+#
+# @!attribute [rw] category
+#   @return [String, nil]
+#
+# @!attribute [rw] createdAt
+#   @return [String, nil]
+#
+# @!attribute [rw] description
+#   @return [String, nil]
+#
+# @!attribute [rw] isLive
+#   @return [Boolean, nil]
+#
+# @!attribute [rw] isPremium
+#   @return [Boolean, nil]
+#
+# @!attribute [rw] language
+#   @return [String, nil]
+#
+# @!attribute [rw] logoUrl
+#   @return [String, nil]
+#
+# @!attribute [rw] name
+#   @return [String, nil]
+#
+# @!attribute [rw] streamUrl
+#   @return [String, nil]
+#
+# @!attribute [rw] updatedAt
+#   @return [String, nil]
 ChannelUpdateData = Struct.new(
   :id,
+  :category,
+  :createdAt,
+  :description,
+  :isLive,
+  :isPremium,
+  :language,
+  :logoUrl,
+  :name,
+  :streamUrl,
+  :updatedAt,
   keyword_init: true
 )
 
@@ -208,62 +224,54 @@ ChannelRemoveMatch = Struct.new(
 
 # Movie entity data model.
 #
-# @!attribute [rw] created_at
+# @!attribute [rw] createdAt
 #   @return [String, nil]
 #
-# @!attribute [rw] data
-#   @return [Hash, nil]
-#
 # @!attribute [rw] description
-#   @return [String]
+#   @return [String, nil]
 #
 # @!attribute [rw] duration
-#   @return [Integer]
+#   @return [Integer, nil]
 #
 # @!attribute [rw] genre
-#   @return [Array]
+#   @return [Array, nil]
 #
 # @!attribute [rw] id
 #   @return [String, nil]
 #
-# @!attribute [rw] is_premium
+# @!attribute [rw] isPremium
 #   @return [Boolean, nil]
 #
 # @!attribute [rw] rating
 #   @return [Float, nil]
 #
-# @!attribute [rw] release_year
-#   @return [Integer]
+# @!attribute [rw] releaseYear
+#   @return [Integer, nil]
 #
-# @!attribute [rw] stream_url
+# @!attribute [rw] streamUrl
 #   @return [String, nil]
 #
-# @!attribute [rw] success
-#   @return [Boolean, nil]
-#
-# @!attribute [rw] thumbnail_url
+# @!attribute [rw] thumbnailUrl
 #   @return [String, nil]
 #
 # @!attribute [rw] title
-#   @return [String]
+#   @return [String, nil]
 #
-# @!attribute [rw] updated_at
+# @!attribute [rw] updatedAt
 #   @return [String, nil]
 Movie = Struct.new(
-  :created_at,
-  :data,
+  :createdAt,
   :description,
   :duration,
   :genre,
   :id,
-  :is_premium,
+  :isPremium,
   :rating,
-  :release_year,
-  :stream_url,
-  :success,
-  :thumbnail_url,
+  :releaseYear,
+  :streamUrl,
+  :thumbnailUrl,
   :title,
-  :updated_at,
+  :updatedAt,
   keyword_init: true
 )
 
@@ -278,11 +286,8 @@ MovieLoadMatch = Struct.new(
 
 # Request payload for Movie#list.
 #
-# @!attribute [rw] created_at
+# @!attribute [rw] createdAt
 #   @return [String, nil]
-#
-# @!attribute [rw] data
-#   @return [Hash, nil]
 #
 # @!attribute [rw] description
 #   @return [String, nil]
@@ -296,105 +301,92 @@ MovieLoadMatch = Struct.new(
 # @!attribute [rw] id
 #   @return [String, nil]
 #
-# @!attribute [rw] is_premium
+# @!attribute [rw] isPremium
 #   @return [Boolean, nil]
 #
 # @!attribute [rw] rating
 #   @return [Float, nil]
 #
-# @!attribute [rw] release_year
+# @!attribute [rw] releaseYear
 #   @return [Integer, nil]
 #
-# @!attribute [rw] stream_url
+# @!attribute [rw] streamUrl
 #   @return [String, nil]
 #
-# @!attribute [rw] success
-#   @return [Boolean, nil]
-#
-# @!attribute [rw] thumbnail_url
+# @!attribute [rw] thumbnailUrl
 #   @return [String, nil]
 #
 # @!attribute [rw] title
 #   @return [String, nil]
 #
-# @!attribute [rw] updated_at
+# @!attribute [rw] updatedAt
 #   @return [String, nil]
 MovieListMatch = Struct.new(
-  :created_at,
-  :data,
+  :createdAt,
   :description,
   :duration,
   :genre,
   :id,
-  :is_premium,
+  :isPremium,
   :rating,
-  :release_year,
-  :stream_url,
-  :success,
-  :thumbnail_url,
+  :releaseYear,
+  :streamUrl,
+  :thumbnailUrl,
   :title,
-  :updated_at,
+  :updatedAt,
   keyword_init: true
 )
 
 # Request payload for Movie#create.
 #
-# @!attribute [rw] created_at
+# @!attribute [rw] createdAt
 #   @return [String, nil]
 #
-# @!attribute [rw] data
-#   @return [Hash, nil]
-#
 # @!attribute [rw] description
-#   @return [String]
+#   @return [String, nil]
 #
 # @!attribute [rw] duration
-#   @return [Integer]
+#   @return [Integer, nil]
 #
 # @!attribute [rw] genre
-#   @return [Array]
+#   @return [Array, nil]
 #
 # @!attribute [rw] id
 #   @return [String, nil]
 #
-# @!attribute [rw] is_premium
+# @!attribute [rw] isPremium
 #   @return [Boolean, nil]
 #
 # @!attribute [rw] rating
 #   @return [Float, nil]
 #
-# @!attribute [rw] release_year
-#   @return [Integer]
+# @!attribute [rw] releaseYear
+#   @return [Integer, nil]
 #
-# @!attribute [rw] stream_url
+# @!attribute [rw] streamUrl
 #   @return [String, nil]
 #
-# @!attribute [rw] success
-#   @return [Boolean, nil]
-#
-# @!attribute [rw] thumbnail_url
+# @!attribute [rw] thumbnailUrl
 #   @return [String, nil]
 #
 # @!attribute [rw] title
-#   @return [String]
+#   @return [String, nil]
 #
-# @!attribute [rw] updated_at
+# @!attribute [rw] updatedAt
 #   @return [String, nil]
 MovieCreateData = Struct.new(
-  :created_at,
-  :data,
+  :createdAt,
   :description,
   :duration,
   :genre,
   :id,
-  :is_premium,
+  :isPremium,
   :rating,
-  :release_year,
-  :stream_url,
-  :success,
-  :thumbnail_url,
+  :releaseYear,
+  :streamUrl,
+  :thumbnailUrl,
   :title,
-  :updated_at,
+  :updatedAt,
   keyword_init: true
 )
 
@@ -402,8 +394,52 @@ MovieCreateData = Struct.new(
 #
 # @!attribute [rw] id
 #   @return [String]
+#
+# @!attribute [rw] createdAt
+#   @return [String, nil]
+#
+# @!attribute [rw] description
+#   @return [String, nil]
+#
+# @!attribute [rw] duration
+#   @return [Integer, nil]
+#
+# @!attribute [rw] genre
+#   @return [Array, nil]
+#
+# @!attribute [rw] isPremium
+#   @return [Boolean, nil]
+#
+# @!attribute [rw] rating
+#   @return [Float, nil]
+#
+# @!attribute [rw] releaseYear
+#   @return [Integer, nil]
+#
+# @!attribute [rw] streamUrl
+#   @return [String, nil]
+#
+# @!attribute [rw] thumbnailUrl
+#   @return [String, nil]
+#
+# @!attribute [rw] title
+#   @return [String, nil]
+#
+# @!attribute [rw] updatedAt
+#   @return [String, nil]
 MovieUpdateData = Struct.new(
   :id,
+  :createdAt,
+  :description,
+  :duration,
+  :genre,
+  :isPremium,
+  :rating,
+  :releaseYear,
+  :streamUrl,
+  :thumbnailUrl,
+  :title,
+  :updatedAt,
   keyword_init: true
 )
 
@@ -418,62 +454,54 @@ MovieRemoveMatch = Struct.new(
 
 # Series entity data model.
 #
-# @!attribute [rw] created_at
+# @!attribute [rw] createdAt
 #   @return [String, nil]
 #
-# @!attribute [rw] data
-#   @return [Hash, nil]
-#
 # @!attribute [rw] description
-#   @return [String]
+#   @return [String, nil]
 #
-# @!attribute [rw] episode
+# @!attribute [rw] episodes
 #   @return [Integer, nil]
 #
 # @!attribute [rw] genre
-#   @return [Array]
+#   @return [Array, nil]
 #
 # @!attribute [rw] id
 #   @return [String, nil]
 #
-# @!attribute [rw] is_premium
+# @!attribute [rw] isPremium
 #   @return [Boolean, nil]
 #
 # @!attribute [rw] rating
 #   @return [Float, nil]
 #
-# @!attribute [rw] release_year
-#   @return [Integer]
-#
-# @!attribute [rw] season
+# @!attribute [rw] releaseYear
 #   @return [Integer, nil]
 #
-# @!attribute [rw] success
-#   @return [Boolean, nil]
+# @!attribute [rw] seasons
+#   @return [Integer, nil]
 #
-# @!attribute [rw] thumbnail_url
+# @!attribute [rw] thumbnailUrl
 #   @return [String, nil]
 #
 # @!attribute [rw] title
-#   @return [String]
+#   @return [String, nil]
 #
-# @!attribute [rw] updated_at
+# @!attribute [rw] updatedAt
 #   @return [String, nil]
 Series = Struct.new(
-  :created_at,
-  :data,
+  :createdAt,
   :description,
-  :episode,
+  :episodes,
   :genre,
   :id,
-  :is_premium,
+  :isPremium,
   :rating,
-  :release_year,
-  :season,
-  :success,
-  :thumbnail_url,
+  :releaseYear,
+  :seasons,
+  :thumbnailUrl,
   :title,
-  :updated_at,
+  :updatedAt,
   keyword_init: true
 )
 
@@ -488,16 +516,13 @@ SeriesLoadMatch = Struct.new(
 
 # Request payload for Series#list.
 #
-# @!attribute [rw] created_at
+# @!attribute [rw] createdAt
 #   @return [String, nil]
-#
-# @!attribute [rw] data
-#   @return [Hash, nil]
 #
 # @!attribute [rw] description
 #   @return [String, nil]
 #
-# @!attribute [rw] episode
+# @!attribute [rw] episodes
 #   @return [Integer, nil]
 #
 # @!attribute [rw] genre
@@ -506,105 +531,92 @@ SeriesLoadMatch = Struct.new(
 # @!attribute [rw] id
 #   @return [String, nil]
 #
-# @!attribute [rw] is_premium
+# @!attribute [rw] isPremium
 #   @return [Boolean, nil]
 #
 # @!attribute [rw] rating
 #   @return [Float, nil]
 #
-# @!attribute [rw] release_year
+# @!attribute [rw] releaseYear
 #   @return [Integer, nil]
 #
-# @!attribute [rw] season
+# @!attribute [rw] seasons
 #   @return [Integer, nil]
 #
-# @!attribute [rw] success
-#   @return [Boolean, nil]
-#
-# @!attribute [rw] thumbnail_url
+# @!attribute [rw] thumbnailUrl
 #   @return [String, nil]
 #
 # @!attribute [rw] title
 #   @return [String, nil]
 #
-# @!attribute [rw] updated_at
+# @!attribute [rw] updatedAt
 #   @return [String, nil]
 SeriesListMatch = Struct.new(
-  :created_at,
-  :data,
+  :createdAt,
   :description,
-  :episode,
+  :episodes,
   :genre,
   :id,
-  :is_premium,
+  :isPremium,
   :rating,
-  :release_year,
-  :season,
-  :success,
-  :thumbnail_url,
+  :releaseYear,
+  :seasons,
+  :thumbnailUrl,
   :title,
-  :updated_at,
+  :updatedAt,
   keyword_init: true
 )
 
 # Request payload for Series#create.
 #
-# @!attribute [rw] created_at
+# @!attribute [rw] createdAt
 #   @return [String, nil]
 #
-# @!attribute [rw] data
-#   @return [Hash, nil]
-#
 # @!attribute [rw] description
-#   @return [String]
+#   @return [String, nil]
 #
-# @!attribute [rw] episode
+# @!attribute [rw] episodes
 #   @return [Integer, nil]
 #
 # @!attribute [rw] genre
-#   @return [Array]
+#   @return [Array, nil]
 #
 # @!attribute [rw] id
 #   @return [String, nil]
 #
-# @!attribute [rw] is_premium
+# @!attribute [rw] isPremium
 #   @return [Boolean, nil]
 #
 # @!attribute [rw] rating
 #   @return [Float, nil]
 #
-# @!attribute [rw] release_year
-#   @return [Integer]
-#
-# @!attribute [rw] season
+# @!attribute [rw] releaseYear
 #   @return [Integer, nil]
 #
-# @!attribute [rw] success
-#   @return [Boolean, nil]
+# @!attribute [rw] seasons
+#   @return [Integer, nil]
 #
-# @!attribute [rw] thumbnail_url
+# @!attribute [rw] thumbnailUrl
 #   @return [String, nil]
 #
 # @!attribute [rw] title
-#   @return [String]
+#   @return [String, nil]
 #
-# @!attribute [rw] updated_at
+# @!attribute [rw] updatedAt
 #   @return [String, nil]
 SeriesCreateData = Struct.new(
-  :created_at,
-  :data,
+  :createdAt,
   :description,
-  :episode,
+  :episodes,
   :genre,
   :id,
-  :is_premium,
+  :isPremium,
   :rating,
-  :release_year,
-  :season,
-  :success,
-  :thumbnail_url,
+  :releaseYear,
+  :seasons,
+  :thumbnailUrl,
   :title,
-  :updated_at,
+  :updatedAt,
   keyword_init: true
 )
 
@@ -612,8 +624,52 @@ SeriesCreateData = Struct.new(
 #
 # @!attribute [rw] id
 #   @return [String]
+#
+# @!attribute [rw] createdAt
+#   @return [String, nil]
+#
+# @!attribute [rw] description
+#   @return [String, nil]
+#
+# @!attribute [rw] episodes
+#   @return [Integer, nil]
+#
+# @!attribute [rw] genre
+#   @return [Array, nil]
+#
+# @!attribute [rw] isPremium
+#   @return [Boolean, nil]
+#
+# @!attribute [rw] rating
+#   @return [Float, nil]
+#
+# @!attribute [rw] releaseYear
+#   @return [Integer, nil]
+#
+# @!attribute [rw] seasons
+#   @return [Integer, nil]
+#
+# @!attribute [rw] thumbnailUrl
+#   @return [String, nil]
+#
+# @!attribute [rw] title
+#   @return [String, nil]
+#
+# @!attribute [rw] updatedAt
+#   @return [String, nil]
 SeriesUpdateData = Struct.new(
   :id,
+  :createdAt,
+  :description,
+  :episodes,
+  :genre,
+  :isPremium,
+  :rating,
+  :releaseYear,
+  :seasons,
+  :thumbnailUrl,
+  :title,
+  :updatedAt,
   keyword_init: true
 )
 

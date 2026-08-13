@@ -70,7 +70,7 @@ describe("ChannelEntity", function()
     -- The basic flow consumes synthetic IDs from the fixture. In live mode
     -- without an *_ENTID env override, those IDs hit the live API and 4xx.
     if setup.synthetic_only then
-      pending("live entity test uses synthetic IDs from fixture — set FUNISGOSTREAMING_TEST_CHANNEL_ENTID JSON to run live")
+      pending("live entity test uses synthetic IDs from fixture — set FUNISGO_STREAMING_TEST_CHANNEL_ENTID JSON to run live")
       return
     end
     local client = setup.client
@@ -82,7 +82,7 @@ describe("ChannelEntity", function()
 
     local channel_ref01_data_result, err = channel_ref01_ent:create(channel_ref01_data, nil)
     assert.is_nil(err)
-    channel_ref01_data = helpers.to_map(channel_ref01_data_result)
+    channel_ref01_data = helpers.to_map(type(channel_ref01_data_result) == 'table' and channel_ref01_data_result.data_get and channel_ref01_data_result:data_get() or channel_ref01_data_result)
     assert.is_not_nil(channel_ref01_data)
     assert.is_not_nil(channel_ref01_data["id"])
 
@@ -109,7 +109,7 @@ describe("ChannelEntity", function()
 
     local channel_ref01_resdata_up0_result, err = channel_ref01_ent:update(channel_ref01_data_up0_up, nil)
     assert.is_nil(err)
-    local channel_ref01_resdata_up0 = helpers.to_map(channel_ref01_resdata_up0_result)
+    local channel_ref01_resdata_up0 = helpers.to_map(type(channel_ref01_resdata_up0_result) == 'table' and channel_ref01_resdata_up0_result.data_get and channel_ref01_resdata_up0_result:data_get() or channel_ref01_resdata_up0_result)
     assert.is_not_nil(channel_ref01_resdata_up0)
     assert.are.equal(channel_ref01_resdata_up0["id"], channel_ref01_data_up0_up["id"])
     assert.are.equal(channel_ref01_resdata_up0[channel_ref01_markdef_up0_name], channel_ref01_markdef_up0_value)
@@ -120,7 +120,7 @@ describe("ChannelEntity", function()
     }
     local channel_ref01_data_dt0_loaded, err = channel_ref01_ent:load(channel_ref01_match_dt0, nil)
     assert.is_nil(err)
-    local channel_ref01_data_dt0_load_result = helpers.to_map(channel_ref01_data_dt0_loaded)
+    local channel_ref01_data_dt0_load_result = helpers.to_map(type(channel_ref01_data_dt0_loaded) == 'table' and channel_ref01_data_dt0_loaded.data_get and channel_ref01_data_dt0_loaded:data_get() or channel_ref01_data_dt0_loaded)
     assert.is_not_nil(channel_ref01_data_dt0_load_result)
     assert.are.equal(channel_ref01_data_dt0_load_result["id"], channel_ref01_data["id"])
 
@@ -178,39 +178,39 @@ function channel_basic_setup(extra)
   -- Detect ENTID env override before envOverride consumes it. When live
   -- mode is on without a real override, the basic test runs against synthetic
   -- IDs from the fixture and 4xx's. Surface this so the test can skip.
-  local entid_env_raw = os.getenv("FUNISGOSTREAMING_TEST_CHANNEL_ENTID")
+  local entid_env_raw = os.getenv("FUNISGO_STREAMING_TEST_CHANNEL_ENTID")
   local idmap_overridden = entid_env_raw ~= nil and entid_env_raw:match("^%s*{") ~= nil
 
   local env = runner.env_override({
-    ["FUNISGOSTREAMING_TEST_CHANNEL_ENTID"] = idmap,
-    ["FUNISGOSTREAMING_TEST_LIVE"] = "FALSE",
-    ["FUNISGOSTREAMING_TEST_EXPLAIN"] = "FALSE",
-    ["FUNISGOSTREAMING_APIKEY"] = "NONE",
+    ["FUNISGO_STREAMING_TEST_CHANNEL_ENTID"] = idmap,
+    ["FUNISGO_STREAMING_TEST_LIVE"] = "FALSE",
+    ["FUNISGO_STREAMING_TEST_EXPLAIN"] = "FALSE",
+    ["FUNISGO_STREAMING_APIKEY"] = "NONE",
   })
 
   local idmap_resolved = helpers.to_map(
-    env["FUNISGOSTREAMING_TEST_CHANNEL_ENTID"])
+    env["FUNISGO_STREAMING_TEST_CHANNEL_ENTID"])
   if idmap_resolved == nil then
     idmap_resolved = helpers.to_map(idmap)
   end
 
-  if env["FUNISGOSTREAMING_TEST_LIVE"] == "TRUE" then
+  if env["FUNISGO_STREAMING_TEST_LIVE"] == "TRUE" then
     local merged_opts = vs.merge({
       {
-        apikey = env["FUNISGOSTREAMING_APIKEY"],
+        apikey = env["FUNISGO_STREAMING_APIKEY"],
       },
       extra or {},
     })
     client = sdk.new(helpers.to_map(merged_opts))
   end
 
-  local live = env["FUNISGOSTREAMING_TEST_LIVE"] == "TRUE"
+  local live = env["FUNISGO_STREAMING_TEST_LIVE"] == "TRUE"
   return {
     client = client,
     data = entity_data,
     idmap = idmap_resolved,
     env = env,
-    explain = env["FUNISGOSTREAMING_TEST_EXPLAIN"] == "TRUE",
+    explain = env["FUNISGO_STREAMING_TEST_EXPLAIN"] == "TRUE",
     live = live,
     synthetic_only = live and not idmap_overridden,
     now = os.time() * 1000,

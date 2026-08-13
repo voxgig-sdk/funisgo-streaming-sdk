@@ -3,9 +3,9 @@
 import json
 import pytest
 
-from utility.voxgig_struct import voxgig_struct as vs
+from funisgostreaming_sdk.utility.voxgig_struct import voxgig_struct as vs
 from funisgostreaming_sdk import FunisgoStreamingSDK
-from core import helpers
+from funisgostreaming_sdk.core import helpers
 from test import runner
 
 
@@ -105,16 +105,16 @@ def _series_direct_setup(mockres):
     calls = []
 
     env = runner.env_override({
-        "FUNISGOSTREAMING_TEST_SERIES_ENTID": {},
-        "FUNISGOSTREAMING_TEST_LIVE": "FALSE",
-        "FUNISGOSTREAMING_APIKEY": "NONE",
+        "FUNISGO_STREAMING_TEST_SERIES_ENTID": {},
+        "FUNISGO_STREAMING_TEST_LIVE": "FALSE",
+        "FUNISGO_STREAMING_APIKEY": "NONE",
     })
 
-    live = env.get("FUNISGOSTREAMING_TEST_LIVE") == "TRUE"
+    live = env.get("FUNISGO_STREAMING_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {
-            "apikey": env.get("FUNISGOSTREAMING_APIKEY"),
+            "apikey": env.get("FUNISGO_STREAMING_APIKEY"),
         }
         client = FunisgoStreamingSDK(merged_opts)
         return {

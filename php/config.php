@@ -39,110 +39,108 @@ class FunisgoStreamingConfig
               'active' => true,
               'name' => 'category',
               'op' => [
-                'list' => [
-                  'req' => false,
+                'create' => [
+                  'req' => true,
+                  'type' => '`$STRING`',
+                ],
+                'update' => [
+                  'req' => true,
                   'type' => '`$STRING`',
                 ],
               ],
-              'req' => true,
+              'req' => false,
               'type' => '`$STRING`',
               'index$' => 0,
             ],
             [
               'active' => true,
-              'name' => 'created_at',
+              'name' => 'createdAt',
               'req' => false,
               'type' => '`$STRING`',
               'index$' => 1,
             ],
             [
               'active' => true,
-              'name' => 'data',
-              'req' => false,
-              'type' => '`$OBJECT`',
-              'index$' => 2,
-            ],
-            [
-              'active' => true,
               'name' => 'description',
               'op' => [
-                'list' => [
-                  'req' => false,
+                'create' => [
+                  'req' => true,
+                  'type' => '`$STRING`',
+                ],
+                'update' => [
+                  'req' => true,
                   'type' => '`$STRING`',
                 ],
               ],
-              'req' => true,
+              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 3,
+              'index$' => 2,
             ],
             [
               'active' => true,
               'name' => 'id',
               'req' => false,
               'type' => '`$STRING`',
+              'index$' => 3,
+            ],
+            [
+              'active' => true,
+              'name' => 'isLive',
+              'req' => false,
+              'type' => '`$BOOLEAN`',
               'index$' => 4,
             ],
             [
               'active' => true,
-              'name' => 'is_live',
+              'name' => 'isPremium',
               'req' => false,
               'type' => '`$BOOLEAN`',
               'index$' => 5,
             ],
             [
               'active' => true,
-              'name' => 'is_premium',
+              'name' => 'language',
               'req' => false,
-              'type' => '`$BOOLEAN`',
+              'type' => '`$STRING`',
               'index$' => 6,
             ],
             [
               'active' => true,
-              'name' => 'language',
+              'name' => 'logoUrl',
               'req' => false,
               'type' => '`$STRING`',
               'index$' => 7,
             ],
             [
               'active' => true,
-              'name' => 'logo_url',
+              'name' => 'name',
+              'op' => [
+                'create' => [
+                  'req' => true,
+                  'type' => '`$STRING`',
+                ],
+                'update' => [
+                  'req' => true,
+                  'type' => '`$STRING`',
+                ],
+              ],
               'req' => false,
               'type' => '`$STRING`',
               'index$' => 8,
             ],
             [
               'active' => true,
-              'name' => 'name',
-              'op' => [
-                'list' => [
-                  'req' => false,
-                  'type' => '`$STRING`',
-                ],
-              ],
-              'req' => true,
+              'name' => 'streamUrl',
+              'req' => false,
               'type' => '`$STRING`',
               'index$' => 9,
             ],
             [
               'active' => true,
-              'name' => 'stream_url',
+              'name' => 'updatedAt',
               'req' => false,
               'type' => '`$STRING`',
               'index$' => 10,
-            ],
-            [
-              'active' => true,
-              'name' => 'success',
-              'req' => false,
-              'type' => '`$BOOLEAN`',
-              'index$' => 11,
-            ],
-            [
-              'active' => true,
-              'name' => 'updated_at',
-              'req' => false,
-              'type' => '`$STRING`',
-              'index$' => 12,
             ],
           ],
           'name' => 'channel',
@@ -154,6 +152,7 @@ class FunisgoStreamingConfig
                 [
                   'active' => true,
                   'args' => [],
+                  'kind' => 'http',
                   'method' => 'POST',
                   'orig' => '/channels',
                   'parts' => [
@@ -162,7 +161,7 @@ class FunisgoStreamingConfig
                   'select' => [],
                   'transform' => [
                     'req' => '`reqdata`',
-                    'res' => '`body`',
+                    'res' => '`body.data`',
                   ],
                   'index$' => 0,
                 ],
@@ -205,6 +204,7 @@ class FunisgoStreamingConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/channels',
                   'parts' => [
@@ -245,6 +245,7 @@ class FunisgoStreamingConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/channels/{channelId}',
                   'parts' => [
@@ -263,7 +264,7 @@ class FunisgoStreamingConfig
                   ],
                   'transform' => [
                     'req' => '`reqdata`',
-                    'res' => '`body`',
+                    'res' => '`body.data`',
                   ],
                   'index$' => 0,
                 ],
@@ -289,6 +290,7 @@ class FunisgoStreamingConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'DELETE',
                   'orig' => '/channels/{channelId}',
                   'parts' => [
@@ -333,6 +335,7 @@ class FunisgoStreamingConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'PUT',
                   'orig' => '/channels/{channelId}',
                   'parts' => [
@@ -351,7 +354,7 @@ class FunisgoStreamingConfig
                   ],
                   'transform' => [
                     'req' => '`reqdata`',
-                    'res' => '`body`',
+                    'res' => '`body.data`',
                   ],
                   'index$' => 0,
                 ],
@@ -367,131 +370,137 @@ class FunisgoStreamingConfig
           'fields' => [
             [
               'active' => true,
-              'name' => 'created_at',
+              'name' => 'createdAt',
               'req' => false,
               'type' => '`$STRING`',
               'index$' => 0,
             ],
             [
               'active' => true,
-              'name' => 'data',
-              'req' => false,
-              'type' => '`$OBJECT`',
-              'index$' => 1,
-            ],
-            [
-              'active' => true,
               'name' => 'description',
               'op' => [
-                'list' => [
-                  'req' => false,
+                'create' => [
+                  'req' => true,
+                  'type' => '`$STRING`',
+                ],
+                'update' => [
+                  'req' => true,
                   'type' => '`$STRING`',
                 ],
               ],
-              'req' => true,
+              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 2,
+              'index$' => 1,
             ],
             [
               'active' => true,
               'name' => 'duration',
               'op' => [
-                'list' => [
-                  'req' => false,
+                'create' => [
+                  'req' => true,
+                  'type' => '`$INTEGER`',
+                ],
+                'update' => [
+                  'req' => true,
                   'type' => '`$INTEGER`',
                 ],
               ],
-              'req' => true,
+              'req' => false,
               'type' => '`$INTEGER`',
-              'index$' => 3,
+              'index$' => 2,
             ],
             [
               'active' => true,
               'name' => 'genre',
               'op' => [
-                'list' => [
-                  'req' => false,
+                'create' => [
+                  'req' => true,
+                  'type' => '`$ARRAY`',
+                ],
+                'update' => [
+                  'req' => true,
                   'type' => '`$ARRAY`',
                 ],
               ],
-              'req' => true,
+              'req' => false,
               'type' => '`$ARRAY`',
-              'index$' => 4,
+              'index$' => 3,
             ],
             [
               'active' => true,
               'name' => 'id',
               'req' => false,
               'type' => '`$STRING`',
-              'index$' => 5,
+              'index$' => 4,
             ],
             [
               'active' => true,
-              'name' => 'is_premium',
+              'name' => 'isPremium',
               'req' => false,
               'type' => '`$BOOLEAN`',
-              'index$' => 6,
+              'index$' => 5,
             ],
             [
               'active' => true,
               'name' => 'rating',
               'req' => false,
               'type' => '`$NUMBER`',
+              'index$' => 6,
+            ],
+            [
+              'active' => true,
+              'name' => 'releaseYear',
+              'op' => [
+                'create' => [
+                  'req' => true,
+                  'type' => '`$INTEGER`',
+                ],
+                'update' => [
+                  'req' => true,
+                  'type' => '`$INTEGER`',
+                ],
+              ],
+              'req' => false,
+              'type' => '`$INTEGER`',
               'index$' => 7,
             ],
             [
               'active' => true,
-              'name' => 'release_year',
-              'op' => [
-                'list' => [
-                  'req' => false,
-                  'type' => '`$INTEGER`',
-                ],
-              ],
-              'req' => true,
-              'type' => '`$INTEGER`',
+              'name' => 'streamUrl',
+              'req' => false,
+              'type' => '`$STRING`',
               'index$' => 8,
             ],
             [
               'active' => true,
-              'name' => 'stream_url',
+              'name' => 'thumbnailUrl',
               'req' => false,
               'type' => '`$STRING`',
               'index$' => 9,
             ],
             [
               'active' => true,
-              'name' => 'success',
+              'name' => 'title',
+              'op' => [
+                'create' => [
+                  'req' => true,
+                  'type' => '`$STRING`',
+                ],
+                'update' => [
+                  'req' => true,
+                  'type' => '`$STRING`',
+                ],
+              ],
               'req' => false,
-              'type' => '`$BOOLEAN`',
+              'type' => '`$STRING`',
               'index$' => 10,
             ],
             [
               'active' => true,
-              'name' => 'thumbnail_url',
+              'name' => 'updatedAt',
               'req' => false,
               'type' => '`$STRING`',
               'index$' => 11,
-            ],
-            [
-              'active' => true,
-              'name' => 'title',
-              'op' => [
-                'list' => [
-                  'req' => false,
-                  'type' => '`$STRING`',
-                ],
-              ],
-              'req' => true,
-              'type' => '`$STRING`',
-              'index$' => 12,
-            ],
-            [
-              'active' => true,
-              'name' => 'updated_at',
-              'req' => false,
-              'type' => '`$STRING`',
-              'index$' => 13,
             ],
           ],
           'name' => 'movie',
@@ -503,6 +512,7 @@ class FunisgoStreamingConfig
                 [
                   'active' => true,
                   'args' => [],
+                  'kind' => 'http',
                   'method' => 'POST',
                   'orig' => '/movies',
                   'parts' => [
@@ -511,7 +521,7 @@ class FunisgoStreamingConfig
                   'select' => [],
                   'transform' => [
                     'req' => '`reqdata`',
-                    'res' => '`body`',
+                    'res' => '`body.data`',
                   ],
                   'index$' => 0,
                 ],
@@ -554,6 +564,7 @@ class FunisgoStreamingConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/movies',
                   'parts' => [
@@ -594,6 +605,7 @@ class FunisgoStreamingConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/movies/{movieId}',
                   'parts' => [
@@ -612,7 +624,7 @@ class FunisgoStreamingConfig
                   ],
                   'transform' => [
                     'req' => '`reqdata`',
-                    'res' => '`body`',
+                    'res' => '`body.data`',
                   ],
                   'index$' => 0,
                 ],
@@ -638,6 +650,7 @@ class FunisgoStreamingConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'DELETE',
                   'orig' => '/movies/{movieId}',
                   'parts' => [
@@ -682,6 +695,7 @@ class FunisgoStreamingConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'PUT',
                   'orig' => '/movies/{movieId}',
                   'parts' => [
@@ -700,7 +714,7 @@ class FunisgoStreamingConfig
                   ],
                   'transform' => [
                     'req' => '`reqdata`',
-                    'res' => '`body`',
+                    'res' => '`body.data`',
                   ],
                   'index$' => 0,
                 ],
@@ -716,125 +730,127 @@ class FunisgoStreamingConfig
           'fields' => [
             [
               'active' => true,
-              'name' => 'created_at',
+              'name' => 'createdAt',
               'req' => false,
               'type' => '`$STRING`',
               'index$' => 0,
             ],
             [
               'active' => true,
-              'name' => 'data',
+              'name' => 'description',
+              'op' => [
+                'create' => [
+                  'req' => true,
+                  'type' => '`$STRING`',
+                ],
+                'update' => [
+                  'req' => true,
+                  'type' => '`$STRING`',
+                ],
+              ],
               'req' => false,
-              'type' => '`$OBJECT`',
+              'type' => '`$STRING`',
               'index$' => 1,
             ],
             [
               'active' => true,
-              'name' => 'description',
-              'op' => [
-                'list' => [
-                  'req' => false,
-                  'type' => '`$STRING`',
-                ],
-              ],
-              'req' => true,
-              'type' => '`$STRING`',
-              'index$' => 2,
-            ],
-            [
-              'active' => true,
-              'name' => 'episode',
+              'name' => 'episodes',
               'req' => false,
               'type' => '`$INTEGER`',
-              'index$' => 3,
+              'index$' => 2,
             ],
             [
               'active' => true,
               'name' => 'genre',
               'op' => [
-                'list' => [
-                  'req' => false,
+                'create' => [
+                  'req' => true,
+                  'type' => '`$ARRAY`',
+                ],
+                'update' => [
+                  'req' => true,
                   'type' => '`$ARRAY`',
                 ],
               ],
-              'req' => true,
+              'req' => false,
               'type' => '`$ARRAY`',
-              'index$' => 4,
+              'index$' => 3,
             ],
             [
               'active' => true,
               'name' => 'id',
               'req' => false,
               'type' => '`$STRING`',
-              'index$' => 5,
+              'index$' => 4,
             ],
             [
               'active' => true,
-              'name' => 'is_premium',
+              'name' => 'isPremium',
               'req' => false,
               'type' => '`$BOOLEAN`',
-              'index$' => 6,
+              'index$' => 5,
             ],
             [
               'active' => true,
               'name' => 'rating',
               'req' => false,
               'type' => '`$NUMBER`',
+              'index$' => 6,
+            ],
+            [
+              'active' => true,
+              'name' => 'releaseYear',
+              'op' => [
+                'create' => [
+                  'req' => true,
+                  'type' => '`$INTEGER`',
+                ],
+                'update' => [
+                  'req' => true,
+                  'type' => '`$INTEGER`',
+                ],
+              ],
+              'req' => false,
+              'type' => '`$INTEGER`',
               'index$' => 7,
             ],
             [
               'active' => true,
-              'name' => 'release_year',
-              'op' => [
-                'list' => [
-                  'req' => false,
-                  'type' => '`$INTEGER`',
-                ],
-              ],
-              'req' => true,
+              'name' => 'seasons',
+              'req' => false,
               'type' => '`$INTEGER`',
               'index$' => 8,
             ],
             [
               'active' => true,
-              'name' => 'season',
-              'req' => false,
-              'type' => '`$INTEGER`',
-              'index$' => 9,
-            ],
-            [
-              'active' => true,
-              'name' => 'success',
-              'req' => false,
-              'type' => '`$BOOLEAN`',
-              'index$' => 10,
-            ],
-            [
-              'active' => true,
-              'name' => 'thumbnail_url',
+              'name' => 'thumbnailUrl',
               'req' => false,
               'type' => '`$STRING`',
-              'index$' => 11,
+              'index$' => 9,
             ],
             [
               'active' => true,
               'name' => 'title',
               'op' => [
-                'list' => [
-                  'req' => false,
+                'create' => [
+                  'req' => true,
+                  'type' => '`$STRING`',
+                ],
+                'update' => [
+                  'req' => true,
                   'type' => '`$STRING`',
                 ],
               ],
-              'req' => true,
+              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 12,
+              'index$' => 10,
             ],
             [
               'active' => true,
-              'name' => 'updated_at',
+              'name' => 'updatedAt',
               'req' => false,
               'type' => '`$STRING`',
-              'index$' => 13,
+              'index$' => 11,
             ],
           ],
           'name' => 'series',
@@ -846,6 +862,7 @@ class FunisgoStreamingConfig
                 [
                   'active' => true,
                   'args' => [],
+                  'kind' => 'http',
                   'method' => 'POST',
                   'orig' => '/series',
                   'parts' => [
@@ -854,7 +871,7 @@ class FunisgoStreamingConfig
                   'select' => [],
                   'transform' => [
                     'req' => '`reqdata`',
-                    'res' => '`body`',
+                    'res' => '`body.data`',
                   ],
                   'index$' => 0,
                 ],
@@ -897,6 +914,7 @@ class FunisgoStreamingConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/series',
                   'parts' => [
@@ -937,6 +955,7 @@ class FunisgoStreamingConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/series/{seriesId}',
                   'parts' => [
@@ -955,7 +974,7 @@ class FunisgoStreamingConfig
                   ],
                   'transform' => [
                     'req' => '`reqdata`',
-                    'res' => '`body`',
+                    'res' => '`body.data`',
                   ],
                   'index$' => 0,
                 ],
@@ -981,6 +1000,7 @@ class FunisgoStreamingConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'DELETE',
                   'orig' => '/series/{seriesId}',
                   'parts' => [
@@ -1025,6 +1045,7 @@ class FunisgoStreamingConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'PUT',
                   'orig' => '/series/{seriesId}',
                   'parts' => [
@@ -1043,7 +1064,7 @@ class FunisgoStreamingConfig
                   ],
                   'transform' => [
                     'req' => '`reqdata`',
-                    'res' => '`body`',
+                    'res' => '`body.data`',
                   ],
                   'index$' => 0,
                 ],

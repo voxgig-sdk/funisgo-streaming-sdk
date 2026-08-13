@@ -96,37 +96,33 @@ channel = client.Channel()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `category` | `str` | Yes |  |
-| `created_at` | `str` | No |  |
-| `data` | `dict` | No |  |
-| `description` | `str` | Yes |  |
+| `category` | `str` | No |  |
+| `createdAt` | `str` | No |  |
+| `description` | `str` | No |  |
 | `id` | `str` | No |  |
-| `is_live` | `bool` | No |  |
-| `is_premium` | `bool` | No |  |
+| `isLive` | `bool` | No |  |
+| `isPremium` | `bool` | No |  |
 | `language` | `str` | No |  |
-| `logo_url` | `str` | No |  |
-| `name` | `str` | Yes |  |
-| `stream_url` | `str` | No |  |
-| `success` | `bool` | No |  |
-| `updated_at` | `str` | No |  |
+| `logoUrl` | `str` | No |  |
+| `name` | `str` | No |  |
+| `streamUrl` | `str` | No |  |
+| `updatedAt` | `str` | No |  |
 
 ### Field Usage by Operation
 
 | Field | load | list | create | update | remove |
 | --- | --- | --- | --- | --- | --- |
-| `category` | - | Yes | - | - | - |
-| `created_at` | - | - | - | - | - |
-| `data` | - | - | - | - | - |
-| `description` | - | Yes | - | - | - |
+| `category` | - | - | Yes | Yes | - |
+| `createdAt` | - | - | - | - | - |
+| `description` | - | - | Yes | Yes | - |
 | `id` | - | - | - | - | - |
-| `is_live` | - | - | - | - | - |
-| `is_premium` | - | - | - | - | - |
+| `isLive` | - | - | - | - | - |
+| `isPremium` | - | - | - | - | - |
 | `language` | - | - | - | - | - |
-| `logo_url` | - | - | - | - | - |
-| `name` | - | Yes | - | - | - |
-| `stream_url` | - | - | - | - | - |
-| `success` | - | - | - | - | - |
-| `updated_at` | - | - | - | - | - |
+| `logoUrl` | - | - | - | - | - |
+| `name` | - | - | Yes | Yes | - |
+| `streamUrl` | - | - | - | - | - |
+| `updatedAt` | - | - | - | - | - |
 
 ### Operations
 
@@ -136,9 +132,6 @@ Create a new entity with the given data. Returns the created entity data and rai
 
 ```python
 result = client.Channel().create({
-    "category": "example_category",  # str
-    "description": "example_description",  # str
-    "name": "example_name",  # str
 })
 ```
 
@@ -218,39 +211,35 @@ movie = client.Movie()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | `str` | No |  |
-| `data` | `dict` | No |  |
-| `description` | `str` | Yes |  |
-| `duration` | `int` | Yes |  |
-| `genre` | `list` | Yes |  |
+| `createdAt` | `str` | No |  |
+| `description` | `str` | No |  |
+| `duration` | `int` | No |  |
+| `genre` | `list` | No |  |
 | `id` | `str` | No |  |
-| `is_premium` | `bool` | No |  |
+| `isPremium` | `bool` | No |  |
 | `rating` | `float` | No |  |
-| `release_year` | `int` | Yes |  |
-| `stream_url` | `str` | No |  |
-| `success` | `bool` | No |  |
-| `thumbnail_url` | `str` | No |  |
-| `title` | `str` | Yes |  |
-| `updated_at` | `str` | No |  |
+| `releaseYear` | `int` | No |  |
+| `streamUrl` | `str` | No |  |
+| `thumbnailUrl` | `str` | No |  |
+| `title` | `str` | No |  |
+| `updatedAt` | `str` | No |  |
 
 ### Field Usage by Operation
 
 | Field | load | list | create | update | remove |
 | --- | --- | --- | --- | --- | --- |
-| `created_at` | - | - | - | - | - |
-| `data` | - | - | - | - | - |
-| `description` | - | Yes | - | - | - |
-| `duration` | - | Yes | - | - | - |
-| `genre` | - | Yes | - | - | - |
+| `createdAt` | - | - | - | - | - |
+| `description` | - | - | Yes | Yes | - |
+| `duration` | - | - | Yes | Yes | - |
+| `genre` | - | - | Yes | Yes | - |
 | `id` | - | - | - | - | - |
-| `is_premium` | - | - | - | - | - |
+| `isPremium` | - | - | - | - | - |
 | `rating` | - | - | - | - | - |
-| `release_year` | - | Yes | - | - | - |
-| `stream_url` | - | - | - | - | - |
-| `success` | - | - | - | - | - |
-| `thumbnail_url` | - | - | - | - | - |
-| `title` | - | Yes | - | - | - |
-| `updated_at` | - | - | - | - | - |
+| `releaseYear` | - | - | Yes | Yes | - |
+| `streamUrl` | - | - | - | - | - |
+| `thumbnailUrl` | - | - | - | - | - |
+| `title` | - | - | Yes | Yes | - |
+| `updatedAt` | - | - | - | - | - |
 
 ### Operations
 
@@ -260,11 +249,6 @@ Create a new entity with the given data. Returns the created entity data and rai
 
 ```python
 result = client.Movie().create({
-    "description": "example_description",  # str
-    "duration": 1,  # int
-    "genre": [],  # list
-    "release_year": 1,  # int
-    "title": "example_title",  # str
 })
 ```
 
@@ -344,39 +328,35 @@ series = client.Series()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | `str` | No |  |
-| `data` | `dict` | No |  |
-| `description` | `str` | Yes |  |
-| `episode` | `int` | No |  |
-| `genre` | `list` | Yes |  |
+| `createdAt` | `str` | No |  |
+| `description` | `str` | No |  |
+| `episodes` | `int` | No |  |
+| `genre` | `list` | No |  |
 | `id` | `str` | No |  |
-| `is_premium` | `bool` | No |  |
+| `isPremium` | `bool` | No |  |
 | `rating` | `float` | No |  |
-| `release_year` | `int` | Yes |  |
-| `season` | `int` | No |  |
-| `success` | `bool` | No |  |
-| `thumbnail_url` | `str` | No |  |
-| `title` | `str` | Yes |  |
-| `updated_at` | `str` | No |  |
+| `releaseYear` | `int` | No |  |
+| `seasons` | `int` | No |  |
+| `thumbnailUrl` | `str` | No |  |
+| `title` | `str` | No |  |
+| `updatedAt` | `str` | No |  |
 
 ### Field Usage by Operation
 
 | Field | load | list | create | update | remove |
 | --- | --- | --- | --- | --- | --- |
-| `created_at` | - | - | - | - | - |
-| `data` | - | - | - | - | - |
-| `description` | - | Yes | - | - | - |
-| `episode` | - | - | - | - | - |
-| `genre` | - | Yes | - | - | - |
+| `createdAt` | - | - | - | - | - |
+| `description` | - | - | Yes | Yes | - |
+| `episodes` | - | - | - | - | - |
+| `genre` | - | - | Yes | Yes | - |
 | `id` | - | - | - | - | - |
-| `is_premium` | - | - | - | - | - |
+| `isPremium` | - | - | - | - | - |
 | `rating` | - | - | - | - | - |
-| `release_year` | - | Yes | - | - | - |
-| `season` | - | - | - | - | - |
-| `success` | - | - | - | - | - |
-| `thumbnail_url` | - | - | - | - | - |
-| `title` | - | Yes | - | - | - |
-| `updated_at` | - | - | - | - | - |
+| `releaseYear` | - | - | Yes | Yes | - |
+| `seasons` | - | - | - | - | - |
+| `thumbnailUrl` | - | - | - | - | - |
+| `title` | - | - | Yes | Yes | - |
+| `updatedAt` | - | - | - | - | - |
 
 ### Operations
 
@@ -386,10 +366,6 @@ Create a new entity with the given data. Returns the created entity data and rai
 
 ```python
 result = client.Series().create({
-    "description": "example_description",  # str
-    "genre": [],  # list
-    "release_year": 1,  # int
-    "title": "example_title",  # str
 })
 ```
 

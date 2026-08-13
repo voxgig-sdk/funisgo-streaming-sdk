@@ -23,8 +23,8 @@ module FunisgoStreamingTestRunner
   end
 
   def self.env_override(m)
-    live = getenv("FUNISGOSTREAMING_TEST_LIVE")
-    override = getenv("FUNISGOSTREAMING_TEST_OVERRIDE")
+    live = getenv("FUNISGO_STREAMING_TEST_LIVE")
+    override = getenv("FUNISGO_STREAMING_TEST_OVERRIDE")
 
     if live == "TRUE" || override == "TRUE"
       m.each_key do |key|
@@ -44,8 +44,8 @@ module FunisgoStreamingTestRunner
       end
     end
 
-    explain = getenv("FUNISGOSTREAMING_TEST_EXPLAIN")
-    m["FUNISGOSTREAMING_TEST_EXPLAIN"] = explain if explain && !explain.empty?
+    explain = getenv("FUNISGO_STREAMING_TEST_EXPLAIN")
+    m["FUNISGO_STREAMING_TEST_EXPLAIN"] = explain if explain && !explain.empty?
 
     m
   end

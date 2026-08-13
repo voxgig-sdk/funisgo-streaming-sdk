@@ -93,7 +93,7 @@ func TestMovieEntity(t *testing.T) {
 		// The basic flow consumes synthetic IDs from the fixture. In live mode
 		// without an *_ENTID env override, those IDs hit the live API and 4xx.
 		if setup.syntheticOnly {
-			t.Skip("live entity test uses synthetic IDs from fixture — set FUNISGOSTREAMING_TEST_MOVIE_ENTID JSON to run live")
+			t.Skip("live entity test uses synthetic IDs from fixture — set FUNISGO_STREAMING_TEST_MOVIE_ENTID JSON to run live")
 			return
 		}
 		client := setup.client
@@ -107,7 +107,7 @@ func TestMovieEntity(t *testing.T) {
 		if err != nil {
 			t.Fatalf("create failed: %v", err)
 		}
-		movieRef01Data = core.ToMapAny(movieRef01DataResult)
+		movieRef01Data = core.ToMapAny(entityData(movieRef01DataResult))
 		if movieRef01Data == nil {
 			t.Fatal("expected create result to be a map")
 		}
@@ -137,7 +137,7 @@ func TestMovieEntity(t *testing.T) {
 			"id": movieRef01Data["id"],
 		}
 
-		movieRef01MarkdefUp0Name := "created_at"
+		movieRef01MarkdefUp0Name := "createdAt"
 		movieRef01MarkdefUp0Value := fmt.Sprintf("Mark01-movie_ref01_%d", setup.now)
 		movieRef01DataUp0Up[movieRef01MarkdefUp0Name] = movieRef01MarkdefUp0Value
 
@@ -145,7 +145,7 @@ func TestMovieEntity(t *testing.T) {
 		if err != nil {
 			t.Fatalf("update failed: %v", err)
 		}
-		movieRef01ResdataUp0 := core.ToMapAny(movieRef01ResdataUp0Result)
+		movieRef01ResdataUp0 := core.ToMapAny(entityData(movieRef01ResdataUp0Result))
 		if movieRef01ResdataUp0 == nil {
 			t.Fatal("expected update result to be a map")
 		}
@@ -164,7 +164,7 @@ func TestMovieEntity(t *testing.T) {
 		if err != nil {
 			t.Fatalf("load failed: %v", err)
 		}
-		movieRef01DataDt0LoadResult := core.ToMapAny(movieRef01DataDt0Loaded)
+		movieRef01DataDt0LoadResult := core.ToMapAny(entityData(movieRef01DataDt0Loaded))
 		if movieRef01DataDt0LoadResult == nil {
 			t.Fatal("expected load result to be a map")
 		}
@@ -238,38 +238,38 @@ func movieBasicSetup(extra map[string]any) *entityTestSetup {
 	// Detect ENTID env override before envOverride consumes it. When live
 	// mode is on without a real override, the basic test runs against synthetic
 	// IDs from the fixture and 4xx's. Surface this so the test can skip.
-	entidEnvRaw := os.Getenv("FUNISGOSTREAMING_TEST_MOVIE_ENTID")
+	entidEnvRaw := os.Getenv("FUNISGO_STREAMING_TEST_MOVIE_ENTID")
 	idmapOverridden := entidEnvRaw != "" && strings.HasPrefix(strings.TrimSpace(entidEnvRaw), "{")
 
 	env := envOverride(map[string]any{
-		"FUNISGOSTREAMING_TEST_MOVIE_ENTID": idmap,
-		"FUNISGOSTREAMING_TEST_LIVE":      "FALSE",
-		"FUNISGOSTREAMING_TEST_EXPLAIN":   "FALSE",
-		"FUNISGOSTREAMING_APIKEY":         "NONE",
+		"FUNISGO_STREAMING_TEST_MOVIE_ENTID": idmap,
+		"FUNISGO_STREAMING_TEST_LIVE":      "FALSE",
+		"FUNISGO_STREAMING_TEST_EXPLAIN":   "FALSE",
+		"FUNISGO_STREAMING_APIKEY":         "NONE",
 	})
 
-	idmapResolved := core.ToMapAny(env["FUNISGOSTREAMING_TEST_MOVIE_ENTID"])
+	idmapResolved := core.ToMapAny(env["FUNISGO_STREAMING_TEST_MOVIE_ENTID"])
 	if idmapResolved == nil {
 		idmapResolved = core.ToMapAny(idmap)
 	}
 
-	if env["FUNISGOSTREAMING_TEST_LIVE"] == "TRUE" {
+	if env["FUNISGO_STREAMING_TEST_LIVE"] == "TRUE" {
 		mergedOpts := vs.Merge([]any{
 			map[string]any{
-				"apikey": env["FUNISGOSTREAMING_APIKEY"],
+				"apikey": env["FUNISGO_STREAMING_APIKEY"],
 			},
 			extra,
 		})
 		client = sdk.NewFunisgoStreamingSDK(core.ToMapAny(mergedOpts))
 	}
 
-	live := env["FUNISGOSTREAMING_TEST_LIVE"] == "TRUE"
+	live := env["FUNISGO_STREAMING_TEST_LIVE"] == "TRUE"
 	return &entityTestSetup{
 		client:        client,
 		data:          entityData,
 		idmap:         idmapResolved,
 		env:           env,
-		explain:       env["FUNISGOSTREAMING_TEST_EXPLAIN"] == "TRUE",
+		explain:       env["FUNISGO_STREAMING_TEST_EXPLAIN"] == "TRUE",
 		live:          live,
 		syntheticOnly: live && !idmapOverridden,
 		now:           time.Now().UnixMilli(),

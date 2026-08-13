@@ -101,37 +101,33 @@ $channel = $client->Channel();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `category` | `string` | Yes |  |
-| `created_at` | `string` | No |  |
-| `data` | `array` | No |  |
-| `description` | `string` | Yes |  |
+| `category` | `string` | No |  |
+| `createdAt` | `string` | No |  |
+| `description` | `string` | No |  |
 | `id` | `string` | No |  |
-| `is_live` | `bool` | No |  |
-| `is_premium` | `bool` | No |  |
+| `isLive` | `bool` | No |  |
+| `isPremium` | `bool` | No |  |
 | `language` | `string` | No |  |
-| `logo_url` | `string` | No |  |
-| `name` | `string` | Yes |  |
-| `stream_url` | `string` | No |  |
-| `success` | `bool` | No |  |
-| `updated_at` | `string` | No |  |
+| `logoUrl` | `string` | No |  |
+| `name` | `string` | No |  |
+| `streamUrl` | `string` | No |  |
+| `updatedAt` | `string` | No |  |
 
 ### Field Usage by Operation
 
 | Field | load | list | create | update | remove |
 | --- | --- | --- | --- | --- | --- |
-| `category` | - | Yes | - | - | - |
-| `created_at` | - | - | - | - | - |
-| `data` | - | - | - | - | - |
-| `description` | - | Yes | - | - | - |
+| `category` | - | - | Yes | Yes | - |
+| `createdAt` | - | - | - | - | - |
+| `description` | - | - | Yes | Yes | - |
 | `id` | - | - | - | - | - |
-| `is_live` | - | - | - | - | - |
-| `is_premium` | - | - | - | - | - |
+| `isLive` | - | - | - | - | - |
+| `isPremium` | - | - | - | - | - |
 | `language` | - | - | - | - | - |
-| `logo_url` | - | - | - | - | - |
-| `name` | - | Yes | - | - | - |
-| `stream_url` | - | - | - | - | - |
-| `success` | - | - | - | - | - |
-| `updated_at` | - | - | - | - | - |
+| `logoUrl` | - | - | - | - | - |
+| `name` | - | - | Yes | Yes | - |
+| `streamUrl` | - | - | - | - | - |
+| `updatedAt` | - | - | - | - | - |
 
 ### Operations
 
@@ -141,9 +137,6 @@ Create a new entity with the given data. Throws on error.
 
 ```php
 $result = $client->Channel()->create([
-  "category" => null, // string
-  "description" => null, // string
-  "name" => null, // string
 ]);
 ```
 
@@ -222,39 +215,35 @@ $movie = $client->Movie();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | `string` | No |  |
-| `data` | `array` | No |  |
-| `description` | `string` | Yes |  |
-| `duration` | `int` | Yes |  |
-| `genre` | `array` | Yes |  |
+| `createdAt` | `string` | No |  |
+| `description` | `string` | No |  |
+| `duration` | `int` | No |  |
+| `genre` | `array` | No |  |
 | `id` | `string` | No |  |
-| `is_premium` | `bool` | No |  |
+| `isPremium` | `bool` | No |  |
 | `rating` | `float` | No |  |
-| `release_year` | `int` | Yes |  |
-| `stream_url` | `string` | No |  |
-| `success` | `bool` | No |  |
-| `thumbnail_url` | `string` | No |  |
-| `title` | `string` | Yes |  |
-| `updated_at` | `string` | No |  |
+| `releaseYear` | `int` | No |  |
+| `streamUrl` | `string` | No |  |
+| `thumbnailUrl` | `string` | No |  |
+| `title` | `string` | No |  |
+| `updatedAt` | `string` | No |  |
 
 ### Field Usage by Operation
 
 | Field | load | list | create | update | remove |
 | --- | --- | --- | --- | --- | --- |
-| `created_at` | - | - | - | - | - |
-| `data` | - | - | - | - | - |
-| `description` | - | Yes | - | - | - |
-| `duration` | - | Yes | - | - | - |
-| `genre` | - | Yes | - | - | - |
+| `createdAt` | - | - | - | - | - |
+| `description` | - | - | Yes | Yes | - |
+| `duration` | - | - | Yes | Yes | - |
+| `genre` | - | - | Yes | Yes | - |
 | `id` | - | - | - | - | - |
-| `is_premium` | - | - | - | - | - |
+| `isPremium` | - | - | - | - | - |
 | `rating` | - | - | - | - | - |
-| `release_year` | - | Yes | - | - | - |
-| `stream_url` | - | - | - | - | - |
-| `success` | - | - | - | - | - |
-| `thumbnail_url` | - | - | - | - | - |
-| `title` | - | Yes | - | - | - |
-| `updated_at` | - | - | - | - | - |
+| `releaseYear` | - | - | Yes | Yes | - |
+| `streamUrl` | - | - | - | - | - |
+| `thumbnailUrl` | - | - | - | - | - |
+| `title` | - | - | Yes | Yes | - |
+| `updatedAt` | - | - | - | - | - |
 
 ### Operations
 
@@ -264,11 +253,6 @@ Create a new entity with the given data. Throws on error.
 
 ```php
 $result = $client->Movie()->create([
-  "description" => null, // string
-  "duration" => null, // int
-  "genre" => null, // array
-  "release_year" => null, // int
-  "title" => null, // string
 ]);
 ```
 
@@ -347,39 +331,35 @@ $series = $client->Series();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | `string` | No |  |
-| `data` | `array` | No |  |
-| `description` | `string` | Yes |  |
-| `episode` | `int` | No |  |
-| `genre` | `array` | Yes |  |
+| `createdAt` | `string` | No |  |
+| `description` | `string` | No |  |
+| `episodes` | `int` | No |  |
+| `genre` | `array` | No |  |
 | `id` | `string` | No |  |
-| `is_premium` | `bool` | No |  |
+| `isPremium` | `bool` | No |  |
 | `rating` | `float` | No |  |
-| `release_year` | `int` | Yes |  |
-| `season` | `int` | No |  |
-| `success` | `bool` | No |  |
-| `thumbnail_url` | `string` | No |  |
-| `title` | `string` | Yes |  |
-| `updated_at` | `string` | No |  |
+| `releaseYear` | `int` | No |  |
+| `seasons` | `int` | No |  |
+| `thumbnailUrl` | `string` | No |  |
+| `title` | `string` | No |  |
+| `updatedAt` | `string` | No |  |
 
 ### Field Usage by Operation
 
 | Field | load | list | create | update | remove |
 | --- | --- | --- | --- | --- | --- |
-| `created_at` | - | - | - | - | - |
-| `data` | - | - | - | - | - |
-| `description` | - | Yes | - | - | - |
-| `episode` | - | - | - | - | - |
-| `genre` | - | Yes | - | - | - |
+| `createdAt` | - | - | - | - | - |
+| `description` | - | - | Yes | Yes | - |
+| `episodes` | - | - | - | - | - |
+| `genre` | - | - | Yes | Yes | - |
 | `id` | - | - | - | - | - |
-| `is_premium` | - | - | - | - | - |
+| `isPremium` | - | - | - | - | - |
 | `rating` | - | - | - | - | - |
-| `release_year` | - | Yes | - | - | - |
-| `season` | - | - | - | - | - |
-| `success` | - | - | - | - | - |
-| `thumbnail_url` | - | - | - | - | - |
-| `title` | - | Yes | - | - | - |
-| `updated_at` | - | - | - | - | - |
+| `releaseYear` | - | - | Yes | Yes | - |
+| `seasons` | - | - | - | - | - |
+| `thumbnailUrl` | - | - | - | - | - |
+| `title` | - | - | Yes | Yes | - |
+| `updatedAt` | - | - | - | - | - |
 
 ### Operations
 
@@ -389,10 +369,6 @@ Create a new entity with the given data. Throws on error.
 
 ```php
 $result = $client->Series()->create([
-  "description" => null, // string
-  "genre" => null, // array
-  "release_year" => null, // int
-  "title" => null, // string
 ]);
 ```
 

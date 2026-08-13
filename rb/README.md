@@ -50,7 +50,7 @@ end
 
 ```ruby
 begin
-  # load returns the bare Channel record (raises on error).
+  # load returns the ENTITY — call data_get for the Channel record (raises on error).
   channel = client.Channel.load({ "id" => "example_id" })
   puts channel
 rescue => err
@@ -61,14 +61,14 @@ end
 ### 4. Create, update, and remove
 
 ```ruby
-# create returns the bare created Channel record.
-created = client.Channel.create({ "category" => "example_category", "description" => "example_description", "name" => "example_name" })
+# create returns the ENTITY — call data_get for the created Channel record.
+created = client.Channel.create({ "category" => "example_category", "createdAt" => "example_createdAt" })
 
-# Update — index the bare record directly (created["id"]).
-client.Channel.update({ "id" => created["id"] })
+# Update — index the record via data_get (created.data_get["id"]).
+client.Channel.update({ "id" => created.data_get["id"], "category" => "example_category", "createdAt" => "example_createdAt" })
 
 # Remove
-client.Channel.remove({ "id" => created["id"] })
+client.Channel.remove({ "id" => created.data_get["id"] })
 ```
 
 
@@ -78,7 +78,7 @@ Entity operations raise on failure, so rescue them:
 
 ```ruby
 begin
-  channels = client.Channel.list()
+  seriess = client.Series.list()
 rescue => err
   warn "list failed: #{err}"
 end
@@ -146,12 +146,13 @@ data via the `entity` option so offline calls resolve without a live server:
 
 ```ruby
 client = FunisgoStreamingSDK.test({
-  "entity" => { "channel" => { "test01" => { "id" => "test01" } } },
+  "entity" => { "series" => { "test01" => { "id" => "test01" } } },
 })
 
-# Entity ops return the bare mock record (raises on error).
-channel = client.Channel.list()
-puts channel
+# Entity ops return the ENTITY (raises on error);
+# call data_get for the mock record.
+series = client.Series.list()
+puts series
 ```
 
 ### Use a custom fetch function
@@ -275,18 +276,16 @@ returns a result `Hash` with these keys:
 | Field | Description |
 | --- | --- |
 | `category` |  |
-| `created_at` |  |
-| `data` |  |
+| `createdAt` |  |
 | `description` |  |
 | `id` |  |
-| `is_live` |  |
-| `is_premium` |  |
+| `isLive` |  |
+| `isPremium` |  |
 | `language` |  |
-| `logo_url` |  |
+| `logoUrl` |  |
 | `name` |  |
-| `stream_url` |  |
-| `success` |  |
-| `updated_at` |  |
+| `streamUrl` |  |
+| `updatedAt` |  |
 
 Operations: Create, List, Load, Remove, Update.
 
@@ -296,20 +295,18 @@ API path: `/channels`
 
 | Field | Description |
 | --- | --- |
-| `created_at` |  |
-| `data` |  |
+| `createdAt` |  |
 | `description` |  |
 | `duration` |  |
 | `genre` |  |
 | `id` |  |
-| `is_premium` |  |
+| `isPremium` |  |
 | `rating` |  |
-| `release_year` |  |
-| `stream_url` |  |
-| `success` |  |
-| `thumbnail_url` |  |
+| `releaseYear` |  |
+| `streamUrl` |  |
+| `thumbnailUrl` |  |
 | `title` |  |
-| `updated_at` |  |
+| `updatedAt` |  |
 
 Operations: Create, List, Load, Remove, Update.
 
@@ -319,20 +316,18 @@ API path: `/movies`
 
 | Field | Description |
 | --- | --- |
-| `created_at` |  |
-| `data` |  |
+| `createdAt` |  |
 | `description` |  |
-| `episode` |  |
+| `episodes` |  |
 | `genre` |  |
 | `id` |  |
-| `is_premium` |  |
+| `isPremium` |  |
 | `rating` |  |
-| `release_year` |  |
-| `season` |  |
-| `success` |  |
-| `thumbnail_url` |  |
+| `releaseYear` |  |
+| `seasons` |  |
+| `thumbnailUrl` |  |
 | `title` |  |
-| `updated_at` |  |
+| `updatedAt` |  |
 
 Operations: Create, List, Load, Remove, Update.
 
@@ -362,23 +357,21 @@ Create an instance: `channel = client.Channel`
 | Field | Type | Description |
 | --- | --- | --- |
 | `category` | `String` |  |
-| `created_at` | `String` |  |
-| `data` | `Hash` |  |
+| `createdAt` | `String` |  |
 | `description` | `String` |  |
 | `id` | `String` |  |
-| `is_live` | `Boolean` |  |
-| `is_premium` | `Boolean` |  |
+| `isLive` | `Boolean` |  |
+| `isPremium` | `Boolean` |  |
 | `language` | `String` |  |
-| `logo_url` | `String` |  |
+| `logoUrl` | `String` |  |
 | `name` | `String` |  |
-| `stream_url` | `String` |  |
-| `success` | `Boolean` |  |
-| `updated_at` | `String` |  |
+| `streamUrl` | `String` |  |
+| `updatedAt` | `String` |  |
 
 #### Example: Load
 
 ```ruby
-# load returns the bare Channel record (raises on error).
+# load returns the ENTITY — call data_get for the Channel record (raises on error).
 channel = client.Channel.load({ "id" => "channel_id" })
 ```
 
@@ -393,9 +386,6 @@ channels = client.Channel.list
 
 ```ruby
 channel = client.Channel.create({
-  "category" => "example_category", # String
-  "description" => "example_description", # String
-  "name" => "example_name", # String
 })
 ```
 
@@ -418,25 +408,23 @@ Create an instance: `movie = client.Movie`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `created_at` | `String` |  |
-| `data` | `Hash` |  |
+| `createdAt` | `String` |  |
 | `description` | `String` |  |
 | `duration` | `Integer` |  |
 | `genre` | `Array` |  |
 | `id` | `String` |  |
-| `is_premium` | `Boolean` |  |
+| `isPremium` | `Boolean` |  |
 | `rating` | `Float` |  |
-| `release_year` | `Integer` |  |
-| `stream_url` | `String` |  |
-| `success` | `Boolean` |  |
-| `thumbnail_url` | `String` |  |
+| `releaseYear` | `Integer` |  |
+| `streamUrl` | `String` |  |
+| `thumbnailUrl` | `String` |  |
 | `title` | `String` |  |
-| `updated_at` | `String` |  |
+| `updatedAt` | `String` |  |
 
 #### Example: Load
 
 ```ruby
-# load returns the bare Movie record (raises on error).
+# load returns the ENTITY — call data_get for the Movie record (raises on error).
 movie = client.Movie.load({ "id" => "movie_id" })
 ```
 
@@ -451,11 +439,6 @@ movies = client.Movie.list
 
 ```ruby
 movie = client.Movie.create({
-  "description" => "example_description", # String
-  "duration" => 1, # Integer
-  "genre" => [], # Array
-  "release_year" => 1, # Integer
-  "title" => "example_title", # String
 })
 ```
 
@@ -478,25 +461,23 @@ Create an instance: `series = client.Series`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `created_at` | `String` |  |
-| `data` | `Hash` |  |
+| `createdAt` | `String` |  |
 | `description` | `String` |  |
-| `episode` | `Integer` |  |
+| `episodes` | `Integer` |  |
 | `genre` | `Array` |  |
 | `id` | `String` |  |
-| `is_premium` | `Boolean` |  |
+| `isPremium` | `Boolean` |  |
 | `rating` | `Float` |  |
-| `release_year` | `Integer` |  |
-| `season` | `Integer` |  |
-| `success` | `Boolean` |  |
-| `thumbnail_url` | `String` |  |
+| `releaseYear` | `Integer` |  |
+| `seasons` | `Integer` |  |
+| `thumbnailUrl` | `String` |  |
 | `title` | `String` |  |
-| `updated_at` | `String` |  |
+| `updatedAt` | `String` |  |
 
 #### Example: Load
 
 ```ruby
-# load returns the bare Series record (raises on error).
+# load returns the ENTITY — call data_get for the Series record (raises on error).
 series = client.Series.load({ "id" => "series_id" })
 ```
 
@@ -511,10 +492,6 @@ seriess = client.Series.list
 
 ```ruby
 series = client.Series.create({
-  "description" => "example_description", # String
-  "genre" => [], # Array
-  "release_year" => 1, # Integer
-  "title" => "example_title", # String
 })
 ```
 
@@ -595,11 +572,11 @@ Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-channel = client.Channel
-channel.list()
+series = client.Series
+series.list()
 
-# channel.data_get now returns the channel data from the last list
-# channel.match_get returns the last match criteria
+# series.data_get now returns the series data from the last list
+# series.match_get returns the last match criteria
 ```
 
 Call `make` to create a fresh instance with the same configuration

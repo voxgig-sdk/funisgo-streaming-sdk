@@ -70,14 +70,14 @@ func main() {
     fmt.Println(channel)
 
     // Create a channel.
-    created, err := client.Channel(nil).Create(map[string]any{"category": "example_category", "description": "example_description", "name": "example_name"}, nil)
+    created, err := client.Channel(nil).Create(map[string]any{"category": "example_category", "createdAt": "example_createdAt"}, nil)
     if err != nil {
         panic(err)
     }
     fmt.Println(created)
 
     // Update a channel.
-    updated, err := client.Channel(nil).Update(map[string]any{"id": "example_id"}, nil)
+    updated, err := client.Channel(nil).Update(map[string]any{"id": "example_id", "category": "example_category", "createdAt": "example_createdAt"}, nil)
     if err != nil {
         panic(err)
     }
@@ -99,12 +99,12 @@ Every entity operation returns `(value, error)`. Check `err` before
 using the value — there is no exception to catch:
 
 ```go
-channels, err := client.Channel(nil).List(nil, nil)
+seriess, err := client.Series(nil).List(nil, nil)
 if err != nil {
     // handle err
     return
 }
-_ = channels
+_ = seriess
 ```
 
 `Direct` follows the same `(value, error)` convention:
@@ -168,13 +168,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-channel, err := client.Channel(nil).List(
+series, err := client.Series(nil).List(
     nil, nil,
 )
 if err != nil {
     panic(err)
 }
-fmt.Println(channel) // the returned mock data
+fmt.Println(series) // the returned mock data
 ```
 
 ### Use a custom fetch function
@@ -301,18 +301,16 @@ Only `Direct()` returns a response envelope — a `map[string]any` with
 | Field | Description |
 | --- | --- |
 | `"category"` |  |
-| `"created_at"` |  |
-| `"data"` |  |
+| `"createdAt"` |  |
 | `"description"` |  |
 | `"id"` |  |
-| `"is_live"` |  |
-| `"is_premium"` |  |
+| `"isLive"` |  |
+| `"isPremium"` |  |
 | `"language"` |  |
-| `"logo_url"` |  |
+| `"logoUrl"` |  |
 | `"name"` |  |
-| `"stream_url"` |  |
-| `"success"` |  |
-| `"updated_at"` |  |
+| `"streamUrl"` |  |
+| `"updatedAt"` |  |
 
 Operations: Create, List, Load, Remove, Update.
 
@@ -322,20 +320,18 @@ API path: `/channels`
 
 | Field | Description |
 | --- | --- |
-| `"created_at"` |  |
-| `"data"` |  |
+| `"createdAt"` |  |
 | `"description"` |  |
 | `"duration"` |  |
 | `"genre"` |  |
 | `"id"` |  |
-| `"is_premium"` |  |
+| `"isPremium"` |  |
 | `"rating"` |  |
-| `"release_year"` |  |
-| `"stream_url"` |  |
-| `"success"` |  |
-| `"thumbnail_url"` |  |
+| `"releaseYear"` |  |
+| `"streamUrl"` |  |
+| `"thumbnailUrl"` |  |
 | `"title"` |  |
-| `"updated_at"` |  |
+| `"updatedAt"` |  |
 
 Operations: Create, List, Load, Remove, Update.
 
@@ -345,20 +341,18 @@ API path: `/movies`
 
 | Field | Description |
 | --- | --- |
-| `"created_at"` |  |
-| `"data"` |  |
+| `"createdAt"` |  |
 | `"description"` |  |
-| `"episode"` |  |
+| `"episodes"` |  |
 | `"genre"` |  |
 | `"id"` |  |
-| `"is_premium"` |  |
+| `"isPremium"` |  |
 | `"rating"` |  |
-| `"release_year"` |  |
-| `"season"` |  |
-| `"success"` |  |
-| `"thumbnail_url"` |  |
+| `"releaseYear"` |  |
+| `"seasons"` |  |
+| `"thumbnailUrl"` |  |
 | `"title"` |  |
-| `"updated_at"` |  |
+| `"updatedAt"` |  |
 
 Operations: Create, List, Load, Remove, Update.
 
@@ -388,18 +382,16 @@ Create an instance: `channel := client.Channel(nil)`
 | Field | Type | Description |
 | --- | --- | --- |
 | `category` | `string` |  |
-| `created_at` | `string` |  |
-| `data` | `map[string]any` |  |
+| `createdAt` | `string` |  |
 | `description` | `string` |  |
 | `id` | `string` |  |
-| `is_live` | `bool` |  |
-| `is_premium` | `bool` |  |
+| `isLive` | `bool` |  |
+| `isPremium` | `bool` |  |
 | `language` | `string` |  |
-| `logo_url` | `string` |  |
+| `logoUrl` | `string` |  |
 | `name` | `string` |  |
-| `stream_url` | `string` |  |
-| `success` | `bool` |  |
-| `updated_at` | `string` |  |
+| `streamUrl` | `string` |  |
+| `updatedAt` | `string` |  |
 
 #### Example: Load
 
@@ -425,9 +417,6 @@ fmt.Println(channels) // the array of records
 
 ```go
 result, err := client.Channel(nil).Create(map[string]any{
-    "category": "example_category",
-    "description": "example_description",
-    "name": "example_name",
 }, nil)
 if err != nil {
     panic(err)
@@ -454,20 +443,18 @@ Create an instance: `movie := client.Movie(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `created_at` | `string` |  |
-| `data` | `map[string]any` |  |
+| `createdAt` | `string` |  |
 | `description` | `string` |  |
 | `duration` | `int` |  |
 | `genre` | `[]any` |  |
 | `id` | `string` |  |
-| `is_premium` | `bool` |  |
+| `isPremium` | `bool` |  |
 | `rating` | `float64` |  |
-| `release_year` | `int` |  |
-| `stream_url` | `string` |  |
-| `success` | `bool` |  |
-| `thumbnail_url` | `string` |  |
+| `releaseYear` | `int` |  |
+| `streamUrl` | `string` |  |
+| `thumbnailUrl` | `string` |  |
 | `title` | `string` |  |
-| `updated_at` | `string` |  |
+| `updatedAt` | `string` |  |
 
 #### Example: Load
 
@@ -493,11 +480,6 @@ fmt.Println(movies) // the array of records
 
 ```go
 result, err := client.Movie(nil).Create(map[string]any{
-    "description": "example_description",
-    "duration": 1,
-    "genre": []any{},
-    "release_year": 1,
-    "title": "example_title",
 }, nil)
 if err != nil {
     panic(err)
@@ -524,20 +506,18 @@ Create an instance: `series := client.Series(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `created_at` | `string` |  |
-| `data` | `map[string]any` |  |
+| `createdAt` | `string` |  |
 | `description` | `string` |  |
-| `episode` | `int` |  |
+| `episodes` | `int` |  |
 | `genre` | `[]any` |  |
 | `id` | `string` |  |
-| `is_premium` | `bool` |  |
+| `isPremium` | `bool` |  |
 | `rating` | `float64` |  |
-| `release_year` | `int` |  |
-| `season` | `int` |  |
-| `success` | `bool` |  |
-| `thumbnail_url` | `string` |  |
+| `releaseYear` | `int` |  |
+| `seasons` | `int` |  |
+| `thumbnailUrl` | `string` |  |
 | `title` | `string` |  |
-| `updated_at` | `string` |  |
+| `updatedAt` | `string` |  |
 
 #### Example: Load
 
@@ -563,10 +543,6 @@ fmt.Println(seriess) // the array of records
 
 ```go
 result, err := client.Series(nil).Create(map[string]any{
-    "description": "example_description",
-    "genre": []any{},
-    "release_year": 1,
-    "title": "example_title",
 }, nil)
 if err != nil {
     panic(err)
@@ -648,11 +624,11 @@ Entity instances are stateful. After a successful `List`, the entity
 stores the returned data and match criteria internally.
 
 ```go
-channel := client.Channel(nil)
-channel.List(nil, nil)
+series := client.Series(nil)
+series.List(nil, nil)
 
-// channel.Data() now returns the channel data from the last list
-// channel.Match() returns the last match criteria
+// series.Data() now returns the series data from the last list
+// series.Match() returns the last match criteria
 ```
 
 Call `Make()` to create a fresh instance with the same configuration

@@ -102,37 +102,33 @@ channel = client.Channel
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `category` | `String` | Yes |  |
-| `created_at` | `String` | No |  |
-| `data` | `Hash` | No |  |
-| `description` | `String` | Yes |  |
+| `category` | `String` | No |  |
+| `createdAt` | `String` | No |  |
+| `description` | `String` | No |  |
 | `id` | `String` | No |  |
-| `is_live` | `Boolean` | No |  |
-| `is_premium` | `Boolean` | No |  |
+| `isLive` | `Boolean` | No |  |
+| `isPremium` | `Boolean` | No |  |
 | `language` | `String` | No |  |
-| `logo_url` | `String` | No |  |
-| `name` | `String` | Yes |  |
-| `stream_url` | `String` | No |  |
-| `success` | `Boolean` | No |  |
-| `updated_at` | `String` | No |  |
+| `logoUrl` | `String` | No |  |
+| `name` | `String` | No |  |
+| `streamUrl` | `String` | No |  |
+| `updatedAt` | `String` | No |  |
 
 ### Field Usage by Operation
 
 | Field | load | list | create | update | remove |
 | --- | --- | --- | --- | --- | --- |
-| `category` | - | Yes | - | - | - |
-| `created_at` | - | - | - | - | - |
-| `data` | - | - | - | - | - |
-| `description` | - | Yes | - | - | - |
+| `category` | - | - | Yes | Yes | - |
+| `createdAt` | - | - | - | - | - |
+| `description` | - | - | Yes | Yes | - |
 | `id` | - | - | - | - | - |
-| `is_live` | - | - | - | - | - |
-| `is_premium` | - | - | - | - | - |
+| `isLive` | - | - | - | - | - |
+| `isPremium` | - | - | - | - | - |
 | `language` | - | - | - | - | - |
-| `logo_url` | - | - | - | - | - |
-| `name` | - | Yes | - | - | - |
-| `stream_url` | - | - | - | - | - |
-| `success` | - | - | - | - | - |
-| `updated_at` | - | - | - | - | - |
+| `logoUrl` | - | - | - | - | - |
+| `name` | - | - | Yes | Yes | - |
+| `streamUrl` | - | - | - | - | - |
+| `updatedAt` | - | - | - | - | - |
 
 ### Operations
 
@@ -142,9 +138,6 @@ Create a new entity with the given data. Raises on error.
 
 ```ruby
 result = client.Channel.create({
-  "category" => "example_category", # String
-  "description" => "example_description", # String
-  "name" => "example_name", # String
 })
 ```
 
@@ -223,39 +216,35 @@ movie = client.Movie
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | `String` | No |  |
-| `data` | `Hash` | No |  |
-| `description` | `String` | Yes |  |
-| `duration` | `Integer` | Yes |  |
-| `genre` | `Array` | Yes |  |
+| `createdAt` | `String` | No |  |
+| `description` | `String` | No |  |
+| `duration` | `Integer` | No |  |
+| `genre` | `Array` | No |  |
 | `id` | `String` | No |  |
-| `is_premium` | `Boolean` | No |  |
+| `isPremium` | `Boolean` | No |  |
 | `rating` | `Float` | No |  |
-| `release_year` | `Integer` | Yes |  |
-| `stream_url` | `String` | No |  |
-| `success` | `Boolean` | No |  |
-| `thumbnail_url` | `String` | No |  |
-| `title` | `String` | Yes |  |
-| `updated_at` | `String` | No |  |
+| `releaseYear` | `Integer` | No |  |
+| `streamUrl` | `String` | No |  |
+| `thumbnailUrl` | `String` | No |  |
+| `title` | `String` | No |  |
+| `updatedAt` | `String` | No |  |
 
 ### Field Usage by Operation
 
 | Field | load | list | create | update | remove |
 | --- | --- | --- | --- | --- | --- |
-| `created_at` | - | - | - | - | - |
-| `data` | - | - | - | - | - |
-| `description` | - | Yes | - | - | - |
-| `duration` | - | Yes | - | - | - |
-| `genre` | - | Yes | - | - | - |
+| `createdAt` | - | - | - | - | - |
+| `description` | - | - | Yes | Yes | - |
+| `duration` | - | - | Yes | Yes | - |
+| `genre` | - | - | Yes | Yes | - |
 | `id` | - | - | - | - | - |
-| `is_premium` | - | - | - | - | - |
+| `isPremium` | - | - | - | - | - |
 | `rating` | - | - | - | - | - |
-| `release_year` | - | Yes | - | - | - |
-| `stream_url` | - | - | - | - | - |
-| `success` | - | - | - | - | - |
-| `thumbnail_url` | - | - | - | - | - |
-| `title` | - | Yes | - | - | - |
-| `updated_at` | - | - | - | - | - |
+| `releaseYear` | - | - | Yes | Yes | - |
+| `streamUrl` | - | - | - | - | - |
+| `thumbnailUrl` | - | - | - | - | - |
+| `title` | - | - | Yes | Yes | - |
+| `updatedAt` | - | - | - | - | - |
 
 ### Operations
 
@@ -265,11 +254,6 @@ Create a new entity with the given data. Raises on error.
 
 ```ruby
 result = client.Movie.create({
-  "description" => "example_description", # String
-  "duration" => 1, # Integer
-  "genre" => [], # Array
-  "release_year" => 1, # Integer
-  "title" => "example_title", # String
 })
 ```
 
@@ -348,39 +332,35 @@ series = client.Series
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | `String` | No |  |
-| `data` | `Hash` | No |  |
-| `description` | `String` | Yes |  |
-| `episode` | `Integer` | No |  |
-| `genre` | `Array` | Yes |  |
+| `createdAt` | `String` | No |  |
+| `description` | `String` | No |  |
+| `episodes` | `Integer` | No |  |
+| `genre` | `Array` | No |  |
 | `id` | `String` | No |  |
-| `is_premium` | `Boolean` | No |  |
+| `isPremium` | `Boolean` | No |  |
 | `rating` | `Float` | No |  |
-| `release_year` | `Integer` | Yes |  |
-| `season` | `Integer` | No |  |
-| `success` | `Boolean` | No |  |
-| `thumbnail_url` | `String` | No |  |
-| `title` | `String` | Yes |  |
-| `updated_at` | `String` | No |  |
+| `releaseYear` | `Integer` | No |  |
+| `seasons` | `Integer` | No |  |
+| `thumbnailUrl` | `String` | No |  |
+| `title` | `String` | No |  |
+| `updatedAt` | `String` | No |  |
 
 ### Field Usage by Operation
 
 | Field | load | list | create | update | remove |
 | --- | --- | --- | --- | --- | --- |
-| `created_at` | - | - | - | - | - |
-| `data` | - | - | - | - | - |
-| `description` | - | Yes | - | - | - |
-| `episode` | - | - | - | - | - |
-| `genre` | - | Yes | - | - | - |
+| `createdAt` | - | - | - | - | - |
+| `description` | - | - | Yes | Yes | - |
+| `episodes` | - | - | - | - | - |
+| `genre` | - | - | Yes | Yes | - |
 | `id` | - | - | - | - | - |
-| `is_premium` | - | - | - | - | - |
+| `isPremium` | - | - | - | - | - |
 | `rating` | - | - | - | - | - |
-| `release_year` | - | Yes | - | - | - |
-| `season` | - | - | - | - | - |
-| `success` | - | - | - | - | - |
-| `thumbnail_url` | - | - | - | - | - |
-| `title` | - | Yes | - | - | - |
-| `updated_at` | - | - | - | - | - |
+| `releaseYear` | - | - | Yes | Yes | - |
+| `seasons` | - | - | - | - | - |
+| `thumbnailUrl` | - | - | - | - | - |
+| `title` | - | - | Yes | Yes | - |
+| `updatedAt` | - | - | - | - | - |
 
 ### Operations
 
@@ -390,10 +370,6 @@ Create a new entity with the given data. Raises on error.
 
 ```ruby
 result = client.Series.create({
-  "description" => "example_description", # String
-  "genre" => [], # Array
-  "release_year" => 1, # Integer
-  "title" => "example_title", # String
 })
 ```
 

@@ -99,37 +99,33 @@ local channel = client:Channel(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `category` | `string` | Yes |  |
-| `created_at` | `string` | No |  |
-| `data` | `table` | No |  |
-| `description` | `string` | Yes |  |
+| `category` | `string` | No |  |
+| `createdAt` | `string` | No |  |
+| `description` | `string` | No |  |
 | `id` | `string` | No |  |
-| `is_live` | `boolean` | No |  |
-| `is_premium` | `boolean` | No |  |
+| `isLive` | `boolean` | No |  |
+| `isPremium` | `boolean` | No |  |
 | `language` | `string` | No |  |
-| `logo_url` | `string` | No |  |
-| `name` | `string` | Yes |  |
-| `stream_url` | `string` | No |  |
-| `success` | `boolean` | No |  |
-| `updated_at` | `string` | No |  |
+| `logoUrl` | `string` | No |  |
+| `name` | `string` | No |  |
+| `streamUrl` | `string` | No |  |
+| `updatedAt` | `string` | No |  |
 
 ### Field Usage by Operation
 
 | Field | load | list | create | update | remove |
 | --- | --- | --- | --- | --- | --- |
-| `category` | - | Yes | - | - | - |
-| `created_at` | - | - | - | - | - |
-| `data` | - | - | - | - | - |
-| `description` | - | Yes | - | - | - |
+| `category` | - | - | Yes | Yes | - |
+| `createdAt` | - | - | - | - | - |
+| `description` | - | - | Yes | Yes | - |
 | `id` | - | - | - | - | - |
-| `is_live` | - | - | - | - | - |
-| `is_premium` | - | - | - | - | - |
+| `isLive` | - | - | - | - | - |
+| `isPremium` | - | - | - | - | - |
 | `language` | - | - | - | - | - |
-| `logo_url` | - | - | - | - | - |
-| `name` | - | Yes | - | - | - |
-| `stream_url` | - | - | - | - | - |
-| `success` | - | - | - | - | - |
-| `updated_at` | - | - | - | - | - |
+| `logoUrl` | - | - | - | - | - |
+| `name` | - | - | Yes | Yes | - |
+| `streamUrl` | - | - | - | - | - |
+| `updatedAt` | - | - | - | - | - |
 
 ### Operations
 
@@ -139,9 +135,6 @@ Create a new entity with the given data.
 
 ```lua
 local result, err = client:Channel():create({
-  category = --[[ string ]],
-  description = --[[ string ]],
-  name = --[[ string ]],
 })
 ```
 
@@ -220,39 +213,35 @@ local movie = client:Movie(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | `string` | No |  |
-| `data` | `table` | No |  |
-| `description` | `string` | Yes |  |
-| `duration` | `number` | Yes |  |
-| `genre` | `table` | Yes |  |
+| `createdAt` | `string` | No |  |
+| `description` | `string` | No |  |
+| `duration` | `number` | No |  |
+| `genre` | `table` | No |  |
 | `id` | `string` | No |  |
-| `is_premium` | `boolean` | No |  |
+| `isPremium` | `boolean` | No |  |
 | `rating` | `number` | No |  |
-| `release_year` | `number` | Yes |  |
-| `stream_url` | `string` | No |  |
-| `success` | `boolean` | No |  |
-| `thumbnail_url` | `string` | No |  |
-| `title` | `string` | Yes |  |
-| `updated_at` | `string` | No |  |
+| `releaseYear` | `number` | No |  |
+| `streamUrl` | `string` | No |  |
+| `thumbnailUrl` | `string` | No |  |
+| `title` | `string` | No |  |
+| `updatedAt` | `string` | No |  |
 
 ### Field Usage by Operation
 
 | Field | load | list | create | update | remove |
 | --- | --- | --- | --- | --- | --- |
-| `created_at` | - | - | - | - | - |
-| `data` | - | - | - | - | - |
-| `description` | - | Yes | - | - | - |
-| `duration` | - | Yes | - | - | - |
-| `genre` | - | Yes | - | - | - |
+| `createdAt` | - | - | - | - | - |
+| `description` | - | - | Yes | Yes | - |
+| `duration` | - | - | Yes | Yes | - |
+| `genre` | - | - | Yes | Yes | - |
 | `id` | - | - | - | - | - |
-| `is_premium` | - | - | - | - | - |
+| `isPremium` | - | - | - | - | - |
 | `rating` | - | - | - | - | - |
-| `release_year` | - | Yes | - | - | - |
-| `stream_url` | - | - | - | - | - |
-| `success` | - | - | - | - | - |
-| `thumbnail_url` | - | - | - | - | - |
-| `title` | - | Yes | - | - | - |
-| `updated_at` | - | - | - | - | - |
+| `releaseYear` | - | - | Yes | Yes | - |
+| `streamUrl` | - | - | - | - | - |
+| `thumbnailUrl` | - | - | - | - | - |
+| `title` | - | - | Yes | Yes | - |
+| `updatedAt` | - | - | - | - | - |
 
 ### Operations
 
@@ -262,11 +251,6 @@ Create a new entity with the given data.
 
 ```lua
 local result, err = client:Movie():create({
-  description = --[[ string ]],
-  duration = --[[ number ]],
-  genre = --[[ table ]],
-  release_year = --[[ number ]],
-  title = --[[ string ]],
 })
 ```
 
@@ -345,39 +329,35 @@ local series = client:Series(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | `string` | No |  |
-| `data` | `table` | No |  |
-| `description` | `string` | Yes |  |
-| `episode` | `number` | No |  |
-| `genre` | `table` | Yes |  |
+| `createdAt` | `string` | No |  |
+| `description` | `string` | No |  |
+| `episodes` | `number` | No |  |
+| `genre` | `table` | No |  |
 | `id` | `string` | No |  |
-| `is_premium` | `boolean` | No |  |
+| `isPremium` | `boolean` | No |  |
 | `rating` | `number` | No |  |
-| `release_year` | `number` | Yes |  |
-| `season` | `number` | No |  |
-| `success` | `boolean` | No |  |
-| `thumbnail_url` | `string` | No |  |
-| `title` | `string` | Yes |  |
-| `updated_at` | `string` | No |  |
+| `releaseYear` | `number` | No |  |
+| `seasons` | `number` | No |  |
+| `thumbnailUrl` | `string` | No |  |
+| `title` | `string` | No |  |
+| `updatedAt` | `string` | No |  |
 
 ### Field Usage by Operation
 
 | Field | load | list | create | update | remove |
 | --- | --- | --- | --- | --- | --- |
-| `created_at` | - | - | - | - | - |
-| `data` | - | - | - | - | - |
-| `description` | - | Yes | - | - | - |
-| `episode` | - | - | - | - | - |
-| `genre` | - | Yes | - | - | - |
+| `createdAt` | - | - | - | - | - |
+| `description` | - | - | Yes | Yes | - |
+| `episodes` | - | - | - | - | - |
+| `genre` | - | - | Yes | Yes | - |
 | `id` | - | - | - | - | - |
-| `is_premium` | - | - | - | - | - |
+| `isPremium` | - | - | - | - | - |
 | `rating` | - | - | - | - | - |
-| `release_year` | - | Yes | - | - | - |
-| `season` | - | - | - | - | - |
-| `success` | - | - | - | - | - |
-| `thumbnail_url` | - | - | - | - | - |
-| `title` | - | Yes | - | - | - |
-| `updated_at` | - | - | - | - | - |
+| `releaseYear` | - | - | Yes | Yes | - |
+| `seasons` | - | - | - | - | - |
+| `thumbnailUrl` | - | - | - | - | - |
+| `title` | - | - | Yes | Yes | - |
+| `updatedAt` | - | - | - | - | - |
 
 ### Operations
 
@@ -387,10 +367,6 @@ Create a new entity with the given data.
 
 ```lua
 local result, err = client:Series():create({
-  description = --[[ string ]],
-  genre = --[[ table ]],
-  release_year = --[[ number ]],
-  title = --[[ string ]],
 })
 ```
 

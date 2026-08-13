@@ -93,7 +93,7 @@ func TestSeriesEntity(t *testing.T) {
 		// The basic flow consumes synthetic IDs from the fixture. In live mode
 		// without an *_ENTID env override, those IDs hit the live API and 4xx.
 		if setup.syntheticOnly {
-			t.Skip("live entity test uses synthetic IDs from fixture — set FUNISGOSTREAMING_TEST_SERIES_ENTID JSON to run live")
+			t.Skip("live entity test uses synthetic IDs from fixture — set FUNISGO_STREAMING_TEST_SERIES_ENTID JSON to run live")
 			return
 		}
 		client := setup.client
@@ -107,7 +107,7 @@ func TestSeriesEntity(t *testing.T) {
 		if err != nil {
 			t.Fatalf("create failed: %v", err)
 		}
-		seriesRef01Data = core.ToMapAny(seriesRef01DataResult)
+		seriesRef01Data = core.ToMapAny(entityData(seriesRef01DataResult))
 		if seriesRef01Data == nil {
 			t.Fatal("expected create result to be a map")
 		}
@@ -137,7 +137,7 @@ func TestSeriesEntity(t *testing.T) {
 			"id": seriesRef01Data["id"],
 		}
 
-		seriesRef01MarkdefUp0Name := "created_at"
+		seriesRef01MarkdefUp0Name := "createdAt"
 		seriesRef01MarkdefUp0Value := fmt.Sprintf("Mark01-series_ref01_%d", setup.now)
 		seriesRef01DataUp0Up[seriesRef01MarkdefUp0Name] = seriesRef01MarkdefUp0Value
 
@@ -145,7 +145,7 @@ func TestSeriesEntity(t *testing.T) {
 		if err != nil {
 			t.Fatalf("update failed: %v", err)
 		}
-		seriesRef01ResdataUp0 := core.ToMapAny(seriesRef01ResdataUp0Result)
+		seriesRef01ResdataUp0 := core.ToMapAny(entityData(seriesRef01ResdataUp0Result))
 		if seriesRef01ResdataUp0 == nil {
 			t.Fatal("expected update result to be a map")
 		}
@@ -164,7 +164,7 @@ func TestSeriesEntity(t *testing.T) {
 		if err != nil {
 			t.Fatalf("load failed: %v", err)
 		}
-		seriesRef01DataDt0LoadResult := core.ToMapAny(seriesRef01DataDt0Loaded)
+		seriesRef01DataDt0LoadResult := core.ToMapAny(entityData(seriesRef01DataDt0Loaded))
 		if seriesRef01DataDt0LoadResult == nil {
 			t.Fatal("expected load result to be a map")
 		}
@@ -238,38 +238,38 @@ func seriesBasicSetup(extra map[string]any) *entityTestSetup {
 	// Detect ENTID env override before envOverride consumes it. When live
 	// mode is on without a real override, the basic test runs against synthetic
 	// IDs from the fixture and 4xx's. Surface this so the test can skip.
-	entidEnvRaw := os.Getenv("FUNISGOSTREAMING_TEST_SERIES_ENTID")
+	entidEnvRaw := os.Getenv("FUNISGO_STREAMING_TEST_SERIES_ENTID")
 	idmapOverridden := entidEnvRaw != "" && strings.HasPrefix(strings.TrimSpace(entidEnvRaw), "{")
 
 	env := envOverride(map[string]any{
-		"FUNISGOSTREAMING_TEST_SERIES_ENTID": idmap,
-		"FUNISGOSTREAMING_TEST_LIVE":      "FALSE",
-		"FUNISGOSTREAMING_TEST_EXPLAIN":   "FALSE",
-		"FUNISGOSTREAMING_APIKEY":         "NONE",
+		"FUNISGO_STREAMING_TEST_SERIES_ENTID": idmap,
+		"FUNISGO_STREAMING_TEST_LIVE":      "FALSE",
+		"FUNISGO_STREAMING_TEST_EXPLAIN":   "FALSE",
+		"FUNISGO_STREAMING_APIKEY":         "NONE",
 	})
 
-	idmapResolved := core.ToMapAny(env["FUNISGOSTREAMING_TEST_SERIES_ENTID"])
+	idmapResolved := core.ToMapAny(env["FUNISGO_STREAMING_TEST_SERIES_ENTID"])
 	if idmapResolved == nil {
 		idmapResolved = core.ToMapAny(idmap)
 	}
 
-	if env["FUNISGOSTREAMING_TEST_LIVE"] == "TRUE" {
+	if env["FUNISGO_STREAMING_TEST_LIVE"] == "TRUE" {
 		mergedOpts := vs.Merge([]any{
 			map[string]any{
-				"apikey": env["FUNISGOSTREAMING_APIKEY"],
+				"apikey": env["FUNISGO_STREAMING_APIKEY"],
 			},
 			extra,
 		})
 		client = sdk.NewFunisgoStreamingSDK(core.ToMapAny(mergedOpts))
 	}
 
-	live := env["FUNISGOSTREAMING_TEST_LIVE"] == "TRUE"
+	live := env["FUNISGO_STREAMING_TEST_LIVE"] == "TRUE"
 	return &entityTestSetup{
 		client:        client,
 		data:          entityData,
 		idmap:         idmapResolved,
 		env:           env,
-		explain:       env["FUNISGOSTREAMING_TEST_EXPLAIN"] == "TRUE",
+		explain:       env["FUNISGO_STREAMING_TEST_EXPLAIN"] == "TRUE",
 		live:          live,
 		syntheticOnly: live && !idmapOverridden,
 		now:           time.Now().UnixMilli(),

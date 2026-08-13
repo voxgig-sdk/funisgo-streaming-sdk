@@ -16,11 +16,11 @@
 import pytest
 
 from funisgostreaming_sdk import FunisgoStreamingSDK
-from core.error import FunisgoStreamingError
-from core.result import FunisgoStreamingResult
-from core.response import FunisgoStreamingResponse
-from core.spec import FunisgoStreamingSpec
-from feature.base_feature import FunisgoStreamingBaseFeature
+from funisgostreaming_sdk.core.error import FunisgoStreamingError
+from funisgostreaming_sdk.core.result import FunisgoStreamingResult
+from funisgostreaming_sdk.core.response import FunisgoStreamingResponse
+from funisgostreaming_sdk.core.spec import FunisgoStreamingSpec
+from funisgostreaming_sdk.feature.base_feature import FunisgoStreamingBaseFeature
 
 
 def _client():

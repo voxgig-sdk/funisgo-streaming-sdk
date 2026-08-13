@@ -121,16 +121,16 @@ function movie_direct_setup($mockres)
     $calls = new \ArrayObject();
 
     $env = Runner::env_override([
-        "FUNISGOSTREAMING_TEST_MOVIE_ENTID" => [],
-        "FUNISGOSTREAMING_TEST_LIVE" => "FALSE",
-        "FUNISGOSTREAMING_APIKEY" => "NONE",
+        "FUNISGO_STREAMING_TEST_MOVIE_ENTID" => [],
+        "FUNISGO_STREAMING_TEST_LIVE" => "FALSE",
+        "FUNISGO_STREAMING_APIKEY" => "NONE",
     ]);
 
-    $live = $env["FUNISGOSTREAMING_TEST_LIVE"] === "TRUE";
+    $live = $env["FUNISGO_STREAMING_TEST_LIVE"] === "TRUE";
 
     if ($live) {
         $merged_opts = [
-            "apikey" => $env["FUNISGOSTREAMING_APIKEY"],
+            "apikey" => $env["FUNISGO_STREAMING_APIKEY"],
         ];
         $client = new FunisgoStreamingSDK($merged_opts);
         return [

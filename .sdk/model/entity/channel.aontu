@@ -8,33 +8,36 @@ main: kit: entity: channel: {
     {
       name: "category"
       op: {
-        list: {
-          req: false
+        create: {
+          req: true
+          type: "`$STRING`"
+        }
+        update: {
+          req: true
           type: "`$STRING`"
         }
       }
-      req: true
-      type: "`$STRING`"
-    }
-    {
-      name: "created_at"
       req: false
       type: "`$STRING`"
     }
     {
-      name: "data"
+      name: "createdAt"
       req: false
-      type: "`$OBJECT`"
+      type: "`$STRING`"
     }
     {
       name: "description"
       op: {
-        list: {
-          req: false
+        create: {
+          req: true
+          type: "`$STRING`"
+        }
+        update: {
+          req: true
           type: "`$STRING`"
         }
       }
-      req: true
+      req: false
       type: "`$STRING`"
     }
     {
@@ -43,12 +46,12 @@ main: kit: entity: channel: {
       type: "`$STRING`"
     }
     {
-      name: "is_live"
+      name: "isLive"
       req: false
       type: "`$BOOLEAN`"
     }
     {
-      name: "is_premium"
+      name: "isPremium"
       req: false
       type: "`$BOOLEAN`"
     }
@@ -58,33 +61,32 @@ main: kit: entity: channel: {
       type: "`$STRING`"
     }
     {
-      name: "logo_url"
+      name: "logoUrl"
       req: false
       type: "`$STRING`"
     }
     {
       name: "name"
       op: {
-        list: {
-          req: false
+        create: {
+          req: true
+          type: "`$STRING`"
+        }
+        update: {
+          req: true
           type: "`$STRING`"
         }
       }
-      req: true
-      type: "`$STRING`"
-    }
-    {
-      name: "stream_url"
       req: false
       type: "`$STRING`"
     }
     {
-      name: "success"
+      name: "streamUrl"
       req: false
-      type: "`$BOOLEAN`"
+      type: "`$STRING`"
     }
     {
-      name: "updated_at"
+      name: "updatedAt"
       req: false
       type: "`$STRING`"
     }
@@ -108,7 +110,7 @@ main: kit: entity: channel: {
           ]
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.data`"
           }
         }
       ]
@@ -196,7 +198,7 @@ main: kit: entity: channel: {
           }
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.data`"
           }
         }
       ]
@@ -272,7 +274,7 @@ main: kit: entity: channel: {
           }
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.data`"
           }
         }
       ]

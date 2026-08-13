@@ -26,8 +26,8 @@ import {
 describe('SeriesEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when FUNISGOSTREAMING_TEST_LIVE=TRUE.
-  afterEach(liveDelay('FUNISGOSTREAMING_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when FUNISGO_STREAMING_TEST_LIVE=TRUE.
+  afterEach(liveDelay('FUNISGO_STREAMING_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = FunisgoStreamingSDK.test()
@@ -62,14 +62,14 @@ describe('SeriesEntity', async () => {
     const series_ref01_ent = client.Series()
     let series_ref01_data = setup.data.new.series['series_ref01']
 
-    series_ref01_data = await series_ref01_ent.create(series_ref01_data)
+    series_ref01_data = (await series_ref01_ent.create(series_ref01_data)).data()
     assert(null != series_ref01_data.id)
 
 
     // LIST
     const series_ref01_match: any = {}
 
-    const series_ref01_list = await series_ref01_ent.list(series_ref01_match)
+    const series_ref01_list = (await series_ref01_ent.list(series_ref01_match)).map((e: any) => e.data())
 
     assert(!isempty(select(series_ref01_list, { id: series_ref01_data.id })))
 
@@ -78,10 +78,10 @@ describe('SeriesEntity', async () => {
     const series_ref01_data_up0: any = {}
     series_ref01_data_up0.id = series_ref01_data.id
 
-    const series_ref01_markdef_up0 = { name: 'created_at', value: 'Mark01-series_ref01_' + setup.now }
+    const series_ref01_markdef_up0 = { name: 'createdAt', value: 'Mark01-series_ref01_' + setup.now }
     ;(series_ref01_data_up0 as any)[series_ref01_markdef_up0.name] = series_ref01_markdef_up0.value
 
-    const series_ref01_resdata_up0 = await series_ref01_ent.update(series_ref01_data_up0)
+    const series_ref01_resdata_up0 = (await series_ref01_ent.update(series_ref01_data_up0)).data()
     assert(series_ref01_resdata_up0.id === series_ref01_data_up0.id)
 
     assert((series_ref01_resdata_up0 as any)[series_ref01_markdef_up0.name] === series_ref01_markdef_up0.value)
@@ -90,7 +90,7 @@ describe('SeriesEntity', async () => {
     // LOAD
     const series_ref01_match_dt0: any = {}
     series_ref01_match_dt0.id = series_ref01_data.id
-    const series_ref01_data_dt0 = await series_ref01_ent.load(series_ref01_match_dt0)
+    const series_ref01_data_dt0 = (await series_ref01_ent.load(series_ref01_match_dt0)).data()
     assert(series_ref01_data_dt0.id === series_ref01_data.id)
 
 
@@ -102,7 +102,7 @@ describe('SeriesEntity', async () => {
     // LIST
     const series_ref01_match_rt0: any = {}
 
-    const series_ref01_list_rt0 = await series_ref01_ent.list(series_ref01_match_rt0)
+    const series_ref01_list_rt0 = (await series_ref01_ent.list(series_ref01_match_rt0)).map((e: any) => e.data())
 
     assert(isempty(select(series_ref01_list_rt0, { id: series_ref01_data.id })))
 

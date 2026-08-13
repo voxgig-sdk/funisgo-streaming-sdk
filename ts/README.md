@@ -37,7 +37,9 @@ const client = new FunisgoStreamingSDK({
 
 ### 2. List channel records
 
-`list()` resolves to an array of Channel objects — iterate it directly:
+`list()` resolves to an array of Channel ENTITIES — every operation
+resolves to entities, not raw records. Iterate them directly, and call
+`.data()` on one for the record it holds:
 
 ```ts
 const channels = await client.Channel().list()
@@ -63,21 +65,22 @@ try {
 ### 4. Create, update, and remove
 
 ```ts
-// Create — returns the created Channel
+// Create — returns the created Channel ENTITY (.data() for the record)
 const created = await client.Channel().create({
   category: 'example_category',
-  description: 'example_description',
-  name: 'example_name',
+  createdAt: 'example_createdAt',
 })
 
-// Update — the id comes straight off the returned entity
+// Update — the id comes off the returned entity's data()
 const updated = await client.Channel().update({
-  id: created.id!,
+  id: created.data().id!,
+  category: 'example_category',
+  createdAt: 'example_createdAt',
 })
 
 // Remove
 await client.Channel().remove({
-  id: created.id!,
+  id: created.data().id!,
 })
 ```
 
@@ -88,8 +91,8 @@ Entity operations reject on failure, so wrap them in `try` / `catch`:
 
 ```ts
 try {
-  const channels = await client.Channel().list()
-  console.log(channels)
+  const seriess = await client.Series().list()
+  console.log(seriess)
 } catch (err) {
   console.error('list failed:', err)
 }
@@ -155,9 +158,10 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = FunisgoStreamingSDK.test()
 
-const channel = await client.Channel().list()
-// channel is a bare entity populated with mock response data
-console.log(channel)
+const series = await client.Series().list()
+// series is the entity, populated with mock response data
+// — call series.data() for the record itself
+console.log(series)
 ```
 
 You can also use the instance method:
@@ -172,7 +176,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.Channel()
+const entity = client.Series()
 
 // First call runs the operation and stores its result
 await entity.list()
@@ -333,18 +337,16 @@ The `prepare()` method returns:
 | Field | Description |
 | --- | --- |
 | `category` |  |
-| `created_at` |  |
-| `data` |  |
+| `createdAt` |  |
 | `description` |  |
 | `id` |  |
-| `is_live` |  |
-| `is_premium` |  |
+| `isLive` |  |
+| `isPremium` |  |
 | `language` |  |
-| `logo_url` |  |
+| `logoUrl` |  |
 | `name` |  |
-| `stream_url` |  |
-| `success` |  |
-| `updated_at` |  |
+| `streamUrl` |  |
+| `updatedAt` |  |
 
 Operations: create, list, load, remove, update.
 
@@ -354,20 +356,18 @@ API path: `/channels`
 
 | Field | Description |
 | --- | --- |
-| `created_at` |  |
-| `data` |  |
+| `createdAt` |  |
 | `description` |  |
 | `duration` |  |
 | `genre` |  |
 | `id` |  |
-| `is_premium` |  |
+| `isPremium` |  |
 | `rating` |  |
-| `release_year` |  |
-| `stream_url` |  |
-| `success` |  |
-| `thumbnail_url` |  |
+| `releaseYear` |  |
+| `streamUrl` |  |
+| `thumbnailUrl` |  |
 | `title` |  |
-| `updated_at` |  |
+| `updatedAt` |  |
 
 Operations: create, list, load, remove, update.
 
@@ -377,20 +377,18 @@ API path: `/movies`
 
 | Field | Description |
 | --- | --- |
-| `created_at` |  |
-| `data` |  |
+| `createdAt` |  |
 | `description` |  |
-| `episode` |  |
+| `episodes` |  |
 | `genre` |  |
 | `id` |  |
-| `is_premium` |  |
+| `isPremium` |  |
 | `rating` |  |
-| `release_year` |  |
-| `season` |  |
-| `success` |  |
-| `thumbnail_url` |  |
+| `releaseYear` |  |
+| `seasons` |  |
+| `thumbnailUrl` |  |
 | `title` |  |
-| `updated_at` |  |
+| `updatedAt` |  |
 
 Operations: create, list, load, remove, update.
 
@@ -420,18 +418,16 @@ Create an instance: `const channel = client.Channel()`
 | Field | Type | Description |
 | --- | --- | --- |
 | `category` | `string` |  |
-| `created_at` | `string` |  |
-| `data` | `Record<string, any>` |  |
+| `createdAt` | `string` |  |
 | `description` | `string` |  |
 | `id` | `string` |  |
-| `is_live` | `boolean` |  |
-| `is_premium` | `boolean` |  |
+| `isLive` | `boolean` |  |
+| `isPremium` | `boolean` |  |
 | `language` | `string` |  |
-| `logo_url` | `string` |  |
+| `logoUrl` | `string` |  |
 | `name` | `string` |  |
-| `stream_url` | `string` |  |
-| `success` | `boolean` |  |
-| `updated_at` | `string` |  |
+| `streamUrl` | `string` |  |
+| `updatedAt` | `string` |  |
 
 #### Example: Load
 
@@ -449,9 +445,6 @@ const channels = await client.Channel().list()
 
 ```ts
 const channel = await client.Channel().create({
-  category: 'example_category',
-  description: 'example_description',
-  name: 'example_name',
 })
 ```
 
@@ -474,20 +467,18 @@ Create an instance: `const movie = client.Movie()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `created_at` | `string` |  |
-| `data` | `Record<string, any>` |  |
+| `createdAt` | `string` |  |
 | `description` | `string` |  |
 | `duration` | `number` |  |
 | `genre` | `any[]` |  |
 | `id` | `string` |  |
-| `is_premium` | `boolean` |  |
+| `isPremium` | `boolean` |  |
 | `rating` | `number` |  |
-| `release_year` | `number` |  |
-| `stream_url` | `string` |  |
-| `success` | `boolean` |  |
-| `thumbnail_url` | `string` |  |
+| `releaseYear` | `number` |  |
+| `streamUrl` | `string` |  |
+| `thumbnailUrl` | `string` |  |
 | `title` | `string` |  |
-| `updated_at` | `string` |  |
+| `updatedAt` | `string` |  |
 
 #### Example: Load
 
@@ -505,11 +496,6 @@ const movies = await client.Movie().list()
 
 ```ts
 const movie = await client.Movie().create({
-  description: 'example_description',
-  duration: 1,
-  genre: [],
-  release_year: 1,
-  title: 'example_title',
 })
 ```
 
@@ -532,20 +518,18 @@ Create an instance: `const series = client.Series()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `created_at` | `string` |  |
-| `data` | `Record<string, any>` |  |
+| `createdAt` | `string` |  |
 | `description` | `string` |  |
-| `episode` | `number` |  |
+| `episodes` | `number` |  |
 | `genre` | `any[]` |  |
 | `id` | `string` |  |
-| `is_premium` | `boolean` |  |
+| `isPremium` | `boolean` |  |
 | `rating` | `number` |  |
-| `release_year` | `number` |  |
-| `season` | `number` |  |
-| `success` | `boolean` |  |
-| `thumbnail_url` | `string` |  |
+| `releaseYear` | `number` |  |
+| `seasons` | `number` |  |
+| `thumbnailUrl` | `string` |  |
 | `title` | `string` |  |
-| `updated_at` | `string` |  |
+| `updatedAt` | `string` |  |
 
 #### Example: Load
 
@@ -563,10 +547,6 @@ const seriess = await client.Series().list()
 
 ```ts
 const series = await client.Series().create({
-  description: 'example_description',
-  genre: [],
-  release_year: 1,
-  title: 'example_title',
 })
 ```
 
@@ -640,11 +620,11 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const channel = client.Channel()
-await channel.list()
+const series = client.Series()
+await series.list()
 
-// channel.data() now returns the channel data from the last `list`
-// channel.match() returns the last match criteria
+// series.data() now returns the series data from the last `list`
+// series.match() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

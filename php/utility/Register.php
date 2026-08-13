@@ -23,6 +23,7 @@ require_once __DIR__ . '/MakeUrl.php';
 require_once __DIR__ . '/Param.php';
 require_once __DIR__ . '/PrepareAuth.php';
 require_once __DIR__ . '/PrepareBody.php';
+require_once __DIR__ . '/Graphql.php';
 require_once __DIR__ . '/PrepareHeaders.php';
 require_once __DIR__ . '/PrepareMethod.php';
 require_once __DIR__ . '/PrepareParams.php';
@@ -59,6 +60,8 @@ FunisgoStreamingUtility::setRegistrar(function (FunisgoStreamingUtility $u): voi
     $u->prepare_params = [FunisgoStreamingPrepareParams::class, 'call'];
     $u->prepare_path = [FunisgoStreamingPreparePath::class, 'call'];
     $u->prepare_query = [FunisgoStreamingPrepareQuery::class, 'call'];
+    $u->graphql_body = [FunisgoStreamingGraphql::class, 'body'];
+    $u->graphql_errors = [FunisgoStreamingGraphql::class, 'errors'];
     $u->result_basic = [FunisgoStreamingResultBasic::class, 'call'];
     $u->result_body = [FunisgoStreamingResultBody::class, 'call'];
     $u->result_headers = [FunisgoStreamingResultHeaders::class, 'call'];

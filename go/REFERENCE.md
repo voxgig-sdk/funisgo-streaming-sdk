@@ -107,37 +107,33 @@ fmt.Println(channel.GetName()) // "channel"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `category` | `string` | Yes |  |
-| `created_at` | `string` | No |  |
-| `data` | `map[string]any` | No |  |
-| `description` | `string` | Yes |  |
+| `category` | `string` | No |  |
+| `createdAt` | `string` | No |  |
+| `description` | `string` | No |  |
 | `id` | `string` | No |  |
-| `is_live` | `bool` | No |  |
-| `is_premium` | `bool` | No |  |
+| `isLive` | `bool` | No |  |
+| `isPremium` | `bool` | No |  |
 | `language` | `string` | No |  |
-| `logo_url` | `string` | No |  |
-| `name` | `string` | Yes |  |
-| `stream_url` | `string` | No |  |
-| `success` | `bool` | No |  |
-| `updated_at` | `string` | No |  |
+| `logoUrl` | `string` | No |  |
+| `name` | `string` | No |  |
+| `streamUrl` | `string` | No |  |
+| `updatedAt` | `string` | No |  |
 
 ### Field Usage by Operation
 
 | Field | load | list | create | update | remove |
 | --- | --- | --- | --- | --- | --- |
-| `category` | - | Yes | - | - | - |
-| `created_at` | - | - | - | - | - |
-| `data` | - | - | - | - | - |
-| `description` | - | Yes | - | - | - |
+| `category` | - | - | Yes | Yes | - |
+| `createdAt` | - | - | - | - | - |
+| `description` | - | - | Yes | Yes | - |
 | `id` | - | - | - | - | - |
-| `is_live` | - | - | - | - | - |
-| `is_premium` | - | - | - | - | - |
+| `isLive` | - | - | - | - | - |
+| `isPremium` | - | - | - | - | - |
 | `language` | - | - | - | - | - |
-| `logo_url` | - | - | - | - | - |
-| `name` | - | Yes | - | - | - |
-| `stream_url` | - | - | - | - | - |
-| `success` | - | - | - | - | - |
-| `updated_at` | - | - | - | - | - |
+| `logoUrl` | - | - | - | - | - |
+| `name` | - | - | Yes | Yes | - |
+| `streamUrl` | - | - | - | - | - |
+| `updatedAt` | - | - | - | - | - |
 
 ### Operations
 
@@ -171,9 +167,6 @@ Create a new entity with the given data.
 
 ```go
 result, err := client.Channel(nil).Create(map[string]any{
-    "category": "example_category",
-    "description": "example_description",
-    "name": "example_name",
 }, nil)
 if err != nil {
     panic(err)
@@ -243,39 +236,35 @@ fmt.Println(movie.GetName()) // "movie"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | `string` | No |  |
-| `data` | `map[string]any` | No |  |
-| `description` | `string` | Yes |  |
-| `duration` | `int` | Yes |  |
-| `genre` | `[]any` | Yes |  |
+| `createdAt` | `string` | No |  |
+| `description` | `string` | No |  |
+| `duration` | `int` | No |  |
+| `genre` | `[]any` | No |  |
 | `id` | `string` | No |  |
-| `is_premium` | `bool` | No |  |
+| `isPremium` | `bool` | No |  |
 | `rating` | `float64` | No |  |
-| `release_year` | `int` | Yes |  |
-| `stream_url` | `string` | No |  |
-| `success` | `bool` | No |  |
-| `thumbnail_url` | `string` | No |  |
-| `title` | `string` | Yes |  |
-| `updated_at` | `string` | No |  |
+| `releaseYear` | `int` | No |  |
+| `streamUrl` | `string` | No |  |
+| `thumbnailUrl` | `string` | No |  |
+| `title` | `string` | No |  |
+| `updatedAt` | `string` | No |  |
 
 ### Field Usage by Operation
 
 | Field | load | list | create | update | remove |
 | --- | --- | --- | --- | --- | --- |
-| `created_at` | - | - | - | - | - |
-| `data` | - | - | - | - | - |
-| `description` | - | Yes | - | - | - |
-| `duration` | - | Yes | - | - | - |
-| `genre` | - | Yes | - | - | - |
+| `createdAt` | - | - | - | - | - |
+| `description` | - | - | Yes | Yes | - |
+| `duration` | - | - | Yes | Yes | - |
+| `genre` | - | - | Yes | Yes | - |
 | `id` | - | - | - | - | - |
-| `is_premium` | - | - | - | - | - |
+| `isPremium` | - | - | - | - | - |
 | `rating` | - | - | - | - | - |
-| `release_year` | - | Yes | - | - | - |
-| `stream_url` | - | - | - | - | - |
-| `success` | - | - | - | - | - |
-| `thumbnail_url` | - | - | - | - | - |
-| `title` | - | Yes | - | - | - |
-| `updated_at` | - | - | - | - | - |
+| `releaseYear` | - | - | Yes | Yes | - |
+| `streamUrl` | - | - | - | - | - |
+| `thumbnailUrl` | - | - | - | - | - |
+| `title` | - | - | Yes | Yes | - |
+| `updatedAt` | - | - | - | - | - |
 
 ### Operations
 
@@ -309,11 +298,6 @@ Create a new entity with the given data.
 
 ```go
 result, err := client.Movie(nil).Create(map[string]any{
-    "description": "example_description",
-    "duration": 1,
-    "genre": []any{},
-    "release_year": 1,
-    "title": "example_title",
 }, nil)
 if err != nil {
     panic(err)
@@ -383,39 +367,35 @@ fmt.Println(series.GetName()) // "series"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | `string` | No |  |
-| `data` | `map[string]any` | No |  |
-| `description` | `string` | Yes |  |
-| `episode` | `int` | No |  |
-| `genre` | `[]any` | Yes |  |
+| `createdAt` | `string` | No |  |
+| `description` | `string` | No |  |
+| `episodes` | `int` | No |  |
+| `genre` | `[]any` | No |  |
 | `id` | `string` | No |  |
-| `is_premium` | `bool` | No |  |
+| `isPremium` | `bool` | No |  |
 | `rating` | `float64` | No |  |
-| `release_year` | `int` | Yes |  |
-| `season` | `int` | No |  |
-| `success` | `bool` | No |  |
-| `thumbnail_url` | `string` | No |  |
-| `title` | `string` | Yes |  |
-| `updated_at` | `string` | No |  |
+| `releaseYear` | `int` | No |  |
+| `seasons` | `int` | No |  |
+| `thumbnailUrl` | `string` | No |  |
+| `title` | `string` | No |  |
+| `updatedAt` | `string` | No |  |
 
 ### Field Usage by Operation
 
 | Field | load | list | create | update | remove |
 | --- | --- | --- | --- | --- | --- |
-| `created_at` | - | - | - | - | - |
-| `data` | - | - | - | - | - |
-| `description` | - | Yes | - | - | - |
-| `episode` | - | - | - | - | - |
-| `genre` | - | Yes | - | - | - |
+| `createdAt` | - | - | - | - | - |
+| `description` | - | - | Yes | Yes | - |
+| `episodes` | - | - | - | - | - |
+| `genre` | - | - | Yes | Yes | - |
 | `id` | - | - | - | - | - |
-| `is_premium` | - | - | - | - | - |
+| `isPremium` | - | - | - | - | - |
 | `rating` | - | - | - | - | - |
-| `release_year` | - | Yes | - | - | - |
-| `season` | - | - | - | - | - |
-| `success` | - | - | - | - | - |
-| `thumbnail_url` | - | - | - | - | - |
-| `title` | - | Yes | - | - | - |
-| `updated_at` | - | - | - | - | - |
+| `releaseYear` | - | - | Yes | Yes | - |
+| `seasons` | - | - | - | - | - |
+| `thumbnailUrl` | - | - | - | - | - |
+| `title` | - | - | Yes | Yes | - |
+| `updatedAt` | - | - | - | - | - |
 
 ### Operations
 
@@ -449,10 +429,6 @@ Create a new entity with the given data.
 
 ```go
 result, err := client.Series(nil).Create(map[string]any{
-    "description": "example_description",
-    "genre": []any{},
-    "release_year": 1,
-    "title": "example_title",
 }, nil)
 if err != nil {
     panic(err)

@@ -31,7 +31,7 @@ main: kit: flow: BasicMovieFlow:
         ref: "movie_ref01",
         srcdatavar: "movie_ref01_data",
         suffix: "_up0",
-        textfield: "created_at"
+        textfield: "createdAt"
       }
 
       op: "update",

@@ -24,6 +24,7 @@ require_relative 'prepare_method'
 require_relative 'prepare_params'
 require_relative 'prepare_path'
 require_relative 'prepare_query'
+require_relative 'graphql'
 require_relative 'result_basic'
 require_relative 'result_body'
 require_relative 'result_headers'
@@ -55,6 +56,8 @@ FunisgoStreamingUtility.registrar = ->(u) {
   u.prepare_params = FunisgoStreamingUtilities::PrepareParams
   u.prepare_path = FunisgoStreamingUtilities::PreparePath
   u.prepare_query = FunisgoStreamingUtilities::PrepareQuery
+  u.graphql_body = FunisgoStreamingUtilities::GraphqlBody
+  u.graphql_errors = FunisgoStreamingUtilities::GraphqlErrors
   u.result_basic = FunisgoStreamingUtilities::ResultBasic
   u.result_body = FunisgoStreamingUtilities::ResultBody
   u.result_headers = FunisgoStreamingUtilities::ResultHeaders

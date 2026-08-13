@@ -26,8 +26,8 @@ import {
 describe('ChannelEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when FUNISGOSTREAMING_TEST_LIVE=TRUE.
-  afterEach(liveDelay('FUNISGOSTREAMING_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when FUNISGO_STREAMING_TEST_LIVE=TRUE.
+  afterEach(liveDelay('FUNISGO_STREAMING_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = FunisgoStreamingSDK.test()
@@ -62,14 +62,14 @@ describe('ChannelEntity', async () => {
     const channel_ref01_ent = client.Channel()
     let channel_ref01_data = setup.data.new.channel['channel_ref01']
 
-    channel_ref01_data = await channel_ref01_ent.create(channel_ref01_data)
+    channel_ref01_data = (await channel_ref01_ent.create(channel_ref01_data)).data()
     assert(null != channel_ref01_data.id)
 
 
     // LIST
     const channel_ref01_match: any = {}
 
-    const channel_ref01_list = await channel_ref01_ent.list(channel_ref01_match)
+    const channel_ref01_list = (await channel_ref01_ent.list(channel_ref01_match)).map((e: any) => e.data())
 
     assert(!isempty(select(channel_ref01_list, { id: channel_ref01_data.id })))
 
@@ -81,7 +81,7 @@ describe('ChannelEntity', async () => {
     const channel_ref01_markdef_up0 = { name: 'category', value: 'Mark01-channel_ref01_' + setup.now }
     ;(channel_ref01_data_up0 as any)[channel_ref01_markdef_up0.name] = channel_ref01_markdef_up0.value
 
-    const channel_ref01_resdata_up0 = await channel_ref01_ent.update(channel_ref01_data_up0)
+    const channel_ref01_resdata_up0 = (await channel_ref01_ent.update(channel_ref01_data_up0)).data()
     assert(channel_ref01_resdata_up0.id === channel_ref01_data_up0.id)
 
     assert((channel_ref01_resdata_up0 as any)[channel_ref01_markdef_up0.name] === channel_ref01_markdef_up0.value)
@@ -90,7 +90,7 @@ describe('ChannelEntity', async () => {
     // LOAD
     const channel_ref01_match_dt0: any = {}
     channel_ref01_match_dt0.id = channel_ref01_data.id
-    const channel_ref01_data_dt0 = await channel_ref01_ent.load(channel_ref01_match_dt0)
+    const channel_ref01_data_dt0 = (await channel_ref01_ent.load(channel_ref01_match_dt0)).data()
     assert(channel_ref01_data_dt0.id === channel_ref01_data.id)
 
 
@@ -102,7 +102,7 @@ describe('ChannelEntity', async () => {
     // LIST
     const channel_ref01_match_rt0: any = {}
 
-    const channel_ref01_list_rt0 = await channel_ref01_ent.list(channel_ref01_match_rt0)
+    const channel_ref01_list_rt0 = (await channel_ref01_ent.list(channel_ref01_match_rt0)).map((e: any) => e.data())
 
     assert(isempty(select(channel_ref01_list_rt0, { id: channel_ref01_data.id })))
 

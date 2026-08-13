@@ -38,18 +38,27 @@ network, and no credentials:
 ### TypeScript
 
 ```ts
-const client = FunisgoStreamingSDK.test()
-const channels = await client.Channel().list()
-// channels is an array of bare Channel records populated with mock data
-console.log(channels)
+// The offline mock starts EMPTY — seed it with the records the test needs.
+// Shape: { entity: { <entity-name>: { <id>: <record> } } }
+const client = FunisgoStreamingSDK.test({
+  entity: {
+    series: {
+      test01: { id: 'test01' },
+    },
+  },
+})
+const seriess = await client.Series().list()
+// seriess is an array of Series entities, populated with mock data
+// — call seriess[0].data() for the record itself
+console.log(seriess)
 ```
 
 ### Python
 
 ```python
 client = FunisgoStreamingSDK.test()
-channels = client.Channel().list()
-print(channels)
+seriess = client.Series().list()
+print(seriess)
 ```
 
 ### PHP
@@ -57,16 +66,16 @@ print(channels)
 ```php
 // Seed fixture data so offline calls resolve without a live server.
 $client = FunisgoStreamingSDK::test([
-    "entity" => ["channel" => ["test01" => ["id" => "test01"]]],
+    "entity" => ["series" => ["test01" => ["id" => "test01"]]],
 ]);
-$channels = $client->Channel()->list();
+$seriess = $client->Series()->list();
 ```
 
 ### Golang
 
 ```go
 client := sdk.Test()
-result, err := client.Channel(nil).List(
+result, err := client.Series(nil).List(
     nil, nil,
 )
 ```
@@ -76,16 +85,16 @@ result, err := client.Channel(nil).List(
 ```ruby
 # Seed fixture data so offline calls resolve without a live server.
 client = FunisgoStreamingSDK.test({
-  "entity" => { "channel" => { "test01" => { "id" => "test01" } } },
+  "entity" => { "series" => { "test01" => { "id" => "test01" } } },
 })
-channels = client.Channel.list()
+seriess = client.Series.list()
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local results, err = client:Channel():list()
+local results, err = client:Series():list()
 ```
 
 ## Packages
@@ -112,7 +121,7 @@ const client = new FunisgoStreamingSDK({
   apikey: process.env.FUNISGO_STREAMING_APIKEY,
 })
 
-// List all channels (returns Channel[])
+// List all channels (returns ChannelEntity[] — .data() for the record)
 const channels = await client.Channel().list()
 for (const channel of channels) {
   console.log(channel)
@@ -200,7 +209,7 @@ $client = new FunisgoStreamingSDK([
 $channels = $client->Channel()->list();
 print_r($channels);
 
-// Load a specific channel (returns the bare record; throws on error)
+// Load a specific channel (returns the ENTITY; call data_get() for the record; throws on error)
 $channel = $client->Channel()->load(["id" => "example_id"]);
 print_r($channel);
 ```
@@ -235,7 +244,7 @@ client = FunisgoStreamingSDK.new({
 channels = client.Channel.list
 puts channels
 
-# Load a specific channel (returns the bare record; raises on error)
+# Load a specific channel (returns the ENTITY; call data_get for the record)
 channel = client.Channel.load({ "id" => "example_id" })
 puts channel
 ```
@@ -374,6 +383,9 @@ Pass custom features via the `extend` option at construction time.
 
 This SDK is generated from the upstream OpenAPI specification. It is an
 unofficial client and is not affiliated with the API provider.
+
+The OpenAPI spec(s) this SDK was generated from are kept in the
+[`.sdk/def/`](.sdk/def/) folder.
 
 - Upstream API: [https://funisgo.netlify.app/docpelis](https://funisgo.netlify.app/docpelis)
 

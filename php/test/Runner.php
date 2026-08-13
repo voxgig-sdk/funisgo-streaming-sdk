@@ -43,8 +43,8 @@ class FunisgoStreamingTestRunner
 
     public static function env_override(array $m): array
     {
-        $live = self::getenv('FUNISGOSTREAMING_TEST_LIVE');
-        $override = self::getenv('FUNISGOSTREAMING_TEST_OVERRIDE');
+        $live = self::getenv('FUNISGO_STREAMING_TEST_LIVE');
+        $override = self::getenv('FUNISGO_STREAMING_TEST_OVERRIDE');
 
         if ($live === 'TRUE' || $override === 'TRUE') {
             foreach (array_keys($m) as $key) {
@@ -63,9 +63,9 @@ class FunisgoStreamingTestRunner
             }
         }
 
-        $explain = self::getenv('FUNISGOSTREAMING_TEST_EXPLAIN');
+        $explain = self::getenv('FUNISGO_STREAMING_TEST_EXPLAIN');
         if ($explain !== null && $explain !== '') {
-            $m['FUNISGOSTREAMING_TEST_EXPLAIN'] = $explain;
+            $m['FUNISGO_STREAMING_TEST_EXPLAIN'] = $explain;
         }
 
         return $m;

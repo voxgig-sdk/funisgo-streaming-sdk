@@ -8,39 +8,48 @@ guide: {
   entity: channel: {
     path: "/channels": {
       op: create: method: *POST
+      op: create: transform: res: *("`body.data`")|top
       op: list: method: *GET
     }
     path: "/channels/{channelId}": {
       rename: param: "channelId": *"id"
       op: load: method: *GET
+      op: load: transform: res: *("`body.data`")|top
       op: remove: method: *DELETE
       op: update: method: *PUT
+      op: update: transform: res: *("`body.data`")|top
     }
   }
 
   entity: movie: {
     path: "/movies": {
       op: create: method: *POST
+      op: create: transform: res: *("`body.data`")|top
       op: list: method: *GET
     }
     path: "/movies/{movieId}": {
       rename: param: "movieId": *"id"
       op: load: method: *GET
+      op: load: transform: res: *("`body.data`")|top
       op: remove: method: *DELETE
       op: update: method: *PUT
+      op: update: transform: res: *("`body.data`")|top
     }
   }
 
   entity: series: {
     path: "/series": {
       op: create: method: *POST
+      op: create: transform: res: *("`body.data`")|top
       op: list: method: *GET
     }
     path: "/series/{seriesId}": {
       rename: param: "seriesId": *"id"
       op: load: method: *GET
+      op: load: transform: res: *("`body.data`")|top
       op: remove: method: *DELETE
       op: update: method: *PUT
+      op: update: transform: res: *("`body.data`")|top
     }
   }
 

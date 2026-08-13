@@ -33,110 +33,108 @@ func MakeConfig() map[string]any {
 						"active": true,
 						"name": "category",
 						"op": map[string]any{
-							"list": map[string]any{
-								"req": false,
+							"create": map[string]any{
+								"req": true,
+								"type": "`$STRING`",
+							},
+							"update": map[string]any{
+								"req": true,
 								"type": "`$STRING`",
 							},
 						},
-						"req": true,
+						"req": false,
 						"type": "`$STRING`",
 						"index$": 0,
 					},
 					map[string]any{
 						"active": true,
-						"name": "created_at",
+						"name": "createdAt",
 						"req": false,
 						"type": "`$STRING`",
 						"index$": 1,
 					},
 					map[string]any{
 						"active": true,
-						"name": "data",
-						"req": false,
-						"type": "`$OBJECT`",
-						"index$": 2,
-					},
-					map[string]any{
-						"active": true,
 						"name": "description",
 						"op": map[string]any{
-							"list": map[string]any{
-								"req": false,
+							"create": map[string]any{
+								"req": true,
+								"type": "`$STRING`",
+							},
+							"update": map[string]any{
+								"req": true,
 								"type": "`$STRING`",
 							},
 						},
-						"req": true,
+						"req": false,
 						"type": "`$STRING`",
-						"index$": 3,
+						"index$": 2,
 					},
 					map[string]any{
 						"active": true,
 						"name": "id",
 						"req": false,
 						"type": "`$STRING`",
+						"index$": 3,
+					},
+					map[string]any{
+						"active": true,
+						"name": "isLive",
+						"req": false,
+						"type": "`$BOOLEAN`",
 						"index$": 4,
 					},
 					map[string]any{
 						"active": true,
-						"name": "is_live",
+						"name": "isPremium",
 						"req": false,
 						"type": "`$BOOLEAN`",
 						"index$": 5,
 					},
 					map[string]any{
 						"active": true,
-						"name": "is_premium",
+						"name": "language",
 						"req": false,
-						"type": "`$BOOLEAN`",
+						"type": "`$STRING`",
 						"index$": 6,
 					},
 					map[string]any{
 						"active": true,
-						"name": "language",
+						"name": "logoUrl",
 						"req": false,
 						"type": "`$STRING`",
 						"index$": 7,
 					},
 					map[string]any{
 						"active": true,
-						"name": "logo_url",
+						"name": "name",
+						"op": map[string]any{
+							"create": map[string]any{
+								"req": true,
+								"type": "`$STRING`",
+							},
+							"update": map[string]any{
+								"req": true,
+								"type": "`$STRING`",
+							},
+						},
 						"req": false,
 						"type": "`$STRING`",
 						"index$": 8,
 					},
 					map[string]any{
 						"active": true,
-						"name": "name",
-						"op": map[string]any{
-							"list": map[string]any{
-								"req": false,
-								"type": "`$STRING`",
-							},
-						},
-						"req": true,
+						"name": "streamUrl",
+						"req": false,
 						"type": "`$STRING`",
 						"index$": 9,
 					},
 					map[string]any{
 						"active": true,
-						"name": "stream_url",
+						"name": "updatedAt",
 						"req": false,
 						"type": "`$STRING`",
 						"index$": 10,
-					},
-					map[string]any{
-						"active": true,
-						"name": "success",
-						"req": false,
-						"type": "`$BOOLEAN`",
-						"index$": 11,
-					},
-					map[string]any{
-						"active": true,
-						"name": "updated_at",
-						"req": false,
-						"type": "`$STRING`",
-						"index$": 12,
 					},
 				},
 				"name": "channel",
@@ -148,6 +146,7 @@ func MakeConfig() map[string]any {
 							map[string]any{
 								"active": true,
 								"args": map[string]any{},
+								"kind": "http",
 								"method": "POST",
 								"orig": "/channels",
 								"parts": []any{
@@ -156,12 +155,11 @@ func MakeConfig() map[string]any {
 								"select": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body`",
+									"res": "`body.data`",
 								},
 								"index$": 0,
 							},
 						},
-						"key$": "create",
 					},
 					"list": map[string]any{
 						"input": "data",
@@ -199,6 +197,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/channels",
 								"parts": []any{
@@ -218,7 +217,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "list",
 					},
 					"load": map[string]any{
 						"input": "data",
@@ -239,6 +237,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/channels/{channelId}",
 								"parts": []any{
@@ -257,12 +256,11 @@ func MakeConfig() map[string]any {
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body`",
+									"res": "`body.data`",
 								},
 								"index$": 0,
 							},
 						},
-						"key$": "load",
 					},
 					"remove": map[string]any{
 						"input": "data",
@@ -283,6 +281,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "DELETE",
 								"orig": "/channels/{channelId}",
 								"parts": []any{
@@ -306,7 +305,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "remove",
 					},
 					"update": map[string]any{
 						"input": "data",
@@ -327,6 +325,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "PUT",
 								"orig": "/channels/{channelId}",
 								"parts": []any{
@@ -345,12 +344,11 @@ func MakeConfig() map[string]any {
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body`",
+									"res": "`body.data`",
 								},
 								"index$": 0,
 							},
 						},
-						"key$": "update",
 					},
 				},
 				"relations": map[string]any{
@@ -361,131 +359,137 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"active": true,
-						"name": "created_at",
+						"name": "createdAt",
 						"req": false,
 						"type": "`$STRING`",
 						"index$": 0,
 					},
 					map[string]any{
 						"active": true,
-						"name": "data",
-						"req": false,
-						"type": "`$OBJECT`",
-						"index$": 1,
-					},
-					map[string]any{
-						"active": true,
 						"name": "description",
 						"op": map[string]any{
-							"list": map[string]any{
-								"req": false,
+							"create": map[string]any{
+								"req": true,
+								"type": "`$STRING`",
+							},
+							"update": map[string]any{
+								"req": true,
 								"type": "`$STRING`",
 							},
 						},
-						"req": true,
+						"req": false,
 						"type": "`$STRING`",
-						"index$": 2,
+						"index$": 1,
 					},
 					map[string]any{
 						"active": true,
 						"name": "duration",
 						"op": map[string]any{
-							"list": map[string]any{
-								"req": false,
+							"create": map[string]any{
+								"req": true,
+								"type": "`$INTEGER`",
+							},
+							"update": map[string]any{
+								"req": true,
 								"type": "`$INTEGER`",
 							},
 						},
-						"req": true,
+						"req": false,
 						"type": "`$INTEGER`",
-						"index$": 3,
+						"index$": 2,
 					},
 					map[string]any{
 						"active": true,
 						"name": "genre",
 						"op": map[string]any{
-							"list": map[string]any{
-								"req": false,
+							"create": map[string]any{
+								"req": true,
+								"type": "`$ARRAY`",
+							},
+							"update": map[string]any{
+								"req": true,
 								"type": "`$ARRAY`",
 							},
 						},
-						"req": true,
+						"req": false,
 						"type": "`$ARRAY`",
-						"index$": 4,
+						"index$": 3,
 					},
 					map[string]any{
 						"active": true,
 						"name": "id",
 						"req": false,
 						"type": "`$STRING`",
-						"index$": 5,
+						"index$": 4,
 					},
 					map[string]any{
 						"active": true,
-						"name": "is_premium",
+						"name": "isPremium",
 						"req": false,
 						"type": "`$BOOLEAN`",
-						"index$": 6,
+						"index$": 5,
 					},
 					map[string]any{
 						"active": true,
 						"name": "rating",
 						"req": false,
 						"type": "`$NUMBER`",
+						"index$": 6,
+					},
+					map[string]any{
+						"active": true,
+						"name": "releaseYear",
+						"op": map[string]any{
+							"create": map[string]any{
+								"req": true,
+								"type": "`$INTEGER`",
+							},
+							"update": map[string]any{
+								"req": true,
+								"type": "`$INTEGER`",
+							},
+						},
+						"req": false,
+						"type": "`$INTEGER`",
 						"index$": 7,
 					},
 					map[string]any{
 						"active": true,
-						"name": "release_year",
-						"op": map[string]any{
-							"list": map[string]any{
-								"req": false,
-								"type": "`$INTEGER`",
-							},
-						},
-						"req": true,
-						"type": "`$INTEGER`",
+						"name": "streamUrl",
+						"req": false,
+						"type": "`$STRING`",
 						"index$": 8,
 					},
 					map[string]any{
 						"active": true,
-						"name": "stream_url",
+						"name": "thumbnailUrl",
 						"req": false,
 						"type": "`$STRING`",
 						"index$": 9,
 					},
 					map[string]any{
 						"active": true,
-						"name": "success",
+						"name": "title",
+						"op": map[string]any{
+							"create": map[string]any{
+								"req": true,
+								"type": "`$STRING`",
+							},
+							"update": map[string]any{
+								"req": true,
+								"type": "`$STRING`",
+							},
+						},
 						"req": false,
-						"type": "`$BOOLEAN`",
+						"type": "`$STRING`",
 						"index$": 10,
 					},
 					map[string]any{
 						"active": true,
-						"name": "thumbnail_url",
+						"name": "updatedAt",
 						"req": false,
 						"type": "`$STRING`",
 						"index$": 11,
-					},
-					map[string]any{
-						"active": true,
-						"name": "title",
-						"op": map[string]any{
-							"list": map[string]any{
-								"req": false,
-								"type": "`$STRING`",
-							},
-						},
-						"req": true,
-						"type": "`$STRING`",
-						"index$": 12,
-					},
-					map[string]any{
-						"active": true,
-						"name": "updated_at",
-						"req": false,
-						"type": "`$STRING`",
-						"index$": 13,
 					},
 				},
 				"name": "movie",
@@ -497,6 +501,7 @@ func MakeConfig() map[string]any {
 							map[string]any{
 								"active": true,
 								"args": map[string]any{},
+								"kind": "http",
 								"method": "POST",
 								"orig": "/movies",
 								"parts": []any{
@@ -505,12 +510,11 @@ func MakeConfig() map[string]any {
 								"select": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body`",
+									"res": "`body.data`",
 								},
 								"index$": 0,
 							},
 						},
-						"key$": "create",
 					},
 					"list": map[string]any{
 						"input": "data",
@@ -548,6 +552,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/movies",
 								"parts": []any{
@@ -567,7 +572,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "list",
 					},
 					"load": map[string]any{
 						"input": "data",
@@ -588,6 +592,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/movies/{movieId}",
 								"parts": []any{
@@ -606,12 +611,11 @@ func MakeConfig() map[string]any {
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body`",
+									"res": "`body.data`",
 								},
 								"index$": 0,
 							},
 						},
-						"key$": "load",
 					},
 					"remove": map[string]any{
 						"input": "data",
@@ -632,6 +636,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "DELETE",
 								"orig": "/movies/{movieId}",
 								"parts": []any{
@@ -655,7 +660,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "remove",
 					},
 					"update": map[string]any{
 						"input": "data",
@@ -676,6 +680,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "PUT",
 								"orig": "/movies/{movieId}",
 								"parts": []any{
@@ -694,12 +699,11 @@ func MakeConfig() map[string]any {
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body`",
+									"res": "`body.data`",
 								},
 								"index$": 0,
 							},
 						},
-						"key$": "update",
 					},
 				},
 				"relations": map[string]any{
@@ -710,125 +714,127 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"active": true,
-						"name": "created_at",
+						"name": "createdAt",
 						"req": false,
 						"type": "`$STRING`",
 						"index$": 0,
 					},
 					map[string]any{
 						"active": true,
-						"name": "data",
+						"name": "description",
+						"op": map[string]any{
+							"create": map[string]any{
+								"req": true,
+								"type": "`$STRING`",
+							},
+							"update": map[string]any{
+								"req": true,
+								"type": "`$STRING`",
+							},
+						},
 						"req": false,
-						"type": "`$OBJECT`",
+						"type": "`$STRING`",
 						"index$": 1,
 					},
 					map[string]any{
 						"active": true,
-						"name": "description",
-						"op": map[string]any{
-							"list": map[string]any{
-								"req": false,
-								"type": "`$STRING`",
-							},
-						},
-						"req": true,
-						"type": "`$STRING`",
-						"index$": 2,
-					},
-					map[string]any{
-						"active": true,
-						"name": "episode",
+						"name": "episodes",
 						"req": false,
 						"type": "`$INTEGER`",
-						"index$": 3,
+						"index$": 2,
 					},
 					map[string]any{
 						"active": true,
 						"name": "genre",
 						"op": map[string]any{
-							"list": map[string]any{
-								"req": false,
+							"create": map[string]any{
+								"req": true,
+								"type": "`$ARRAY`",
+							},
+							"update": map[string]any{
+								"req": true,
 								"type": "`$ARRAY`",
 							},
 						},
-						"req": true,
+						"req": false,
 						"type": "`$ARRAY`",
-						"index$": 4,
+						"index$": 3,
 					},
 					map[string]any{
 						"active": true,
 						"name": "id",
 						"req": false,
 						"type": "`$STRING`",
-						"index$": 5,
+						"index$": 4,
 					},
 					map[string]any{
 						"active": true,
-						"name": "is_premium",
+						"name": "isPremium",
 						"req": false,
 						"type": "`$BOOLEAN`",
-						"index$": 6,
+						"index$": 5,
 					},
 					map[string]any{
 						"active": true,
 						"name": "rating",
 						"req": false,
 						"type": "`$NUMBER`",
+						"index$": 6,
+					},
+					map[string]any{
+						"active": true,
+						"name": "releaseYear",
+						"op": map[string]any{
+							"create": map[string]any{
+								"req": true,
+								"type": "`$INTEGER`",
+							},
+							"update": map[string]any{
+								"req": true,
+								"type": "`$INTEGER`",
+							},
+						},
+						"req": false,
+						"type": "`$INTEGER`",
 						"index$": 7,
 					},
 					map[string]any{
 						"active": true,
-						"name": "release_year",
-						"op": map[string]any{
-							"list": map[string]any{
-								"req": false,
-								"type": "`$INTEGER`",
-							},
-						},
-						"req": true,
+						"name": "seasons",
+						"req": false,
 						"type": "`$INTEGER`",
 						"index$": 8,
 					},
 					map[string]any{
 						"active": true,
-						"name": "season",
-						"req": false,
-						"type": "`$INTEGER`",
-						"index$": 9,
-					},
-					map[string]any{
-						"active": true,
-						"name": "success",
-						"req": false,
-						"type": "`$BOOLEAN`",
-						"index$": 10,
-					},
-					map[string]any{
-						"active": true,
-						"name": "thumbnail_url",
+						"name": "thumbnailUrl",
 						"req": false,
 						"type": "`$STRING`",
-						"index$": 11,
+						"index$": 9,
 					},
 					map[string]any{
 						"active": true,
 						"name": "title",
 						"op": map[string]any{
-							"list": map[string]any{
-								"req": false,
+							"create": map[string]any{
+								"req": true,
+								"type": "`$STRING`",
+							},
+							"update": map[string]any{
+								"req": true,
 								"type": "`$STRING`",
 							},
 						},
-						"req": true,
+						"req": false,
 						"type": "`$STRING`",
-						"index$": 12,
+						"index$": 10,
 					},
 					map[string]any{
 						"active": true,
-						"name": "updated_at",
+						"name": "updatedAt",
 						"req": false,
 						"type": "`$STRING`",
-						"index$": 13,
+						"index$": 11,
 					},
 				},
 				"name": "series",
@@ -840,6 +846,7 @@ func MakeConfig() map[string]any {
 							map[string]any{
 								"active": true,
 								"args": map[string]any{},
+								"kind": "http",
 								"method": "POST",
 								"orig": "/series",
 								"parts": []any{
@@ -848,12 +855,11 @@ func MakeConfig() map[string]any {
 								"select": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body`",
+									"res": "`body.data`",
 								},
 								"index$": 0,
 							},
 						},
-						"key$": "create",
 					},
 					"list": map[string]any{
 						"input": "data",
@@ -891,6 +897,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/series",
 								"parts": []any{
@@ -910,7 +917,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "list",
 					},
 					"load": map[string]any{
 						"input": "data",
@@ -931,6 +937,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/series/{seriesId}",
 								"parts": []any{
@@ -949,12 +956,11 @@ func MakeConfig() map[string]any {
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body`",
+									"res": "`body.data`",
 								},
 								"index$": 0,
 							},
 						},
-						"key$": "load",
 					},
 					"remove": map[string]any{
 						"input": "data",
@@ -975,6 +981,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "DELETE",
 								"orig": "/series/{seriesId}",
 								"parts": []any{
@@ -998,7 +1005,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "remove",
 					},
 					"update": map[string]any{
 						"input": "data",
@@ -1019,6 +1025,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "PUT",
 								"orig": "/series/{seriesId}",
 								"parts": []any{
@@ -1037,12 +1044,11 @@ func MakeConfig() map[string]any {
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body`",
+									"res": "`body.data`",
 								},
 								"index$": 0,
 							},
 						},
-						"key$": "update",
 					},
 				},
 				"relations": map[string]any{

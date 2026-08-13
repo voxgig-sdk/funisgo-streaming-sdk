@@ -2,67 +2,59 @@
   "existing": {
     "channel": {
       "CHANNEL00": {
-        "category": "s82",
-        "created_at": "s83",
-        "data": {},
-        "description": "s85",
+        "category": "s6e",
+        "createdAt": "s6f",
+        "description": "s70",
         "id": "CHANNEL00",
-        "is_live": false,
-        "is_premium": true,
-        "language": "s89",
-        "logo_url": "s8a",
-        "name": "s8b",
-        "stream_url": "s8c",
-        "success": false,
-        "updated_at": "s8e"
+        "isLive": true,
+        "isPremium": false,
+        "language": "s74",
+        "logoUrl": "s75",
+        "name": "s76",
+        "streamUrl": "s77",
+        "updatedAt": "s78"
       },
       "CHANNEL01": {
-        "category": "s104",
-        "created_at": "s105",
-        "data": {},
-        "description": "s107",
+        "category": "sdc",
+        "createdAt": "sdd",
+        "description": "sde",
         "id": "CHANNEL01",
-        "is_live": false,
-        "is_premium": true,
-        "language": "s10b",
-        "logo_url": "s10c",
-        "name": "s10d",
-        "stream_url": "s10e",
-        "success": false,
-        "updated_at": "s110"
+        "isLive": true,
+        "isPremium": false,
+        "language": "se2",
+        "logoUrl": "se3",
+        "name": "se4",
+        "streamUrl": "se5",
+        "updatedAt": "se6"
       },
       "CHANNEL02": {
-        "category": "s186",
-        "created_at": "s187",
-        "data": {},
-        "description": "s189",
+        "category": "s14a",
+        "createdAt": "s14b",
+        "description": "s14c",
         "id": "CHANNEL02",
-        "is_live": false,
-        "is_premium": true,
-        "language": "s18d",
-        "logo_url": "s18e",
-        "name": "s18f",
-        "stream_url": "s190",
-        "success": false,
-        "updated_at": "s192"
+        "isLive": true,
+        "isPremium": false,
+        "language": "s150",
+        "logoUrl": "s151",
+        "name": "s152",
+        "streamUrl": "s153",
+        "updatedAt": "s154"
       }
     }
   },
   "new": {
     "channel": {
       "channel_ref01": {
-        "category": "s208",
-        "created_at": "s209",
-        "data": {},
-        "description": "s20b",
-        "is_live": false,
-        "is_premium": true,
-        "language": "s20f",
-        "logo_url": "s210",
-        "name": "s211",
-        "stream_url": "s212",
-        "success": false,
-        "updated_at": "s214"
+        "category": "s1b8",
+        "createdAt": "s1b9",
+        "description": "s1ba",
+        "isLive": true,
+        "isPremium": false,
+        "language": "s1be",
+        "logoUrl": "s1bf",
+        "name": "s1c0",
+        "streamUrl": "s1c1",
+        "updatedAt": "s1c2"
       }
     }
   }

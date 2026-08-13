@@ -6,19 +6,17 @@
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 
 export interface Channel {
-  category: string
-  created_at?: string
-  data?: Record<string, any>
-  description: string
+  category?: string
+  createdAt?: string
+  description?: string
   id?: string
-  is_live?: boolean
-  is_premium?: boolean
+  isLive?: boolean
+  isPremium?: boolean
   language?: string
-  logo_url?: string
-  name: string
-  stream_url?: string
-  success?: boolean
-  updated_at?: string
+  logoUrl?: string
+  name?: string
+  streamUrl?: string
+  updatedAt?: string
 }
 
 export interface ChannelLoadMatch {
@@ -27,38 +25,44 @@ export interface ChannelLoadMatch {
 
 export interface ChannelListMatch {
   category?: string
-  created_at?: string
-  data?: Record<string, any>
+  createdAt?: string
   description?: string
   id?: string
-  is_live?: boolean
-  is_premium?: boolean
+  isLive?: boolean
+  isPremium?: boolean
   language?: string
-  logo_url?: string
+  logoUrl?: string
   name?: string
-  stream_url?: string
-  success?: boolean
-  updated_at?: string
+  streamUrl?: string
+  updatedAt?: string
 }
 
 export interface ChannelCreateData {
-  category: string
-  created_at?: string
-  data?: Record<string, any>
-  description: string
+  category?: string
+  createdAt?: string
+  description?: string
   id?: string
-  is_live?: boolean
-  is_premium?: boolean
+  isLive?: boolean
+  isPremium?: boolean
   language?: string
-  logo_url?: string
-  name: string
-  stream_url?: string
-  success?: boolean
-  updated_at?: string
+  logoUrl?: string
+  name?: string
+  streamUrl?: string
+  updatedAt?: string
 }
 
 export interface ChannelUpdateData {
   id: string
+  category?: string
+  createdAt?: string
+  description?: string
+  isLive?: boolean
+  isPremium?: boolean
+  language?: string
+  logoUrl?: string
+  name?: string
+  streamUrl?: string
+  updatedAt?: string
 }
 
 export interface ChannelRemoveMatch {
@@ -66,20 +70,18 @@ export interface ChannelRemoveMatch {
 }
 
 export interface Movie {
-  created_at?: string
-  data?: Record<string, any>
-  description: string
-  duration: number
-  genre: any[]
+  createdAt?: string
+  description?: string
+  duration?: number
+  genre?: any[]
   id?: string
-  is_premium?: boolean
+  isPremium?: boolean
   rating?: number
-  release_year: number
-  stream_url?: string
-  success?: boolean
-  thumbnail_url?: string
-  title: string
-  updated_at?: string
+  releaseYear?: number
+  streamUrl?: string
+  thumbnailUrl?: string
+  title?: string
+  updatedAt?: string
 }
 
 export interface MovieLoadMatch {
@@ -87,41 +89,48 @@ export interface MovieLoadMatch {
 }
 
 export interface MovieListMatch {
-  created_at?: string
-  data?: Record<string, any>
+  createdAt?: string
   description?: string
   duration?: number
   genre?: any[]
   id?: string
-  is_premium?: boolean
+  isPremium?: boolean
   rating?: number
-  release_year?: number
-  stream_url?: string
-  success?: boolean
-  thumbnail_url?: string
+  releaseYear?: number
+  streamUrl?: string
+  thumbnailUrl?: string
   title?: string
-  updated_at?: string
+  updatedAt?: string
 }
 
 export interface MovieCreateData {
-  created_at?: string
-  data?: Record<string, any>
-  description: string
-  duration: number
-  genre: any[]
+  createdAt?: string
+  description?: string
+  duration?: number
+  genre?: any[]
   id?: string
-  is_premium?: boolean
+  isPremium?: boolean
   rating?: number
-  release_year: number
-  stream_url?: string
-  success?: boolean
-  thumbnail_url?: string
-  title: string
-  updated_at?: string
+  releaseYear?: number
+  streamUrl?: string
+  thumbnailUrl?: string
+  title?: string
+  updatedAt?: string
 }
 
 export interface MovieUpdateData {
   id: string
+  createdAt?: string
+  description?: string
+  duration?: number
+  genre?: any[]
+  isPremium?: boolean
+  rating?: number
+  releaseYear?: number
+  streamUrl?: string
+  thumbnailUrl?: string
+  title?: string
+  updatedAt?: string
 }
 
 export interface MovieRemoveMatch {
@@ -129,20 +138,18 @@ export interface MovieRemoveMatch {
 }
 
 export interface Series {
-  created_at?: string
-  data?: Record<string, any>
-  description: string
-  episode?: number
-  genre: any[]
+  createdAt?: string
+  description?: string
+  episodes?: number
+  genre?: any[]
   id?: string
-  is_premium?: boolean
+  isPremium?: boolean
   rating?: number
-  release_year: number
-  season?: number
-  success?: boolean
-  thumbnail_url?: string
-  title: string
-  updated_at?: string
+  releaseYear?: number
+  seasons?: number
+  thumbnailUrl?: string
+  title?: string
+  updatedAt?: string
 }
 
 export interface SeriesLoadMatch {
@@ -150,41 +157,48 @@ export interface SeriesLoadMatch {
 }
 
 export interface SeriesListMatch {
-  created_at?: string
-  data?: Record<string, any>
+  createdAt?: string
   description?: string
-  episode?: number
+  episodes?: number
   genre?: any[]
   id?: string
-  is_premium?: boolean
+  isPremium?: boolean
   rating?: number
-  release_year?: number
-  season?: number
-  success?: boolean
-  thumbnail_url?: string
+  releaseYear?: number
+  seasons?: number
+  thumbnailUrl?: string
   title?: string
-  updated_at?: string
+  updatedAt?: string
 }
 
 export interface SeriesCreateData {
-  created_at?: string
-  data?: Record<string, any>
-  description: string
-  episode?: number
-  genre: any[]
+  createdAt?: string
+  description?: string
+  episodes?: number
+  genre?: any[]
   id?: string
-  is_premium?: boolean
+  isPremium?: boolean
   rating?: number
-  release_year: number
-  season?: number
-  success?: boolean
-  thumbnail_url?: string
-  title: string
-  updated_at?: string
+  releaseYear?: number
+  seasons?: number
+  thumbnailUrl?: string
+  title?: string
+  updatedAt?: string
 }
 
 export interface SeriesUpdateData {
   id: string
+  createdAt?: string
+  description?: string
+  episodes?: number
+  genre?: any[]
+  isPremium?: boolean
+  rating?: number
+  releaseYear?: number
+  seasons?: number
+  thumbnailUrl?: string
+  title?: string
+  updatedAt?: string
 }
 
 export interface SeriesRemoveMatch {

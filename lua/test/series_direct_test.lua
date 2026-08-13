@@ -115,16 +115,16 @@ function series_direct_setup(mockres)
   local calls = {}
 
   local env = runner.env_override({
-    ["FUNISGOSTREAMING_TEST_SERIES_ENTID"] = {},
-    ["FUNISGOSTREAMING_TEST_LIVE"] = "FALSE",
-    ["FUNISGOSTREAMING_APIKEY"] = "NONE",
+    ["FUNISGO_STREAMING_TEST_SERIES_ENTID"] = {},
+    ["FUNISGO_STREAMING_TEST_LIVE"] = "FALSE",
+    ["FUNISGO_STREAMING_APIKEY"] = "NONE",
   })
 
-  local live = env["FUNISGOSTREAMING_TEST_LIVE"] == "TRUE"
+  local live = env["FUNISGO_STREAMING_TEST_LIVE"] == "TRUE"
 
   if live then
     local merged_opts = {
-      apikey = env["FUNISGOSTREAMING_APIKEY"],
+      apikey = env["FUNISGO_STREAMING_APIKEY"],
     }
     local client = sdk.new(merged_opts)
     return {

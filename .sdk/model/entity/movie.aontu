@@ -6,46 +6,53 @@ main: kit: entity: movie: {
 
   fields: [
     {
-      name: "created_at"
+      name: "createdAt"
       req: false
       type: "`$STRING`"
     }
     {
-      name: "data"
-      req: false
-      type: "`$OBJECT`"
-    }
-    {
       name: "description"
       op: {
-        list: {
-          req: false
+        create: {
+          req: true
+          type: "`$STRING`"
+        }
+        update: {
+          req: true
           type: "`$STRING`"
         }
       }
-      req: true
+      req: false
       type: "`$STRING`"
     }
     {
       name: "duration"
       op: {
-        list: {
-          req: false
+        create: {
+          req: true
+          type: "`$INTEGER`"
+        }
+        update: {
+          req: true
           type: "`$INTEGER`"
         }
       }
-      req: true
+      req: false
       type: "`$INTEGER`"
     }
     {
       name: "genre"
       op: {
-        list: {
-          req: false
+        create: {
+          req: true
+          type: "`$ARRAY`"
+        }
+        update: {
+          req: true
           type: "`$ARRAY`"
         }
       }
-      req: true
+      req: false
       type: "`$ARRAY`"
     }
     {
@@ -54,7 +61,7 @@ main: kit: entity: movie: {
       type: "`$STRING`"
     }
     {
-      name: "is_premium"
+      name: "isPremium"
       req: false
       type: "`$BOOLEAN`"
     }
@@ -64,44 +71,47 @@ main: kit: entity: movie: {
       type: "`$NUMBER`"
     }
     {
-      name: "release_year"
+      name: "releaseYear"
       op: {
-        list: {
-          req: false
+        create: {
+          req: true
+          type: "`$INTEGER`"
+        }
+        update: {
+          req: true
           type: "`$INTEGER`"
         }
       }
-      req: true
+      req: false
       type: "`$INTEGER`"
     }
     {
-      name: "stream_url"
+      name: "streamUrl"
       req: false
       type: "`$STRING`"
     }
     {
-      name: "success"
-      req: false
-      type: "`$BOOLEAN`"
-    }
-    {
-      name: "thumbnail_url"
+      name: "thumbnailUrl"
       req: false
       type: "`$STRING`"
     }
     {
       name: "title"
       op: {
-        list: {
-          req: false
+        create: {
+          req: true
+          type: "`$STRING`"
+        }
+        update: {
+          req: true
           type: "`$STRING`"
         }
       }
-      req: true
+      req: false
       type: "`$STRING`"
     }
     {
-      name: "updated_at"
+      name: "updatedAt"
       req: false
       type: "`$STRING`"
     }
@@ -125,7 +135,7 @@ main: kit: entity: movie: {
           ]
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.data`"
           }
         }
       ]
@@ -213,7 +223,7 @@ main: kit: entity: movie: {
           }
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.data`"
           }
         }
       ]
@@ -289,7 +299,7 @@ main: kit: entity: movie: {
           }
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.data`"
           }
         }
       ]

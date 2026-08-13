@@ -55,7 +55,7 @@ except Exception as err:
 
 ### 3. Load a channel
 
-`load()` returns the bare record (a `dict`) and raises on error.
+`load()` returns the ENTITY — call data_get() for the record — and raises on error.
 
 ```python
 try:
@@ -68,14 +68,14 @@ except Exception as err:
 ### 4. Create, update, and remove
 
 ```python
-# Create — returns the bare created record (a dict)
-created = client.Channel().create({"category": "example_category", "description": "example_description", "name": "example_name"})
+# Create — returns the ENTITY (call data_get() for the record)
+created = client.Channel().create({"category": "example_category", "createdAt": "example_createdAt"})
 
 # Update — the created record's id is a plain dict key
-client.Channel().update({"id": created["id"]})
+client.Channel().update({"id": created.data_get()["id"], "category": "example_category", "createdAt": "example_createdAt"})
 
 # Remove
-client.Channel().remove({"id": created["id"]})
+client.Channel().remove({"id": created.data_get()["id"]})
 ```
 
 
@@ -85,8 +85,8 @@ Entity operations raise on failure, so wrap them in `try` / `except`:
 
 ```python
 try:
-    channels = client.Channel().list()
-    print(channels)
+    seriess = client.Series().list()
+    print(seriess)
 except Exception as err:
     print(f"list failed: {err}")
 ```
@@ -152,9 +152,10 @@ Create a mock client for unit testing — no server required:
 ```python
 client = FunisgoStreamingSDK.test()
 
-# Entity ops return the bare record and raise on error.
-channel = client.Channel().list()
-# channel contains the mock response record
+# Entity ops return the ENTITY and raises on error;
+# call data_get() for the record.
+series = client.Series().list()
+# series contains the mock response record
 ```
 
 ### Use a custom fetch function
@@ -256,7 +257,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (a `dict` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (a `dict` for single-entity
 ops, a `list` for `list`) and raise on error. Wrap calls in
 `try`/`except` to handle failures.
 
@@ -279,18 +280,16 @@ On error, `ok` is `False` and `err` contains the error value.
 | Field | Description |
 | --- | --- |
 | `category` |  |
-| `created_at` |  |
-| `data` |  |
+| `createdAt` |  |
 | `description` |  |
 | `id` |  |
-| `is_live` |  |
-| `is_premium` |  |
+| `isLive` |  |
+| `isPremium` |  |
 | `language` |  |
-| `logo_url` |  |
+| `logoUrl` |  |
 | `name` |  |
-| `stream_url` |  |
-| `success` |  |
-| `updated_at` |  |
+| `streamUrl` |  |
+| `updatedAt` |  |
 
 Operations: Create, List, Load, Remove, Update.
 
@@ -300,20 +299,18 @@ API path: `/channels`
 
 | Field | Description |
 | --- | --- |
-| `created_at` |  |
-| `data` |  |
+| `createdAt` |  |
 | `description` |  |
 | `duration` |  |
 | `genre` |  |
 | `id` |  |
-| `is_premium` |  |
+| `isPremium` |  |
 | `rating` |  |
-| `release_year` |  |
-| `stream_url` |  |
-| `success` |  |
-| `thumbnail_url` |  |
+| `releaseYear` |  |
+| `streamUrl` |  |
+| `thumbnailUrl` |  |
 | `title` |  |
-| `updated_at` |  |
+| `updatedAt` |  |
 
 Operations: Create, List, Load, Remove, Update.
 
@@ -323,20 +320,18 @@ API path: `/movies`
 
 | Field | Description |
 | --- | --- |
-| `created_at` |  |
-| `data` |  |
+| `createdAt` |  |
 | `description` |  |
-| `episode` |  |
+| `episodes` |  |
 | `genre` |  |
 | `id` |  |
-| `is_premium` |  |
+| `isPremium` |  |
 | `rating` |  |
-| `release_year` |  |
-| `season` |  |
-| `success` |  |
-| `thumbnail_url` |  |
+| `releaseYear` |  |
+| `seasons` |  |
+| `thumbnailUrl` |  |
 | `title` |  |
-| `updated_at` |  |
+| `updatedAt` |  |
 
 Operations: Create, List, Load, Remove, Update.
 
@@ -366,18 +361,16 @@ Create an instance: `channel = client.Channel()`
 | Field | Type | Description |
 | --- | --- | --- |
 | `category` | `str` |  |
-| `created_at` | `str` |  |
-| `data` | `dict` |  |
+| `createdAt` | `str` |  |
 | `description` | `str` |  |
 | `id` | `str` |  |
-| `is_live` | `bool` |  |
-| `is_premium` | `bool` |  |
+| `isLive` | `bool` |  |
+| `isPremium` | `bool` |  |
 | `language` | `str` |  |
-| `logo_url` | `str` |  |
+| `logoUrl` | `str` |  |
 | `name` | `str` |  |
-| `stream_url` | `str` |  |
-| `success` | `bool` |  |
-| `updated_at` | `str` |  |
+| `streamUrl` | `str` |  |
+| `updatedAt` | `str` |  |
 
 #### Example: Load
 
@@ -395,9 +388,6 @@ channels = client.Channel().list()
 
 ```python
 channel = client.Channel().create({
-    "category": "example_category",  # str
-    "description": "example_description",  # str
-    "name": "example_name",  # str
 })
 ```
 
@@ -420,20 +410,18 @@ Create an instance: `movie = client.Movie()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `created_at` | `str` |  |
-| `data` | `dict` |  |
+| `createdAt` | `str` |  |
 | `description` | `str` |  |
 | `duration` | `int` |  |
 | `genre` | `list` |  |
 | `id` | `str` |  |
-| `is_premium` | `bool` |  |
+| `isPremium` | `bool` |  |
 | `rating` | `float` |  |
-| `release_year` | `int` |  |
-| `stream_url` | `str` |  |
-| `success` | `bool` |  |
-| `thumbnail_url` | `str` |  |
+| `releaseYear` | `int` |  |
+| `streamUrl` | `str` |  |
+| `thumbnailUrl` | `str` |  |
 | `title` | `str` |  |
-| `updated_at` | `str` |  |
+| `updatedAt` | `str` |  |
 
 #### Example: Load
 
@@ -451,11 +439,6 @@ movies = client.Movie().list()
 
 ```python
 movie = client.Movie().create({
-    "description": "example_description",  # str
-    "duration": 1,  # int
-    "genre": [],  # list
-    "release_year": 1,  # int
-    "title": "example_title",  # str
 })
 ```
 
@@ -478,20 +461,18 @@ Create an instance: `series = client.Series()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `created_at` | `str` |  |
-| `data` | `dict` |  |
+| `createdAt` | `str` |  |
 | `description` | `str` |  |
-| `episode` | `int` |  |
+| `episodes` | `int` |  |
 | `genre` | `list` |  |
 | `id` | `str` |  |
-| `is_premium` | `bool` |  |
+| `isPremium` | `bool` |  |
 | `rating` | `float` |  |
-| `release_year` | `int` |  |
-| `season` | `int` |  |
-| `success` | `bool` |  |
-| `thumbnail_url` | `str` |  |
+| `releaseYear` | `int` |  |
+| `seasons` | `int` |  |
+| `thumbnailUrl` | `str` |  |
 | `title` | `str` |  |
-| `updated_at` | `str` |  |
+| `updatedAt` | `str` |  |
 
 #### Example: Load
 
@@ -509,10 +490,6 @@ seriess = client.Series().list()
 
 ```python
 series = client.Series().create({
-    "description": "example_description",  # str
-    "genre": [],  # list
-    "release_year": 1,  # int
-    "title": "example_title",  # str
 })
 ```
 
@@ -592,11 +569,11 @@ Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-channel = client.Channel()
-channel.list()
+series = client.Series()
+series.list()
 
-# channel.data_get() now returns the channel data from the last list
-# channel.match_get() returns the last match criteria
+# series.data_get() now returns the series data from the last list
+# series.match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

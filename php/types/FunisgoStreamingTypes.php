@@ -15,19 +15,17 @@ declare(strict_types=1);
 /** Channel entity data model. */
 class Channel
 {
-    public string $category;
-    public ?string $created_at = null;
-    public ?array $data = null;
-    public string $description;
+    public ?string $category = null;
+    public ?string $createdAt = null;
+    public ?string $description = null;
     public ?string $id = null;
-    public ?bool $is_live = null;
-    public ?bool $is_premium = null;
+    public ?bool $isLive = null;
+    public ?bool $isPremium = null;
     public ?string $language = null;
-    public ?string $logo_url = null;
-    public string $name;
-    public ?string $stream_url = null;
-    public ?bool $success = null;
-    public ?string $updated_at = null;
+    public ?string $logoUrl = null;
+    public ?string $name = null;
+    public ?string $streamUrl = null;
+    public ?string $updatedAt = null;
 }
 
 /** Request payload for Channel#load. */
@@ -40,42 +38,48 @@ class ChannelLoadMatch
 class ChannelListMatch
 {
     public ?string $category = null;
-    public ?string $created_at = null;
-    public ?array $data = null;
+    public ?string $createdAt = null;
     public ?string $description = null;
     public ?string $id = null;
-    public ?bool $is_live = null;
-    public ?bool $is_premium = null;
+    public ?bool $isLive = null;
+    public ?bool $isPremium = null;
     public ?string $language = null;
-    public ?string $logo_url = null;
+    public ?string $logoUrl = null;
     public ?string $name = null;
-    public ?string $stream_url = null;
-    public ?bool $success = null;
-    public ?string $updated_at = null;
+    public ?string $streamUrl = null;
+    public ?string $updatedAt = null;
 }
 
 /** Request payload for Channel#create. */
 class ChannelCreateData
 {
-    public string $category;
-    public ?string $created_at = null;
-    public ?array $data = null;
-    public string $description;
+    public ?string $category = null;
+    public ?string $createdAt = null;
+    public ?string $description = null;
     public ?string $id = null;
-    public ?bool $is_live = null;
-    public ?bool $is_premium = null;
+    public ?bool $isLive = null;
+    public ?bool $isPremium = null;
     public ?string $language = null;
-    public ?string $logo_url = null;
-    public string $name;
-    public ?string $stream_url = null;
-    public ?bool $success = null;
-    public ?string $updated_at = null;
+    public ?string $logoUrl = null;
+    public ?string $name = null;
+    public ?string $streamUrl = null;
+    public ?string $updatedAt = null;
 }
 
 /** Request payload for Channel#update. */
 class ChannelUpdateData
 {
     public string $id;
+    public ?string $category = null;
+    public ?string $createdAt = null;
+    public ?string $description = null;
+    public ?bool $isLive = null;
+    public ?bool $isPremium = null;
+    public ?string $language = null;
+    public ?string $logoUrl = null;
+    public ?string $name = null;
+    public ?string $streamUrl = null;
+    public ?string $updatedAt = null;
 }
 
 /** Request payload for Channel#remove. */
@@ -87,20 +91,18 @@ class ChannelRemoveMatch
 /** Movie entity data model. */
 class Movie
 {
-    public ?string $created_at = null;
-    public ?array $data = null;
-    public string $description;
-    public int $duration;
-    public array $genre;
+    public ?string $createdAt = null;
+    public ?string $description = null;
+    public ?int $duration = null;
+    public ?array $genre = null;
     public ?string $id = null;
-    public ?bool $is_premium = null;
+    public ?bool $isPremium = null;
     public ?float $rating = null;
-    public int $release_year;
-    public ?string $stream_url = null;
-    public ?bool $success = null;
-    public ?string $thumbnail_url = null;
-    public string $title;
-    public ?string $updated_at = null;
+    public ?int $releaseYear = null;
+    public ?string $streamUrl = null;
+    public ?string $thumbnailUrl = null;
+    public ?string $title = null;
+    public ?string $updatedAt = null;
 }
 
 /** Request payload for Movie#load. */
@@ -112,45 +114,52 @@ class MovieLoadMatch
 /** Request payload for Movie#list. */
 class MovieListMatch
 {
-    public ?string $created_at = null;
-    public ?array $data = null;
+    public ?string $createdAt = null;
     public ?string $description = null;
     public ?int $duration = null;
     public ?array $genre = null;
     public ?string $id = null;
-    public ?bool $is_premium = null;
+    public ?bool $isPremium = null;
     public ?float $rating = null;
-    public ?int $release_year = null;
-    public ?string $stream_url = null;
-    public ?bool $success = null;
-    public ?string $thumbnail_url = null;
+    public ?int $releaseYear = null;
+    public ?string $streamUrl = null;
+    public ?string $thumbnailUrl = null;
     public ?string $title = null;
-    public ?string $updated_at = null;
+    public ?string $updatedAt = null;
 }
 
 /** Request payload for Movie#create. */
 class MovieCreateData
 {
-    public ?string $created_at = null;
-    public ?array $data = null;
-    public string $description;
-    public int $duration;
-    public array $genre;
+    public ?string $createdAt = null;
+    public ?string $description = null;
+    public ?int $duration = null;
+    public ?array $genre = null;
     public ?string $id = null;
-    public ?bool $is_premium = null;
+    public ?bool $isPremium = null;
     public ?float $rating = null;
-    public int $release_year;
-    public ?string $stream_url = null;
-    public ?bool $success = null;
-    public ?string $thumbnail_url = null;
-    public string $title;
-    public ?string $updated_at = null;
+    public ?int $releaseYear = null;
+    public ?string $streamUrl = null;
+    public ?string $thumbnailUrl = null;
+    public ?string $title = null;
+    public ?string $updatedAt = null;
 }
 
 /** Request payload for Movie#update. */
 class MovieUpdateData
 {
     public string $id;
+    public ?string $createdAt = null;
+    public ?string $description = null;
+    public ?int $duration = null;
+    public ?array $genre = null;
+    public ?bool $isPremium = null;
+    public ?float $rating = null;
+    public ?int $releaseYear = null;
+    public ?string $streamUrl = null;
+    public ?string $thumbnailUrl = null;
+    public ?string $title = null;
+    public ?string $updatedAt = null;
 }
 
 /** Request payload for Movie#remove. */
@@ -162,20 +171,18 @@ class MovieRemoveMatch
 /** Series entity data model. */
 class Series
 {
-    public ?string $created_at = null;
-    public ?array $data = null;
-    public string $description;
-    public ?int $episode = null;
-    public array $genre;
+    public ?string $createdAt = null;
+    public ?string $description = null;
+    public ?int $episodes = null;
+    public ?array $genre = null;
     public ?string $id = null;
-    public ?bool $is_premium = null;
+    public ?bool $isPremium = null;
     public ?float $rating = null;
-    public int $release_year;
-    public ?int $season = null;
-    public ?bool $success = null;
-    public ?string $thumbnail_url = null;
-    public string $title;
-    public ?string $updated_at = null;
+    public ?int $releaseYear = null;
+    public ?int $seasons = null;
+    public ?string $thumbnailUrl = null;
+    public ?string $title = null;
+    public ?string $updatedAt = null;
 }
 
 /** Request payload for Series#load. */
@@ -187,45 +194,52 @@ class SeriesLoadMatch
 /** Request payload for Series#list. */
 class SeriesListMatch
 {
-    public ?string $created_at = null;
-    public ?array $data = null;
+    public ?string $createdAt = null;
     public ?string $description = null;
-    public ?int $episode = null;
+    public ?int $episodes = null;
     public ?array $genre = null;
     public ?string $id = null;
-    public ?bool $is_premium = null;
+    public ?bool $isPremium = null;
     public ?float $rating = null;
-    public ?int $release_year = null;
-    public ?int $season = null;
-    public ?bool $success = null;
-    public ?string $thumbnail_url = null;
+    public ?int $releaseYear = null;
+    public ?int $seasons = null;
+    public ?string $thumbnailUrl = null;
     public ?string $title = null;
-    public ?string $updated_at = null;
+    public ?string $updatedAt = null;
 }
 
 /** Request payload for Series#create. */
 class SeriesCreateData
 {
-    public ?string $created_at = null;
-    public ?array $data = null;
-    public string $description;
-    public ?int $episode = null;
-    public array $genre;
+    public ?string $createdAt = null;
+    public ?string $description = null;
+    public ?int $episodes = null;
+    public ?array $genre = null;
     public ?string $id = null;
-    public ?bool $is_premium = null;
+    public ?bool $isPremium = null;
     public ?float $rating = null;
-    public int $release_year;
-    public ?int $season = null;
-    public ?bool $success = null;
-    public ?string $thumbnail_url = null;
-    public string $title;
-    public ?string $updated_at = null;
+    public ?int $releaseYear = null;
+    public ?int $seasons = null;
+    public ?string $thumbnailUrl = null;
+    public ?string $title = null;
+    public ?string $updatedAt = null;
 }
 
 /** Request payload for Series#update. */
 class SeriesUpdateData
 {
     public string $id;
+    public ?string $createdAt = null;
+    public ?string $description = null;
+    public ?int $episodes = null;
+    public ?array $genre = null;
+    public ?bool $isPremium = null;
+    public ?float $rating = null;
+    public ?int $releaseYear = null;
+    public ?int $seasons = null;
+    public ?string $thumbnailUrl = null;
+    public ?string $title = null;
+    public ?string $updatedAt = null;
 }
 
 /** Request payload for Series#remove. */

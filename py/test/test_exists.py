@@ -1,4 +1,4 @@
-# ProjectName SDK exists test
+# FunisgoStreaming SDK exists test
 
 import pytest
 from funisgostreaming_sdk import FunisgoStreamingSDK
