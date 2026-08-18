@@ -40,7 +40,7 @@ class FunisgoStreamingSDK
         $utility = new FunisgoStreamingUtility();
         $this->_utility = $utility;
 
-        $config = FunisgoStreamingConfig::make_config();
+        $config = FunisgoStreamingConfig::shared_config();
 
         $this->_rootctx = ($utility->make_context)([
             "client" => $this,

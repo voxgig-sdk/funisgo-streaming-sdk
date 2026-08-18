@@ -28,7 +28,7 @@ class FunisgoStreamingSDK
     utility = FunisgoStreamingUtility.new
     @_utility = utility
 
-    config = FunisgoStreamingConfig.make_config
+    config = FunisgoStreamingConfig.shared_config
 
     @_rootctx = utility.make_context.call({
       "client" => self,

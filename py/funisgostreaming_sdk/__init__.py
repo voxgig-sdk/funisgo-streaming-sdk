@@ -23,8 +23,8 @@ class FunisgoStreamingSDK:
         utility = FunisgoStreamingUtility()
         self._utility = utility
 
-        from funisgostreaming_sdk.config import make_config
-        config = make_config()
+        from funisgostreaming_sdk.config import shared_config
+        config = shared_config()
 
         self._rootctx = utility.make_context({
             "client": self,

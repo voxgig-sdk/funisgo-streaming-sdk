@@ -23,7 +23,7 @@ func NewFunisgoStreamingSDK(options map[string]any) *FunisgoStreamingSDK {
 
 	sdk.utility = NewUtility()
 
-	config := MakeConfig()
+	config := SharedConfig()
 
 	sdk.rootctx = sdk.utility.MakeContext(map[string]any{
 		"client":  sdk,
