@@ -9,7 +9,7 @@ The API is exposed as capitalised, semantic **Entities** — e.g.
 instead of raw URL paths and query parameters. This keeps the surface
 predictable and low-friction for both humans and AI agents.
 
-> Other languages, the CLI, and MCP server live alongside this one — see
+> Also generated from this model: `go`, `go-cli`, `go-mcp`, `lua`, `php`, `py`, `rb` — see
 > the [top-level README](../README.md).
 
 
@@ -358,7 +358,7 @@ API path: `/channels`
 | --- | --- |
 | `createdAt` |  |
 | `description` |  |
-| `duration` |  |
+| `duration` | Duration in minutes |
 | `genre` |  |
 | `id` |  |
 | `isPremium` |  |
@@ -469,7 +469,7 @@ Create an instance: `const movie = client.Movie()`
 | --- | --- | --- |
 | `createdAt` | `string` |  |
 | `description` | `string` |  |
-| `duration` | `number` |  |
+| `duration` | `number` | Duration in minutes |
 | `genre` | `any[]` |  |
 | `id` | `string` |  |
 | `isPremium` | `boolean` |  |

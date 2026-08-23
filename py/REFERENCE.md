@@ -213,7 +213,7 @@ movie = client.Movie()
 | --- | --- | --- | --- |
 | `createdAt` | `str` | No |  |
 | `description` | `str` | No |  |
-| `duration` | `int` | No |  |
+| `duration` | `int` | No | Duration in minutes |
 | `genre` | `list` | No |  |
 | `id` | `str` | No |  |
 | `isPremium` | `bool` | No |  |

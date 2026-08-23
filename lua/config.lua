@@ -7,6 +7,9 @@ local function make_config()
   return {
     main = {
       name = "FunisgoStreaming",
+      slug = "funisgo-streaming",
+      version = "0.0.1",
+      target = "lua",
     },
     feature = {
       ["test"] = {
@@ -335,6 +338,7 @@ local function make_config()
                 ["type"] = "`$INTEGER`",
               },
             },
+            ["short"] = "Duration in minutes",
             ["type"] = "`$INTEGER`",
           },
           {

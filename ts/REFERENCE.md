@@ -255,7 +255,7 @@ const movie = client.Movie()
 | --- | --- | --- | --- |
 | `createdAt` | `string` | No |  |
 | `description` | `string` | No |  |
-| `duration` | `number` | No |  |
+| `duration` | `number` | No | Duration in minutes |
 | `genre` | `any[]` | No |  |
 | `id` | `string` | No |  |
 | `isPremium` | `boolean` | No |  |

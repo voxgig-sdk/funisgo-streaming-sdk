@@ -19,9 +19,20 @@ class Config {
     return fi
   }
 
+  // False for a feature added at runtime via options.extend (station's
+  // adopt path) - the constructor uses this to skip makeFeature for names
+  // no generated class backs.
+  hasFeature(this: any, fn: string) {
+    return null != FEATURE_CLASS[fn]
+  }
+
 
   main = {
     name: 'FunisgoStreaming',
+        slug: "funisgo-streaming",
+    version: "0.0.1",
+    target: "ts",
+
   }
 
 
@@ -367,6 +378,7 @@ class Config {
               "type": "`$INTEGER`"
             }
           },
+          "short": "Duration in minutes",
           "type": "`$INTEGER`"
         },
         {

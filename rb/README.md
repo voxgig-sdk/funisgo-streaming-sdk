@@ -297,7 +297,7 @@ API path: `/channels`
 | --- | --- |
 | `createdAt` |  |
 | `description` |  |
-| `duration` |  |
+| `duration` | Duration in minutes |
 | `genre` |  |
 | `id` |  |
 | `isPremium` |  |
@@ -410,7 +410,7 @@ Create an instance: `movie = client.Movie`
 | --- | --- | --- |
 | `createdAt` | `String` |  |
 | `description` | `String` |  |
-| `duration` | `Integer` |  |
+| `duration` | `Integer` | Duration in minutes |
 | `genre` | `Array` |  |
 | `id` | `String` |  |
 | `isPremium` | `Boolean` |  |

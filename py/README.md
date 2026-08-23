@@ -301,7 +301,7 @@ API path: `/channels`
 | --- | --- |
 | `createdAt` |  |
 | `description` |  |
-| `duration` |  |
+| `duration` | Duration in minutes |
 | `genre` |  |
 | `id` |  |
 | `isPremium` |  |
@@ -412,7 +412,7 @@ Create an instance: `movie = client.Movie()`
 | --- | --- | --- |
 | `createdAt` | `str` |  |
 | `description` | `str` |  |
-| `duration` | `int` |  |
+| `duration` | `int` | Duration in minutes |
 | `genre` | `list` |  |
 | `id` | `str` |  |
 | `isPremium` | `bool` |  |

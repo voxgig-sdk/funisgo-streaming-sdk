@@ -6,7 +6,7 @@ The Golang SDK for the FunisgoStreaming API — an entity-oriented client using 
 
 It exposes the API as capitalised, semantic **Entities** — e.g. `client.Channel(nil)` — each with the same small set of operations (`List`, `Load`, `Create`, `Update`, `Remove`) instead of raw URL paths and query strings. You call meaning, not endpoints, which keeps the cognitive load low.
 
-> Other languages, the CLI, and MCP server live alongside this one — see
+> Also generated from this model: `go-cli`, `go-mcp`, `lua`, `php`, `py`, `rb`, `ts` — see
 > the [top-level README](../README.md).
 
 
@@ -322,7 +322,7 @@ API path: `/channels`
 | --- | --- |
 | `"createdAt"` |  |
 | `"description"` |  |
-| `"duration"` |  |
+| `"duration"` | Duration in minutes |
 | `"genre"` |  |
 | `"id"` |  |
 | `"isPremium"` |  |
@@ -445,7 +445,7 @@ Create an instance: `movie := client.Movie(nil)`
 | --- | --- | --- |
 | `createdAt` | `string` |  |
 | `description` | `string` |  |
-| `duration` | `int` |  |
+| `duration` | `int` | Duration in minutes |
 | `genre` | `[]any` |  |
 | `id` | `string` |  |
 | `isPremium` | `bool` |  |

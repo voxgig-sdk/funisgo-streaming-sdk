@@ -33,6 +33,9 @@ class FunisgoStreamingConfig
         return [
             "main" => [
                 "name" => "FunisgoStreaming",
+                "slug" => "funisgo-streaming",
+                "version" => "0.0.1",
+                "target" => "php",
             ],
             "feature" => [
                 "test" => [
@@ -361,6 +364,7 @@ class FunisgoStreamingConfig
                   'type' => '`$INTEGER`',
                 ],
               ],
+              'short' => 'Duration in minutes',
               'type' => '`$INTEGER`',
             ],
             [

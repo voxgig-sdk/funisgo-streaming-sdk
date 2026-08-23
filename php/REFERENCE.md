@@ -217,7 +217,7 @@ $movie = $client->Movie();
 | --- | --- | --- | --- |
 | `createdAt` | `string` | No |  |
 | `description` | `string` | No |  |
-| `duration` | `int` | No |  |
+| `duration` | `int` | No | Duration in minutes |
 | `genre` | `array` | No |  |
 | `id` | `string` | No |  |
 | `isPremium` | `bool` | No |  |

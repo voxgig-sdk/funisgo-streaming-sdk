@@ -238,7 +238,7 @@ fmt.Println(movie.GetName()) // "movie"
 | --- | --- | --- | --- |
 | `createdAt` | `string` | No |  |
 | `description` | `string` | No |  |
-| `duration` | `int` | No |  |
+| `duration` | `int` | No | Duration in minutes |
 | `genre` | `[]any` | No |  |
 | `id` | `string` | No |  |
 | `isPremium` | `bool` | No |  |

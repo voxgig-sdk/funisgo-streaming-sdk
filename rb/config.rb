@@ -19,6 +19,9 @@ module FunisgoStreamingConfig
     {
       "main" => {
         "name" => "FunisgoStreaming",
+        "slug" => "funisgo-streaming",
+        "version" => "0.0.1",
+        "target" => "rb",
       },
       "feature" => {
         "test" => {
@@ -347,6 +350,7 @@ module FunisgoStreamingConfig
                   "type" => "`$INTEGER`",
                 },
               },
+              "short" => "Duration in minutes",
               "type" => "`$INTEGER`",
             },
             {

@@ -215,7 +215,7 @@ local movie = client:Movie(nil)
 | --- | --- | --- | --- |
 | `createdAt` | `string` | No |  |
 | `description` | `string` | No |  |
-| `duration` | `number` | No |  |
+| `duration` | `number` | No | Duration in minutes |
 | `genre` | `table` | No |  |
 | `id` | `string` | No |  |
 | `isPremium` | `boolean` | No |  |

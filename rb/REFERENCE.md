@@ -218,7 +218,7 @@ movie = client.Movie
 | --- | --- | --- | --- |
 | `createdAt` | `String` | No |  |
 | `description` | `String` | No |  |
-| `duration` | `Integer` | No |  |
+| `duration` | `Integer` | No | Duration in minutes |
 | `genre` | `Array` | No |  |
 | `id` | `String` | No |  |
 | `isPremium` | `Boolean` | No |  |

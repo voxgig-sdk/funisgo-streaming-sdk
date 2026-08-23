@@ -286,7 +286,7 @@ API path: `/channels`
 | --- | --- |
 | `createdAt` |  |
 | `description` |  |
-| `duration` |  |
+| `duration` | Duration in minutes |
 | `genre` |  |
 | `id` |  |
 | `isPremium` |  |
@@ -397,7 +397,7 @@ Create an instance: `local movie = client:Movie(nil)`
 | --- | --- | --- |
 | `createdAt` | `string` |  |
 | `description` | `string` |  |
-| `duration` | `number` |  |
+| `duration` | `number` | Duration in minutes |
 | `genre` | `table` |  |
 | `id` | `string` |  |
 | `isPremium` | `boolean` |  |

@@ -28,6 +28,9 @@ def make_config():
     return {
         "main": {
             "name": "FunisgoStreaming",
+            "slug": "funisgo-streaming",
+            "version": "0.0.1",
+            "target": "py",
         },
         "feature": {
             "test": {
@@ -356,6 +359,7 @@ def make_config():
                 "type": "`$INTEGER`",
               },
             },
+            "short": "Duration in minutes",
             "type": "`$INTEGER`",
           },
           {

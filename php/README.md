@@ -307,7 +307,7 @@ API path: `/channels`
 | --- | --- |
 | `createdAt` |  |
 | `description` |  |
-| `duration` |  |
+| `duration` | Duration in minutes |
 | `genre` |  |
 | `id` |  |
 | `isPremium` |  |
@@ -420,7 +420,7 @@ Create an instance: `$movie = $client->Movie();`
 | --- | --- | --- |
 | `createdAt` | `string` |  |
 | `description` | `string` |  |
-| `duration` | `int` |  |
+| `duration` | `int` | Duration in minutes |
 | `genre` | `array` |  |
 | `id` | `string` |  |
 | `isPremium` | `bool` |  |

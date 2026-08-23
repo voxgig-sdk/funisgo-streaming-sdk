@@ -38,6 +38,7 @@ main: kit: entity: movie: {
         }
       }
       req: false
+      short: "Duration in minutes"
       type: "`$INTEGER`"
     }
     {
