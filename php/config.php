@@ -42,6 +42,7 @@ class FunisgoStreamingConfig
           'options' => [
             'active' => false,
           ],
+          'transport' => 'base',
         ],
             ],
             "options" => [
