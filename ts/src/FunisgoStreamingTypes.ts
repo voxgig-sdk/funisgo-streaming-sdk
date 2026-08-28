@@ -25,16 +25,8 @@ export interface ChannelLoadMatch {
 
 export interface ChannelListMatch {
   category?: string
-  createdAt?: string
-  description?: string
-  id?: string
-  isLive?: boolean
-  isPremium?: boolean
-  language?: string
-  logoUrl?: string
-  name?: string
-  streamUrl?: string
-  updatedAt?: string
+  limit?: number
+  page?: number
 }
 
 export interface ChannelCreateData {
@@ -89,18 +81,9 @@ export interface MovieLoadMatch {
 }
 
 export interface MovieListMatch {
-  createdAt?: string
-  description?: string
-  duration?: number
-  genre?: any[]
-  id?: string
-  isPremium?: boolean
-  rating?: number
-  releaseYear?: number
-  streamUrl?: string
-  thumbnailUrl?: string
-  title?: string
-  updatedAt?: string
+  genre?: string
+  limit?: number
+  page?: number
 }
 
 export interface MovieCreateData {
@@ -157,18 +140,9 @@ export interface SeriesLoadMatch {
 }
 
 export interface SeriesListMatch {
-  createdAt?: string
-  description?: string
-  episodes?: number
-  genre?: any[]
-  id?: string
-  isPremium?: boolean
-  rating?: number
-  releaseYear?: number
-  seasons?: number
-  thumbnailUrl?: string
-  title?: string
-  updatedAt?: string
+  genre?: string
+  limit?: number
+  page?: number
 }
 
 export interface SeriesCreateData {

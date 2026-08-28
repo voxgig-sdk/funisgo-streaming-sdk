@@ -35,16 +35,8 @@ type ChannelLoadMatch struct {
 // ChannelListMatch is the typed request payload for Channel.ListTyped.
 type ChannelListMatch struct {
 	Category *string `json:"category,omitempty"`
-	CreatedAt *string `json:"createdAt,omitempty"`
-	Description *string `json:"description,omitempty"`
-	Id *string `json:"id,omitempty"`
-	IsLive *bool `json:"isLive,omitempty"`
-	IsPremium *bool `json:"isPremium,omitempty"`
-	Language *string `json:"language,omitempty"`
-	LogoUrl *string `json:"logoUrl,omitempty"`
-	Name *string `json:"name,omitempty"`
-	StreamUrl *string `json:"streamUrl,omitempty"`
-	UpdatedAt *string `json:"updatedAt,omitempty"`
+	Limit *int `json:"limit,omitempty"`
+	Page *int `json:"page,omitempty"`
 }
 
 // ChannelCreateData is the typed request payload for Channel.CreateTyped.
@@ -105,18 +97,9 @@ type MovieLoadMatch struct {
 
 // MovieListMatch is the typed request payload for Movie.ListTyped.
 type MovieListMatch struct {
-	CreatedAt *string `json:"createdAt,omitempty"`
-	Description *string `json:"description,omitempty"`
-	Duration *int `json:"duration,omitempty"`
-	Genre *[]any `json:"genre,omitempty"`
-	Id *string `json:"id,omitempty"`
-	IsPremium *bool `json:"isPremium,omitempty"`
-	Rating *float64 `json:"rating,omitempty"`
-	ReleaseYear *int `json:"releaseYear,omitempty"`
-	StreamUrl *string `json:"streamUrl,omitempty"`
-	ThumbnailUrl *string `json:"thumbnailUrl,omitempty"`
-	Title *string `json:"title,omitempty"`
-	UpdatedAt *string `json:"updatedAt,omitempty"`
+	Genre *string `json:"genre,omitempty"`
+	Limit *int `json:"limit,omitempty"`
+	Page *int `json:"page,omitempty"`
 }
 
 // MovieCreateData is the typed request payload for Movie.CreateTyped.
@@ -179,18 +162,9 @@ type SeriesLoadMatch struct {
 
 // SeriesListMatch is the typed request payload for Series.ListTyped.
 type SeriesListMatch struct {
-	CreatedAt *string `json:"createdAt,omitempty"`
-	Description *string `json:"description,omitempty"`
-	Episodes *int `json:"episodes,omitempty"`
-	Genre *[]any `json:"genre,omitempty"`
-	Id *string `json:"id,omitempty"`
-	IsPremium *bool `json:"isPremium,omitempty"`
-	Rating *float64 `json:"rating,omitempty"`
-	ReleaseYear *int `json:"releaseYear,omitempty"`
-	Seasons *int `json:"seasons,omitempty"`
-	ThumbnailUrl *string `json:"thumbnailUrl,omitempty"`
-	Title *string `json:"title,omitempty"`
-	UpdatedAt *string `json:"updatedAt,omitempty"`
+	Genre *string `json:"genre,omitempty"`
+	Limit *int `json:"limit,omitempty"`
+	Page *int `json:"page,omitempty"`
 }
 
 // SeriesCreateData is the typed request payload for Series.CreateTyped.

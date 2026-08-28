@@ -71,47 +71,15 @@ ChannelLoadMatch = Struct.new(
 # @!attribute [rw] category
 #   @return [String, nil]
 #
-# @!attribute [rw] createdAt
-#   @return [String, nil]
+# @!attribute [rw] limit
+#   @return [Integer, nil]
 #
-# @!attribute [rw] description
-#   @return [String, nil]
-#
-# @!attribute [rw] id
-#   @return [String, nil]
-#
-# @!attribute [rw] isLive
-#   @return [Boolean, nil]
-#
-# @!attribute [rw] isPremium
-#   @return [Boolean, nil]
-#
-# @!attribute [rw] language
-#   @return [String, nil]
-#
-# @!attribute [rw] logoUrl
-#   @return [String, nil]
-#
-# @!attribute [rw] name
-#   @return [String, nil]
-#
-# @!attribute [rw] streamUrl
-#   @return [String, nil]
-#
-# @!attribute [rw] updatedAt
-#   @return [String, nil]
+# @!attribute [rw] page
+#   @return [Integer, nil]
 ChannelListMatch = Struct.new(
   :category,
-  :createdAt,
-  :description,
-  :id,
-  :isLive,
-  :isPremium,
-  :language,
-  :logoUrl,
-  :name,
-  :streamUrl,
-  :updatedAt,
+  :limit,
+  :page,
   keyword_init: true
 )
 
@@ -286,54 +254,18 @@ MovieLoadMatch = Struct.new(
 
 # Request payload for Movie#list.
 #
-# @!attribute [rw] createdAt
-#   @return [String, nil]
-#
-# @!attribute [rw] description
-#   @return [String, nil]
-#
-# @!attribute [rw] duration
-#   @return [Integer, nil]
-#
 # @!attribute [rw] genre
-#   @return [Array, nil]
-#
-# @!attribute [rw] id
 #   @return [String, nil]
 #
-# @!attribute [rw] isPremium
-#   @return [Boolean, nil]
-#
-# @!attribute [rw] rating
-#   @return [Float, nil]
-#
-# @!attribute [rw] releaseYear
+# @!attribute [rw] limit
 #   @return [Integer, nil]
 #
-# @!attribute [rw] streamUrl
-#   @return [String, nil]
-#
-# @!attribute [rw] thumbnailUrl
-#   @return [String, nil]
-#
-# @!attribute [rw] title
-#   @return [String, nil]
-#
-# @!attribute [rw] updatedAt
-#   @return [String, nil]
+# @!attribute [rw] page
+#   @return [Integer, nil]
 MovieListMatch = Struct.new(
-  :createdAt,
-  :description,
-  :duration,
   :genre,
-  :id,
-  :isPremium,
-  :rating,
-  :releaseYear,
-  :streamUrl,
-  :thumbnailUrl,
-  :title,
-  :updatedAt,
+  :limit,
+  :page,
   keyword_init: true
 )
 
@@ -516,54 +448,18 @@ SeriesLoadMatch = Struct.new(
 
 # Request payload for Series#list.
 #
-# @!attribute [rw] createdAt
-#   @return [String, nil]
-#
-# @!attribute [rw] description
-#   @return [String, nil]
-#
-# @!attribute [rw] episodes
-#   @return [Integer, nil]
-#
 # @!attribute [rw] genre
-#   @return [Array, nil]
-#
-# @!attribute [rw] id
 #   @return [String, nil]
 #
-# @!attribute [rw] isPremium
-#   @return [Boolean, nil]
-#
-# @!attribute [rw] rating
-#   @return [Float, nil]
-#
-# @!attribute [rw] releaseYear
+# @!attribute [rw] limit
 #   @return [Integer, nil]
 #
-# @!attribute [rw] seasons
+# @!attribute [rw] page
 #   @return [Integer, nil]
-#
-# @!attribute [rw] thumbnailUrl
-#   @return [String, nil]
-#
-# @!attribute [rw] title
-#   @return [String, nil]
-#
-# @!attribute [rw] updatedAt
-#   @return [String, nil]
 SeriesListMatch = Struct.new(
-  :createdAt,
-  :description,
-  :episodes,
   :genre,
-  :id,
-  :isPremium,
-  :rating,
-  :releaseYear,
-  :seasons,
-  :thumbnailUrl,
-  :title,
-  :updatedAt,
+  :limit,
+  :page,
   keyword_init: true
 )
 

@@ -38,16 +38,8 @@ class ChannelLoadMatch
 class ChannelListMatch
 {
     public ?string $category = null;
-    public ?string $createdAt = null;
-    public ?string $description = null;
-    public ?string $id = null;
-    public ?bool $isLive = null;
-    public ?bool $isPremium = null;
-    public ?string $language = null;
-    public ?string $logoUrl = null;
-    public ?string $name = null;
-    public ?string $streamUrl = null;
-    public ?string $updatedAt = null;
+    public ?int $limit = null;
+    public ?int $page = null;
 }
 
 /** Request payload for Channel#create. */
@@ -114,18 +106,9 @@ class MovieLoadMatch
 /** Request payload for Movie#list. */
 class MovieListMatch
 {
-    public ?string $createdAt = null;
-    public ?string $description = null;
-    public ?int $duration = null;
-    public ?array $genre = null;
-    public ?string $id = null;
-    public ?bool $isPremium = null;
-    public ?float $rating = null;
-    public ?int $releaseYear = null;
-    public ?string $streamUrl = null;
-    public ?string $thumbnailUrl = null;
-    public ?string $title = null;
-    public ?string $updatedAt = null;
+    public ?string $genre = null;
+    public ?int $limit = null;
+    public ?int $page = null;
 }
 
 /** Request payload for Movie#create. */
@@ -194,18 +177,9 @@ class SeriesLoadMatch
 /** Request payload for Series#list. */
 class SeriesListMatch
 {
-    public ?string $createdAt = null;
-    public ?string $description = null;
-    public ?int $episodes = null;
-    public ?array $genre = null;
-    public ?string $id = null;
-    public ?bool $isPremium = null;
-    public ?float $rating = null;
-    public ?int $releaseYear = null;
-    public ?int $seasons = null;
-    public ?string $thumbnailUrl = null;
-    public ?string $title = null;
-    public ?string $updatedAt = null;
+    public ?string $genre = null;
+    public ?int $limit = null;
+    public ?int $page = null;
 }
 
 /** Request payload for Series#create. */

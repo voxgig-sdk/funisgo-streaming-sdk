@@ -24,16 +24,8 @@
 
 ---@class ChannelListMatch
 ---@field category? string
----@field createdAt? string
----@field description? string
----@field id? string
----@field isLive? boolean
----@field isPremium? boolean
----@field language? string
----@field logoUrl? string
----@field name? string
----@field streamUrl? string
----@field updatedAt? string
+---@field limit? number
+---@field page? number
 
 ---@class ChannelCreateData
 ---@field category? string
@@ -82,18 +74,9 @@
 ---@field id string
 
 ---@class MovieListMatch
----@field createdAt? string
----@field description? string
----@field duration? number
----@field genre? table
----@field id? string
----@field isPremium? boolean
----@field rating? number
----@field releaseYear? number
----@field streamUrl? string
----@field thumbnailUrl? string
----@field title? string
----@field updatedAt? string
+---@field genre? string
+---@field limit? number
+---@field page? number
 
 ---@class MovieCreateData
 ---@field createdAt? string
@@ -144,18 +127,9 @@
 ---@field id string
 
 ---@class SeriesListMatch
----@field createdAt? string
----@field description? string
----@field episodes? number
----@field genre? table
----@field id? string
----@field isPremium? boolean
----@field rating? number
----@field releaseYear? number
----@field seasons? number
----@field thumbnailUrl? string
----@field title? string
----@field updatedAt? string
+---@field genre? string
+---@field limit? number
+---@field page? number
 
 ---@class SeriesCreateData
 ---@field createdAt? string

@@ -36,16 +36,8 @@ class ChannelLoadMatch(TypedDict):
 
 class ChannelListMatch(TypedDict, total=False):
     category: str
-    createdAt: str
-    description: str
-    id: str
-    isLive: bool
-    isPremium: bool
-    language: str
-    logoUrl: str
-    name: str
-    streamUrl: str
-    updatedAt: str
+    limit: int
+    page: int
 
 
 class ChannelCreateData(TypedDict, total=False):
@@ -103,18 +95,9 @@ class MovieLoadMatch(TypedDict):
 
 
 class MovieListMatch(TypedDict, total=False):
-    createdAt: str
-    description: str
-    duration: int
-    genre: list
-    id: str
-    isPremium: bool
-    rating: float
-    releaseYear: int
-    streamUrl: str
-    thumbnailUrl: str
-    title: str
-    updatedAt: str
+    genre: str
+    limit: int
+    page: int
 
 
 class MovieCreateData(TypedDict, total=False):
@@ -174,18 +157,9 @@ class SeriesLoadMatch(TypedDict):
 
 
 class SeriesListMatch(TypedDict, total=False):
-    createdAt: str
-    description: str
-    episodes: int
-    genre: list
-    id: str
-    isPremium: bool
-    rating: float
-    releaseYear: int
-    seasons: int
-    thumbnailUrl: str
-    title: str
-    updatedAt: str
+    genre: str
+    limit: int
+    page: int
 
 
 class SeriesCreateData(TypedDict, total=False):
