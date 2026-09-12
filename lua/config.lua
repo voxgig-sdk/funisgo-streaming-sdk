@@ -51,6 +51,7 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "createdAt",
             ["type"] = "`$STRING`",
           },
@@ -85,6 +86,7 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "uri",
             ["name"] = "logoUrl",
             ["type"] = "`$STRING`",
           },
@@ -103,13 +105,19 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "uri",
             ["name"] = "streamUrl",
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "updatedAt",
             ["type"] = "`$STRING`",
           },
+        },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
         },
         ["name"] = "channel",
         ["op"] = {
@@ -122,13 +130,18 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "POST",
                 ["orig"] = "/channels",
-                ["parts"] = {
-                  "channels",
+                ["segments"] = {
+                  {
+                    ["lit"] = "channels",
+                  },
                 },
                 ["select"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.data`",
+                },
+                ["parts"] = {
+                  "channels",
                 },
               },
             },
@@ -165,8 +178,10 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/channels",
-                ["parts"] = {
-                  "channels",
+                ["segments"] = {
+                  {
+                    ["lit"] = "channels",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -178,6 +193,9 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "channels",
                 },
               },
             },
@@ -201,13 +219,17 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/channels/{channelId}",
-                ["parts"] = {
-                  "channels",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["channelId"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "channels",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -218,6 +240,10 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.data`",
+                },
+                ["parts"] = {
+                  "channels",
+                  "{id}",
                 },
               },
             },
@@ -241,13 +267,17 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "DELETE",
                 ["orig"] = "/channels/{channelId}",
-                ["parts"] = {
-                  "channels",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["channelId"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "channels",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -258,6 +288,10 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "channels",
+                  "{id}",
                 },
               },
             },
@@ -281,13 +315,17 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "PUT",
                 ["orig"] = "/channels/{channelId}",
-                ["parts"] = {
-                  "channels",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["channelId"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "channels",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -298,6 +336,10 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.data`",
+                },
+                ["parts"] = {
+                  "channels",
+                  "{id}",
                 },
               },
             },
@@ -310,6 +352,7 @@ local function make_config()
       ["movie"] = {
         ["fields"] = {
           {
+            ["format"] = "date-time",
             ["name"] = "createdAt",
             ["type"] = "`$STRING`",
           },
@@ -365,6 +408,7 @@ local function make_config()
             ["type"] = "`$BOOLEAN`",
           },
           {
+            ["format"] = "float",
             ["name"] = "rating",
             ["type"] = "`$NUMBER`",
           },
@@ -383,10 +427,12 @@ local function make_config()
             ["type"] = "`$INTEGER`",
           },
           {
+            ["format"] = "uri",
             ["name"] = "streamUrl",
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "uri",
             ["name"] = "thumbnailUrl",
             ["type"] = "`$STRING`",
           },
@@ -405,9 +451,14 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "updatedAt",
             ["type"] = "`$STRING`",
           },
+        },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
         },
         ["name"] = "movie",
         ["op"] = {
@@ -420,13 +471,18 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "POST",
                 ["orig"] = "/movies",
-                ["parts"] = {
-                  "movies",
+                ["segments"] = {
+                  {
+                    ["lit"] = "movies",
+                  },
                 },
                 ["select"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.data`",
+                },
+                ["parts"] = {
+                  "movies",
                 },
               },
             },
@@ -463,8 +519,10 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/movies",
-                ["parts"] = {
-                  "movies",
+                ["segments"] = {
+                  {
+                    ["lit"] = "movies",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -476,6 +534,9 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "movies",
                 },
               },
             },
@@ -499,13 +560,17 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/movies/{movieId}",
-                ["parts"] = {
-                  "movies",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["movieId"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "movies",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -516,6 +581,10 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.data`",
+                },
+                ["parts"] = {
+                  "movies",
+                  "{id}",
                 },
               },
             },
@@ -539,13 +608,17 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "DELETE",
                 ["orig"] = "/movies/{movieId}",
-                ["parts"] = {
-                  "movies",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["movieId"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "movies",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -556,6 +629,10 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "movies",
+                  "{id}",
                 },
               },
             },
@@ -579,13 +656,17 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "PUT",
                 ["orig"] = "/movies/{movieId}",
-                ["parts"] = {
-                  "movies",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["movieId"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "movies",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -596,6 +677,10 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.data`",
+                },
+                ["parts"] = {
+                  "movies",
+                  "{id}",
                 },
               },
             },
@@ -608,6 +693,7 @@ local function make_config()
       ["series"] = {
         ["fields"] = {
           {
+            ["format"] = "date-time",
             ["name"] = "createdAt",
             ["type"] = "`$STRING`",
           },
@@ -652,6 +738,7 @@ local function make_config()
             ["type"] = "`$BOOLEAN`",
           },
           {
+            ["format"] = "float",
             ["name"] = "rating",
             ["type"] = "`$NUMBER`",
           },
@@ -674,6 +761,7 @@ local function make_config()
             ["type"] = "`$INTEGER`",
           },
           {
+            ["format"] = "uri",
             ["name"] = "thumbnailUrl",
             ["type"] = "`$STRING`",
           },
@@ -692,9 +780,14 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "updatedAt",
             ["type"] = "`$STRING`",
           },
+        },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
         },
         ["name"] = "series",
         ["op"] = {
@@ -707,13 +800,18 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "POST",
                 ["orig"] = "/series",
-                ["parts"] = {
-                  "series",
+                ["segments"] = {
+                  {
+                    ["lit"] = "series",
+                  },
                 },
                 ["select"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.data`",
+                },
+                ["parts"] = {
+                  "series",
                 },
               },
             },
@@ -750,8 +848,10 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/series",
-                ["parts"] = {
-                  "series",
+                ["segments"] = {
+                  {
+                    ["lit"] = "series",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -763,6 +863,9 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "series",
                 },
               },
             },
@@ -786,13 +889,17 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/series/{seriesId}",
-                ["parts"] = {
-                  "series",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["seriesId"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "series",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -803,6 +910,10 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.data`",
+                },
+                ["parts"] = {
+                  "series",
+                  "{id}",
                 },
               },
             },
@@ -826,13 +937,17 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "DELETE",
                 ["orig"] = "/series/{seriesId}",
-                ["parts"] = {
-                  "series",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["seriesId"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "series",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -843,6 +958,10 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "series",
+                  "{id}",
                 },
               },
             },
@@ -866,13 +985,17 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "PUT",
                 ["orig"] = "/series/{seriesId}",
-                ["parts"] = {
-                  "series",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["seriesId"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "series",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -883,6 +1006,10 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.data`",
+                },
+                ["parts"] = {
+                  "series",
+                  "{id}",
                 },
               },
             },

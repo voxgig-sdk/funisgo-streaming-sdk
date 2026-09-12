@@ -171,7 +171,7 @@ def _series_basic_setup(extra):
         "FUNISGO_STREAMING_TEST_SERIES_ENTID": idmap,
         "FUNISGO_STREAMING_TEST_LIVE": "FALSE",
         "FUNISGO_STREAMING_TEST_EXPLAIN": "FALSE",
-        "FUNISGO_STREAMING_APIKEY": "NONE",
+        "FUNISGO_STREAMING_APIKEY": "",
     })
 
     idmap_resolved = helpers.to_map(
@@ -181,6 +181,10 @@ def _series_basic_setup(extra):
 
     if env.get("FUNISGO_STREAMING_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
+            # FIRST, so the generated fields below win: sdk-test-control.json's
+            # test.client.options adds to the live client, it does not
+            # redirect it.
+            runner.live_client_options(),
             {
                 "apikey": env.get("FUNISGO_STREAMING_APIKEY"),
             },

@@ -77,6 +77,7 @@ class FunisgoStreamingConfig
               'type' => '`$STRING`',
             ],
             [
+              'format' => 'date-time',
               'name' => 'createdAt',
               'type' => '`$STRING`',
             ],
@@ -111,6 +112,7 @@ class FunisgoStreamingConfig
               'type' => '`$STRING`',
             ],
             [
+              'format' => 'uri',
               'name' => 'logoUrl',
               'type' => '`$STRING`',
             ],
@@ -129,13 +131,19 @@ class FunisgoStreamingConfig
               'type' => '`$STRING`',
             ],
             [
+              'format' => 'uri',
               'name' => 'streamUrl',
               'type' => '`$STRING`',
             ],
             [
+              'format' => 'date-time',
               'name' => 'updatedAt',
               'type' => '`$STRING`',
             ],
+          ],
+          'id' => [
+            'field' => 'id',
+            'name' => 'id',
           ],
           'name' => 'channel',
           'op' => [
@@ -148,13 +156,18 @@ class FunisgoStreamingConfig
                   'kind' => 'http',
                   'method' => 'POST',
                   'orig' => '/channels',
-                  'parts' => [
-                    'channels',
+                  'segments' => [
+                    [
+                      'lit' => 'channels',
+                    ],
                   ],
                   'select' => [],
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.data`',
+                  ],
+                  'parts' => [
+                    'channels',
                   ],
                 ],
               ],
@@ -191,8 +204,10 @@ class FunisgoStreamingConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/channels',
-                  'parts' => [
-                    'channels',
+                  'segments' => [
+                    [
+                      'lit' => 'channels',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -204,6 +219,9 @@ class FunisgoStreamingConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'channels',
                   ],
                 ],
               ],
@@ -227,13 +245,17 @@ class FunisgoStreamingConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/channels/{channelId}',
-                  'parts' => [
-                    'channels',
-                    '{id}',
-                  ],
                   'rename' => [
                     'param' => [
                       'channelId' => 'id',
+                    ],
+                  ],
+                  'segments' => [
+                    [
+                      'lit' => 'channels',
+                    ],
+                    [
+                      'var' => 'id',
                     ],
                   ],
                   'select' => [
@@ -244,6 +266,10 @@ class FunisgoStreamingConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.data`',
+                  ],
+                  'parts' => [
+                    'channels',
+                    '{id}',
                   ],
                 ],
               ],
@@ -267,13 +293,17 @@ class FunisgoStreamingConfig
                   'kind' => 'http',
                   'method' => 'DELETE',
                   'orig' => '/channels/{channelId}',
-                  'parts' => [
-                    'channels',
-                    '{id}',
-                  ],
                   'rename' => [
                     'param' => [
                       'channelId' => 'id',
+                    ],
+                  ],
+                  'segments' => [
+                    [
+                      'lit' => 'channels',
+                    ],
+                    [
+                      'var' => 'id',
                     ],
                   ],
                   'select' => [
@@ -284,6 +314,10 @@ class FunisgoStreamingConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'channels',
+                    '{id}',
                   ],
                 ],
               ],
@@ -307,13 +341,17 @@ class FunisgoStreamingConfig
                   'kind' => 'http',
                   'method' => 'PUT',
                   'orig' => '/channels/{channelId}',
-                  'parts' => [
-                    'channels',
-                    '{id}',
-                  ],
                   'rename' => [
                     'param' => [
                       'channelId' => 'id',
+                    ],
+                  ],
+                  'segments' => [
+                    [
+                      'lit' => 'channels',
+                    ],
+                    [
+                      'var' => 'id',
                     ],
                   ],
                   'select' => [
@@ -324,6 +362,10 @@ class FunisgoStreamingConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.data`',
+                  ],
+                  'parts' => [
+                    'channels',
+                    '{id}',
                   ],
                 ],
               ],
@@ -336,6 +378,7 @@ class FunisgoStreamingConfig
         'movie' => [
           'fields' => [
             [
+              'format' => 'date-time',
               'name' => 'createdAt',
               'type' => '`$STRING`',
             ],
@@ -391,6 +434,7 @@ class FunisgoStreamingConfig
               'type' => '`$BOOLEAN`',
             ],
             [
+              'format' => 'float',
               'name' => 'rating',
               'type' => '`$NUMBER`',
             ],
@@ -409,10 +453,12 @@ class FunisgoStreamingConfig
               'type' => '`$INTEGER`',
             ],
             [
+              'format' => 'uri',
               'name' => 'streamUrl',
               'type' => '`$STRING`',
             ],
             [
+              'format' => 'uri',
               'name' => 'thumbnailUrl',
               'type' => '`$STRING`',
             ],
@@ -431,9 +477,14 @@ class FunisgoStreamingConfig
               'type' => '`$STRING`',
             ],
             [
+              'format' => 'date-time',
               'name' => 'updatedAt',
               'type' => '`$STRING`',
             ],
+          ],
+          'id' => [
+            'field' => 'id',
+            'name' => 'id',
           ],
           'name' => 'movie',
           'op' => [
@@ -446,13 +497,18 @@ class FunisgoStreamingConfig
                   'kind' => 'http',
                   'method' => 'POST',
                   'orig' => '/movies',
-                  'parts' => [
-                    'movies',
+                  'segments' => [
+                    [
+                      'lit' => 'movies',
+                    ],
                   ],
                   'select' => [],
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.data`',
+                  ],
+                  'parts' => [
+                    'movies',
                   ],
                 ],
               ],
@@ -489,8 +545,10 @@ class FunisgoStreamingConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/movies',
-                  'parts' => [
-                    'movies',
+                  'segments' => [
+                    [
+                      'lit' => 'movies',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -502,6 +560,9 @@ class FunisgoStreamingConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'movies',
                   ],
                 ],
               ],
@@ -525,13 +586,17 @@ class FunisgoStreamingConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/movies/{movieId}',
-                  'parts' => [
-                    'movies',
-                    '{id}',
-                  ],
                   'rename' => [
                     'param' => [
                       'movieId' => 'id',
+                    ],
+                  ],
+                  'segments' => [
+                    [
+                      'lit' => 'movies',
+                    ],
+                    [
+                      'var' => 'id',
                     ],
                   ],
                   'select' => [
@@ -542,6 +607,10 @@ class FunisgoStreamingConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.data`',
+                  ],
+                  'parts' => [
+                    'movies',
+                    '{id}',
                   ],
                 ],
               ],
@@ -565,13 +634,17 @@ class FunisgoStreamingConfig
                   'kind' => 'http',
                   'method' => 'DELETE',
                   'orig' => '/movies/{movieId}',
-                  'parts' => [
-                    'movies',
-                    '{id}',
-                  ],
                   'rename' => [
                     'param' => [
                       'movieId' => 'id',
+                    ],
+                  ],
+                  'segments' => [
+                    [
+                      'lit' => 'movies',
+                    ],
+                    [
+                      'var' => 'id',
                     ],
                   ],
                   'select' => [
@@ -582,6 +655,10 @@ class FunisgoStreamingConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'movies',
+                    '{id}',
                   ],
                 ],
               ],
@@ -605,13 +682,17 @@ class FunisgoStreamingConfig
                   'kind' => 'http',
                   'method' => 'PUT',
                   'orig' => '/movies/{movieId}',
-                  'parts' => [
-                    'movies',
-                    '{id}',
-                  ],
                   'rename' => [
                     'param' => [
                       'movieId' => 'id',
+                    ],
+                  ],
+                  'segments' => [
+                    [
+                      'lit' => 'movies',
+                    ],
+                    [
+                      'var' => 'id',
                     ],
                   ],
                   'select' => [
@@ -622,6 +703,10 @@ class FunisgoStreamingConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.data`',
+                  ],
+                  'parts' => [
+                    'movies',
+                    '{id}',
                   ],
                 ],
               ],
@@ -634,6 +719,7 @@ class FunisgoStreamingConfig
         'series' => [
           'fields' => [
             [
+              'format' => 'date-time',
               'name' => 'createdAt',
               'type' => '`$STRING`',
             ],
@@ -678,6 +764,7 @@ class FunisgoStreamingConfig
               'type' => '`$BOOLEAN`',
             ],
             [
+              'format' => 'float',
               'name' => 'rating',
               'type' => '`$NUMBER`',
             ],
@@ -700,6 +787,7 @@ class FunisgoStreamingConfig
               'type' => '`$INTEGER`',
             ],
             [
+              'format' => 'uri',
               'name' => 'thumbnailUrl',
               'type' => '`$STRING`',
             ],
@@ -718,9 +806,14 @@ class FunisgoStreamingConfig
               'type' => '`$STRING`',
             ],
             [
+              'format' => 'date-time',
               'name' => 'updatedAt',
               'type' => '`$STRING`',
             ],
+          ],
+          'id' => [
+            'field' => 'id',
+            'name' => 'id',
           ],
           'name' => 'series',
           'op' => [
@@ -733,13 +826,18 @@ class FunisgoStreamingConfig
                   'kind' => 'http',
                   'method' => 'POST',
                   'orig' => '/series',
-                  'parts' => [
-                    'series',
+                  'segments' => [
+                    [
+                      'lit' => 'series',
+                    ],
                   ],
                   'select' => [],
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.data`',
+                  ],
+                  'parts' => [
+                    'series',
                   ],
                 ],
               ],
@@ -776,8 +874,10 @@ class FunisgoStreamingConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/series',
-                  'parts' => [
-                    'series',
+                  'segments' => [
+                    [
+                      'lit' => 'series',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -789,6 +889,9 @@ class FunisgoStreamingConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'series',
                   ],
                 ],
               ],
@@ -812,13 +915,17 @@ class FunisgoStreamingConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/series/{seriesId}',
-                  'parts' => [
-                    'series',
-                    '{id}',
-                  ],
                   'rename' => [
                     'param' => [
                       'seriesId' => 'id',
+                    ],
+                  ],
+                  'segments' => [
+                    [
+                      'lit' => 'series',
+                    ],
+                    [
+                      'var' => 'id',
                     ],
                   ],
                   'select' => [
@@ -829,6 +936,10 @@ class FunisgoStreamingConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.data`',
+                  ],
+                  'parts' => [
+                    'series',
+                    '{id}',
                   ],
                 ],
               ],
@@ -852,13 +963,17 @@ class FunisgoStreamingConfig
                   'kind' => 'http',
                   'method' => 'DELETE',
                   'orig' => '/series/{seriesId}',
-                  'parts' => [
-                    'series',
-                    '{id}',
-                  ],
                   'rename' => [
                     'param' => [
                       'seriesId' => 'id',
+                    ],
+                  ],
+                  'segments' => [
+                    [
+                      'lit' => 'series',
+                    ],
+                    [
+                      'var' => 'id',
                     ],
                   ],
                   'select' => [
@@ -869,6 +984,10 @@ class FunisgoStreamingConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'series',
+                    '{id}',
                   ],
                 ],
               ],
@@ -892,13 +1011,17 @@ class FunisgoStreamingConfig
                   'kind' => 'http',
                   'method' => 'PUT',
                   'orig' => '/series/{seriesId}',
-                  'parts' => [
-                    'series',
-                    '{id}',
-                  ],
                   'rename' => [
                     'param' => [
                       'seriesId' => 'id',
+                    ],
+                  ],
+                  'segments' => [
+                    [
+                      'lit' => 'series',
+                    ],
+                    [
+                      'var' => 'id',
                     ],
                   ],
                   'select' => [
@@ -909,6 +1032,10 @@ class FunisgoStreamingConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.data`',
+                  ],
+                  'parts' => [
+                    'series',
+                    '{id}',
                   ],
                 ],
               ],

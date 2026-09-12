@@ -196,14 +196,22 @@ func channelDirectSetup(mockres any) *channelDirectSetupResult {
 	env := envOverride(map[string]any{
 		"FUNISGO_STREAMING_TEST_CHANNEL_ENTID": map[string]any{},
 		"FUNISGO_STREAMING_TEST_LIVE":    "FALSE",
-		"FUNISGO_STREAMING_APIKEY":       "NONE",
+		"FUNISGO_STREAMING_APIKEY":       "",
 	})
 
 	live := env["FUNISGO_STREAMING_TEST_LIVE"] == "TRUE"
 
 	if live {
-		mergedOpts := map[string]any{
+		// sdk-test-control.json's test.client.options seeds the live
+		// client; the generated fields below overwrite anything they name.
+		mergedOpts := map[string]any{}
+		for k, v := range liveClientOptions() {
+			mergedOpts[k] = v
+		}
+		for k, v := range map[string]any{
 			"apikey": env["FUNISGO_STREAMING_APIKEY"],
+		} {
+			mergedOpts[k] = v
 		}
 		client := sdk.NewFunisgoStreamingSDK(mergedOpts)
 

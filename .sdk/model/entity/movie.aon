@@ -6,6 +6,7 @@ main: kit: entity: movie: {
 
   fields: [
     {
+      format: "date-time"
       name: "createdAt"
       req: false
       type: "`$STRING`"
@@ -67,6 +68,7 @@ main: kit: entity: movie: {
       type: "`$BOOLEAN`"
     }
     {
+      format: "float"
       name: "rating"
       req: false
       type: "`$NUMBER`"
@@ -87,11 +89,13 @@ main: kit: entity: movie: {
       type: "`$INTEGER`"
     }
     {
+      format: "uri"
       name: "streamUrl"
       req: false
       type: "`$STRING`"
     }
     {
+      format: "uri"
       name: "thumbnailUrl"
       req: false
       type: "`$STRING`"
@@ -112,6 +116,7 @@ main: kit: entity: movie: {
       type: "`$STRING`"
     }
     {
+      format: "date-time"
       name: "updatedAt"
       req: false
       type: "`$STRING`"
@@ -131,8 +136,10 @@ main: kit: entity: movie: {
         {
           method: "POST"
           orig: "/movies"
-          parts: [
-            "movies"
+          segments: [
+            {
+              lit: "movies"
+            }
           ]
           transform: {
             req: "`reqdata`"
@@ -174,8 +181,10 @@ main: kit: entity: movie: {
           }
           method: "GET"
           orig: "/movies"
-          parts: [
-            "movies"
+          segments: [
+            {
+              lit: "movies"
+            }
           ]
           select: {
             exist: [
@@ -208,15 +217,19 @@ main: kit: entity: movie: {
           }
           method: "GET"
           orig: "/movies/{movieId}"
-          parts: [
-            "movies"
-            "{id}"
-          ]
           rename: {
             param: {
               movieId: "id"
             }
           }
+          segments: [
+            {
+              lit: "movies"
+            }
+            {
+              var: "id"
+            }
+          ]
           select: {
             exist: [
               "id"
@@ -246,15 +259,19 @@ main: kit: entity: movie: {
           }
           method: "DELETE"
           orig: "/movies/{movieId}"
-          parts: [
-            "movies"
-            "{id}"
-          ]
           rename: {
             param: {
               movieId: "id"
             }
           }
+          segments: [
+            {
+              lit: "movies"
+            }
+            {
+              var: "id"
+            }
+          ]
           select: {
             exist: [
               "id"
@@ -284,15 +301,19 @@ main: kit: entity: movie: {
           }
           method: "PUT"
           orig: "/movies/{movieId}"
-          parts: [
-            "movies"
-            "{id}"
-          ]
           rename: {
             param: {
               movieId: "id"
             }
           }
+          segments: [
+            {
+              lit: "movies"
+            }
+            {
+              var: "id"
+            }
+          ]
           select: {
             exist: [
               "id"

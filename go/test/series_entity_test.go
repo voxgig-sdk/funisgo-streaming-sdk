@@ -101,7 +101,7 @@ func TestSeriesEntity(t *testing.T) {
 		// CREATE
 		seriesRef01Ent := client.Series(nil)
 		seriesRef01Data := core.ToMapAny(vs.GetProp(
-			vs.GetPath([]any{"new", "series"}, setup.data), "series_ref01"))
+			vs.GetPath(setup.data, []any{"new", "series"}), "series_ref01"))
 
 		seriesRef01DataResult, err := seriesRef01Ent.Create(seriesRef01Data, nil)
 		if err != nil {
@@ -225,7 +225,7 @@ func seriesBasicSetup(extra map[string]any) *entityTestSetup {
 	client := sdk.TestSDK(options, extra)
 
 	// Generate idmap via transform, matching TS pattern.
-	idmap := vs.Transform(
+	idmap, _ := vs.Transform(
 		[]any{"series01", "series02", "series03"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
@@ -245,7 +245,7 @@ func seriesBasicSetup(extra map[string]any) *entityTestSetup {
 		"FUNISGO_STREAMING_TEST_SERIES_ENTID": idmap,
 		"FUNISGO_STREAMING_TEST_LIVE":      "FALSE",
 		"FUNISGO_STREAMING_TEST_EXPLAIN":   "FALSE",
-		"FUNISGO_STREAMING_APIKEY":         "NONE",
+		"FUNISGO_STREAMING_APIKEY":         "",
 	})
 
 	idmapResolved := core.ToMapAny(env["FUNISGO_STREAMING_TEST_SERIES_ENTID"])
@@ -254,11 +254,23 @@ func seriesBasicSetup(extra map[string]any) *entityTestSetup {
 	}
 
 	if env["FUNISGO_STREAMING_TEST_LIVE"] == "TRUE" {
+		// An empty map, not a nil one: Merge returns nil when its last entry
+		// is nil, and BasicSetup is normally called with no extras - so a
+		// bare nil silently discarded the apikey and server values below.
+		extraOpts := extra
+		if extraOpts == nil {
+			extraOpts = map[string]any{}
+		}
+
 		mergedOpts := vs.Merge([]any{
+			// liveClientOptions() FIRST, so the generated fields below win:
+			// sdk-test-control.json's test.client.options adds to the live
+			// client, it does not redirect it.
+			liveClientOptions(),
 			map[string]any{
 				"apikey": env["FUNISGO_STREAMING_APIKEY"],
 			},
-			extra,
+			extraOpts,
 		})
 		client = sdk.NewFunisgoStreamingSDK(core.ToMapAny(mergedOpts))
 	}

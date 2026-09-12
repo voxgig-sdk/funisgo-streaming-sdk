@@ -123,15 +123,17 @@ function channel_direct_setup($mockres)
     $env = Runner::env_override([
         "FUNISGO_STREAMING_TEST_CHANNEL_ENTID" => [],
         "FUNISGO_STREAMING_TEST_LIVE" => "FALSE",
-        "FUNISGO_STREAMING_APIKEY" => "NONE",
+        "FUNISGO_STREAMING_APIKEY" => "",
     ]);
 
     $live = $env["FUNISGO_STREAMING_TEST_LIVE"] === "TRUE";
 
     if ($live) {
-        $merged_opts = [
+        // Merged so the generated fields win: sdk-test-control.json's
+        // test.client.options adds to the live client, it does not redirect it.
+        $merged_opts = array_merge(Runner::live_client_options(), [
             "apikey" => $env["FUNISGO_STREAMING_APIKEY"],
-        ];
+        ]);
         $client = new FunisgoStreamingSDK($merged_opts);
         return [
             "client" => $client,

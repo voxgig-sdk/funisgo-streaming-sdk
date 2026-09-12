@@ -6,6 +6,7 @@ main: kit: entity: series: {
 
   fields: [
     {
+      format: "date-time"
       name: "createdAt"
       req: false
       type: "`$STRING`"
@@ -56,6 +57,7 @@ main: kit: entity: series: {
       type: "`$BOOLEAN`"
     }
     {
+      format: "float"
       name: "rating"
       req: false
       type: "`$NUMBER`"
@@ -81,6 +83,7 @@ main: kit: entity: series: {
       type: "`$INTEGER`"
     }
     {
+      format: "uri"
       name: "thumbnailUrl"
       req: false
       type: "`$STRING`"
@@ -101,6 +104,7 @@ main: kit: entity: series: {
       type: "`$STRING`"
     }
     {
+      format: "date-time"
       name: "updatedAt"
       req: false
       type: "`$STRING`"
@@ -120,8 +124,10 @@ main: kit: entity: series: {
         {
           method: "POST"
           orig: "/series"
-          parts: [
-            "series"
+          segments: [
+            {
+              lit: "series"
+            }
           ]
           transform: {
             req: "`reqdata`"
@@ -163,8 +169,10 @@ main: kit: entity: series: {
           }
           method: "GET"
           orig: "/series"
-          parts: [
-            "series"
+          segments: [
+            {
+              lit: "series"
+            }
           ]
           select: {
             exist: [
@@ -197,15 +205,19 @@ main: kit: entity: series: {
           }
           method: "GET"
           orig: "/series/{seriesId}"
-          parts: [
-            "series"
-            "{id}"
-          ]
           rename: {
             param: {
               seriesId: "id"
             }
           }
+          segments: [
+            {
+              lit: "series"
+            }
+            {
+              var: "id"
+            }
+          ]
           select: {
             exist: [
               "id"
@@ -235,15 +247,19 @@ main: kit: entity: series: {
           }
           method: "DELETE"
           orig: "/series/{seriesId}"
-          parts: [
-            "series"
-            "{id}"
-          ]
           rename: {
             param: {
               seriesId: "id"
             }
           }
+          segments: [
+            {
+              lit: "series"
+            }
+            {
+              var: "id"
+            }
+          ]
           select: {
             exist: [
               "id"
@@ -273,15 +289,19 @@ main: kit: entity: series: {
           }
           method: "PUT"
           orig: "/series/{seriesId}"
-          parts: [
-            "series"
-            "{id}"
-          ]
           rename: {
             param: {
               seriesId: "id"
             }
           }
+          segments: [
+            {
+              lit: "series"
+            }
+            {
+              var: "id"
+            }
+          ]
           select: {
             exist: [
               "id"

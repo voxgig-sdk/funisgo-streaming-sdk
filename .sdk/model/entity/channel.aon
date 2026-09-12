@@ -21,6 +21,7 @@ main: kit: entity: channel: {
       type: "`$STRING`"
     }
     {
+      format: "date-time"
       name: "createdAt"
       req: false
       type: "`$STRING`"
@@ -61,6 +62,7 @@ main: kit: entity: channel: {
       type: "`$STRING`"
     }
     {
+      format: "uri"
       name: "logoUrl"
       req: false
       type: "`$STRING`"
@@ -81,11 +83,13 @@ main: kit: entity: channel: {
       type: "`$STRING`"
     }
     {
+      format: "uri"
       name: "streamUrl"
       req: false
       type: "`$STRING`"
     }
     {
+      format: "date-time"
       name: "updatedAt"
       req: false
       type: "`$STRING`"
@@ -105,8 +109,10 @@ main: kit: entity: channel: {
         {
           method: "POST"
           orig: "/channels"
-          parts: [
-            "channels"
+          segments: [
+            {
+              lit: "channels"
+            }
           ]
           transform: {
             req: "`reqdata`"
@@ -148,8 +154,10 @@ main: kit: entity: channel: {
           }
           method: "GET"
           orig: "/channels"
-          parts: [
-            "channels"
+          segments: [
+            {
+              lit: "channels"
+            }
           ]
           select: {
             exist: [
@@ -182,15 +190,19 @@ main: kit: entity: channel: {
           }
           method: "GET"
           orig: "/channels/{channelId}"
-          parts: [
-            "channels"
-            "{id}"
-          ]
           rename: {
             param: {
               channelId: "id"
             }
           }
+          segments: [
+            {
+              lit: "channels"
+            }
+            {
+              var: "id"
+            }
+          ]
           select: {
             exist: [
               "id"
@@ -220,15 +232,19 @@ main: kit: entity: channel: {
           }
           method: "DELETE"
           orig: "/channels/{channelId}"
-          parts: [
-            "channels"
-            "{id}"
-          ]
           rename: {
             param: {
               channelId: "id"
             }
           }
+          segments: [
+            {
+              lit: "channels"
+            }
+            {
+              var: "id"
+            }
+          ]
           select: {
             exist: [
               "id"
@@ -258,15 +274,19 @@ main: kit: entity: channel: {
           }
           method: "PUT"
           orig: "/channels/{channelId}"
-          parts: [
-            "channels"
-            "{id}"
-          ]
           rename: {
             param: {
               channelId: "id"
             }
           }
+          segments: [
+            {
+              lit: "channels"
+            }
+            {
+              var: "id"
+            }
+          ]
           select: {
             exist: [
               "id"
