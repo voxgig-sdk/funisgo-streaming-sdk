@@ -105,7 +105,7 @@ local results, err = client:Series():list()
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/funisgo-streaming` | publish pending — [install from git tag](https://github.com/voxgig-sdk/funisgo-streaming-sdk/releases) |
+| TypeScript | `@voxgig-sdk/funisgo-streaming-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/funisgo-streaming-sdk/releases) |
 | Python | `voxgig-sdk-funisgo-streaming` | publish pending — [install from git tag](https://github.com/voxgig-sdk/funisgo-streaming-sdk/releases) |
 | PHP | `voxgig-sdk/funisgo-streaming` | publish pending — [install from git tag](https://github.com/voxgig-sdk/funisgo-streaming-sdk/releases) |
 | Golang | `github.com/voxgig-sdk/funisgo-streaming-sdk/go` | `go get github.com/voxgig-sdk/funisgo-streaming-sdk/go@latest` |
@@ -119,7 +119,7 @@ local results, err = client:Series():list()
 ### TypeScript
 
 ```ts
-import { FunisgoStreamingSDK } from '@voxgig-sdk/funisgo-streaming'
+import { FunisgoStreamingSDK } from '@voxgig-sdk/funisgo-streaming-sdk'
 
 const client = new FunisgoStreamingSDK({
   apikey: process.env.FUNISGO_STREAMING_APIKEY,

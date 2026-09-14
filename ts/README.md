@@ -28,7 +28,7 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { FunisgoStreamingSDK } from '@voxgig-sdk/funisgo-streaming'
+import { FunisgoStreamingSDK } from '@voxgig-sdk/funisgo-streaming-sdk'
 
 const client = new FunisgoStreamingSDK({
   apikey: process.env.FUNISGO_STREAMING_APIKEY,
@@ -633,7 +633,7 @@ funisgo-streaming/
 Import the SDK from the package root:
 
 ```ts
-import { FunisgoStreamingSDK } from '@voxgig-sdk/funisgo-streaming'
+import { FunisgoStreamingSDK } from '@voxgig-sdk/funisgo-streaming-sdk'
 ```
 
 ### Entity state
