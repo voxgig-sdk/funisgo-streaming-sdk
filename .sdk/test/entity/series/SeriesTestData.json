@@ -4,13 +4,13 @@
       "SERIES00": {
         "createdAt": "s78",
         "description": "s79",
-        "episodes": "s7a",
+        "episodes": 122,
         "genre": [],
         "id": "SERIES00",
         "isPremium": false,
         "rating": 126,
-        "releaseYear": "s7f",
-        "seasons": "s80",
+        "releaseYear": 127,
+        "seasons": 128,
         "thumbnailUrl": "s81",
         "title": "s82",
         "updatedAt": "s83"
@@ -18,13 +18,13 @@
       "SERIES01": {
         "createdAt": "sf0",
         "description": "sf1",
-        "episodes": "sf2",
+        "episodes": 242,
         "genre": [],
         "id": "SERIES01",
         "isPremium": false,
         "rating": 246,
-        "releaseYear": "sf7",
-        "seasons": "sf8",
+        "releaseYear": 247,
+        "seasons": 248,
         "thumbnailUrl": "sf9",
         "title": "sfa",
         "updatedAt": "sfb"
@@ -32,13 +32,13 @@
       "SERIES02": {
         "createdAt": "s168",
         "description": "s169",
-        "episodes": "s16a",
+        "episodes": 362,
         "genre": [],
         "id": "SERIES02",
         "isPremium": false,
         "rating": 366,
-        "releaseYear": "s16f",
-        "seasons": "s170",
+        "releaseYear": 367,
+        "seasons": 368,
         "thumbnailUrl": "s171",
         "title": "s172",
         "updatedAt": "s173"
@@ -50,15 +50,1186 @@
       "series_ref01": {
         "createdAt": "s1e0",
         "description": "s1e1",
-        "episodes": "s1e2",
+        "episodes": 482,
         "genre": [],
         "isPremium": false,
         "rating": 486,
-        "releaseYear": "s1e7",
-        "seasons": "s1e8",
+        "releaseYear": 487,
+        "seasons": 488,
         "thumbnailUrl": "s1e9",
         "title": "s1ea",
         "updatedAt": "s1eb"
+      }
+    }
+  },
+  "requests": {
+    "POST /series": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "createSeries",
+        "parameters": [],
+        "protocol": "http",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "description": {
+                    "example": "A high school chemistry teacher turned methamphetamine producer",
+                    "type": "string"
+                  },
+                  "episodes": {
+                    "example": 62,
+                    "type": "integer"
+                  },
+                  "genre": {
+                    "example": [
+                      "Drama",
+                      "Crime",
+                      "Thriller"
+                    ],
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "isPremium": {
+                    "example": true,
+                    "type": "boolean"
+                  },
+                  "rating": {
+                    "example": 9.5,
+                    "format": "float",
+                    "type": "number"
+                  },
+                  "releaseYear": {
+                    "example": 2008,
+                    "type": "integer"
+                  },
+                  "seasons": {
+                    "example": 5,
+                    "type": "integer"
+                  },
+                  "thumbnailUrl": {
+                    "example": "https://example.com/thumbnails/breaking-bad.jpg",
+                    "format": "uri",
+                    "type": "string"
+                  },
+                  "title": {
+                    "example": "Breaking Bad",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "title",
+                  "description",
+                  "genre",
+                  "releaseYear"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "properties": {
+                        "createdAt": {
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        "description": {
+                          "example": "A high school chemistry teacher turned methamphetamine producer",
+                          "type": "string"
+                        },
+                        "episodes": {
+                          "example": 62,
+                          "type": "integer"
+                        },
+                        "genre": {
+                          "example": [
+                            "Drama",
+                            "Crime",
+                            "Thriller"
+                          ],
+                          "items": {
+                            "type": "string"
+                          },
+                          "type": "array"
+                        },
+                        "id": {
+                          "example": "ser123456",
+                          "type": "string"
+                        },
+                        "isPremium": {
+                          "example": true,
+                          "type": "boolean"
+                        },
+                        "rating": {
+                          "example": 9.5,
+                          "format": "float",
+                          "type": "number"
+                        },
+                        "releaseYear": {
+                          "example": 2008,
+                          "type": "integer"
+                        },
+                        "seasons": {
+                          "example": 5,
+                          "type": "integer"
+                        },
+                        "thumbnailUrl": {
+                          "example": "https://example.com/thumbnails/breaking-bad.jpg",
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "title": {
+                          "example": "Breaking Bad",
+                          "type": "string"
+                        },
+                        "updatedAt": {
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "success": {
+                      "example": true,
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Series created successfully"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "BAD_REQUEST",
+                    "message": "Invalid input parameters"
+                  },
+                  "success": false
+                },
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "properties": {
+                        "code": {
+                          "example": "INVALID_REQUEST",
+                          "type": "string"
+                        },
+                        "message": {
+                          "example": "The request was invalid or malformed",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "success": {
+                      "example": false,
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "The request was invalid or malformed"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "UNAUTHORIZED",
+                    "message": "Invalid or missing API key"
+                  },
+                  "success": false
+                },
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "properties": {
+                        "code": {
+                          "example": "INVALID_REQUEST",
+                          "type": "string"
+                        },
+                        "message": {
+                          "example": "The request was invalid or malformed",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "success": {
+                      "example": false,
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Authentication credentials are missing or invalid"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "FORBIDDEN",
+                    "message": "This operation requires a premium plan subscription"
+                  },
+                  "success": false
+                },
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "properties": {
+                        "code": {
+                          "example": "INVALID_REQUEST",
+                          "type": "string"
+                        },
+                        "message": {
+                          "example": "The request was invalid or malformed",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "success": {
+                      "example": false,
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Premium plan required for this operation"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "securitySchemes": {
+          "ApiKeyAuth": {
+            "description": "API key for authentication. Free and premium plans available with different usage limits.",
+            "in": "header",
+            "name": "X-API-Key",
+            "type": "apiKey"
+          }
+        },
+        "securitySource": "operation"
+      }
+    },
+    "GET /series": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getSeries",
+        "parameters": [
+          {
+            "description": "Page number for pagination",
+            "in": "query",
+            "name": "page",
+            "required": false,
+            "schema": {
+              "default": 1,
+              "minimum": 1,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Number of items per page",
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 20,
+              "maximum": 100,
+              "minimum": 1,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Filter series by genre",
+            "in": "query",
+            "name": "genre",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "items": {
+                        "properties": {
+                          "createdAt": {
+                            "format": "date-time",
+                            "type": "string"
+                          },
+                          "description": {
+                            "example": "A high school chemistry teacher turned methamphetamine producer",
+                            "type": "string"
+                          },
+                          "episodes": {
+                            "example": 62,
+                            "type": "integer"
+                          },
+                          "genre": {
+                            "example": [
+                              "Drama",
+                              "Crime",
+                              "Thriller"
+                            ],
+                            "items": {
+                              "type": "string"
+                            },
+                            "type": "array"
+                          },
+                          "id": {
+                            "example": "ser123456",
+                            "type": "string"
+                          },
+                          "isPremium": {
+                            "example": true,
+                            "type": "boolean"
+                          },
+                          "rating": {
+                            "example": 9.5,
+                            "format": "float",
+                            "type": "number"
+                          },
+                          "releaseYear": {
+                            "example": 2008,
+                            "type": "integer"
+                          },
+                          "seasons": {
+                            "example": 5,
+                            "type": "integer"
+                          },
+                          "thumbnailUrl": {
+                            "example": "https://example.com/thumbnails/breaking-bad.jpg",
+                            "format": "uri",
+                            "type": "string"
+                          },
+                          "title": {
+                            "example": "Breaking Bad",
+                            "type": "string"
+                          },
+                          "updatedAt": {
+                            "format": "date-time",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "pagination": {
+                      "properties": {
+                        "currentPage": {
+                          "example": 1,
+                          "type": "integer"
+                        },
+                        "itemsPerPage": {
+                          "example": 20,
+                          "type": "integer"
+                        },
+                        "totalItems": {
+                          "example": 200,
+                          "type": "integer"
+                        },
+                        "totalPages": {
+                          "example": 10,
+                          "type": "integer"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "success": {
+                      "example": true,
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful response with list of series"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "UNAUTHORIZED",
+                    "message": "Invalid or missing API key"
+                  },
+                  "success": false
+                },
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "properties": {
+                        "code": {
+                          "example": "INVALID_REQUEST",
+                          "type": "string"
+                        },
+                        "message": {
+                          "example": "The request was invalid or malformed",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "success": {
+                      "example": false,
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Authentication credentials are missing or invalid"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "RATE_LIMIT_EXCEEDED",
+                    "message": "You have exceeded your API rate limit. Please upgrade to premium for higher limits."
+                  },
+                  "success": false
+                },
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "properties": {
+                        "code": {
+                          "example": "INVALID_REQUEST",
+                          "type": "string"
+                        },
+                        "message": {
+                          "example": "The request was invalid or malformed",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "success": {
+                      "example": false,
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "API rate limit exceeded"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "securitySchemes": {
+          "ApiKeyAuth": {
+            "description": "API key for authentication. Free and premium plans available with different usage limits.",
+            "in": "header",
+            "name": "X-API-Key",
+            "type": "apiKey"
+          }
+        },
+        "securitySource": "operation"
+      }
+    },
+    "GET /series/{seriesId}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getSeriesById",
+        "parameters": [
+          {
+            "description": "ID of the series to retrieve",
+            "in": "path",
+            "name": "seriesId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "properties": {
+                        "createdAt": {
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        "description": {
+                          "example": "A high school chemistry teacher turned methamphetamine producer",
+                          "type": "string"
+                        },
+                        "episodes": {
+                          "example": 62,
+                          "type": "integer"
+                        },
+                        "genre": {
+                          "example": [
+                            "Drama",
+                            "Crime",
+                            "Thriller"
+                          ],
+                          "items": {
+                            "type": "string"
+                          },
+                          "type": "array"
+                        },
+                        "id": {
+                          "example": "ser123456",
+                          "type": "string"
+                        },
+                        "isPremium": {
+                          "example": true,
+                          "type": "boolean"
+                        },
+                        "rating": {
+                          "example": 9.5,
+                          "format": "float",
+                          "type": "number"
+                        },
+                        "releaseYear": {
+                          "example": 2008,
+                          "type": "integer"
+                        },
+                        "seasons": {
+                          "example": 5,
+                          "type": "integer"
+                        },
+                        "thumbnailUrl": {
+                          "example": "https://example.com/thumbnails/breaking-bad.jpg",
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "title": {
+                          "example": "Breaking Bad",
+                          "type": "string"
+                        },
+                        "updatedAt": {
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "success": {
+                      "example": true,
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful response with series details"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "UNAUTHORIZED",
+                    "message": "Invalid or missing API key"
+                  },
+                  "success": false
+                },
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "properties": {
+                        "code": {
+                          "example": "INVALID_REQUEST",
+                          "type": "string"
+                        },
+                        "message": {
+                          "example": "The request was invalid or malformed",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "success": {
+                      "example": false,
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Authentication credentials are missing or invalid"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "NOT_FOUND",
+                    "message": "The requested resource was not found"
+                  },
+                  "success": false
+                },
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "properties": {
+                        "code": {
+                          "example": "INVALID_REQUEST",
+                          "type": "string"
+                        },
+                        "message": {
+                          "example": "The request was invalid or malformed",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "success": {
+                      "example": false,
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "The requested resource was not found"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "securitySchemes": {
+          "ApiKeyAuth": {
+            "description": "API key for authentication. Free and premium plans available with different usage limits.",
+            "in": "header",
+            "name": "X-API-Key",
+            "type": "apiKey"
+          }
+        },
+        "securitySource": "operation"
+      }
+    },
+    "DELETE /series/{seriesId}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "deleteSeries",
+        "parameters": [
+          {
+            "description": "ID of the series to delete",
+            "in": "path",
+            "name": "seriesId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "example": "Series deleted successfully",
+                      "type": "string"
+                    },
+                    "success": {
+                      "example": true,
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Series deleted successfully"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "UNAUTHORIZED",
+                    "message": "Invalid or missing API key"
+                  },
+                  "success": false
+                },
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "properties": {
+                        "code": {
+                          "example": "INVALID_REQUEST",
+                          "type": "string"
+                        },
+                        "message": {
+                          "example": "The request was invalid or malformed",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "success": {
+                      "example": false,
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Authentication credentials are missing or invalid"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "FORBIDDEN",
+                    "message": "This operation requires a premium plan subscription"
+                  },
+                  "success": false
+                },
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "properties": {
+                        "code": {
+                          "example": "INVALID_REQUEST",
+                          "type": "string"
+                        },
+                        "message": {
+                          "example": "The request was invalid or malformed",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "success": {
+                      "example": false,
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Premium plan required for this operation"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "NOT_FOUND",
+                    "message": "The requested resource was not found"
+                  },
+                  "success": false
+                },
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "properties": {
+                        "code": {
+                          "example": "INVALID_REQUEST",
+                          "type": "string"
+                        },
+                        "message": {
+                          "example": "The request was invalid or malformed",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "success": {
+                      "example": false,
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "The requested resource was not found"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "securitySchemes": {
+          "ApiKeyAuth": {
+            "description": "API key for authentication. Free and premium plans available with different usage limits.",
+            "in": "header",
+            "name": "X-API-Key",
+            "type": "apiKey"
+          }
+        },
+        "securitySource": "operation"
+      }
+    },
+    "PUT /series/{seriesId}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "updateSeries",
+        "parameters": [
+          {
+            "description": "ID of the series to update",
+            "in": "path",
+            "name": "seriesId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "description": {
+                    "example": "A high school chemistry teacher turned methamphetamine producer",
+                    "type": "string"
+                  },
+                  "episodes": {
+                    "example": 62,
+                    "type": "integer"
+                  },
+                  "genre": {
+                    "example": [
+                      "Drama",
+                      "Crime",
+                      "Thriller"
+                    ],
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "isPremium": {
+                    "example": true,
+                    "type": "boolean"
+                  },
+                  "rating": {
+                    "example": 9.5,
+                    "format": "float",
+                    "type": "number"
+                  },
+                  "releaseYear": {
+                    "example": 2008,
+                    "type": "integer"
+                  },
+                  "seasons": {
+                    "example": 5,
+                    "type": "integer"
+                  },
+                  "thumbnailUrl": {
+                    "example": "https://example.com/thumbnails/breaking-bad.jpg",
+                    "format": "uri",
+                    "type": "string"
+                  },
+                  "title": {
+                    "example": "Breaking Bad",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "title",
+                  "description",
+                  "genre",
+                  "releaseYear"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "properties": {
+                        "createdAt": {
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        "description": {
+                          "example": "A high school chemistry teacher turned methamphetamine producer",
+                          "type": "string"
+                        },
+                        "episodes": {
+                          "example": 62,
+                          "type": "integer"
+                        },
+                        "genre": {
+                          "example": [
+                            "Drama",
+                            "Crime",
+                            "Thriller"
+                          ],
+                          "items": {
+                            "type": "string"
+                          },
+                          "type": "array"
+                        },
+                        "id": {
+                          "example": "ser123456",
+                          "type": "string"
+                        },
+                        "isPremium": {
+                          "example": true,
+                          "type": "boolean"
+                        },
+                        "rating": {
+                          "example": 9.5,
+                          "format": "float",
+                          "type": "number"
+                        },
+                        "releaseYear": {
+                          "example": 2008,
+                          "type": "integer"
+                        },
+                        "seasons": {
+                          "example": 5,
+                          "type": "integer"
+                        },
+                        "thumbnailUrl": {
+                          "example": "https://example.com/thumbnails/breaking-bad.jpg",
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "title": {
+                          "example": "Breaking Bad",
+                          "type": "string"
+                        },
+                        "updatedAt": {
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "success": {
+                      "example": true,
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Series updated successfully"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "BAD_REQUEST",
+                    "message": "Invalid input parameters"
+                  },
+                  "success": false
+                },
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "properties": {
+                        "code": {
+                          "example": "INVALID_REQUEST",
+                          "type": "string"
+                        },
+                        "message": {
+                          "example": "The request was invalid or malformed",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "success": {
+                      "example": false,
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "The request was invalid or malformed"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "UNAUTHORIZED",
+                    "message": "Invalid or missing API key"
+                  },
+                  "success": false
+                },
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "properties": {
+                        "code": {
+                          "example": "INVALID_REQUEST",
+                          "type": "string"
+                        },
+                        "message": {
+                          "example": "The request was invalid or malformed",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "success": {
+                      "example": false,
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Authentication credentials are missing or invalid"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "FORBIDDEN",
+                    "message": "This operation requires a premium plan subscription"
+                  },
+                  "success": false
+                },
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "properties": {
+                        "code": {
+                          "example": "INVALID_REQUEST",
+                          "type": "string"
+                        },
+                        "message": {
+                          "example": "The request was invalid or malformed",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "success": {
+                      "example": false,
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Premium plan required for this operation"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "NOT_FOUND",
+                    "message": "The requested resource was not found"
+                  },
+                  "success": false
+                },
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "properties": {
+                        "code": {
+                          "example": "INVALID_REQUEST",
+                          "type": "string"
+                        },
+                        "message": {
+                          "example": "The request was invalid or malformed",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "success": {
+                      "example": false,
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "The requested resource was not found"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "securitySchemes": {
+          "ApiKeyAuth": {
+            "description": "API key for authentication. Free and premium plans available with different usage limits.",
+            "in": "header",
+            "name": "X-API-Key",
+            "type": "apiKey"
+          }
+        },
+        "securitySource": "operation"
       }
     }
   }

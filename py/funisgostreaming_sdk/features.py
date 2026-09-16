@@ -1,12 +1,18 @@
 # FunisgoStreaming SDK feature factory
 
 from funisgostreaming_sdk.feature.base_feature import FunisgoStreamingBaseFeature
+from funisgostreaming_sdk.feature.ratelimit_feature import FunisgoStreamingRatelimitFeature
+from funisgostreaming_sdk.feature.retry_feature import FunisgoStreamingRetryFeature
 from funisgostreaming_sdk.feature.test_feature import FunisgoStreamingTestFeature
+from funisgostreaming_sdk.feature.timeout_feature import FunisgoStreamingTimeoutFeature
 
 
 _FEATURES = {
     "base": lambda: FunisgoStreamingBaseFeature(),
+    "ratelimit": lambda: FunisgoStreamingRatelimitFeature(),
+    "retry": lambda: FunisgoStreamingRetryFeature(),
     "test": lambda: FunisgoStreamingTestFeature(),
+    "timeout": lambda: FunisgoStreamingTimeoutFeature(),
 }
 
 

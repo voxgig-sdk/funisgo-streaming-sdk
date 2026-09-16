@@ -24,7 +24,71 @@
         "repr": "auto"
       },
       "contributor": {},
-      "docs": {},
+      "doc": {
+        "active": true,
+        "assets": {
+          "path": ".sdk/doc/assets"
+        },
+        "brand": {
+          "label": "",
+          "notice": "",
+          "shortNotice": "",
+          "url": ""
+        },
+        "ci": {
+          "active": true,
+          "branch": "main"
+        },
+        "content": {
+          "path": ".sdk/doc/content"
+        },
+        "edition": {
+          "summary": {
+            "active": true,
+            "base": "node_modules/@voxgig/docgen/project/.sdk",
+            "brand": {},
+            "filter": {
+              "entities": [],
+              "features": [],
+              "targets": []
+            },
+            "kind": "summary",
+            "name": "summary",
+            "origname": "",
+            "output": {
+              "path": "SUMMARY.md"
+            },
+            "package": "@voxgig/docgen",
+            "site": {
+              "active": true
+            },
+            "style": {},
+            "title": ""
+          }
+        },
+        "qa": {
+          "vocabulary": []
+        },
+        "style": {
+          "color": {
+            "accent": "#00c6d8",
+            "background": "#f5f5f9",
+            "darkBackground": "#0f1117",
+            "darkText": "#e6edf3",
+            "primary": "#e70042",
+            "text": "#0a0a0a"
+          },
+          "font": "Nunito, system-ui, sans-serif",
+          "fontFile": "",
+          "headingFont": "Nunito, system-ui, sans-serif",
+          "headingFontFile": "",
+          "logo": "",
+          "mode": "light",
+          "mono": "ui-monospace, monospace",
+          "monoFile": ""
+        },
+        "target": {}
+      },
       "entity": {
         "channel": {
           "active": true,
@@ -146,6 +210,12 @@
                 {
                   "active": true,
                   "args": {},
+                  "contract": {
+                    "id": "POST /channels",
+                    "json": "{\"operationId\":\"createChannel\",\"parameters\":[],\"protocol\":\"http\",\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"category\":{\"example\":\"Sports\",\"type\":\"string\"},\"description\":{\"example\":\"24/7 sports streaming channel\",\"type\":\"string\"},\"isLive\":{\"example\":true,\"type\":\"boolean\"},\"isPremium\":{\"example\":true,\"type\":\"boolean\"},\"language\":{\"example\":\"English\",\"type\":\"string\"},\"logoUrl\":{\"example\":\"https://example.com/logos/sports-channel.png\",\"format\":\"uri\",\"type\":\"string\"},\"name\":{\"example\":\"FunisGo Sports\",\"type\":\"string\"},\"streamUrl\":{\"example\":\"https://stream.funisgo.com/channels/ch123456\",\"format\":\"uri\",\"type\":\"string\"}},\"required\":[\"name\",\"description\",\"category\"],\"type\":\"object\"}}},\"required\":true},\"responses\":{\"201\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"data\":{\"properties\":{\"category\":{\"example\":\"Sports\",\"type\":\"string\"},\"createdAt\":{\"format\":\"date-time\",\"type\":\"string\"},\"description\":{\"example\":\"24/7 sports streaming channel\",\"type\":\"string\"},\"id\":{\"example\":\"ch123456\",\"type\":\"string\"},\"isLive\":{\"example\":true,\"type\":\"boolean\"},\"isPremium\":{\"example\":true,\"type\":\"boolean\"},\"language\":{\"example\":\"English\",\"type\":\"string\"},\"logoUrl\":{\"example\":\"https://example.com/logos/sports-channel.png\",\"format\":\"uri\",\"type\":\"string\"},\"name\":{\"example\":\"FunisGo Sports\",\"type\":\"string\"},\"streamUrl\":{\"example\":\"https://stream.funisgo.com/channels/ch123456\",\"format\":\"uri\",\"type\":\"string\"},\"updatedAt\":{\"format\":\"date-time\",\"type\":\"string\"}},\"type\":\"object\"},\"success\":{\"example\":true,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Channel created successfully\"},\"400\":{\"content\":{\"application/json\":{\"example\":{\"error\":{\"code\":\"BAD_REQUEST\",\"message\":\"Invalid input parameters\"},\"success\":false},\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"example\":\"INVALID_REQUEST\",\"type\":\"string\"},\"message\":{\"example\":\"The request was invalid or malformed\",\"type\":\"string\"}},\"type\":\"object\"},\"success\":{\"example\":false,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"The request was invalid or malformed\"},\"401\":{\"content\":{\"application/json\":{\"example\":{\"error\":{\"code\":\"UNAUTHORIZED\",\"message\":\"Invalid or missing API key\"},\"success\":false},\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"example\":\"INVALID_REQUEST\",\"type\":\"string\"},\"message\":{\"example\":\"The request was invalid or malformed\",\"type\":\"string\"}},\"type\":\"object\"},\"success\":{\"example\":false,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Authentication credentials are missing or invalid\"},\"403\":{\"content\":{\"application/json\":{\"example\":{\"error\":{\"code\":\"FORBIDDEN\",\"message\":\"This operation requires a premium plan subscription\"},\"success\":false},\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"example\":\"INVALID_REQUEST\",\"type\":\"string\"},\"message\":{\"example\":\"The request was invalid or malformed\",\"type\":\"string\"}},\"type\":\"object\"},\"success\":{\"example\":false,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Premium plan required for this operation\"}},\"security\":[{\"ApiKeyAuth\":[]}],\"securitySchemes\":{\"ApiKeyAuth\":{\"description\":\"API key for authentication. Free and premium plans available with different usage limits.\",\"in\":\"header\",\"name\":\"X-API-Key\",\"type\":\"apiKey\"}},\"securitySource\":\"operation\"}",
+                    "source": "openapi3",
+                    "version": 1
+                  },
                   "kind": "http",
                   "method": "POST",
                   "orig": "/channels",
@@ -198,6 +268,12 @@
                       }
                     ]
                   },
+                  "contract": {
+                    "id": "GET /channels",
+                    "json": "{\"operationId\":\"getChannels\",\"parameters\":[{\"description\":\"Page number for pagination\",\"in\":\"query\",\"name\":\"page\",\"required\":false,\"schema\":{\"default\":1,\"minimum\":1,\"type\":\"integer\"}},{\"description\":\"Number of items per page\",\"in\":\"query\",\"name\":\"limit\",\"required\":false,\"schema\":{\"default\":20,\"maximum\":100,\"minimum\":1,\"type\":\"integer\"}},{\"description\":\"Filter channels by category\",\"in\":\"query\",\"name\":\"category\",\"required\":false,\"schema\":{\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"data\":{\"items\":{\"properties\":{\"category\":{\"example\":\"Sports\",\"type\":\"string\"},\"createdAt\":{\"format\":\"date-time\",\"type\":\"string\"},\"description\":{\"example\":\"24/7 sports streaming channel\",\"type\":\"string\"},\"id\":{\"example\":\"ch123456\",\"type\":\"string\"},\"isLive\":{\"example\":true,\"type\":\"boolean\"},\"isPremium\":{\"example\":true,\"type\":\"boolean\"},\"language\":{\"example\":\"English\",\"type\":\"string\"},\"logoUrl\":{\"example\":\"https://example.com/logos/sports-channel.png\",\"format\":\"uri\",\"type\":\"string\"},\"name\":{\"example\":\"FunisGo Sports\",\"type\":\"string\"},\"streamUrl\":{\"example\":\"https://stream.funisgo.com/channels/ch123456\",\"format\":\"uri\",\"type\":\"string\"},\"updatedAt\":{\"format\":\"date-time\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"},\"pagination\":{\"properties\":{\"currentPage\":{\"example\":1,\"type\":\"integer\"},\"itemsPerPage\":{\"example\":20,\"type\":\"integer\"},\"totalItems\":{\"example\":200,\"type\":\"integer\"},\"totalPages\":{\"example\":10,\"type\":\"integer\"}},\"type\":\"object\"},\"success\":{\"example\":true,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Successful response with list of channels\"},\"401\":{\"content\":{\"application/json\":{\"example\":{\"error\":{\"code\":\"UNAUTHORIZED\",\"message\":\"Invalid or missing API key\"},\"success\":false},\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"example\":\"INVALID_REQUEST\",\"type\":\"string\"},\"message\":{\"example\":\"The request was invalid or malformed\",\"type\":\"string\"}},\"type\":\"object\"},\"success\":{\"example\":false,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Authentication credentials are missing or invalid\"},\"429\":{\"content\":{\"application/json\":{\"example\":{\"error\":{\"code\":\"RATE_LIMIT_EXCEEDED\",\"message\":\"You have exceeded your API rate limit. Please upgrade to premium for higher limits.\"},\"success\":false},\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"example\":\"INVALID_REQUEST\",\"type\":\"string\"},\"message\":{\"example\":\"The request was invalid or malformed\",\"type\":\"string\"}},\"type\":\"object\"},\"success\":{\"example\":false,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"API rate limit exceeded\"}},\"security\":[{\"ApiKeyAuth\":[]}],\"securitySchemes\":{\"ApiKeyAuth\":{\"description\":\"API key for authentication. Free and premium plans available with different usage limits.\",\"in\":\"header\",\"name\":\"X-API-Key\",\"type\":\"apiKey\"}},\"securitySource\":\"operation\"}",
+                    "source": "openapi3",
+                    "version": 1
+                  },
                   "kind": "http",
                   "method": "GET",
                   "orig": "/channels",
@@ -237,6 +313,12 @@
                         "type": "`$STRING`"
                       }
                     ]
+                  },
+                  "contract": {
+                    "id": "GET /channels/{channelId}",
+                    "json": "{\"operationId\":\"getChannelById\",\"parameters\":[{\"description\":\"ID of the channel to retrieve\",\"in\":\"path\",\"name\":\"channelId\",\"required\":true,\"schema\":{\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"data\":{\"properties\":{\"category\":{\"example\":\"Sports\",\"type\":\"string\"},\"createdAt\":{\"format\":\"date-time\",\"type\":\"string\"},\"description\":{\"example\":\"24/7 sports streaming channel\",\"type\":\"string\"},\"id\":{\"example\":\"ch123456\",\"type\":\"string\"},\"isLive\":{\"example\":true,\"type\":\"boolean\"},\"isPremium\":{\"example\":true,\"type\":\"boolean\"},\"language\":{\"example\":\"English\",\"type\":\"string\"},\"logoUrl\":{\"example\":\"https://example.com/logos/sports-channel.png\",\"format\":\"uri\",\"type\":\"string\"},\"name\":{\"example\":\"FunisGo Sports\",\"type\":\"string\"},\"streamUrl\":{\"example\":\"https://stream.funisgo.com/channels/ch123456\",\"format\":\"uri\",\"type\":\"string\"},\"updatedAt\":{\"format\":\"date-time\",\"type\":\"string\"}},\"type\":\"object\"},\"success\":{\"example\":true,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Successful response with channel details\"},\"401\":{\"content\":{\"application/json\":{\"example\":{\"error\":{\"code\":\"UNAUTHORIZED\",\"message\":\"Invalid or missing API key\"},\"success\":false},\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"example\":\"INVALID_REQUEST\",\"type\":\"string\"},\"message\":{\"example\":\"The request was invalid or malformed\",\"type\":\"string\"}},\"type\":\"object\"},\"success\":{\"example\":false,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Authentication credentials are missing or invalid\"},\"404\":{\"content\":{\"application/json\":{\"example\":{\"error\":{\"code\":\"NOT_FOUND\",\"message\":\"The requested resource was not found\"},\"success\":false},\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"example\":\"INVALID_REQUEST\",\"type\":\"string\"},\"message\":{\"example\":\"The request was invalid or malformed\",\"type\":\"string\"}},\"type\":\"object\"},\"success\":{\"example\":false,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"The requested resource was not found\"}},\"security\":[{\"ApiKeyAuth\":[]}],\"securitySchemes\":{\"ApiKeyAuth\":{\"description\":\"API key for authentication. Free and premium plans available with different usage limits.\",\"in\":\"header\",\"name\":\"X-API-Key\",\"type\":\"apiKey\"}},\"securitySource\":\"operation\"}",
+                    "source": "openapi3",
+                    "version": 1
                   },
                   "kind": "http",
                   "method": "GET",
@@ -284,6 +366,12 @@
                       }
                     ]
                   },
+                  "contract": {
+                    "id": "DELETE /channels/{channelId}",
+                    "json": "{\"operationId\":\"deleteChannel\",\"parameters\":[{\"description\":\"ID of the channel to delete\",\"in\":\"path\",\"name\":\"channelId\",\"required\":true,\"schema\":{\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"message\":{\"example\":\"Channel deleted successfully\",\"type\":\"string\"},\"success\":{\"example\":true,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Channel deleted successfully\"},\"401\":{\"content\":{\"application/json\":{\"example\":{\"error\":{\"code\":\"UNAUTHORIZED\",\"message\":\"Invalid or missing API key\"},\"success\":false},\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"example\":\"INVALID_REQUEST\",\"type\":\"string\"},\"message\":{\"example\":\"The request was invalid or malformed\",\"type\":\"string\"}},\"type\":\"object\"},\"success\":{\"example\":false,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Authentication credentials are missing or invalid\"},\"403\":{\"content\":{\"application/json\":{\"example\":{\"error\":{\"code\":\"FORBIDDEN\",\"message\":\"This operation requires a premium plan subscription\"},\"success\":false},\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"example\":\"INVALID_REQUEST\",\"type\":\"string\"},\"message\":{\"example\":\"The request was invalid or malformed\",\"type\":\"string\"}},\"type\":\"object\"},\"success\":{\"example\":false,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Premium plan required for this operation\"},\"404\":{\"content\":{\"application/json\":{\"example\":{\"error\":{\"code\":\"NOT_FOUND\",\"message\":\"The requested resource was not found\"},\"success\":false},\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"example\":\"INVALID_REQUEST\",\"type\":\"string\"},\"message\":{\"example\":\"The request was invalid or malformed\",\"type\":\"string\"}},\"type\":\"object\"},\"success\":{\"example\":false,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"The requested resource was not found\"}},\"security\":[{\"ApiKeyAuth\":[]}],\"securitySchemes\":{\"ApiKeyAuth\":{\"description\":\"API key for authentication. Free and premium plans available with different usage limits.\",\"in\":\"header\",\"name\":\"X-API-Key\",\"type\":\"apiKey\"}},\"securitySource\":\"operation\"}",
+                    "source": "openapi3",
+                    "version": 1
+                  },
                   "kind": "http",
                   "method": "DELETE",
                   "orig": "/channels/{channelId}",
@@ -329,6 +417,12 @@
                         "type": "`$STRING`"
                       }
                     ]
+                  },
+                  "contract": {
+                    "id": "PUT /channels/{channelId}",
+                    "json": "{\"operationId\":\"updateChannel\",\"parameters\":[{\"description\":\"ID of the channel to update\",\"in\":\"path\",\"name\":\"channelId\",\"required\":true,\"schema\":{\"type\":\"string\"}}],\"protocol\":\"http\",\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"category\":{\"example\":\"Sports\",\"type\":\"string\"},\"description\":{\"example\":\"24/7 sports streaming channel\",\"type\":\"string\"},\"isLive\":{\"example\":true,\"type\":\"boolean\"},\"isPremium\":{\"example\":true,\"type\":\"boolean\"},\"language\":{\"example\":\"English\",\"type\":\"string\"},\"logoUrl\":{\"example\":\"https://example.com/logos/sports-channel.png\",\"format\":\"uri\",\"type\":\"string\"},\"name\":{\"example\":\"FunisGo Sports\",\"type\":\"string\"},\"streamUrl\":{\"example\":\"https://stream.funisgo.com/channels/ch123456\",\"format\":\"uri\",\"type\":\"string\"}},\"required\":[\"name\",\"description\",\"category\"],\"type\":\"object\"}}},\"required\":true},\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"data\":{\"properties\":{\"category\":{\"example\":\"Sports\",\"type\":\"string\"},\"createdAt\":{\"format\":\"date-time\",\"type\":\"string\"},\"description\":{\"example\":\"24/7 sports streaming channel\",\"type\":\"string\"},\"id\":{\"example\":\"ch123456\",\"type\":\"string\"},\"isLive\":{\"example\":true,\"type\":\"boolean\"},\"isPremium\":{\"example\":true,\"type\":\"boolean\"},\"language\":{\"example\":\"English\",\"type\":\"string\"},\"logoUrl\":{\"example\":\"https://example.com/logos/sports-channel.png\",\"format\":\"uri\",\"type\":\"string\"},\"name\":{\"example\":\"FunisGo Sports\",\"type\":\"string\"},\"streamUrl\":{\"example\":\"https://stream.funisgo.com/channels/ch123456\",\"format\":\"uri\",\"type\":\"string\"},\"updatedAt\":{\"format\":\"date-time\",\"type\":\"string\"}},\"type\":\"object\"},\"success\":{\"example\":true,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Channel updated successfully\"},\"400\":{\"content\":{\"application/json\":{\"example\":{\"error\":{\"code\":\"BAD_REQUEST\",\"message\":\"Invalid input parameters\"},\"success\":false},\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"example\":\"INVALID_REQUEST\",\"type\":\"string\"},\"message\":{\"example\":\"The request was invalid or malformed\",\"type\":\"string\"}},\"type\":\"object\"},\"success\":{\"example\":false,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"The request was invalid or malformed\"},\"401\":{\"content\":{\"application/json\":{\"example\":{\"error\":{\"code\":\"UNAUTHORIZED\",\"message\":\"Invalid or missing API key\"},\"success\":false},\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"example\":\"INVALID_REQUEST\",\"type\":\"string\"},\"message\":{\"example\":\"The request was invalid or malformed\",\"type\":\"string\"}},\"type\":\"object\"},\"success\":{\"example\":false,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Authentication credentials are missing or invalid\"},\"403\":{\"content\":{\"application/json\":{\"example\":{\"error\":{\"code\":\"FORBIDDEN\",\"message\":\"This operation requires a premium plan subscription\"},\"success\":false},\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"example\":\"INVALID_REQUEST\",\"type\":\"string\"},\"message\":{\"example\":\"The request was invalid or malformed\",\"type\":\"string\"}},\"type\":\"object\"},\"success\":{\"example\":false,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Premium plan required for this operation\"},\"404\":{\"content\":{\"application/json\":{\"example\":{\"error\":{\"code\":\"NOT_FOUND\",\"message\":\"The requested resource was not found\"},\"success\":false},\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"example\":\"INVALID_REQUEST\",\"type\":\"string\"},\"message\":{\"example\":\"The request was invalid or malformed\",\"type\":\"string\"}},\"type\":\"object\"},\"success\":{\"example\":false,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"The requested resource was not found\"}},\"security\":[{\"ApiKeyAuth\":[]}],\"securitySchemes\":{\"ApiKeyAuth\":{\"description\":\"API key for authentication. Free and premium plans available with different usage limits.\",\"in\":\"header\",\"name\":\"X-API-Key\",\"type\":\"apiKey\"}},\"securitySource\":\"operation\"}",
+                    "source": "openapi3",
+                    "version": 1
                   },
                   "kind": "http",
                   "method": "PUT",
@@ -511,6 +605,12 @@
                 {
                   "active": true,
                   "args": {},
+                  "contract": {
+                    "id": "POST /movies",
+                    "json": "{\"operationId\":\"createMovie\",\"parameters\":[],\"protocol\":\"http\",\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"description\":{\"example\":\"A computer hacker learns about the true nature of reality\",\"type\":\"string\"},\"duration\":{\"description\":\"Duration in minutes\",\"example\":136,\"type\":\"integer\"},\"genre\":{\"example\":[\"Action\",\"Sci-Fi\"],\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"isPremium\":{\"example\":false,\"type\":\"boolean\"},\"rating\":{\"example\":8.7,\"format\":\"float\",\"type\":\"number\"},\"releaseYear\":{\"example\":1999,\"type\":\"integer\"},\"streamUrl\":{\"example\":\"https://stream.funisgo.com/movies/mov123456\",\"format\":\"uri\",\"type\":\"string\"},\"thumbnailUrl\":{\"example\":\"https://example.com/thumbnails/matrix.jpg\",\"format\":\"uri\",\"type\":\"string\"},\"title\":{\"example\":\"The Matrix\",\"type\":\"string\"}},\"required\":[\"title\",\"description\",\"genre\",\"releaseYear\",\"duration\"],\"type\":\"object\"}}},\"required\":true},\"responses\":{\"201\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"data\":{\"properties\":{\"createdAt\":{\"format\":\"date-time\",\"type\":\"string\"},\"description\":{\"example\":\"A computer hacker learns about the true nature of reality\",\"type\":\"string\"},\"duration\":{\"description\":\"Duration in minutes\",\"example\":136,\"type\":\"integer\"},\"genre\":{\"example\":[\"Action\",\"Sci-Fi\"],\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"id\":{\"example\":\"mov123456\",\"type\":\"string\"},\"isPremium\":{\"example\":false,\"type\":\"boolean\"},\"rating\":{\"example\":8.7,\"format\":\"float\",\"type\":\"number\"},\"releaseYear\":{\"example\":1999,\"type\":\"integer\"},\"streamUrl\":{\"example\":\"https://stream.funisgo.com/movies/mov123456\",\"format\":\"uri\",\"type\":\"string\"},\"thumbnailUrl\":{\"example\":\"https://example.com/thumbnails/matrix.jpg\",\"format\":\"uri\",\"type\":\"string\"},\"title\":{\"example\":\"The Matrix\",\"type\":\"string\"},\"updatedAt\":{\"format\":\"date-time\",\"type\":\"string\"}},\"type\":\"object\"},\"success\":{\"example\":true,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Movie created successfully\"},\"400\":{\"content\":{\"application/json\":{\"example\":{\"error\":{\"code\":\"BAD_REQUEST\",\"message\":\"Invalid input parameters\"},\"success\":false},\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"example\":\"INVALID_REQUEST\",\"type\":\"string\"},\"message\":{\"example\":\"The request was invalid or malformed\",\"type\":\"string\"}},\"type\":\"object\"},\"success\":{\"example\":false,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"The request was invalid or malformed\"},\"401\":{\"content\":{\"application/json\":{\"example\":{\"error\":{\"code\":\"UNAUTHORIZED\",\"message\":\"Invalid or missing API key\"},\"success\":false},\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"example\":\"INVALID_REQUEST\",\"type\":\"string\"},\"message\":{\"example\":\"The request was invalid or malformed\",\"type\":\"string\"}},\"type\":\"object\"},\"success\":{\"example\":false,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Authentication credentials are missing or invalid\"},\"403\":{\"content\":{\"application/json\":{\"example\":{\"error\":{\"code\":\"FORBIDDEN\",\"message\":\"This operation requires a premium plan subscription\"},\"success\":false},\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"example\":\"INVALID_REQUEST\",\"type\":\"string\"},\"message\":{\"example\":\"The request was invalid or malformed\",\"type\":\"string\"}},\"type\":\"object\"},\"success\":{\"example\":false,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Premium plan required for this operation\"}},\"security\":[{\"ApiKeyAuth\":[]}],\"securitySchemes\":{\"ApiKeyAuth\":{\"description\":\"API key for authentication. Free and premium plans available with different usage limits.\",\"in\":\"header\",\"name\":\"X-API-Key\",\"type\":\"apiKey\"}},\"securitySource\":\"operation\"}",
+                    "source": "openapi3",
+                    "version": 1
+                  },
                   "kind": "http",
                   "method": "POST",
                   "orig": "/movies",
@@ -563,6 +663,12 @@
                       }
                     ]
                   },
+                  "contract": {
+                    "id": "GET /movies",
+                    "json": "{\"operationId\":\"getMovies\",\"parameters\":[{\"description\":\"Page number for pagination\",\"in\":\"query\",\"name\":\"page\",\"required\":false,\"schema\":{\"default\":1,\"minimum\":1,\"type\":\"integer\"}},{\"description\":\"Number of items per page\",\"in\":\"query\",\"name\":\"limit\",\"required\":false,\"schema\":{\"default\":20,\"maximum\":100,\"minimum\":1,\"type\":\"integer\"}},{\"description\":\"Filter movies by genre\",\"in\":\"query\",\"name\":\"genre\",\"required\":false,\"schema\":{\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"data\":{\"items\":{\"properties\":{\"createdAt\":{\"format\":\"date-time\",\"type\":\"string\"},\"description\":{\"example\":\"A computer hacker learns about the true nature of reality\",\"type\":\"string\"},\"duration\":{\"description\":\"Duration in minutes\",\"example\":136,\"type\":\"integer\"},\"genre\":{\"example\":[\"Action\",\"Sci-Fi\"],\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"id\":{\"example\":\"mov123456\",\"type\":\"string\"},\"isPremium\":{\"example\":false,\"type\":\"boolean\"},\"rating\":{\"example\":8.7,\"format\":\"float\",\"type\":\"number\"},\"releaseYear\":{\"example\":1999,\"type\":\"integer\"},\"streamUrl\":{\"example\":\"https://stream.funisgo.com/movies/mov123456\",\"format\":\"uri\",\"type\":\"string\"},\"thumbnailUrl\":{\"example\":\"https://example.com/thumbnails/matrix.jpg\",\"format\":\"uri\",\"type\":\"string\"},\"title\":{\"example\":\"The Matrix\",\"type\":\"string\"},\"updatedAt\":{\"format\":\"date-time\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"},\"pagination\":{\"properties\":{\"currentPage\":{\"example\":1,\"type\":\"integer\"},\"itemsPerPage\":{\"example\":20,\"type\":\"integer\"},\"totalItems\":{\"example\":200,\"type\":\"integer\"},\"totalPages\":{\"example\":10,\"type\":\"integer\"}},\"type\":\"object\"},\"success\":{\"example\":true,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Successful response with list of movies\"},\"401\":{\"content\":{\"application/json\":{\"example\":{\"error\":{\"code\":\"UNAUTHORIZED\",\"message\":\"Invalid or missing API key\"},\"success\":false},\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"example\":\"INVALID_REQUEST\",\"type\":\"string\"},\"message\":{\"example\":\"The request was invalid or malformed\",\"type\":\"string\"}},\"type\":\"object\"},\"success\":{\"example\":false,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Authentication credentials are missing or invalid\"},\"429\":{\"content\":{\"application/json\":{\"example\":{\"error\":{\"code\":\"RATE_LIMIT_EXCEEDED\",\"message\":\"You have exceeded your API rate limit. Please upgrade to premium for higher limits.\"},\"success\":false},\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"example\":\"INVALID_REQUEST\",\"type\":\"string\"},\"message\":{\"example\":\"The request was invalid or malformed\",\"type\":\"string\"}},\"type\":\"object\"},\"success\":{\"example\":false,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"API rate limit exceeded\"}},\"security\":[{\"ApiKeyAuth\":[]}],\"securitySchemes\":{\"ApiKeyAuth\":{\"description\":\"API key for authentication. Free and premium plans available with different usage limits.\",\"in\":\"header\",\"name\":\"X-API-Key\",\"type\":\"apiKey\"}},\"securitySource\":\"operation\"}",
+                    "source": "openapi3",
+                    "version": 1
+                  },
                   "kind": "http",
                   "method": "GET",
                   "orig": "/movies",
@@ -602,6 +708,12 @@
                         "type": "`$STRING`"
                       }
                     ]
+                  },
+                  "contract": {
+                    "id": "GET /movies/{movieId}",
+                    "json": "{\"operationId\":\"getMovieById\",\"parameters\":[{\"description\":\"ID of the movie to retrieve\",\"in\":\"path\",\"name\":\"movieId\",\"required\":true,\"schema\":{\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"data\":{\"properties\":{\"createdAt\":{\"format\":\"date-time\",\"type\":\"string\"},\"description\":{\"example\":\"A computer hacker learns about the true nature of reality\",\"type\":\"string\"},\"duration\":{\"description\":\"Duration in minutes\",\"example\":136,\"type\":\"integer\"},\"genre\":{\"example\":[\"Action\",\"Sci-Fi\"],\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"id\":{\"example\":\"mov123456\",\"type\":\"string\"},\"isPremium\":{\"example\":false,\"type\":\"boolean\"},\"rating\":{\"example\":8.7,\"format\":\"float\",\"type\":\"number\"},\"releaseYear\":{\"example\":1999,\"type\":\"integer\"},\"streamUrl\":{\"example\":\"https://stream.funisgo.com/movies/mov123456\",\"format\":\"uri\",\"type\":\"string\"},\"thumbnailUrl\":{\"example\":\"https://example.com/thumbnails/matrix.jpg\",\"format\":\"uri\",\"type\":\"string\"},\"title\":{\"example\":\"The Matrix\",\"type\":\"string\"},\"updatedAt\":{\"format\":\"date-time\",\"type\":\"string\"}},\"type\":\"object\"},\"success\":{\"example\":true,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Successful response with movie details\"},\"401\":{\"content\":{\"application/json\":{\"example\":{\"error\":{\"code\":\"UNAUTHORIZED\",\"message\":\"Invalid or missing API key\"},\"success\":false},\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"example\":\"INVALID_REQUEST\",\"type\":\"string\"},\"message\":{\"example\":\"The request was invalid or malformed\",\"type\":\"string\"}},\"type\":\"object\"},\"success\":{\"example\":false,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Authentication credentials are missing or invalid\"},\"404\":{\"content\":{\"application/json\":{\"example\":{\"error\":{\"code\":\"NOT_FOUND\",\"message\":\"The requested resource was not found\"},\"success\":false},\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"example\":\"INVALID_REQUEST\",\"type\":\"string\"},\"message\":{\"example\":\"The request was invalid or malformed\",\"type\":\"string\"}},\"type\":\"object\"},\"success\":{\"example\":false,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"The requested resource was not found\"}},\"security\":[{\"ApiKeyAuth\":[]}],\"securitySchemes\":{\"ApiKeyAuth\":{\"description\":\"API key for authentication. Free and premium plans available with different usage limits.\",\"in\":\"header\",\"name\":\"X-API-Key\",\"type\":\"apiKey\"}},\"securitySource\":\"operation\"}",
+                    "source": "openapi3",
+                    "version": 1
                   },
                   "kind": "http",
                   "method": "GET",
@@ -649,6 +761,12 @@
                       }
                     ]
                   },
+                  "contract": {
+                    "id": "DELETE /movies/{movieId}",
+                    "json": "{\"operationId\":\"deleteMovie\",\"parameters\":[{\"description\":\"ID of the movie to delete\",\"in\":\"path\",\"name\":\"movieId\",\"required\":true,\"schema\":{\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"message\":{\"example\":\"Movie deleted successfully\",\"type\":\"string\"},\"success\":{\"example\":true,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Movie deleted successfully\"},\"401\":{\"content\":{\"application/json\":{\"example\":{\"error\":{\"code\":\"UNAUTHORIZED\",\"message\":\"Invalid or missing API key\"},\"success\":false},\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"example\":\"INVALID_REQUEST\",\"type\":\"string\"},\"message\":{\"example\":\"The request was invalid or malformed\",\"type\":\"string\"}},\"type\":\"object\"},\"success\":{\"example\":false,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Authentication credentials are missing or invalid\"},\"403\":{\"content\":{\"application/json\":{\"example\":{\"error\":{\"code\":\"FORBIDDEN\",\"message\":\"This operation requires a premium plan subscription\"},\"success\":false},\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"example\":\"INVALID_REQUEST\",\"type\":\"string\"},\"message\":{\"example\":\"The request was invalid or malformed\",\"type\":\"string\"}},\"type\":\"object\"},\"success\":{\"example\":false,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Premium plan required for this operation\"},\"404\":{\"content\":{\"application/json\":{\"example\":{\"error\":{\"code\":\"NOT_FOUND\",\"message\":\"The requested resource was not found\"},\"success\":false},\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"example\":\"INVALID_REQUEST\",\"type\":\"string\"},\"message\":{\"example\":\"The request was invalid or malformed\",\"type\":\"string\"}},\"type\":\"object\"},\"success\":{\"example\":false,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"The requested resource was not found\"}},\"security\":[{\"ApiKeyAuth\":[]}],\"securitySchemes\":{\"ApiKeyAuth\":{\"description\":\"API key for authentication. Free and premium plans available with different usage limits.\",\"in\":\"header\",\"name\":\"X-API-Key\",\"type\":\"apiKey\"}},\"securitySource\":\"operation\"}",
+                    "source": "openapi3",
+                    "version": 1
+                  },
                   "kind": "http",
                   "method": "DELETE",
                   "orig": "/movies/{movieId}",
@@ -694,6 +812,12 @@
                         "type": "`$STRING`"
                       }
                     ]
+                  },
+                  "contract": {
+                    "id": "PUT /movies/{movieId}",
+                    "json": "{\"operationId\":\"updateMovie\",\"parameters\":[{\"description\":\"ID of the movie to update\",\"in\":\"path\",\"name\":\"movieId\",\"required\":true,\"schema\":{\"type\":\"string\"}}],\"protocol\":\"http\",\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"description\":{\"example\":\"A computer hacker learns about the true nature of reality\",\"type\":\"string\"},\"duration\":{\"description\":\"Duration in minutes\",\"example\":136,\"type\":\"integer\"},\"genre\":{\"example\":[\"Action\",\"Sci-Fi\"],\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"isPremium\":{\"example\":false,\"type\":\"boolean\"},\"rating\":{\"example\":8.7,\"format\":\"float\",\"type\":\"number\"},\"releaseYear\":{\"example\":1999,\"type\":\"integer\"},\"streamUrl\":{\"example\":\"https://stream.funisgo.com/movies/mov123456\",\"format\":\"uri\",\"type\":\"string\"},\"thumbnailUrl\":{\"example\":\"https://example.com/thumbnails/matrix.jpg\",\"format\":\"uri\",\"type\":\"string\"},\"title\":{\"example\":\"The Matrix\",\"type\":\"string\"}},\"required\":[\"title\",\"description\",\"genre\",\"releaseYear\",\"duration\"],\"type\":\"object\"}}},\"required\":true},\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"data\":{\"properties\":{\"createdAt\":{\"format\":\"date-time\",\"type\":\"string\"},\"description\":{\"example\":\"A computer hacker learns about the true nature of reality\",\"type\":\"string\"},\"duration\":{\"description\":\"Duration in minutes\",\"example\":136,\"type\":\"integer\"},\"genre\":{\"example\":[\"Action\",\"Sci-Fi\"],\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"id\":{\"example\":\"mov123456\",\"type\":\"string\"},\"isPremium\":{\"example\":false,\"type\":\"boolean\"},\"rating\":{\"example\":8.7,\"format\":\"float\",\"type\":\"number\"},\"releaseYear\":{\"example\":1999,\"type\":\"integer\"},\"streamUrl\":{\"example\":\"https://stream.funisgo.com/movies/mov123456\",\"format\":\"uri\",\"type\":\"string\"},\"thumbnailUrl\":{\"example\":\"https://example.com/thumbnails/matrix.jpg\",\"format\":\"uri\",\"type\":\"string\"},\"title\":{\"example\":\"The Matrix\",\"type\":\"string\"},\"updatedAt\":{\"format\":\"date-time\",\"type\":\"string\"}},\"type\":\"object\"},\"success\":{\"example\":true,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Movie updated successfully\"},\"400\":{\"content\":{\"application/json\":{\"example\":{\"error\":{\"code\":\"BAD_REQUEST\",\"message\":\"Invalid input parameters\"},\"success\":false},\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"example\":\"INVALID_REQUEST\",\"type\":\"string\"},\"message\":{\"example\":\"The request was invalid or malformed\",\"type\":\"string\"}},\"type\":\"object\"},\"success\":{\"example\":false,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"The request was invalid or malformed\"},\"401\":{\"content\":{\"application/json\":{\"example\":{\"error\":{\"code\":\"UNAUTHORIZED\",\"message\":\"Invalid or missing API key\"},\"success\":false},\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"example\":\"INVALID_REQUEST\",\"type\":\"string\"},\"message\":{\"example\":\"The request was invalid or malformed\",\"type\":\"string\"}},\"type\":\"object\"},\"success\":{\"example\":false,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Authentication credentials are missing or invalid\"},\"403\":{\"content\":{\"application/json\":{\"example\":{\"error\":{\"code\":\"FORBIDDEN\",\"message\":\"This operation requires a premium plan subscription\"},\"success\":false},\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"example\":\"INVALID_REQUEST\",\"type\":\"string\"},\"message\":{\"example\":\"The request was invalid or malformed\",\"type\":\"string\"}},\"type\":\"object\"},\"success\":{\"example\":false,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Premium plan required for this operation\"},\"404\":{\"content\":{\"application/json\":{\"example\":{\"error\":{\"code\":\"NOT_FOUND\",\"message\":\"The requested resource was not found\"},\"success\":false},\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"example\":\"INVALID_REQUEST\",\"type\":\"string\"},\"message\":{\"example\":\"The request was invalid or malformed\",\"type\":\"string\"}},\"type\":\"object\"},\"success\":{\"example\":false,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"The requested resource was not found\"}},\"security\":[{\"ApiKeyAuth\":[]}],\"securitySchemes\":{\"ApiKeyAuth\":{\"description\":\"API key for authentication. Free and premium plans available with different usage limits.\",\"in\":\"header\",\"name\":\"X-API-Key\",\"type\":\"apiKey\"}},\"securitySource\":\"operation\"}",
+                    "source": "openapi3",
+                    "version": 1
                   },
                   "kind": "http",
                   "method": "PUT",
@@ -864,6 +988,12 @@
                 {
                   "active": true,
                   "args": {},
+                  "contract": {
+                    "id": "POST /series",
+                    "json": "{\"operationId\":\"createSeries\",\"parameters\":[],\"protocol\":\"http\",\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"description\":{\"example\":\"A high school chemistry teacher turned methamphetamine producer\",\"type\":\"string\"},\"episodes\":{\"example\":62,\"type\":\"integer\"},\"genre\":{\"example\":[\"Drama\",\"Crime\",\"Thriller\"],\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"isPremium\":{\"example\":true,\"type\":\"boolean\"},\"rating\":{\"example\":9.5,\"format\":\"float\",\"type\":\"number\"},\"releaseYear\":{\"example\":2008,\"type\":\"integer\"},\"seasons\":{\"example\":5,\"type\":\"integer\"},\"thumbnailUrl\":{\"example\":\"https://example.com/thumbnails/breaking-bad.jpg\",\"format\":\"uri\",\"type\":\"string\"},\"title\":{\"example\":\"Breaking Bad\",\"type\":\"string\"}},\"required\":[\"title\",\"description\",\"genre\",\"releaseYear\"],\"type\":\"object\"}}},\"required\":true},\"responses\":{\"201\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"data\":{\"properties\":{\"createdAt\":{\"format\":\"date-time\",\"type\":\"string\"},\"description\":{\"example\":\"A high school chemistry teacher turned methamphetamine producer\",\"type\":\"string\"},\"episodes\":{\"example\":62,\"type\":\"integer\"},\"genre\":{\"example\":[\"Drama\",\"Crime\",\"Thriller\"],\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"id\":{\"example\":\"ser123456\",\"type\":\"string\"},\"isPremium\":{\"example\":true,\"type\":\"boolean\"},\"rating\":{\"example\":9.5,\"format\":\"float\",\"type\":\"number\"},\"releaseYear\":{\"example\":2008,\"type\":\"integer\"},\"seasons\":{\"example\":5,\"type\":\"integer\"},\"thumbnailUrl\":{\"example\":\"https://example.com/thumbnails/breaking-bad.jpg\",\"format\":\"uri\",\"type\":\"string\"},\"title\":{\"example\":\"Breaking Bad\",\"type\":\"string\"},\"updatedAt\":{\"format\":\"date-time\",\"type\":\"string\"}},\"type\":\"object\"},\"success\":{\"example\":true,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Series created successfully\"},\"400\":{\"content\":{\"application/json\":{\"example\":{\"error\":{\"code\":\"BAD_REQUEST\",\"message\":\"Invalid input parameters\"},\"success\":false},\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"example\":\"INVALID_REQUEST\",\"type\":\"string\"},\"message\":{\"example\":\"The request was invalid or malformed\",\"type\":\"string\"}},\"type\":\"object\"},\"success\":{\"example\":false,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"The request was invalid or malformed\"},\"401\":{\"content\":{\"application/json\":{\"example\":{\"error\":{\"code\":\"UNAUTHORIZED\",\"message\":\"Invalid or missing API key\"},\"success\":false},\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"example\":\"INVALID_REQUEST\",\"type\":\"string\"},\"message\":{\"example\":\"The request was invalid or malformed\",\"type\":\"string\"}},\"type\":\"object\"},\"success\":{\"example\":false,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Authentication credentials are missing or invalid\"},\"403\":{\"content\":{\"application/json\":{\"example\":{\"error\":{\"code\":\"FORBIDDEN\",\"message\":\"This operation requires a premium plan subscription\"},\"success\":false},\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"example\":\"INVALID_REQUEST\",\"type\":\"string\"},\"message\":{\"example\":\"The request was invalid or malformed\",\"type\":\"string\"}},\"type\":\"object\"},\"success\":{\"example\":false,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Premium plan required for this operation\"}},\"security\":[{\"ApiKeyAuth\":[]}],\"securitySchemes\":{\"ApiKeyAuth\":{\"description\":\"API key for authentication. Free and premium plans available with different usage limits.\",\"in\":\"header\",\"name\":\"X-API-Key\",\"type\":\"apiKey\"}},\"securitySource\":\"operation\"}",
+                    "source": "openapi3",
+                    "version": 1
+                  },
                   "kind": "http",
                   "method": "POST",
                   "orig": "/series",
@@ -916,6 +1046,12 @@
                       }
                     ]
                   },
+                  "contract": {
+                    "id": "GET /series",
+                    "json": "{\"operationId\":\"getSeries\",\"parameters\":[{\"description\":\"Page number for pagination\",\"in\":\"query\",\"name\":\"page\",\"required\":false,\"schema\":{\"default\":1,\"minimum\":1,\"type\":\"integer\"}},{\"description\":\"Number of items per page\",\"in\":\"query\",\"name\":\"limit\",\"required\":false,\"schema\":{\"default\":20,\"maximum\":100,\"minimum\":1,\"type\":\"integer\"}},{\"description\":\"Filter series by genre\",\"in\":\"query\",\"name\":\"genre\",\"required\":false,\"schema\":{\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"data\":{\"items\":{\"properties\":{\"createdAt\":{\"format\":\"date-time\",\"type\":\"string\"},\"description\":{\"example\":\"A high school chemistry teacher turned methamphetamine producer\",\"type\":\"string\"},\"episodes\":{\"example\":62,\"type\":\"integer\"},\"genre\":{\"example\":[\"Drama\",\"Crime\",\"Thriller\"],\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"id\":{\"example\":\"ser123456\",\"type\":\"string\"},\"isPremium\":{\"example\":true,\"type\":\"boolean\"},\"rating\":{\"example\":9.5,\"format\":\"float\",\"type\":\"number\"},\"releaseYear\":{\"example\":2008,\"type\":\"integer\"},\"seasons\":{\"example\":5,\"type\":\"integer\"},\"thumbnailUrl\":{\"example\":\"https://example.com/thumbnails/breaking-bad.jpg\",\"format\":\"uri\",\"type\":\"string\"},\"title\":{\"example\":\"Breaking Bad\",\"type\":\"string\"},\"updatedAt\":{\"format\":\"date-time\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"},\"pagination\":{\"properties\":{\"currentPage\":{\"example\":1,\"type\":\"integer\"},\"itemsPerPage\":{\"example\":20,\"type\":\"integer\"},\"totalItems\":{\"example\":200,\"type\":\"integer\"},\"totalPages\":{\"example\":10,\"type\":\"integer\"}},\"type\":\"object\"},\"success\":{\"example\":true,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Successful response with list of series\"},\"401\":{\"content\":{\"application/json\":{\"example\":{\"error\":{\"code\":\"UNAUTHORIZED\",\"message\":\"Invalid or missing API key\"},\"success\":false},\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"example\":\"INVALID_REQUEST\",\"type\":\"string\"},\"message\":{\"example\":\"The request was invalid or malformed\",\"type\":\"string\"}},\"type\":\"object\"},\"success\":{\"example\":false,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Authentication credentials are missing or invalid\"},\"429\":{\"content\":{\"application/json\":{\"example\":{\"error\":{\"code\":\"RATE_LIMIT_EXCEEDED\",\"message\":\"You have exceeded your API rate limit. Please upgrade to premium for higher limits.\"},\"success\":false},\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"example\":\"INVALID_REQUEST\",\"type\":\"string\"},\"message\":{\"example\":\"The request was invalid or malformed\",\"type\":\"string\"}},\"type\":\"object\"},\"success\":{\"example\":false,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"API rate limit exceeded\"}},\"security\":[{\"ApiKeyAuth\":[]}],\"securitySchemes\":{\"ApiKeyAuth\":{\"description\":\"API key for authentication. Free and premium plans available with different usage limits.\",\"in\":\"header\",\"name\":\"X-API-Key\",\"type\":\"apiKey\"}},\"securitySource\":\"operation\"}",
+                    "source": "openapi3",
+                    "version": 1
+                  },
                   "kind": "http",
                   "method": "GET",
                   "orig": "/series",
@@ -955,6 +1091,12 @@
                         "type": "`$STRING`"
                       }
                     ]
+                  },
+                  "contract": {
+                    "id": "GET /series/{seriesId}",
+                    "json": "{\"operationId\":\"getSeriesById\",\"parameters\":[{\"description\":\"ID of the series to retrieve\",\"in\":\"path\",\"name\":\"seriesId\",\"required\":true,\"schema\":{\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"data\":{\"properties\":{\"createdAt\":{\"format\":\"date-time\",\"type\":\"string\"},\"description\":{\"example\":\"A high school chemistry teacher turned methamphetamine producer\",\"type\":\"string\"},\"episodes\":{\"example\":62,\"type\":\"integer\"},\"genre\":{\"example\":[\"Drama\",\"Crime\",\"Thriller\"],\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"id\":{\"example\":\"ser123456\",\"type\":\"string\"},\"isPremium\":{\"example\":true,\"type\":\"boolean\"},\"rating\":{\"example\":9.5,\"format\":\"float\",\"type\":\"number\"},\"releaseYear\":{\"example\":2008,\"type\":\"integer\"},\"seasons\":{\"example\":5,\"type\":\"integer\"},\"thumbnailUrl\":{\"example\":\"https://example.com/thumbnails/breaking-bad.jpg\",\"format\":\"uri\",\"type\":\"string\"},\"title\":{\"example\":\"Breaking Bad\",\"type\":\"string\"},\"updatedAt\":{\"format\":\"date-time\",\"type\":\"string\"}},\"type\":\"object\"},\"success\":{\"example\":true,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Successful response with series details\"},\"401\":{\"content\":{\"application/json\":{\"example\":{\"error\":{\"code\":\"UNAUTHORIZED\",\"message\":\"Invalid or missing API key\"},\"success\":false},\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"example\":\"INVALID_REQUEST\",\"type\":\"string\"},\"message\":{\"example\":\"The request was invalid or malformed\",\"type\":\"string\"}},\"type\":\"object\"},\"success\":{\"example\":false,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Authentication credentials are missing or invalid\"},\"404\":{\"content\":{\"application/json\":{\"example\":{\"error\":{\"code\":\"NOT_FOUND\",\"message\":\"The requested resource was not found\"},\"success\":false},\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"example\":\"INVALID_REQUEST\",\"type\":\"string\"},\"message\":{\"example\":\"The request was invalid or malformed\",\"type\":\"string\"}},\"type\":\"object\"},\"success\":{\"example\":false,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"The requested resource was not found\"}},\"security\":[{\"ApiKeyAuth\":[]}],\"securitySchemes\":{\"ApiKeyAuth\":{\"description\":\"API key for authentication. Free and premium plans available with different usage limits.\",\"in\":\"header\",\"name\":\"X-API-Key\",\"type\":\"apiKey\"}},\"securitySource\":\"operation\"}",
+                    "source": "openapi3",
+                    "version": 1
                   },
                   "kind": "http",
                   "method": "GET",
@@ -1002,6 +1144,12 @@
                       }
                     ]
                   },
+                  "contract": {
+                    "id": "DELETE /series/{seriesId}",
+                    "json": "{\"operationId\":\"deleteSeries\",\"parameters\":[{\"description\":\"ID of the series to delete\",\"in\":\"path\",\"name\":\"seriesId\",\"required\":true,\"schema\":{\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"message\":{\"example\":\"Series deleted successfully\",\"type\":\"string\"},\"success\":{\"example\":true,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Series deleted successfully\"},\"401\":{\"content\":{\"application/json\":{\"example\":{\"error\":{\"code\":\"UNAUTHORIZED\",\"message\":\"Invalid or missing API key\"},\"success\":false},\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"example\":\"INVALID_REQUEST\",\"type\":\"string\"},\"message\":{\"example\":\"The request was invalid or malformed\",\"type\":\"string\"}},\"type\":\"object\"},\"success\":{\"example\":false,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Authentication credentials are missing or invalid\"},\"403\":{\"content\":{\"application/json\":{\"example\":{\"error\":{\"code\":\"FORBIDDEN\",\"message\":\"This operation requires a premium plan subscription\"},\"success\":false},\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"example\":\"INVALID_REQUEST\",\"type\":\"string\"},\"message\":{\"example\":\"The request was invalid or malformed\",\"type\":\"string\"}},\"type\":\"object\"},\"success\":{\"example\":false,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Premium plan required for this operation\"},\"404\":{\"content\":{\"application/json\":{\"example\":{\"error\":{\"code\":\"NOT_FOUND\",\"message\":\"The requested resource was not found\"},\"success\":false},\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"example\":\"INVALID_REQUEST\",\"type\":\"string\"},\"message\":{\"example\":\"The request was invalid or malformed\",\"type\":\"string\"}},\"type\":\"object\"},\"success\":{\"example\":false,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"The requested resource was not found\"}},\"security\":[{\"ApiKeyAuth\":[]}],\"securitySchemes\":{\"ApiKeyAuth\":{\"description\":\"API key for authentication. Free and premium plans available with different usage limits.\",\"in\":\"header\",\"name\":\"X-API-Key\",\"type\":\"apiKey\"}},\"securitySource\":\"operation\"}",
+                    "source": "openapi3",
+                    "version": 1
+                  },
                   "kind": "http",
                   "method": "DELETE",
                   "orig": "/series/{seriesId}",
@@ -1048,6 +1196,12 @@
                       }
                     ]
                   },
+                  "contract": {
+                    "id": "PUT /series/{seriesId}",
+                    "json": "{\"operationId\":\"updateSeries\",\"parameters\":[{\"description\":\"ID of the series to update\",\"in\":\"path\",\"name\":\"seriesId\",\"required\":true,\"schema\":{\"type\":\"string\"}}],\"protocol\":\"http\",\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"description\":{\"example\":\"A high school chemistry teacher turned methamphetamine producer\",\"type\":\"string\"},\"episodes\":{\"example\":62,\"type\":\"integer\"},\"genre\":{\"example\":[\"Drama\",\"Crime\",\"Thriller\"],\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"isPremium\":{\"example\":true,\"type\":\"boolean\"},\"rating\":{\"example\":9.5,\"format\":\"float\",\"type\":\"number\"},\"releaseYear\":{\"example\":2008,\"type\":\"integer\"},\"seasons\":{\"example\":5,\"type\":\"integer\"},\"thumbnailUrl\":{\"example\":\"https://example.com/thumbnails/breaking-bad.jpg\",\"format\":\"uri\",\"type\":\"string\"},\"title\":{\"example\":\"Breaking Bad\",\"type\":\"string\"}},\"required\":[\"title\",\"description\",\"genre\",\"releaseYear\"],\"type\":\"object\"}}},\"required\":true},\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"data\":{\"properties\":{\"createdAt\":{\"format\":\"date-time\",\"type\":\"string\"},\"description\":{\"example\":\"A high school chemistry teacher turned methamphetamine producer\",\"type\":\"string\"},\"episodes\":{\"example\":62,\"type\":\"integer\"},\"genre\":{\"example\":[\"Drama\",\"Crime\",\"Thriller\"],\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"id\":{\"example\":\"ser123456\",\"type\":\"string\"},\"isPremium\":{\"example\":true,\"type\":\"boolean\"},\"rating\":{\"example\":9.5,\"format\":\"float\",\"type\":\"number\"},\"releaseYear\":{\"example\":2008,\"type\":\"integer\"},\"seasons\":{\"example\":5,\"type\":\"integer\"},\"thumbnailUrl\":{\"example\":\"https://example.com/thumbnails/breaking-bad.jpg\",\"format\":\"uri\",\"type\":\"string\"},\"title\":{\"example\":\"Breaking Bad\",\"type\":\"string\"},\"updatedAt\":{\"format\":\"date-time\",\"type\":\"string\"}},\"type\":\"object\"},\"success\":{\"example\":true,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Series updated successfully\"},\"400\":{\"content\":{\"application/json\":{\"example\":{\"error\":{\"code\":\"BAD_REQUEST\",\"message\":\"Invalid input parameters\"},\"success\":false},\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"example\":\"INVALID_REQUEST\",\"type\":\"string\"},\"message\":{\"example\":\"The request was invalid or malformed\",\"type\":\"string\"}},\"type\":\"object\"},\"success\":{\"example\":false,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"The request was invalid or malformed\"},\"401\":{\"content\":{\"application/json\":{\"example\":{\"error\":{\"code\":\"UNAUTHORIZED\",\"message\":\"Invalid or missing API key\"},\"success\":false},\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"example\":\"INVALID_REQUEST\",\"type\":\"string\"},\"message\":{\"example\":\"The request was invalid or malformed\",\"type\":\"string\"}},\"type\":\"object\"},\"success\":{\"example\":false,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Authentication credentials are missing or invalid\"},\"403\":{\"content\":{\"application/json\":{\"example\":{\"error\":{\"code\":\"FORBIDDEN\",\"message\":\"This operation requires a premium plan subscription\"},\"success\":false},\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"example\":\"INVALID_REQUEST\",\"type\":\"string\"},\"message\":{\"example\":\"The request was invalid or malformed\",\"type\":\"string\"}},\"type\":\"object\"},\"success\":{\"example\":false,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"Premium plan required for this operation\"},\"404\":{\"content\":{\"application/json\":{\"example\":{\"error\":{\"code\":\"NOT_FOUND\",\"message\":\"The requested resource was not found\"},\"success\":false},\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"example\":\"INVALID_REQUEST\",\"type\":\"string\"},\"message\":{\"example\":\"The request was invalid or malformed\",\"type\":\"string\"}},\"type\":\"object\"},\"success\":{\"example\":false,\"type\":\"boolean\"}},\"type\":\"object\"}}},\"description\":\"The requested resource was not found\"}},\"security\":[{\"ApiKeyAuth\":[]}],\"securitySchemes\":{\"ApiKeyAuth\":{\"description\":\"API key for authentication. Free and premium plans available with different usage limits.\",\"in\":\"header\",\"name\":\"X-API-Key\",\"type\":\"apiKey\"}},\"securitySource\":\"operation\"}",
+                    "source": "openapi3",
+                    "version": 1
+                  },
                   "kind": "http",
                   "method": "PUT",
                   "orig": "/series/{seriesId}",
@@ -1083,13 +1237,223 @@
         }
       },
       "feature": {
+        "ratelimit": {
+          "active": true,
+          "base": "node_modules/@voxgig/sdkgen/project/.sdk",
+          "config": {
+            "options": {
+              "active": false,
+              "burst": 5,
+              "rate": 5
+            },
+            "optspec": {
+              "now": "`$FUNCTION`",
+              "sleep": "`$FUNCTION`"
+            },
+            "strict": false
+          },
+          "hook": {
+            "GetData": {
+              "active": false,
+              "await": false
+            },
+            "GetMatch": {
+              "active": false,
+              "await": false
+            },
+            "PostConstruct": {
+              "active": false,
+              "await": false
+            },
+            "PostConstructEntity": {
+              "active": false,
+              "await": false
+            },
+            "PostOperation": {
+              "active": false,
+              "await": false
+            },
+            "PreRequest": {
+              "active": false,
+              "await": false
+            },
+            "PreResponse": {
+              "active": false,
+              "await": false
+            },
+            "PreResult": {
+              "active": false,
+              "await": false
+            },
+            "PreSpec": {
+              "active": false,
+              "await": false
+            },
+            "PreTarget": {
+              "active": false,
+              "await": false
+            },
+            "SetData": {
+              "active": false,
+              "await": false
+            }
+          },
+          "name": "ratelimit",
+          "needs": {},
+          "origname": "",
+          "package": "@voxgig/sdkgen",
+          "plugin": {},
+          "spec": {},
+          "target": {
+            "go": {
+              "deps": {}
+            },
+            "go-cli": {
+              "deps": {}
+            },
+            "go-mcp": {
+              "deps": {}
+            },
+            "lua": {
+              "deps": {}
+            },
+            "php": {
+              "deps": {}
+            },
+            "py": {
+              "deps": {}
+            },
+            "rb": {
+              "deps": {}
+            },
+            "ts": {
+              "deps": {}
+            }
+          },
+          "title": "Client-side rate limiting via a token bucket",
+          "transport": "wrap",
+          "version": "0.0.1"
+        },
+        "retry": {
+          "active": true,
+          "base": "node_modules/@voxgig/sdkgen/project/.sdk",
+          "config": {
+            "options": {
+              "active": false,
+              "factor": 2,
+              "maxDelay": 2000,
+              "minDelay": 50,
+              "retries": 2,
+              "statuses": [
+                408,
+                425,
+                429,
+                500,
+                502,
+                503,
+                504
+              ]
+            },
+            "optspec": {
+              "jitter": "`$BOOLEAN`",
+              "sleep": "`$FUNCTION`"
+            },
+            "strict": false
+          },
+          "hook": {
+            "GetData": {
+              "active": false,
+              "await": false
+            },
+            "GetMatch": {
+              "active": false,
+              "await": false
+            },
+            "PostConstruct": {
+              "active": false,
+              "await": false
+            },
+            "PostConstructEntity": {
+              "active": false,
+              "await": false
+            },
+            "PostOperation": {
+              "active": false,
+              "await": false
+            },
+            "PreRequest": {
+              "active": false,
+              "await": false
+            },
+            "PreResponse": {
+              "active": false,
+              "await": false
+            },
+            "PreResult": {
+              "active": false,
+              "await": false
+            },
+            "PreSpec": {
+              "active": false,
+              "await": false
+            },
+            "PreTarget": {
+              "active": false,
+              "await": false
+            },
+            "SetData": {
+              "active": false,
+              "await": false
+            }
+          },
+          "name": "retry",
+          "needs": {},
+          "origname": "",
+          "package": "@voxgig/sdkgen",
+          "plugin": {},
+          "spec": {},
+          "target": {
+            "go": {
+              "deps": {}
+            },
+            "go-cli": {
+              "deps": {}
+            },
+            "go-mcp": {
+              "deps": {}
+            },
+            "lua": {
+              "deps": {}
+            },
+            "php": {
+              "deps": {}
+            },
+            "py": {
+              "deps": {}
+            },
+            "rb": {
+              "deps": {}
+            },
+            "ts": {
+              "deps": {}
+            }
+          },
+          "title": "Automatic retry of transient failures with exponential backoff",
+          "transport": "wrap",
+          "version": "0.0.1"
+        },
         "test": {
           "active": true,
           "base": "node_modules/@voxgig/sdkgen/project/.sdk",
           "config": {
             "options": {
               "active": false
-            }
+            },
+            "optspec": {
+              "entity": "`$MAP`",
+              "net": "`$MAP`"
+            },
+            "strict": false
           },
           "hook": {
             "GetData": {
@@ -1179,6 +1543,102 @@
           },
           "title": "In-memory mock transport for testing without a live server",
           "transport": "base",
+          "version": "0.0.1"
+        },
+        "timeout": {
+          "active": true,
+          "base": "node_modules/@voxgig/sdkgen/project/.sdk",
+          "config": {
+            "options": {
+              "active": false,
+              "ms": 30000
+            },
+            "optspec": {
+              "clearTimer": "`$FUNCTION`",
+              "setTimer": "`$FUNCTION`"
+            },
+            "strict": false
+          },
+          "hook": {
+            "GetData": {
+              "active": false,
+              "await": false
+            },
+            "GetMatch": {
+              "active": false,
+              "await": false
+            },
+            "PostConstruct": {
+              "active": false,
+              "await": false
+            },
+            "PostConstructEntity": {
+              "active": false,
+              "await": false
+            },
+            "PostOperation": {
+              "active": false,
+              "await": false
+            },
+            "PreRequest": {
+              "active": false,
+              "await": false
+            },
+            "PreResponse": {
+              "active": false,
+              "await": false
+            },
+            "PreResult": {
+              "active": false,
+              "await": false
+            },
+            "PreSpec": {
+              "active": false,
+              "await": false
+            },
+            "PreTarget": {
+              "active": false,
+              "await": false
+            },
+            "SetData": {
+              "active": false,
+              "await": false
+            }
+          },
+          "name": "timeout",
+          "needs": {},
+          "origname": "",
+          "package": "@voxgig/sdkgen",
+          "plugin": {},
+          "spec": {},
+          "target": {
+            "go": {
+              "deps": {}
+            },
+            "go-cli": {
+              "deps": {}
+            },
+            "go-mcp": {
+              "deps": {}
+            },
+            "lua": {
+              "deps": {}
+            },
+            "php": {
+              "deps": {}
+            },
+            "py": {
+              "deps": {}
+            },
+            "rb": {
+              "deps": {}
+            },
+            "ts": {
+              "deps": {}
+            }
+          },
+          "title": "Per-request timeout with transport abort",
+          "transport": "wrap",
           "version": "0.0.1"
         }
       },
@@ -1545,6 +2005,48 @@
         "website": "https://funisgo.com"
       },
       "option": {},
+      "optspec": {
+        "allow": {
+          "method": "GET,PUT,POST,PATCH,DELETE,OPTIONS",
+          "op": "create,update,load,list,remove,command,direct,graphql"
+        },
+        "apikey": "",
+        "auth": {
+          "basic": false,
+          "prefix": ""
+        },
+        "base": "http://localhost:8000",
+        "clean": {
+          "keys": "key,token,id"
+        },
+        "entity": {
+          "`$CHILD`": {
+            "`$OPEN`": true,
+            "active": false,
+            "alias": {}
+          }
+        },
+        "extend": "`$ANY`",
+        "headers": {
+          "`$CHILD`": "`$STRING`"
+        },
+        "prefix": "",
+        "secret": "",
+        "server": {
+          "`$CHILD`": ""
+        },
+        "suffix": "",
+        "system": {
+          "fetch": "`$ANY`"
+        },
+        "test": {
+          "active": false,
+          "entity": {
+            "`$OPEN`": true
+          }
+        },
+        "utility": {}
+      },
       "repo": {
         "host": "github.com",
         "path": ""
@@ -2099,6 +2601,7 @@
           },
           "package": "@voxgig/sdkgen",
           "provides": {
+            "schema": true,
             "sekreto": true
           },
           "publish": {
@@ -2140,7 +2643,7 @@
         "live": {
           "app": false,
           "base": "",
-          "strict": false
+          "strict": true
         }
       }
     }

@@ -4,12 +4,12 @@
       "MOVIE00": {
         "createdAt": "s78",
         "description": "s79",
-        "duration": "s7a",
+        "duration": 122,
         "genre": [],
         "id": "MOVIE00",
         "isPremium": false,
         "rating": 126,
-        "releaseYear": "s7f",
+        "releaseYear": 127,
         "streamUrl": "s80",
         "thumbnailUrl": "s81",
         "title": "s82",
@@ -18,12 +18,12 @@
       "MOVIE01": {
         "createdAt": "sf0",
         "description": "sf1",
-        "duration": "sf2",
+        "duration": 242,
         "genre": [],
         "id": "MOVIE01",
         "isPremium": false,
         "rating": 246,
-        "releaseYear": "sf7",
+        "releaseYear": 247,
         "streamUrl": "sf8",
         "thumbnailUrl": "sf9",
         "title": "sfa",
@@ -32,12 +32,12 @@
       "MOVIE02": {
         "createdAt": "s168",
         "description": "s169",
-        "duration": "s16a",
+        "duration": 362,
         "genre": [],
         "id": "MOVIE02",
         "isPremium": false,
         "rating": 366,
-        "releaseYear": "s16f",
+        "releaseYear": 367,
         "streamUrl": "s170",
         "thumbnailUrl": "s171",
         "title": "s172",
@@ -50,15 +50,1194 @@
       "movie_ref01": {
         "createdAt": "s1e0",
         "description": "s1e1",
-        "duration": "s1e2",
+        "duration": 482,
         "genre": [],
         "isPremium": false,
         "rating": 486,
-        "releaseYear": "s1e7",
+        "releaseYear": 487,
         "streamUrl": "s1e8",
         "thumbnailUrl": "s1e9",
         "title": "s1ea",
         "updatedAt": "s1eb"
+      }
+    }
+  },
+  "requests": {
+    "POST /movies": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "createMovie",
+        "parameters": [],
+        "protocol": "http",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "description": {
+                    "example": "A computer hacker learns about the true nature of reality",
+                    "type": "string"
+                  },
+                  "duration": {
+                    "description": "Duration in minutes",
+                    "example": 136,
+                    "type": "integer"
+                  },
+                  "genre": {
+                    "example": [
+                      "Action",
+                      "Sci-Fi"
+                    ],
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "isPremium": {
+                    "example": false,
+                    "type": "boolean"
+                  },
+                  "rating": {
+                    "example": 8.7,
+                    "format": "float",
+                    "type": "number"
+                  },
+                  "releaseYear": {
+                    "example": 1999,
+                    "type": "integer"
+                  },
+                  "streamUrl": {
+                    "example": "https://stream.funisgo.com/movies/mov123456",
+                    "format": "uri",
+                    "type": "string"
+                  },
+                  "thumbnailUrl": {
+                    "example": "https://example.com/thumbnails/matrix.jpg",
+                    "format": "uri",
+                    "type": "string"
+                  },
+                  "title": {
+                    "example": "The Matrix",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "title",
+                  "description",
+                  "genre",
+                  "releaseYear",
+                  "duration"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "properties": {
+                        "createdAt": {
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        "description": {
+                          "example": "A computer hacker learns about the true nature of reality",
+                          "type": "string"
+                        },
+                        "duration": {
+                          "description": "Duration in minutes",
+                          "example": 136,
+                          "type": "integer"
+                        },
+                        "genre": {
+                          "example": [
+                            "Action",
+                            "Sci-Fi"
+                          ],
+                          "items": {
+                            "type": "string"
+                          },
+                          "type": "array"
+                        },
+                        "id": {
+                          "example": "mov123456",
+                          "type": "string"
+                        },
+                        "isPremium": {
+                          "example": false,
+                          "type": "boolean"
+                        },
+                        "rating": {
+                          "example": 8.7,
+                          "format": "float",
+                          "type": "number"
+                        },
+                        "releaseYear": {
+                          "example": 1999,
+                          "type": "integer"
+                        },
+                        "streamUrl": {
+                          "example": "https://stream.funisgo.com/movies/mov123456",
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "thumbnailUrl": {
+                          "example": "https://example.com/thumbnails/matrix.jpg",
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "title": {
+                          "example": "The Matrix",
+                          "type": "string"
+                        },
+                        "updatedAt": {
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "success": {
+                      "example": true,
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Movie created successfully"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "BAD_REQUEST",
+                    "message": "Invalid input parameters"
+                  },
+                  "success": false
+                },
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "properties": {
+                        "code": {
+                          "example": "INVALID_REQUEST",
+                          "type": "string"
+                        },
+                        "message": {
+                          "example": "The request was invalid or malformed",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "success": {
+                      "example": false,
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "The request was invalid or malformed"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "UNAUTHORIZED",
+                    "message": "Invalid or missing API key"
+                  },
+                  "success": false
+                },
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "properties": {
+                        "code": {
+                          "example": "INVALID_REQUEST",
+                          "type": "string"
+                        },
+                        "message": {
+                          "example": "The request was invalid or malformed",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "success": {
+                      "example": false,
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Authentication credentials are missing or invalid"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "FORBIDDEN",
+                    "message": "This operation requires a premium plan subscription"
+                  },
+                  "success": false
+                },
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "properties": {
+                        "code": {
+                          "example": "INVALID_REQUEST",
+                          "type": "string"
+                        },
+                        "message": {
+                          "example": "The request was invalid or malformed",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "success": {
+                      "example": false,
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Premium plan required for this operation"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "securitySchemes": {
+          "ApiKeyAuth": {
+            "description": "API key for authentication. Free and premium plans available with different usage limits.",
+            "in": "header",
+            "name": "X-API-Key",
+            "type": "apiKey"
+          }
+        },
+        "securitySource": "operation"
+      }
+    },
+    "GET /movies": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getMovies",
+        "parameters": [
+          {
+            "description": "Page number for pagination",
+            "in": "query",
+            "name": "page",
+            "required": false,
+            "schema": {
+              "default": 1,
+              "minimum": 1,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Number of items per page",
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 20,
+              "maximum": 100,
+              "minimum": 1,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Filter movies by genre",
+            "in": "query",
+            "name": "genre",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "items": {
+                        "properties": {
+                          "createdAt": {
+                            "format": "date-time",
+                            "type": "string"
+                          },
+                          "description": {
+                            "example": "A computer hacker learns about the true nature of reality",
+                            "type": "string"
+                          },
+                          "duration": {
+                            "description": "Duration in minutes",
+                            "example": 136,
+                            "type": "integer"
+                          },
+                          "genre": {
+                            "example": [
+                              "Action",
+                              "Sci-Fi"
+                            ],
+                            "items": {
+                              "type": "string"
+                            },
+                            "type": "array"
+                          },
+                          "id": {
+                            "example": "mov123456",
+                            "type": "string"
+                          },
+                          "isPremium": {
+                            "example": false,
+                            "type": "boolean"
+                          },
+                          "rating": {
+                            "example": 8.7,
+                            "format": "float",
+                            "type": "number"
+                          },
+                          "releaseYear": {
+                            "example": 1999,
+                            "type": "integer"
+                          },
+                          "streamUrl": {
+                            "example": "https://stream.funisgo.com/movies/mov123456",
+                            "format": "uri",
+                            "type": "string"
+                          },
+                          "thumbnailUrl": {
+                            "example": "https://example.com/thumbnails/matrix.jpg",
+                            "format": "uri",
+                            "type": "string"
+                          },
+                          "title": {
+                            "example": "The Matrix",
+                            "type": "string"
+                          },
+                          "updatedAt": {
+                            "format": "date-time",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "pagination": {
+                      "properties": {
+                        "currentPage": {
+                          "example": 1,
+                          "type": "integer"
+                        },
+                        "itemsPerPage": {
+                          "example": 20,
+                          "type": "integer"
+                        },
+                        "totalItems": {
+                          "example": 200,
+                          "type": "integer"
+                        },
+                        "totalPages": {
+                          "example": 10,
+                          "type": "integer"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "success": {
+                      "example": true,
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful response with list of movies"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "UNAUTHORIZED",
+                    "message": "Invalid or missing API key"
+                  },
+                  "success": false
+                },
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "properties": {
+                        "code": {
+                          "example": "INVALID_REQUEST",
+                          "type": "string"
+                        },
+                        "message": {
+                          "example": "The request was invalid or malformed",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "success": {
+                      "example": false,
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Authentication credentials are missing or invalid"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "RATE_LIMIT_EXCEEDED",
+                    "message": "You have exceeded your API rate limit. Please upgrade to premium for higher limits."
+                  },
+                  "success": false
+                },
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "properties": {
+                        "code": {
+                          "example": "INVALID_REQUEST",
+                          "type": "string"
+                        },
+                        "message": {
+                          "example": "The request was invalid or malformed",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "success": {
+                      "example": false,
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "API rate limit exceeded"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "securitySchemes": {
+          "ApiKeyAuth": {
+            "description": "API key for authentication. Free and premium plans available with different usage limits.",
+            "in": "header",
+            "name": "X-API-Key",
+            "type": "apiKey"
+          }
+        },
+        "securitySource": "operation"
+      }
+    },
+    "GET /movies/{movieId}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getMovieById",
+        "parameters": [
+          {
+            "description": "ID of the movie to retrieve",
+            "in": "path",
+            "name": "movieId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "properties": {
+                        "createdAt": {
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        "description": {
+                          "example": "A computer hacker learns about the true nature of reality",
+                          "type": "string"
+                        },
+                        "duration": {
+                          "description": "Duration in minutes",
+                          "example": 136,
+                          "type": "integer"
+                        },
+                        "genre": {
+                          "example": [
+                            "Action",
+                            "Sci-Fi"
+                          ],
+                          "items": {
+                            "type": "string"
+                          },
+                          "type": "array"
+                        },
+                        "id": {
+                          "example": "mov123456",
+                          "type": "string"
+                        },
+                        "isPremium": {
+                          "example": false,
+                          "type": "boolean"
+                        },
+                        "rating": {
+                          "example": 8.7,
+                          "format": "float",
+                          "type": "number"
+                        },
+                        "releaseYear": {
+                          "example": 1999,
+                          "type": "integer"
+                        },
+                        "streamUrl": {
+                          "example": "https://stream.funisgo.com/movies/mov123456",
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "thumbnailUrl": {
+                          "example": "https://example.com/thumbnails/matrix.jpg",
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "title": {
+                          "example": "The Matrix",
+                          "type": "string"
+                        },
+                        "updatedAt": {
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "success": {
+                      "example": true,
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful response with movie details"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "UNAUTHORIZED",
+                    "message": "Invalid or missing API key"
+                  },
+                  "success": false
+                },
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "properties": {
+                        "code": {
+                          "example": "INVALID_REQUEST",
+                          "type": "string"
+                        },
+                        "message": {
+                          "example": "The request was invalid or malformed",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "success": {
+                      "example": false,
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Authentication credentials are missing or invalid"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "NOT_FOUND",
+                    "message": "The requested resource was not found"
+                  },
+                  "success": false
+                },
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "properties": {
+                        "code": {
+                          "example": "INVALID_REQUEST",
+                          "type": "string"
+                        },
+                        "message": {
+                          "example": "The request was invalid or malformed",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "success": {
+                      "example": false,
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "The requested resource was not found"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "securitySchemes": {
+          "ApiKeyAuth": {
+            "description": "API key for authentication. Free and premium plans available with different usage limits.",
+            "in": "header",
+            "name": "X-API-Key",
+            "type": "apiKey"
+          }
+        },
+        "securitySource": "operation"
+      }
+    },
+    "DELETE /movies/{movieId}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "deleteMovie",
+        "parameters": [
+          {
+            "description": "ID of the movie to delete",
+            "in": "path",
+            "name": "movieId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "example": "Movie deleted successfully",
+                      "type": "string"
+                    },
+                    "success": {
+                      "example": true,
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Movie deleted successfully"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "UNAUTHORIZED",
+                    "message": "Invalid or missing API key"
+                  },
+                  "success": false
+                },
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "properties": {
+                        "code": {
+                          "example": "INVALID_REQUEST",
+                          "type": "string"
+                        },
+                        "message": {
+                          "example": "The request was invalid or malformed",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "success": {
+                      "example": false,
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Authentication credentials are missing or invalid"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "FORBIDDEN",
+                    "message": "This operation requires a premium plan subscription"
+                  },
+                  "success": false
+                },
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "properties": {
+                        "code": {
+                          "example": "INVALID_REQUEST",
+                          "type": "string"
+                        },
+                        "message": {
+                          "example": "The request was invalid or malformed",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "success": {
+                      "example": false,
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Premium plan required for this operation"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "NOT_FOUND",
+                    "message": "The requested resource was not found"
+                  },
+                  "success": false
+                },
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "properties": {
+                        "code": {
+                          "example": "INVALID_REQUEST",
+                          "type": "string"
+                        },
+                        "message": {
+                          "example": "The request was invalid or malformed",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "success": {
+                      "example": false,
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "The requested resource was not found"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "securitySchemes": {
+          "ApiKeyAuth": {
+            "description": "API key for authentication. Free and premium plans available with different usage limits.",
+            "in": "header",
+            "name": "X-API-Key",
+            "type": "apiKey"
+          }
+        },
+        "securitySource": "operation"
+      }
+    },
+    "PUT /movies/{movieId}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "updateMovie",
+        "parameters": [
+          {
+            "description": "ID of the movie to update",
+            "in": "path",
+            "name": "movieId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "description": {
+                    "example": "A computer hacker learns about the true nature of reality",
+                    "type": "string"
+                  },
+                  "duration": {
+                    "description": "Duration in minutes",
+                    "example": 136,
+                    "type": "integer"
+                  },
+                  "genre": {
+                    "example": [
+                      "Action",
+                      "Sci-Fi"
+                    ],
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "isPremium": {
+                    "example": false,
+                    "type": "boolean"
+                  },
+                  "rating": {
+                    "example": 8.7,
+                    "format": "float",
+                    "type": "number"
+                  },
+                  "releaseYear": {
+                    "example": 1999,
+                    "type": "integer"
+                  },
+                  "streamUrl": {
+                    "example": "https://stream.funisgo.com/movies/mov123456",
+                    "format": "uri",
+                    "type": "string"
+                  },
+                  "thumbnailUrl": {
+                    "example": "https://example.com/thumbnails/matrix.jpg",
+                    "format": "uri",
+                    "type": "string"
+                  },
+                  "title": {
+                    "example": "The Matrix",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "title",
+                  "description",
+                  "genre",
+                  "releaseYear",
+                  "duration"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "properties": {
+                        "createdAt": {
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        "description": {
+                          "example": "A computer hacker learns about the true nature of reality",
+                          "type": "string"
+                        },
+                        "duration": {
+                          "description": "Duration in minutes",
+                          "example": 136,
+                          "type": "integer"
+                        },
+                        "genre": {
+                          "example": [
+                            "Action",
+                            "Sci-Fi"
+                          ],
+                          "items": {
+                            "type": "string"
+                          },
+                          "type": "array"
+                        },
+                        "id": {
+                          "example": "mov123456",
+                          "type": "string"
+                        },
+                        "isPremium": {
+                          "example": false,
+                          "type": "boolean"
+                        },
+                        "rating": {
+                          "example": 8.7,
+                          "format": "float",
+                          "type": "number"
+                        },
+                        "releaseYear": {
+                          "example": 1999,
+                          "type": "integer"
+                        },
+                        "streamUrl": {
+                          "example": "https://stream.funisgo.com/movies/mov123456",
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "thumbnailUrl": {
+                          "example": "https://example.com/thumbnails/matrix.jpg",
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "title": {
+                          "example": "The Matrix",
+                          "type": "string"
+                        },
+                        "updatedAt": {
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "success": {
+                      "example": true,
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Movie updated successfully"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "BAD_REQUEST",
+                    "message": "Invalid input parameters"
+                  },
+                  "success": false
+                },
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "properties": {
+                        "code": {
+                          "example": "INVALID_REQUEST",
+                          "type": "string"
+                        },
+                        "message": {
+                          "example": "The request was invalid or malformed",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "success": {
+                      "example": false,
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "The request was invalid or malformed"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "UNAUTHORIZED",
+                    "message": "Invalid or missing API key"
+                  },
+                  "success": false
+                },
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "properties": {
+                        "code": {
+                          "example": "INVALID_REQUEST",
+                          "type": "string"
+                        },
+                        "message": {
+                          "example": "The request was invalid or malformed",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "success": {
+                      "example": false,
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Authentication credentials are missing or invalid"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "FORBIDDEN",
+                    "message": "This operation requires a premium plan subscription"
+                  },
+                  "success": false
+                },
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "properties": {
+                        "code": {
+                          "example": "INVALID_REQUEST",
+                          "type": "string"
+                        },
+                        "message": {
+                          "example": "The request was invalid or malformed",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "success": {
+                      "example": false,
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Premium plan required for this operation"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "NOT_FOUND",
+                    "message": "The requested resource was not found"
+                  },
+                  "success": false
+                },
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "properties": {
+                        "code": {
+                          "example": "INVALID_REQUEST",
+                          "type": "string"
+                        },
+                        "message": {
+                          "example": "The request was invalid or malformed",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "success": {
+                      "example": false,
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "The requested resource was not found"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "securitySchemes": {
+          "ApiKeyAuth": {
+            "description": "API key for authentication. Free and premium plans available with different usage limits.",
+            "in": "header",
+            "name": "X-API-Key",
+            "type": "apiKey"
+          }
+        },
+        "securitySource": "operation"
       }
     }
   }

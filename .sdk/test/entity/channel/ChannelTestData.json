@@ -57,5 +57,1108 @@
         "updatedAt": "s1c2"
       }
     }
+  },
+  "requests": {
+    "POST /channels": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "createChannel",
+        "parameters": [],
+        "protocol": "http",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "category": {
+                    "example": "Sports",
+                    "type": "string"
+                  },
+                  "description": {
+                    "example": "24/7 sports streaming channel",
+                    "type": "string"
+                  },
+                  "isLive": {
+                    "example": true,
+                    "type": "boolean"
+                  },
+                  "isPremium": {
+                    "example": true,
+                    "type": "boolean"
+                  },
+                  "language": {
+                    "example": "English",
+                    "type": "string"
+                  },
+                  "logoUrl": {
+                    "example": "https://example.com/logos/sports-channel.png",
+                    "format": "uri",
+                    "type": "string"
+                  },
+                  "name": {
+                    "example": "FunisGo Sports",
+                    "type": "string"
+                  },
+                  "streamUrl": {
+                    "example": "https://stream.funisgo.com/channels/ch123456",
+                    "format": "uri",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name",
+                  "description",
+                  "category"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "properties": {
+                        "category": {
+                          "example": "Sports",
+                          "type": "string"
+                        },
+                        "createdAt": {
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        "description": {
+                          "example": "24/7 sports streaming channel",
+                          "type": "string"
+                        },
+                        "id": {
+                          "example": "ch123456",
+                          "type": "string"
+                        },
+                        "isLive": {
+                          "example": true,
+                          "type": "boolean"
+                        },
+                        "isPremium": {
+                          "example": true,
+                          "type": "boolean"
+                        },
+                        "language": {
+                          "example": "English",
+                          "type": "string"
+                        },
+                        "logoUrl": {
+                          "example": "https://example.com/logos/sports-channel.png",
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "name": {
+                          "example": "FunisGo Sports",
+                          "type": "string"
+                        },
+                        "streamUrl": {
+                          "example": "https://stream.funisgo.com/channels/ch123456",
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "updatedAt": {
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "success": {
+                      "example": true,
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Channel created successfully"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "BAD_REQUEST",
+                    "message": "Invalid input parameters"
+                  },
+                  "success": false
+                },
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "properties": {
+                        "code": {
+                          "example": "INVALID_REQUEST",
+                          "type": "string"
+                        },
+                        "message": {
+                          "example": "The request was invalid or malformed",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "success": {
+                      "example": false,
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "The request was invalid or malformed"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "UNAUTHORIZED",
+                    "message": "Invalid or missing API key"
+                  },
+                  "success": false
+                },
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "properties": {
+                        "code": {
+                          "example": "INVALID_REQUEST",
+                          "type": "string"
+                        },
+                        "message": {
+                          "example": "The request was invalid or malformed",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "success": {
+                      "example": false,
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Authentication credentials are missing or invalid"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "FORBIDDEN",
+                    "message": "This operation requires a premium plan subscription"
+                  },
+                  "success": false
+                },
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "properties": {
+                        "code": {
+                          "example": "INVALID_REQUEST",
+                          "type": "string"
+                        },
+                        "message": {
+                          "example": "The request was invalid or malformed",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "success": {
+                      "example": false,
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Premium plan required for this operation"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "securitySchemes": {
+          "ApiKeyAuth": {
+            "description": "API key for authentication. Free and premium plans available with different usage limits.",
+            "in": "header",
+            "name": "X-API-Key",
+            "type": "apiKey"
+          }
+        },
+        "securitySource": "operation"
+      }
+    },
+    "GET /channels": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getChannels",
+        "parameters": [
+          {
+            "description": "Page number for pagination",
+            "in": "query",
+            "name": "page",
+            "required": false,
+            "schema": {
+              "default": 1,
+              "minimum": 1,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Number of items per page",
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 20,
+              "maximum": 100,
+              "minimum": 1,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Filter channels by category",
+            "in": "query",
+            "name": "category",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "items": {
+                        "properties": {
+                          "category": {
+                            "example": "Sports",
+                            "type": "string"
+                          },
+                          "createdAt": {
+                            "format": "date-time",
+                            "type": "string"
+                          },
+                          "description": {
+                            "example": "24/7 sports streaming channel",
+                            "type": "string"
+                          },
+                          "id": {
+                            "example": "ch123456",
+                            "type": "string"
+                          },
+                          "isLive": {
+                            "example": true,
+                            "type": "boolean"
+                          },
+                          "isPremium": {
+                            "example": true,
+                            "type": "boolean"
+                          },
+                          "language": {
+                            "example": "English",
+                            "type": "string"
+                          },
+                          "logoUrl": {
+                            "example": "https://example.com/logos/sports-channel.png",
+                            "format": "uri",
+                            "type": "string"
+                          },
+                          "name": {
+                            "example": "FunisGo Sports",
+                            "type": "string"
+                          },
+                          "streamUrl": {
+                            "example": "https://stream.funisgo.com/channels/ch123456",
+                            "format": "uri",
+                            "type": "string"
+                          },
+                          "updatedAt": {
+                            "format": "date-time",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "pagination": {
+                      "properties": {
+                        "currentPage": {
+                          "example": 1,
+                          "type": "integer"
+                        },
+                        "itemsPerPage": {
+                          "example": 20,
+                          "type": "integer"
+                        },
+                        "totalItems": {
+                          "example": 200,
+                          "type": "integer"
+                        },
+                        "totalPages": {
+                          "example": 10,
+                          "type": "integer"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "success": {
+                      "example": true,
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful response with list of channels"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "UNAUTHORIZED",
+                    "message": "Invalid or missing API key"
+                  },
+                  "success": false
+                },
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "properties": {
+                        "code": {
+                          "example": "INVALID_REQUEST",
+                          "type": "string"
+                        },
+                        "message": {
+                          "example": "The request was invalid or malformed",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "success": {
+                      "example": false,
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Authentication credentials are missing or invalid"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "RATE_LIMIT_EXCEEDED",
+                    "message": "You have exceeded your API rate limit. Please upgrade to premium for higher limits."
+                  },
+                  "success": false
+                },
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "properties": {
+                        "code": {
+                          "example": "INVALID_REQUEST",
+                          "type": "string"
+                        },
+                        "message": {
+                          "example": "The request was invalid or malformed",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "success": {
+                      "example": false,
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "API rate limit exceeded"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "securitySchemes": {
+          "ApiKeyAuth": {
+            "description": "API key for authentication. Free and premium plans available with different usage limits.",
+            "in": "header",
+            "name": "X-API-Key",
+            "type": "apiKey"
+          }
+        },
+        "securitySource": "operation"
+      }
+    },
+    "GET /channels/{channelId}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getChannelById",
+        "parameters": [
+          {
+            "description": "ID of the channel to retrieve",
+            "in": "path",
+            "name": "channelId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "properties": {
+                        "category": {
+                          "example": "Sports",
+                          "type": "string"
+                        },
+                        "createdAt": {
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        "description": {
+                          "example": "24/7 sports streaming channel",
+                          "type": "string"
+                        },
+                        "id": {
+                          "example": "ch123456",
+                          "type": "string"
+                        },
+                        "isLive": {
+                          "example": true,
+                          "type": "boolean"
+                        },
+                        "isPremium": {
+                          "example": true,
+                          "type": "boolean"
+                        },
+                        "language": {
+                          "example": "English",
+                          "type": "string"
+                        },
+                        "logoUrl": {
+                          "example": "https://example.com/logos/sports-channel.png",
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "name": {
+                          "example": "FunisGo Sports",
+                          "type": "string"
+                        },
+                        "streamUrl": {
+                          "example": "https://stream.funisgo.com/channels/ch123456",
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "updatedAt": {
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "success": {
+                      "example": true,
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful response with channel details"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "UNAUTHORIZED",
+                    "message": "Invalid or missing API key"
+                  },
+                  "success": false
+                },
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "properties": {
+                        "code": {
+                          "example": "INVALID_REQUEST",
+                          "type": "string"
+                        },
+                        "message": {
+                          "example": "The request was invalid or malformed",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "success": {
+                      "example": false,
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Authentication credentials are missing or invalid"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "NOT_FOUND",
+                    "message": "The requested resource was not found"
+                  },
+                  "success": false
+                },
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "properties": {
+                        "code": {
+                          "example": "INVALID_REQUEST",
+                          "type": "string"
+                        },
+                        "message": {
+                          "example": "The request was invalid or malformed",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "success": {
+                      "example": false,
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "The requested resource was not found"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "securitySchemes": {
+          "ApiKeyAuth": {
+            "description": "API key for authentication. Free and premium plans available with different usage limits.",
+            "in": "header",
+            "name": "X-API-Key",
+            "type": "apiKey"
+          }
+        },
+        "securitySource": "operation"
+      }
+    },
+    "DELETE /channels/{channelId}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "deleteChannel",
+        "parameters": [
+          {
+            "description": "ID of the channel to delete",
+            "in": "path",
+            "name": "channelId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "example": "Channel deleted successfully",
+                      "type": "string"
+                    },
+                    "success": {
+                      "example": true,
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Channel deleted successfully"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "UNAUTHORIZED",
+                    "message": "Invalid or missing API key"
+                  },
+                  "success": false
+                },
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "properties": {
+                        "code": {
+                          "example": "INVALID_REQUEST",
+                          "type": "string"
+                        },
+                        "message": {
+                          "example": "The request was invalid or malformed",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "success": {
+                      "example": false,
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Authentication credentials are missing or invalid"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "FORBIDDEN",
+                    "message": "This operation requires a premium plan subscription"
+                  },
+                  "success": false
+                },
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "properties": {
+                        "code": {
+                          "example": "INVALID_REQUEST",
+                          "type": "string"
+                        },
+                        "message": {
+                          "example": "The request was invalid or malformed",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "success": {
+                      "example": false,
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Premium plan required for this operation"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "NOT_FOUND",
+                    "message": "The requested resource was not found"
+                  },
+                  "success": false
+                },
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "properties": {
+                        "code": {
+                          "example": "INVALID_REQUEST",
+                          "type": "string"
+                        },
+                        "message": {
+                          "example": "The request was invalid or malformed",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "success": {
+                      "example": false,
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "The requested resource was not found"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "securitySchemes": {
+          "ApiKeyAuth": {
+            "description": "API key for authentication. Free and premium plans available with different usage limits.",
+            "in": "header",
+            "name": "X-API-Key",
+            "type": "apiKey"
+          }
+        },
+        "securitySource": "operation"
+      }
+    },
+    "PUT /channels/{channelId}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "updateChannel",
+        "parameters": [
+          {
+            "description": "ID of the channel to update",
+            "in": "path",
+            "name": "channelId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "category": {
+                    "example": "Sports",
+                    "type": "string"
+                  },
+                  "description": {
+                    "example": "24/7 sports streaming channel",
+                    "type": "string"
+                  },
+                  "isLive": {
+                    "example": true,
+                    "type": "boolean"
+                  },
+                  "isPremium": {
+                    "example": true,
+                    "type": "boolean"
+                  },
+                  "language": {
+                    "example": "English",
+                    "type": "string"
+                  },
+                  "logoUrl": {
+                    "example": "https://example.com/logos/sports-channel.png",
+                    "format": "uri",
+                    "type": "string"
+                  },
+                  "name": {
+                    "example": "FunisGo Sports",
+                    "type": "string"
+                  },
+                  "streamUrl": {
+                    "example": "https://stream.funisgo.com/channels/ch123456",
+                    "format": "uri",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name",
+                  "description",
+                  "category"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "properties": {
+                        "category": {
+                          "example": "Sports",
+                          "type": "string"
+                        },
+                        "createdAt": {
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        "description": {
+                          "example": "24/7 sports streaming channel",
+                          "type": "string"
+                        },
+                        "id": {
+                          "example": "ch123456",
+                          "type": "string"
+                        },
+                        "isLive": {
+                          "example": true,
+                          "type": "boolean"
+                        },
+                        "isPremium": {
+                          "example": true,
+                          "type": "boolean"
+                        },
+                        "language": {
+                          "example": "English",
+                          "type": "string"
+                        },
+                        "logoUrl": {
+                          "example": "https://example.com/logos/sports-channel.png",
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "name": {
+                          "example": "FunisGo Sports",
+                          "type": "string"
+                        },
+                        "streamUrl": {
+                          "example": "https://stream.funisgo.com/channels/ch123456",
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "updatedAt": {
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "success": {
+                      "example": true,
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Channel updated successfully"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "BAD_REQUEST",
+                    "message": "Invalid input parameters"
+                  },
+                  "success": false
+                },
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "properties": {
+                        "code": {
+                          "example": "INVALID_REQUEST",
+                          "type": "string"
+                        },
+                        "message": {
+                          "example": "The request was invalid or malformed",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "success": {
+                      "example": false,
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "The request was invalid or malformed"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "UNAUTHORIZED",
+                    "message": "Invalid or missing API key"
+                  },
+                  "success": false
+                },
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "properties": {
+                        "code": {
+                          "example": "INVALID_REQUEST",
+                          "type": "string"
+                        },
+                        "message": {
+                          "example": "The request was invalid or malformed",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "success": {
+                      "example": false,
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Authentication credentials are missing or invalid"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "FORBIDDEN",
+                    "message": "This operation requires a premium plan subscription"
+                  },
+                  "success": false
+                },
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "properties": {
+                        "code": {
+                          "example": "INVALID_REQUEST",
+                          "type": "string"
+                        },
+                        "message": {
+                          "example": "The request was invalid or malformed",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "success": {
+                      "example": false,
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Premium plan required for this operation"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "NOT_FOUND",
+                    "message": "The requested resource was not found"
+                  },
+                  "success": false
+                },
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "properties": {
+                        "code": {
+                          "example": "INVALID_REQUEST",
+                          "type": "string"
+                        },
+                        "message": {
+                          "example": "The request was invalid or malformed",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "success": {
+                      "example": false,
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "The requested resource was not found"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "securitySchemes": {
+          "ApiKeyAuth": {
+            "description": "API key for authentication. Free and premium plans available with different usage limits.",
+            "in": "header",
+            "name": "X-API-Key",
+            "type": "apiKey"
+          }
+        },
+        "securitySource": "operation"
+      }
+    }
   }
 }
