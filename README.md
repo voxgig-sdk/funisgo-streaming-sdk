@@ -105,12 +105,12 @@ local results, err = client:Series():list()
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/funisgo-streaming-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/funisgo-streaming-sdk/releases) |
-| Python | `voxgig-sdk-funisgo-streaming` | publish pending — [install from git tag](https://github.com/voxgig-sdk/funisgo-streaming-sdk/releases) |
-| PHP | `voxgig-sdk/funisgo-streaming` | publish pending — [install from git tag](https://github.com/voxgig-sdk/funisgo-streaming-sdk/releases) |
+| TypeScript | `@voxgig-sdk/funisgo-streaming-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/funisgo-streaming-sdk/tags) |
+| Python | `voxgig-sdk-funisgo-streaming` | publish pending — [install from git tag](https://github.com/voxgig-sdk/funisgo-streaming-sdk/tags) |
+| PHP | `voxgig-sdk/funisgo-streaming` | publish pending — [install from git tag](https://github.com/voxgig-sdk/funisgo-streaming-sdk/tags) |
 | Golang | `github.com/voxgig-sdk/funisgo-streaming-sdk/go` | `go get github.com/voxgig-sdk/funisgo-streaming-sdk/go@latest` |
-| Ruby | `voxgig-sdk-funisgo-streaming` | publish pending — [install from git tag](https://github.com/voxgig-sdk/funisgo-streaming-sdk/releases) |
-| Lua | `voxgig-sdk-funisgo-streaming` | publish pending — [install from git tag](https://github.com/voxgig-sdk/funisgo-streaming-sdk/releases) |
+| Ruby | `voxgig-sdk-funisgo-streaming` | publish pending — [install from git tag](https://github.com/voxgig-sdk/funisgo-streaming-sdk/tags) |
+| Lua | `voxgig-sdk-funisgo-streaming` | publish pending — [install from git tag](https://github.com/voxgig-sdk/funisgo-streaming-sdk/tags) |
 | Go CLI | `github.com/voxgig-sdk/funisgo-streaming-sdk/go-cli` | `go install github.com/voxgig-sdk/funisgo-streaming-sdk/go-cli/cmd/funisgo-streaming@latest` |
 | Go MCP server | `github.com/voxgig-sdk/funisgo-streaming-sdk/go-mcp` | `go get github.com/voxgig-sdk/funisgo-streaming-sdk/go-mcp@latest` |
 

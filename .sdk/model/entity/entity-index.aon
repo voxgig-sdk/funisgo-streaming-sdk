@@ -1,5 +1,5 @@
 # Entity Models
 
-@"channel.aon"
-@"movie.aon"
-@"series.aon"
+@"./channel.aon"
+@"./movie.aon"
+@"./series.aon"

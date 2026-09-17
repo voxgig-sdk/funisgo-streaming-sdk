@@ -1,5 +1,5 @@
 # Flows
 
-@"BasicChannelFlow.aon"
-@"BasicMovieFlow.aon"
-@"BasicSeriesFlow.aon"
+@"./BasicChannelFlow.aon"
+@"./BasicMovieFlow.aon"
+@"./BasicSeriesFlow.aon"

@@ -1,7 +1,7 @@
 # FunisgoStreaming SDK utility: prepare_auth
 require_relative 'struct/voxgig_struct'
 module FunisgoStreamingUtilities
-  HEADER_AUTH = "authorization"
+  HEADER_AUTH = "x-api-key"
   OPTION_APIKEY = "apikey"
   NOT_FOUND = "__NOTFOUND__"
 

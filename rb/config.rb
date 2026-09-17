@@ -89,6 +89,7 @@ module FunisgoStreamingConfig
         "base" => "https://api.funisgo.com",
         "auth" => {
           "prefix" => "",
+          "name" => "X-API-Key",
         },
         "headers" => {
           "content-type" => "application/json",
